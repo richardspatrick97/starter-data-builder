@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.ikm.tinkar</groupId>
+    <artifactId>starter-data-builder</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <tinkar.core.version>1.19.0-AKS8M</tinkar.core.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>dev.ikm.tinkar.ext.owl</groupId>
+            <artifactId>owl-extension</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>data-ephemeral-provider</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>coordinate</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>data-spinedarray-provider</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>entity-provider</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>executor-provider</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>search-provider</artifactId>
+            <version>${tinkar.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>tinkar-schema</artifactId>
+            <version>1.13.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>tinkar-transformer-api</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
