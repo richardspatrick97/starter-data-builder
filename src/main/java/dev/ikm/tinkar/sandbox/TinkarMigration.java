@@ -85,7 +85,7 @@ public class TinkarMigration {
 
         List<Entity<? extends EntityVersion>> entities = entitiesToMigrate.stream()
                         .filter(entity -> entity.entityDataType() == FieldDataType.SEMANTIC_CHRONOLOGY)
-                                .filter(entity -> ((SemanticRecord)entity).patternNid() == TinkarTerm.INFERRED_NAVIGATION_PATTERN.nid())
+                                .filter(entity -> ((SemanticRecord)entity).patternNid() == TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN.nid())
                                         .collect(Collectors.toList());
 
 

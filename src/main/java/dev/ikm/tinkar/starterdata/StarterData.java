@@ -4,6 +4,7 @@ import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
+import dev.ikm.tinkar.common.util.time.DateTimeUtil;
 import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
@@ -12,6 +13,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 
 import java.io.File;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -154,7 +156,27 @@ public class StarterData {
         }
 
         public ConceptBuilder axiomSyntax(String axiomSyntax){
-            builderEntities.add(semanticUtility.createAxiomSyntax(conceptNid, axiomSyntax, authoringSTAMP));
+            builderEntities.add(semanticUtility.createAxiomSyntaxSemantic(conceptNid, axiomSyntax, authoringSTAMP));
+            return this;
+        }
+
+        public ConceptBuilder comment(String comment){
+            builderEntities.add(semanticUtility.createCommentSemantic(conceptNid, comment, authoringSTAMP));
+            return this;
+        }
+
+        public ConceptBuilder pathMembership(){
+            builderEntities.add(semanticUtility.createPathMembershipSemantic(conceptNid, authoringSTAMP));
+            return this;
+        }
+
+        public ConceptBuilder versionControl(EntityProxy.Concept concept, String formattedTime){
+            builderEntities.add(semanticUtility.createVersionControlSemantic(conceptNid, concept, formattedTime, authoringSTAMP));
+            return this;
+        }
+
+        public ConceptBuilder statedDefinition(EntityProxy.Concept originConcept){
+            builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConcept, authoringSTAMP));
             return this;
         }
 

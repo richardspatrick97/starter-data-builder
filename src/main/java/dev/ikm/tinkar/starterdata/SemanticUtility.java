@@ -2,11 +2,24 @@ package dev.ikm.tinkar.starterdata;
 
 import dev.ikm.tinkar.common.id.IntIdSet;
 import dev.ikm.tinkar.common.id.IntIds;
+import dev.ikm.tinkar.component.Concept;
+import dev.ikm.tinkar.dto.ConceptDTO;
+import dev.ikm.tinkar.dto.graph.VertexDTO;
 import dev.ikm.tinkar.entity.*;
+import dev.ikm.tinkar.entity.graph.DiTreeEntity;
+import dev.ikm.tinkar.entity.graph.EntityVertex;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.primitive.IntIntMaps;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.IntObjectMaps;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.ImmutableIntList;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.MutableIntIntMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +43,7 @@ class SemanticUtility {
                                                                         Entity<? extends EntityVersion> authoringSTAMP){
         LOG.info("Building FQN Description Semantic: " + text);
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
-        UUID descriptionSemanticUUID = uuidUtility.createUUID(text + "|" + DESCRIPTION_SEMANTIC.description());
+        UUID descriptionSemanticUUID = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
                 .nid(EntityService.get().nidForUuids(descriptionSemanticUUID))
                 .leastSignificantBits(descriptionSemanticUUID.getLeastSignificantBits())
@@ -107,6 +120,7 @@ class SemanticUtility {
                                                                        Entity<? extends EntityVersion> authoringSTAMP){
         LOG.info("Building Identifier Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+
         UUID navigationSemanticUUID = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
                 .nid(EntityService.get().nidForUuids(navigationSemanticUUID))
@@ -118,7 +132,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Identifier Pattern Fields");
+        LOG.info("Building Identifier Semantic Fields");
         MutableList<Object> identifierFields = Lists.mutable.empty();
         identifierFields.add(source);
         identifierFields.add(id);
@@ -148,7 +162,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Dialect Pattern Fields");
+        LOG.info("Building Dialect Semantic Fields");
         MutableList<Object> dialectFields = Lists.mutable.empty();
         dialectFields.add(dialect);
 
@@ -161,9 +175,9 @@ class SemanticUtility {
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }
 
-    protected Entity<? extends EntityVersion> createAxiomSyntax(int referencedComponentNid,
-                                                                String axiomSyntax,
-                                                                Entity<? extends EntityVersion> authoringSTAMP){
+    protected Entity<? extends EntityVersion> createAxiomSyntaxSemantic(int referencedComponentNid,
+                                                                        String axiomSyntax,
+                                                                        Entity<? extends EntityVersion> authoringSTAMP){
         LOG.info("Building Axiom Syntax Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
         UUID axiomSyntaxSemantic = uuidUtility.createUUID();
@@ -177,7 +191,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building AxiomSyntax Pattern Fields");
+        LOG.info("Building Axiom Syntax Semantic Fields");
         MutableList<Object> axiomSyntaxFields = Lists.mutable.empty();
         axiomSyntaxFields.add(axiomSyntax);
 
@@ -190,4 +204,175 @@ class SemanticUtility {
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }
 
+    protected Entity<? extends EntityVersion> createCommentSemantic(int referencedComponentNid,
+                                                                    String comment,
+                                                                    Entity<? extends EntityVersion> authoringSTAMP){
+        LOG.info("Building Comment Semantic");
+        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+        UUID commentSemantic = uuidUtility.createUUID();
+        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
+                .nid(EntityService.get().nidForUuids(commentSemantic))
+                .leastSignificantBits(commentSemantic.getLeastSignificantBits())
+                .mostSignificantBits(commentSemantic.getMostSignificantBits())
+                .additionalUuidLongs(null)
+                .patternNid(TinkarTerm.COMMENT_PATTERN.nid())
+                .referencedComponentNid(referencedComponentNid)
+                .versions(versions.toImmutable())
+                .build();
+
+        LOG.info("Building Comment Semantics Fields");
+        MutableList<Object> commentFields = Lists.mutable.empty();
+        commentFields.add(comment);
+
+        versions.add(SemanticVersionRecordBuilder.builder()
+                .chronology(semanticRecord)
+                .stampNid(authoringSTAMP.nid())
+                .fieldValues(commentFields.toImmutable())
+                .build());
+
+        return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
+    }
+
+    protected Entity<? extends EntityVersion> createPathMembershipSemantic(int referencedComponentNid,
+                                                                           Entity<? extends EntityVersion> authoringSTAMP){
+        LOG.info("Building Path Membership Semantic");
+        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+        UUID pathMembershipSemantic = uuidUtility.createUUID();
+        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
+                .nid(EntityService.get().nidForUuids(pathMembershipSemantic))
+                .leastSignificantBits(pathMembershipSemantic.getLeastSignificantBits())
+                .mostSignificantBits(pathMembershipSemantic.getMostSignificantBits())
+                .additionalUuidLongs(null)
+                .patternNid(StarterData.pathMembershipPattern.nid())
+                .referencedComponentNid(referencedComponentNid)
+                .versions(versions.toImmutable())
+                .build();
+
+        versions.add(SemanticVersionRecordBuilder.builder()
+                .chronology(semanticRecord)
+                .stampNid(authoringSTAMP.nid())
+                .fieldValues(Lists.immutable.empty())
+                .build());
+        return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
+    }
+
+    protected Entity<? extends EntityVersion> createVersionControlSemantic(int referencedComponentNid,
+                                                                           EntityProxy.Concept concept,
+                                                                           String formattedTime,
+                                                                           Entity<? extends EntityVersion> authoringSTAMP){
+        LOG.info("Building Version Control Semantic");
+        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+        UUID versionControlSemantic = uuidUtility.createUUID();
+        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
+                .nid(EntityService.get().nidForUuids(versionControlSemantic))
+                .leastSignificantBits(versionControlSemantic.getLeastSignificantBits())
+                .mostSignificantBits(versionControlSemantic.getMostSignificantBits())
+                .additionalUuidLongs(null)
+                .patternNid(StarterData.versionControlPathOriginPattern.nid())
+                .referencedComponentNid(referencedComponentNid)
+                .versions(versions.toImmutable())
+                .build();
+
+        LOG.info("Building Version Control Semantics Fields");
+        MutableList<Object> versionControlFields = Lists.mutable.empty();
+        versionControlFields.add(concept);
+        versionControlFields.add(formattedTime);
+
+        versions.add(SemanticVersionRecordBuilder.builder()
+                .chronology(semanticRecord)
+                .stampNid(authoringSTAMP.nid())
+                .fieldValues(versionControlFields.toImmutable())
+                .build());
+        return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
+    }
+
+    protected Entity<? extends EntityVersion> createStatedDefinitionSemantic(int referencedComponentNid,
+                                                                             EntityProxy.Concept orignConcept,
+                                                                             Entity<? extends EntityVersion> authoringSTAMP){
+        LOG.info("Building Stated Definition Semantic");
+        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+        UUID statedDefinitionSemantic = uuidUtility.createUUID();
+        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
+                .nid(EntityService.get().nidForUuids(statedDefinitionSemantic))
+                .leastSignificantBits(statedDefinitionSemantic.getLeastSignificantBits())
+                .mostSignificantBits(statedDefinitionSemantic.getMostSignificantBits())
+                .additionalUuidLongs(null)
+                .patternNid(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN.nid())
+                .referencedComponentNid(referencedComponentNid)
+                .versions(versions.toImmutable())
+                .build();
+
+        LOG.info("Building Stated Definition Semantics Fields");
+        MutableList<Object> statedDefinitionFields = Lists.mutable.empty();
+
+        MutableList<EntityVertex> vertexMap = Lists.mutable.empty();
+        MutableIntObjectMap<ImmutableIntList> succesorMap = IntObjectMaps.mutable.empty();
+        MutableIntIntMap predecessorMap = IntIntMaps.mutable.empty();
+
+        //Definition Root
+        UUID definitionRootUUID = uuidUtility.createUUID();
+        MutableMap<ConceptDTO, Object> definitionRootProperty = Maps.mutable.empty();
+        VertexDTO definitionVertexDTO = new VertexDTO(
+                definitionRootUUID.getMostSignificantBits(),
+                definitionRootUUID.getLeastSignificantBits(),
+                0,
+                ConceptDTO.make(TinkarTerm.DEFINITION_ROOT.idString()),
+                definitionRootProperty.toImmutable());
+        EntityVertex definitionRootVertex = EntityVertex.make(definitionVertexDTO);
+        vertexMap.add(definitionRootVertex);
+
+        //Reference
+        UUID referenceUUID = uuidUtility.createUUID();
+        MutableMap<ConceptDTO, Object> referenceProperty = Maps.mutable.empty();
+        referenceProperty.put(ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),orignConcept);
+        EntityVertex referenceVertex = EntityVertex.make(new VertexDTO(
+                referenceUUID.getMostSignificantBits(),
+                referenceUUID.getLeastSignificantBits(),
+                1,
+                ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),
+                referenceProperty.toImmutable()));
+        vertexMap.add(referenceVertex);
+
+        //AND
+        UUID andUUID = uuidUtility.createUUID();
+        MutableMap<ConceptDTO, Object> andProperty = Maps.mutable.empty();
+        EntityVertex andVertex = EntityVertex.make(new VertexDTO(
+                andUUID.getMostSignificantBits(),
+                andUUID.getLeastSignificantBits(),
+                2,
+                ConceptDTO.make(TinkarTerm.AND.idString()),
+                andProperty.toImmutable()));
+        vertexMap.add(andVertex);
+
+        //Necessary Set
+        UUID necessarySetUUID = uuidUtility.createUUID();
+        MutableMap<ConceptDTO, Object> necessarySetProperty = Maps.mutable.empty();
+        EntityVertex necessarySetVertex = EntityVertex.make(new VertexDTO(
+                necessarySetUUID.getMostSignificantBits(),
+                necessarySetUUID.getLeastSignificantBits(),
+                3,
+                ConceptDTO.make(TinkarTerm.NECESSARY_SET.idString()),
+                necessarySetProperty.toImmutable()));
+
+        vertexMap.add(necessarySetVertex);
+
+        //Successor Map
+        succesorMap.put(0, IntLists.immutable.of(3).toImmutable());
+        succesorMap.put(2, IntLists.immutable.of(1).toImmutable());
+        succesorMap.put(3, IntLists.immutable.of(2).toImmutable());
+
+        //Predecessor Map
+        predecessorMap.put(1, 2);
+        predecessorMap.put(2, 3);
+        predecessorMap.put(3, 0);
+
+        statedDefinitionFields.add(new DiTreeEntity(definitionRootVertex, vertexMap.toImmutable(), succesorMap.toImmutable(), predecessorMap.toImmutable()));
+
+        versions.add(SemanticVersionRecordBuilder.builder()
+                .chronology(semanticRecord)
+                .stampNid(authoringSTAMP.nid())
+                .fieldValues(statedDefinitionFields.toImmutable())
+                .build());
+        return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
+    }
 }
