@@ -12,6 +12,7 @@ module tinkar.sandbox {
     requires transitive com.google.protobuf;
     requires org.eclipse.collections.api;
     requires java.logging;
+    requires com.fasterxml.jackson.databind;
 
     opens dev.ikm.tinkar.starterdata;
     opens dev.ikm.tinkar.sandbox;

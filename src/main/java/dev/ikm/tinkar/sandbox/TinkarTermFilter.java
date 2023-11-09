@@ -1,12 +1,35 @@
 package dev.ikm.tinkar.sandbox;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ikm.tinkar.terms.TinkarTerm;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TinkarTermFilter {
+
+    private static String getListOf(JsonNode node) {
+        String result = "";
+        if (node.isEmpty()) {
+            result = "null";
+        } else {
+            result = "List.of(";
+            for(JsonNode item : node) {
+                result += "TinkarTerm." + item.asText() + ", ";
+//                System.out.println(item.asText());
+            }
+            result = result.substring(0, result.length() - 2) + ")";
+        }
+        return result;
+    }
 
     public static void main(String[] args){
         StringBuilder sb = new StringBuilder();
@@ -194,6 +217,22 @@ public class TinkarTermFilter {
         System.out.println("start");
         int totalCount = 0;
         int neededCount = 0;
+
+        JsonNode jsonNode = null;
+        List<String> conceptKeys = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Read JSON resource
+            InputStream inputStream = TinkarTermFilter.class.getClassLoader().getResourceAsStream("starter-data-concepts-resources.json");
+            jsonNode = objectMapper.readTree(inputStream);
+            // Get concept keys from JSON
+            Iterator<String> iterator = jsonNode.fieldNames();
+            iterator.forEachRemaining(e -> conceptKeys.add(e));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
         for(Field field : TinkarTerm.class.getDeclaredFields()){
 
             Pattern pattern = Pattern.compile(sb.toString());
@@ -201,7 +240,11 @@ public class TinkarTermFilter {
 
             if (!field.getAnnotatedType().getType().getTypeName().equals("dev.ikm.tinkar.terms.EntityProxy$Pattern")) {
                 if (!matcher.find()){
-                    System.out.println(field.getName());
+//                    System.out.println(field.getName());
+
+                    JsonNode termNode = jsonNode.get(field.getName());
+                    String origins = getListOf(termNode.get("Origins"));
+                    String destinations = getListOf(termNode.get("Destinations"));
 
 //                    StringBuilder sb2 = new StringBuilder();
 //
@@ -219,8 +262,19 @@ public class TinkarTermFilter {
 //                    System.out.println(sb2);
 
 
+                    StringBuilder starterDataPOJO = new StringBuilder();
 
+                    starterDataPOJO.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
+                    starterDataPOJO.append(".fullyQualifiedName(\"" + termNode.get("FullyQualifiedName").asText() + "\", TinkarTerm.PREFERRED" + ")").append("\n");
+                    starterDataPOJO.append(".synonym(\"" + termNode.get("Synonym").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
+                    starterDataPOJO.append(".definition(\"" + termNode.get("Definition").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
+                    starterDataPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
+                    starterDataPOJO.append(".inferredNavigation(" + destinations + ", " + origins + ")").append("\n");
+                    starterDataPOJO.append(".statedNavigation(" + destinations + ", " + origins + ")").append("\n");
+                    starterDataPOJO.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+                    starterDataPOJO.append(".build();").append("\n");
 
+                    System.out.println(starterDataPOJO);
 
 //                    System.out.println("starterData.concept(TinkarTerm." + field.getName() + ").fullyQualifiedName(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED).build();");
                     neededCount++;
