@@ -16,10 +16,143 @@ import java.util.regex.Pattern;
 
 public class TinkarTermFilter {
 
-    private static String getListOf(JsonNode node) {
+    public static void main(String[] args){
+        StringBuilder conceptFilterSB = generateConceptFilter();
+        Pattern pattern = Pattern.compile(conceptFilterSB.toString());
+        JsonNode jsonNode = readJSONResource("starter-data-concepts-resources.json");
+
+        List<String> additionalTinkarTerms = List.of(
+                "MODEL_CONCEPT",
+                "IDENTIFIER_SOURCE",
+                "VERSION_PROPERTIES",
+                "STATUS_VALUE"
+                );
+
+        System.out.println("start");
+        int totalCount = 0;
+        int neededCount = 0;
+
+        String uncatDestinationsList = "";
+
+        for(Field field : TinkarTerm.class.getDeclaredFields()){
+            Matcher matcher = pattern.matcher(field.getName().toLowerCase());
+
+            if (!field.getAnnotatedType().getType().getTypeName().equals("dev.ikm.tinkar.terms.EntityProxy$Pattern")) {
+                if (!matcher.find() || additionalTinkarTerms.contains(field.getName())){
+//                    System.out.println(field.getName());
+
+                    // Print concept definition code with **default values**
+//                    printWithDefaultData(field);
+
+                    // Print concept definition code with **supplied data**
+                    JsonNode termNode = jsonNode.get(field.getName());
+
+                    if (termNode.get("Origins").isEmpty()) {
+                        uncatDestinationsList += "TinkarTerm." + field.getName() + ", ";
+                    }
+
+                    printWithSuppliedData(field, termNode);
+
+                    neededCount++;
+                }
+            }
+            totalCount++;
+        }
+
+        printUncategorizedGrouperDefinition(uncatDestinationsList.substring(0, uncatDestinationsList.length()-2));
+        neededCount++;
+
+//        StringBuilder identifierSourceSB = new StringBuilder();
+//        identifierSourceSB.append("starterData.concept(TinkarTerm.IDENTIFIER_SOURCE)").append("\n");
+//        identifierSourceSB.append(".fullyQualifiedName(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED" + ")").append("\n");
+//        identifierSourceSB.append(".synonym(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED)").append("\n");
+//        identifierSourceSB.append(".definition(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED)").append("\n");
+//        identifierSourceSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IDENTIFIER_SOURCE.asUuidArray()[0].toString())").append("\n");
+////                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
+//        identifierSourceSB.append(".inferredNavigation(null, null)").append("\n");
+//        identifierSourceSB.append(".statedNavigation(null, null)").append("\n");
+//        identifierSourceSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+//        identifierSourceSB.append(".build();").append("\n");
+//        System.out.println(identifierSourceSB);
+//
+//        StringBuilder versionPropertiesSB = new StringBuilder();
+//        versionPropertiesSB.append("starterData.concept(TinkarTerm.VERSION_PROPERTIES)").append("\n");
+//        versionPropertiesSB.append(".fullyQualifiedName(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED" + ")").append("\n");
+//        versionPropertiesSB.append(".synonym(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED)").append("\n");
+//        versionPropertiesSB.append(".definition(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED)").append("\n");
+//        versionPropertiesSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_PROPERTIES.asUuidArray()[0].toString())").append("\n");
+////                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
+//        versionPropertiesSB.append(".inferredNavigation(null, null)").append("\n");
+//        versionPropertiesSB.append(".statedNavigation(null, null)").append("\n");
+//        versionPropertiesSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+//        versionPropertiesSB.append(".build();").append("\n");
+//        System.out.println(versionPropertiesSB);
+//
+//        StringBuilder statusValueSB = new StringBuilder();
+//        statusValueSB.append("starterData.concept(TinkarTerm.STATUS_VALUE)").append("\n");
+//        statusValueSB.append(".fullyQualifiedName(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED" + ")").append("\n");
+//        statusValueSB.append(".synonym(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED)").append("\n");
+//        statusValueSB.append(".definition(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED)").append("\n");
+//        statusValueSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATUS_VALUE.asUuidArray()[0].toString())").append("\n");
+////                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
+//        statusValueSB.append(".inferredNavigation(null, null)").append("\n");
+//        statusValueSB.append(".statedNavigation(null, null)").append("\n");
+//        statusValueSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+//        statusValueSB.append(".build();").append("\n");
+//        System.out.println(statusValueSB);
+
+        System.out.println("Needed Count: " + neededCount);
+        System.out.println("Total Count: " + totalCount);
+
+    }
+
+    public static void printWithDefaultData(Field field) {
+        StringBuilder starterDataDefaultPOJO = new StringBuilder();
+
+        starterDataDefaultPOJO.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
+        starterDataDefaultPOJO.append(".fullyQualifiedName(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED" + ")").append("\n");
+        starterDataDefaultPOJO.append(".synonym(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED)").append("\n");
+        starterDataDefaultPOJO.append(".definition(TinkarTerm."+ field.getName() + ".description(), TinkarTerm.PREFERRED)").append("\n");
+        starterDataDefaultPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
+//        starterDataDefaultPOJO.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
+        starterDataDefaultPOJO.append(".inferredNavigation(null, null)").append("\n");
+        starterDataDefaultPOJO.append(".statedNavigation(null, null)").append("\n");
+        starterDataDefaultPOJO.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+        starterDataDefaultPOJO.append(".build();").append("\n");
+
+        System.out.println(starterDataDefaultPOJO);
+    }
+
+    public static void printWithSuppliedData(Field field, JsonNode termNode) {
+        String destinations = getListOfOrDefault(termNode.get("Destinations"), "null");
+
+        String defaultOriginStr = "List.of(uncategorizedGrouper)";
+        if (field.getName() == "ROOT_VERTEX") {
+            destinations = destinations.substring(0, destinations.length()-1) + ", uncategorizedGrouper" + ")";
+            defaultOriginStr = "null";
+        }
+
+        String origins = getListOfOrDefault(termNode.get("Origins"), defaultOriginStr);
+
+        StringBuilder starterDataPOJO = new StringBuilder();
+
+        starterDataPOJO.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
+        starterDataPOJO.append(".fullyQualifiedName(\"" + termNode.get("FullyQualifiedName").asText() + "\", TinkarTerm.PREFERRED" + ")").append("\n");
+        starterDataPOJO.append(".synonym(\"" + termNode.get("Synonym").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
+        starterDataPOJO.append(".definition(\"" + termNode.get("Definition").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
+        starterDataPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
+        starterDataPOJO.append(".inferredNavigation(" + destinations + ", " + origins + ")").append("\n");
+        starterDataPOJO.append(".statedNavigation(" + destinations + ", " + origins + ")").append("\n");
+        starterDataPOJO.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+        starterDataPOJO.append(".build();").append("\n");
+
+        System.out.println(starterDataPOJO);
+    }
+
+    private static String getListOfOrDefault(JsonNode node, String defaultStr) {
         String result = "";
         if (node.isEmpty()) {
-            result = "null";
+            result = defaultStr;
         } else {
             result = "List.of(";
             for(JsonNode item : node) {
@@ -31,8 +164,9 @@ public class TinkarTermFilter {
         return result;
     }
 
-    public static void main(String[] args){
+    private static StringBuilder generateConceptFilter() {
         StringBuilder sb = new StringBuilder();
+
         sb.append("assemblage").append("|");
         sb.append("cvx").append("|");
         sb.append("clinvar").append("|");
@@ -214,115 +348,46 @@ public class TinkarTermFilter {
         sb.append("routine").append("|");
         sb.append("allergen");
 
-        System.out.println("start");
-        int totalCount = 0;
-        int neededCount = 0;
+        return sb;
+    }
 
+    private static JsonNode readJSONResource(String resourceFileName) {
         JsonNode jsonNode = null;
-        List<String> conceptKeys = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             // Read JSON resource
-            InputStream inputStream = TinkarTermFilter.class.getClassLoader().getResourceAsStream("starter-data-concepts-resources.json");
+            ObjectMapper objectMapper = new ObjectMapper();
+            InputStream inputStream = TinkarTermFilter.class.getClassLoader().getResourceAsStream(resourceFileName);
             jsonNode = objectMapper.readTree(inputStream);
-            // Get concept keys from JSON
-            Iterator<String> iterator = jsonNode.fieldNames();
-            iterator.forEachRemaining(e -> conceptKeys.add(e));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
+        return jsonNode;
+    }
 
-        for(Field field : TinkarTerm.class.getDeclaredFields()){
+    private static void printUncategorizedGrouperDefinition(String destinationConceptList) {
+        StringBuilder uncategorizedGrouperSB = new StringBuilder();
 
-            Pattern pattern = Pattern.compile(sb.toString());
-            Matcher matcher = pattern.matcher(field.getName().toLowerCase());
+        uncategorizedGrouperSB.append("starterData.concept(uncategorizedGrouper)").append("\n");
+        uncategorizedGrouperSB.append(".fullyQualifiedName(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED" + ")").append("\n");
+        uncategorizedGrouperSB.append(".synonym(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED)").append("\n");
+        uncategorizedGrouperSB.append(".definition(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED)").append("\n");
+        uncategorizedGrouperSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())").append("\n");
+        uncategorizedGrouperSB.append(".inferredNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
+        uncategorizedGrouperSB.append(".statedNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
+        uncategorizedGrouperSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+        uncategorizedGrouperSB.append(".build();").append("\n");
 
-            if (!field.getAnnotatedType().getType().getTypeName().equals("dev.ikm.tinkar.terms.EntityProxy$Pattern")) {
-                if (!matcher.find()){
-//                    System.out.println(field.getName());
+        System.out.println(uncategorizedGrouperSB);
 
-                    JsonNode termNode = jsonNode.get(field.getName());
-                    String origins = getListOf(termNode.get("Origins"));
-                    String destinations = getListOf(termNode.get("Destinations"));
-
-//                     StringBuilder sb2 = new StringBuilder();
-
-//                     sb2.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
-//                     sb2.append(".fullyQualifiedName(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED" + ")").append("\n");
-//                     sb2.append(".synonym(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED)").append("\n");
-//                     sb2.append(".definition(TinkarTerm."+ field.getName() + ".description(), TinkarTerm.PREFERRED)").append("\n");
-//                     sb2.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
-// //                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
-//                     sb2.append(".inferredNavigation(null, null)").append("\n");
-//                     sb2.append(".statedNavigation(null, null)").append("\n");
-//                     sb2.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
-//                     sb2.append(".build();").append("\n");
-
-                    System.out.println(sb2);
-                    
-                    StringBuilder starterDataPOJO = new StringBuilder();
-
-                    starterDataPOJO.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
-                    starterDataPOJO.append(".fullyQualifiedName(\"" + termNode.get("FullyQualifiedName").asText() + "\", TinkarTerm.PREFERRED" + ")").append("\n");
-                    starterDataPOJO.append(".synonym(\"" + termNode.get("Synonym").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
-                    starterDataPOJO.append(".definition(\"" + termNode.get("Definition").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
-                    starterDataPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
-                    starterDataPOJO.append(".inferredNavigation(" + destinations + ", " + origins + ")").append("\n");
-                    starterDataPOJO.append(".statedNavigation(" + destinations + ", " + origins + ")").append("\n");
-                    starterDataPOJO.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
-                    starterDataPOJO.append(".build();").append("\n");
-
-                    System.out.println(starterDataPOJO);
-
-//                    System.out.println("starterData.concept(TinkarTerm." + field.getName() + ").fullyQualifiedName(TinkarTerm." + field.getName() + ".description(), TinkarTerm.PREFERRED).build();");
-                    neededCount++;
-                }
-            }
-            totalCount++;
-        }
-
-        StringBuilder identifierSourceSB = new StringBuilder();
-        identifierSourceSB.append("starterData.concept(TinkarTerm.IDENTIFIER_SOURCE)").append("\n");
-        identifierSourceSB.append(".fullyQualifiedName(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED" + ")").append("\n");
-        identifierSourceSB.append(".synonym(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED)").append("\n");
-        identifierSourceSB.append(".definition(TinkarTerm.IDENTIFIER_SOURCE.description(), TinkarTerm.PREFERRED)").append("\n");
-        identifierSourceSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IDENTIFIER_SOURCE.asUuidArray()[0].toString())").append("\n");
-//                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
-        identifierSourceSB.append(".inferredNavigation(null, null)").append("\n");
-        identifierSourceSB.append(".statedNavigation(null, null)").append("\n");
-        identifierSourceSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
-        identifierSourceSB.append(".build();").append("\n");
-        System.out.println(identifierSourceSB);
-
-        StringBuilder versionPropertiesSB = new StringBuilder();
-        versionPropertiesSB.append("starterData.concept(TinkarTerm.VERSION_PROPERTIES)").append("\n");
-        versionPropertiesSB.append(".fullyQualifiedName(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED" + ")").append("\n");
-        versionPropertiesSB.append(".synonym(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED)").append("\n");
-        versionPropertiesSB.append(".definition(TinkarTerm.VERSION_PROPERTIES.description(), TinkarTerm.PREFERRED)").append("\n");
-        versionPropertiesSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_PROPERTIES.asUuidArray()[0].toString())").append("\n");
-//                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
-        versionPropertiesSB.append(".inferredNavigation(null, null)").append("\n");
-        versionPropertiesSB.append(".statedNavigation(null, null)").append("\n");
-        versionPropertiesSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
-        versionPropertiesSB.append(".build();").append("\n");
-        System.out.println(versionPropertiesSB);
-
-        StringBuilder statusValueSB = new StringBuilder();
-        statusValueSB.append("starterData.concept(TinkarTerm.STATUS_VALUE)").append("\n");
-        statusValueSB.append(".fullyQualifiedName(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED" + ")").append("\n");
-        statusValueSB.append(".synonym(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED)").append("\n");
-        statusValueSB.append(".definition(TinkarTerm.STATUS_VALUE.description(), TinkarTerm.PREFERRED)").append("\n");
-        statusValueSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATUS_VALUE.asUuidArray()[0].toString())").append("\n");
-//                    sb2.append(".statedDefinition(TinkarTerm.SOLOR_CONCEPT)").append("\n");
-        statusValueSB.append(".inferredNavigation(null, null)").append("\n");
-        statusValueSB.append(".statedNavigation(null, null)").append("\n");
-        statusValueSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
-        statusValueSB.append(".build();").append("\n");
-        System.out.println(statusValueSB);
-
-        System.out.println("Needed Count: " + neededCount);
-        System.out.println("Total Count: " + totalCount);
-
+//        starterData.concept(uncategorizedGrouper)
+//                .fullyQualifiedName("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
+//                .synonym("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
+//                .definition("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
+//                .inferredNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.IS_A, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.PART_OF, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATHS_PATTERN, TinkarTerm.ROLE_GROUP, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.STATUS_VALUE), List.of(TinkarTerm.ROOT_VERTEX))
+//                .statedNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.IS_A, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.PART_OF, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATHS_PATTERN, TinkarTerm.ROLE_GROUP, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.STATUS_VALUE), List.of(TinkarTerm.ROOT_VERTEX))
+//                .statedDefinition(TinkarTerm.ROOT_VERTEX)
+//                .build();
     }
 }
