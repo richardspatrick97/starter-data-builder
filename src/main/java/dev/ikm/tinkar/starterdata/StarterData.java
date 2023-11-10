@@ -4,7 +4,6 @@ import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
-import dev.ikm.tinkar.common.util.time.DateTimeUtil;
 import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
@@ -13,7 +12,6 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 
 import java.io.File;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -175,8 +173,8 @@ public class StarterData {
             return this;
         }
 
-        public ConceptBuilder statedDefinition(EntityProxy.Concept originConcept){
-            builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConcept, authoringSTAMP));
+        public ConceptBuilder statedDefinition(List<EntityProxy.Concept> originConceptList){
+            builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConceptList, authoringSTAMP));
             return this;
         }
 

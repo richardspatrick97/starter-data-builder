@@ -81,14 +81,14 @@ public class TinkarTermFilter {
 
     public static void printWithSuppliedData(Field field, JsonNode termNode) {
         String destinations = getListOfOrDefault(termNode.get("Destinations"), "null");
+        String origins = getListOfOrDefault(termNode.get("Origins"), "List.of(uncategorizedGrouper)");
+        String statedDef = origins;
 
-        String defaultOriginStr = "List.of(uncategorizedGrouper)";
         if (field.getName() == "ROOT_VERTEX") {
             destinations = destinations.substring(0, destinations.length()-1) + ", uncategorizedGrouper" + ")";
-            defaultOriginStr = "null";
+            origins = "null";
+            statedDef = "List.of(TinkarTerm.ROOT_VERTEX)";
         }
-
-        String origins = getListOfOrDefault(termNode.get("Origins"), defaultOriginStr);
 
         StringBuilder starterDataPOJO = new StringBuilder();
 
@@ -99,7 +99,7 @@ public class TinkarTermFilter {
         starterDataPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
         starterDataPOJO.append(".inferredNavigation(" + destinations + ", " + origins + ")").append("\n");
         starterDataPOJO.append(".statedNavigation(" + destinations + ", " + origins + ")").append("\n");
-        starterDataPOJO.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+        starterDataPOJO.append(".statedDefinition(" + statedDef + ")").append("\n");
         starterDataPOJO.append(".build();").append("\n");
 
         System.out.println(starterDataPOJO);
@@ -331,7 +331,7 @@ public class TinkarTermFilter {
         uncategorizedGrouperSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())").append("\n");
         uncategorizedGrouperSB.append(".inferredNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
         uncategorizedGrouperSB.append(".statedNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
-        uncategorizedGrouperSB.append(".statedDefinition(TinkarTerm.ROOT_VERTEX)").append("\n");
+        uncategorizedGrouperSB.append(".statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
         uncategorizedGrouperSB.append(".build();").append("\n");
 
         System.out.println(uncategorizedGrouperSB);
