@@ -9,77 +9,81 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tinkar.core.version>1.19.0</tinkar.core.version>
+        <tinkar-core.version>1.21.0</tinkar-core.version>
+        <tinkar-schema.version>1.14.0</tinkar-schema.version>
+        <tinkar-transformer-api.version>1.7.0</tinkar-transformer-api.version>
+        <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
+        <jackson-databind.version>2.14.2</jackson-databind.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>dev.ikm.tinkar.ext.owl</groupId>
             <artifactId>owl-extension</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>data-ephemeral-provider</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>coordinate</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>data-spinedarray-provider</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>entity-provider</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>executor-provider</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>search-provider</artifactId>
-            <version>${tinkar.core.version}</version>
+            <version>${tinkar-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>tinkar-schema</artifactId>
-            <version>1.13.0</version>
+            <version>${tinkar-schema.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>tinkar-transformer-api</artifactId>
-            <version>1.5.0</version>
+            <version>${tinkar-transformer-api.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>
-            <version>4.3.0</version>
+            <version>${java-uuid-generator.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.14.2</version>
+            <version>${jackson-databind.version}</version>
         </dependency>
     </dependencies>
 
