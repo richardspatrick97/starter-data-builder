@@ -2,7 +2,6 @@ package dev.ikm.tinkar.starterdata;
 
 import dev.ikm.tinkar.common.id.IntIdSet;
 import dev.ikm.tinkar.common.id.IntIds;
-import dev.ikm.tinkar.component.Concept;
 import dev.ikm.tinkar.dto.ConceptDTO;
 import dev.ikm.tinkar.dto.graph.VertexDTO;
 import dev.ikm.tinkar.entity.*;
@@ -17,6 +16,7 @@ import org.eclipse.collections.api.factory.primitive.IntLists;
 import org.eclipse.collections.api.factory.primitive.IntObjectMaps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntIntMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
@@ -24,8 +24,6 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
-
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_SEMANTIC;
 
 class SemanticUtility {
 
@@ -287,7 +285,7 @@ class SemanticUtility {
     }
 
     protected Entity<? extends EntityVersion> createStatedDefinitionSemantic(int referencedComponentNid,
-                                                                             EntityProxy.Concept orignConcept,
+                                                                             List<EntityProxy.Concept> originConceptList,
                                                                              Entity<? extends EntityVersion> authoringSTAMP){
         LOG.info("Building Stated Definition Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
@@ -309,29 +307,37 @@ class SemanticUtility {
         MutableIntObjectMap<ImmutableIntList> succesorMap = IntObjectMaps.mutable.empty();
         MutableIntIntMap predecessorMap = IntIntMaps.mutable.empty();
 
+        int vertexIdx = 0;
+
         //Definition Root
         UUID definitionRootUUID = uuidUtility.createUUID();
         MutableMap<ConceptDTO, Object> definitionRootProperty = Maps.mutable.empty();
         VertexDTO definitionVertexDTO = new VertexDTO(
                 definitionRootUUID.getMostSignificantBits(),
                 definitionRootUUID.getLeastSignificantBits(),
-                0,
+                vertexIdx++,
                 ConceptDTO.make(TinkarTerm.DEFINITION_ROOT.idString()),
                 definitionRootProperty.toImmutable());
         EntityVertex definitionRootVertex = EntityVertex.make(definitionVertexDTO);
         vertexMap.add(definitionRootVertex);
 
-        //Reference
-        UUID referenceUUID = uuidUtility.createUUID();
-        MutableMap<ConceptDTO, Object> referenceProperty = Maps.mutable.empty();
-        referenceProperty.put(ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),orignConcept);
-        EntityVertex referenceVertex = EntityVertex.make(new VertexDTO(
-                referenceUUID.getMostSignificantBits(),
-                referenceUUID.getLeastSignificantBits(),
-                1,
-                ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),
-                referenceProperty.toImmutable()));
-        vertexMap.add(referenceVertex);
+        //Reference(s)
+        MutableIntList referenceVeterxIdxList = IntLists.mutable.empty();
+        for (EntityProxy.Concept originConcept : originConceptList) {
+            int referenceIdx = vertexIdx++;
+            referenceVeterxIdxList.add(referenceIdx);
+
+            UUID referenceUUID = uuidUtility.createUUID();
+            MutableMap<ConceptDTO, Object> referenceProperty = Maps.mutable.empty();
+            referenceProperty.put(ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),originConcept);
+            EntityVertex referenceVertex = EntityVertex.make(new VertexDTO(
+                    referenceUUID.getMostSignificantBits(),
+                    referenceUUID.getLeastSignificantBits(),
+                    referenceIdx,
+                    ConceptDTO.make(TinkarTerm.CONCEPT_REFERENCE.idString()),
+                    referenceProperty.toImmutable()));
+            vertexMap.add(referenceVertex);
+        }
 
         //AND
         UUID andUUID = uuidUtility.createUUID();
@@ -339,7 +345,7 @@ class SemanticUtility {
         EntityVertex andVertex = EntityVertex.make(new VertexDTO(
                 andUUID.getMostSignificantBits(),
                 andUUID.getLeastSignificantBits(),
-                2,
+                vertexIdx++,
                 ConceptDTO.make(TinkarTerm.AND.idString()),
                 andProperty.toImmutable()));
         vertexMap.add(andVertex);
@@ -350,21 +356,25 @@ class SemanticUtility {
         EntityVertex necessarySetVertex = EntityVertex.make(new VertexDTO(
                 necessarySetUUID.getMostSignificantBits(),
                 necessarySetUUID.getLeastSignificantBits(),
-                3,
+                vertexIdx,
                 ConceptDTO.make(TinkarTerm.NECESSARY_SET.idString()),
                 necessarySetProperty.toImmutable()));
-
         vertexMap.add(necessarySetVertex);
 
+        int necessarySetIdx = vertexIdx;
+        int andIdx = vertexIdx-1;
+
         //Successor Map
-        succesorMap.put(0, IntLists.immutable.of(3).toImmutable());
-        succesorMap.put(2, IntLists.immutable.of(1).toImmutable());
-        succesorMap.put(3, IntLists.immutable.of(2).toImmutable());
+        succesorMap.put(0, IntLists.immutable.of(necessarySetIdx).toImmutable());
+        succesorMap.put(andIdx, referenceVeterxIdxList.toImmutable());
+        succesorMap.put(necessarySetIdx, IntLists.immutable.of(andIdx).toImmutable());
 
         //Predecessor Map
-        predecessorMap.put(1, 2);
-        predecessorMap.put(2, 3);
-        predecessorMap.put(3, 0);
+        for (int referenceIdx : referenceVeterxIdxList.toArray()) {
+            predecessorMap.put(referenceIdx, andIdx);
+        }
+        predecessorMap.put(andIdx, necessarySetIdx);
+        predecessorMap.put(necessarySetIdx, 0);
 
         statedDefinitionFields.add(new DiTreeEntity(definitionRootVertex, vertexMap.toImmutable(), succesorMap.toImmutable(), predecessorMap.toImmutable()));
 
