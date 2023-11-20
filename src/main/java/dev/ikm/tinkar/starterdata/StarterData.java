@@ -60,12 +60,8 @@ public class StarterData {
         return this;
     }
 
-    public StarterData visualize(){
-        return this;
-    }
-
-    public StarterData validate(){
-        return this;
+    public Entity<? extends EntityVersion> getAuthoringSTAMP(){
+        return authoringSTAMP;
     }
 
     public StarterData build() {
@@ -92,11 +88,6 @@ public class StarterData {
     public StarterData authoringSTAMP(EntityProxy.Concept status, long time, EntityProxy.Concept author, EntityProxy.Concept module, EntityProxy.Concept path){
         authoringSTAMP = stampUtility.createSTAMP(status, time, author, module, path);
         starterDataEntities.add(authoringSTAMP);
-        return this;
-    }
-
-    public StarterData stamp(EntityProxy.Concept status, long time, EntityProxy.Concept author, EntityProxy.Concept module, EntityProxy.Concept path){
-        starterDataEntities.add(stampUtility.createSTAMP(status, time, author, module, path));
         return this;
     }
 
@@ -232,12 +223,14 @@ public class StarterData {
                     purpose,
                     authoringSTAMP,
                     fieldDefinitions.toImmutable()));
-            starterDataEntities.add(semanticUtility.createDescriptionSemantic(
+            Entity<? extends EntityVersion> descriptionSemantic = semanticUtility.createDescriptionSemantic(
                     patternNid,
                     TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE,
                     patternProxy.description(),
-                    authoringSTAMP));
-            //dialect
+                    authoringSTAMP);
+            starterDataEntities.add(descriptionSemantic);
+            starterDataEntities.add(semanticUtility.createDialectSemantic(descriptionSemantic.nid(), TinkarTerm.PREFERRED, authoringSTAMP));
+
             return patternProxy;
         }
     }

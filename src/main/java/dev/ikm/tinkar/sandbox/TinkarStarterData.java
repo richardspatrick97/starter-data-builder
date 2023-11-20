@@ -1,7 +1,18 @@
 package dev.ikm.tinkar.sandbox;
 
+import dev.ikm.tinkar.common.service.CachingService;
+import dev.ikm.tinkar.common.service.PrimitiveData;
+import dev.ikm.tinkar.common.service.ServiceKeys;
+import dev.ikm.tinkar.common.service.ServiceProperties;
 import dev.ikm.tinkar.common.util.io.FileUtil;
+import dev.ikm.tinkar.common.util.time.DateTimeUtil;
+import dev.ikm.tinkar.entity.Entity;
+import dev.ikm.tinkar.entity.EntityVersion;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
+import dev.ikm.tinkar.entity.load.LoadEntitiesFromProtobufFile;
+import dev.ikm.tinkar.entity.transfom.EntityToTinkarSchemaTransformer;
+import dev.ikm.tinkar.entity.transfom.TinkarSchemaToEntityTransformer;
+import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
@@ -10,24 +21,36 @@ import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.io.File;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Logger;
+
+import static dev.ikm.tinkar.entity.Entity.provider;
 
 
 public class TinkarStarterData {
 
-    private static File datastore;
+    private static final Logger LOG = Logger.getLogger(TinkarStarterData.class.getSimpleName());
+
+    private static File exportDataStore;
+    private static File importDataStore;
     private static File exportFile;
 
-    public static void main(String[] args){
-        datastore = new File(args[0]);
-        exportFile = new File(args[1]);
-        FileUtil.recursiveDelete(datastore);
+    private static Entity<? extends EntityVersion> authoringSTAMP;
 
+    public static void main(String[] args){
+        exportDataStore = new File(args[0]);
+        exportFile = new File(args[1]);
+        importDataStore = new File(args[2]);
+        FileUtil.recursiveDelete(exportDataStore);
+        FileUtil.recursiveDelete(importDataStore);
         UUIDUtility uuidUtility = new UUIDUtility();
 
-        StarterData starterData = new StarterData(datastore, uuidUtility)
+        //Build, export, and shutdown database
+        StarterData starterData = new StarterData(exportDataStore, uuidUtility)
                 .init()
                 .authoringSTAMP(
                         TinkarTerm.ACTIVE_STATE,
@@ -36,213 +59,44 @@ public class TinkarStarterData {
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
-        configurePatterns(starterData, uuidUtility);
-        configureConcepts(starterData);
+        authoringSTAMP = starterData.getAuthoringSTAMP();
 
 
-        starterData.build();
-
-//        exportStarterData();
-
+        configureConceptsAndPatterns(starterData, uuidUtility);
+        starterData.build(); //Natively writing data to spined array
+        transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
+        exportStarterData();  //exports starter data to pb.zip
         starterData.shutdown();
+
+        //Load exported starter data into clean database
+        importStarterData(); //load pb.zip into database
+
     }
 
-    private static void configurePatterns(StarterData starterData, UUIDUtility uuidUtility){
-        //Create Description Pattern
-        starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
-                .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .fieldDefinition(
-                        TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION,
-                        TinkarTerm.LANGUAGE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.TEXT_FOR_DESCRIPTION,
-                        TinkarTerm.DESCRIPTION,
-                        TinkarTerm.STRING)
-                .fieldDefinition(
-                        TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE,
-                        TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.DESCRIPTION_TYPE,
-                        TinkarTerm.DESCRIPTION_TYPE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .build();
+    private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
-        //Create Stated Navigation Pattern
-        starterData.pattern(TinkarTerm.STATED_NAVIGATION_PATTERN)
-                .meaning(TinkarTerm.IS_A)
-                .purpose(TinkarTerm.IS_A)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_DESTINATION,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_ORIGIN,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .build();
+        Concept uncategorizedGrouper = EntityProxy.Concept.make("UNCATEGORIZED_GROUPER", UUID.randomUUID());
 
-        //Create Inferred Navigation Pattern
-        starterData.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
-                .meaning(TinkarTerm.IS_A)
-                .purpose(TinkarTerm.IS_A)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_DESTINATION,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_ORIGIN,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .build();
-
-        //Create Identifier Pattern
-        starterData.pattern(StarterData.identifierPattern)
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
-                .fieldDefinition(
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.STRING)
-                .build();
-
-        //Create US Dialect Pattern
-        starterData.pattern(TinkarTerm.US_DIALECT_PATTERN)
-                .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
-                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .fieldDefinition(
-                        TinkarTerm.US_ENGLISH_DIALECT,
-                        TinkarTerm.DESCRIPTION_ACCEPTABILITY,
-                        TinkarTerm.COMPONENT_FIELD)
-                .build();
-
-        //Create Axiom Syntax Pattern
         Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
         starterData.concept(axiomSyntax)
                 .fullyQualifiedName(axiomSyntax.description(), TinkarTerm.PREFERRED)
                 .synonym("Axiom Syntax", TinkarTerm.ACCEPTABLE)
                 .definition("Syntax defining description logic", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, axiomSyntax.asUuidArray()[0].toString())
-                .axiomSyntax("ClassOF(adfasdfasdfasdf)")
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
                 .build();
+
         Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
         starterData.concept(expressAxiom)
                 .fullyQualifiedName(expressAxiom.description(), TinkarTerm.PREFERRED)
                 .synonym("Express Axiom", TinkarTerm.ACCEPTABLE)
                 .definition("Expressing description logic through syntax", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, expressAxiom.asUuidArray()[0].toString())
-                .axiomSyntax("ClassOF(323333j33)")
-                .comment("Here's a comment")
-                .pathMembership()
-                .versionControl(TinkarTerm.HEALTH_CONCEPT, Instant.now().toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
                 .statedDefinition(List.of(axiomSyntax))
                 .build();
-        starterData.pattern(StarterData.axiomSyntaxPattern)
-                .meaning(axiomSyntax)
-                .purpose(expressAxiom)
-                .fieldDefinition(
-                        axiomSyntax,
-                        expressAxiom,
-                        TinkarTerm.STRING)
-                .build();
-
-        //Create Stated Definition Pattern
-        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
-                .meaning(TinkarTerm.DESCRIPTUM)
-                .purpose(TinkarTerm.LOGICAL_DEFINITION)
-                .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
-                        TinkarTerm.DITREE_FIELD)
-                .build();
-
-        //Create Inferred Definition Pattern
-        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
-                .meaning(TinkarTerm.DESCRIPTUM)
-                .purpose(TinkarTerm.LOGICAL_DEFINITION)
-                .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
-                        TinkarTerm.DITREE_FIELD)
-                .build();
-
-        //Create Path Membership Pattern
-        starterData.pattern(StarterData.pathMembershipPattern)
-                .meaning(TinkarTerm.PATH)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
-
-        //Create STAMP Pattern
-        starterData.pattern(TinkarTerm.STAMP_PATTERN)
-                .meaning(TinkarTerm.VERSION_PROPERTIES)
-                .purpose(TinkarTerm.VERSION_PROPERTIES)
-                .fieldDefinition(
-                        TinkarTerm.STATUS_VALUE,
-                        TinkarTerm.STATUS_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.TIME_FOR_VERSION,
-                        TinkarTerm.TIME_FOR_VERSION,
-                        TinkarTerm.LONG)
-                .fieldDefinition(
-                        TinkarTerm.AUTHOR_FOR_VERSION,
-                        TinkarTerm.AUTHOR_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.MODULE_FOR_VERSION,
-                        TinkarTerm.MODULE_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_FOR_VERSION,
-                        TinkarTerm.PATH_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .build();
-
-        //Create Tinkar base model component pattern
-        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(TinkarTerm.PATH)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
-
-        //Create Version control path origin pattern
-        starterData.pattern(StarterData.versionControlPathOriginPattern) //Try TinkarTerm.Path-origins with instant
-                .meaning(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH)
-                .purpose(TinkarTerm.PATH_ORIGINS)
-                .fieldDefinition(
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.STRING)
-                .build();
-
-        //Create Comment Pattern
-        starterData.pattern(TinkarTerm.COMMENT_PATTERN)
-                .meaning(TinkarTerm.COMMENT)
-                .purpose(TinkarTerm.COMMENT)
-                .fieldDefinition(
-                        TinkarTerm.COMMENT,
-                        TinkarTerm.COMMENT,
-                        TinkarTerm.STRING)
-                .build();
-
-        //Create Komet base model component pattern
-        starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(TinkarTerm.PATH)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
-    }
-
-    private static void configureConcepts(StarterData starterData){
-        Concept uncategorizedGrouper = EntityProxy.Concept.make("UNCATEGORIZED_GROUPER", UUID.randomUUID());
 
         starterData.concept(TinkarTerm.ACCEPTABLE)
                 .fullyQualifiedName("Acceptable (foundation metadata concept)", TinkarTerm.PREFERRED)
@@ -972,6 +826,8 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
+                .versionControl(TinkarTerm.SANDBOX_PATH, DateTimeUtil.format(authoringSTAMP.versions().get(0).time()))
                 .build();
 
         starterData.concept(TinkarTerm.DIGRAPH_FIELD)
@@ -1632,6 +1488,8 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
+                .versionControl(TinkarTerm.PRIMORDIAL_PATH, DateTimeUtil.format(authoringSTAMP.versions().get(0).time()))
                 .build();
 
         starterData.concept(TinkarTerm.MEANING)
@@ -2082,6 +1940,7 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.PRIMORDIAL_STATE)
@@ -2262,6 +2121,8 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
                 .statedNavigation(null, List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
                 .statedDefinition(List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
+                .pathMembership()
+                .versionControl(TinkarTerm.PRIMORDIAL_PATH, DateTimeUtil.format(authoringSTAMP.versions().get(0).time()))
                 .build();
 
         starterData.concept(TinkarTerm.SANDBOX_PATH_MODULE)
@@ -2719,9 +2580,9 @@ public class TinkarStarterData {
                 .synonym("Tinkar root concept ", TinkarTerm.PREFERRED)
                 .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString())
-                .inferredNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
-                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+//                .inferredNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
+//                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
+//                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
         starterData.concept(uncategorizedGrouper)
@@ -2729,9 +2590,244 @@ public class TinkarStarterData {
                 .synonym("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
                 .definition("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
-                .inferredNavigation(List.of(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.ANY_COMPONENT, TinkarTerm.ARRAY, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.COMMENT, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_REFERENCE, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.CONDITIONAL_TRIGGERS, TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.CZECH_DIALECT, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_CORE_TYPE, TinkarTerm.DESCRIPTION_DIALECT_PAIR, TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.DESCRIPTUM, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EXACT, TinkarTerm.EXTENDED_DESCRIPTION_TYPE, TinkarTerm.EXTENDED_RELATIONSHIP_TYPE, TinkarTerm.FLOAT_LITERAL, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.FRENCH_DIALECT, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.GROUPING, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.INSTANT_LITERAL, TinkarTerm.INSTANT_SUBSTITUTION, TinkarTerm.INVERSE_NAME, TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.IRISH_DIALECT, TinkarTerm.IS_A, TinkarTerm.KOMET_MODULE, TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.KOREAN_DIALECT, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_COORDINATE_NAME, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.LOGIC_COORDINATE_NAME, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.LOGICALLY_EQUIVALENT_TO, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_FOR_USER, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.NAVIGATION, TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_PATTERN, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PART_OF, TinkarTerm.PARTIAL, TinkarTerm.PATH_CONCEPT, TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_FOR_USER, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.PATH_ORIGINS, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.PATHS_PATTERN, TinkarTerm.PHENOMENON, TinkarTerm.POLISH_DIALECT, TinkarTerm.PRESENTATION_UNIT_DIFFERENT, TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION, TinkarTerm.ROLE_GROUP, TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.RUSSIAN_DIALECT, TinkarTerm.SEMANTIC_FIELD_NAME, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.TREE_LIST, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.UUID_LIST_FOR_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.LONG, TinkarTerm.NID, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.USERS_MODULE, TinkarTerm.ROOT_VERTEX), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedNavigation(List.of(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.ANY_COMPONENT, TinkarTerm.ARRAY, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.COMMENT, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_REFERENCE, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.CONDITIONAL_TRIGGERS, TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.CZECH_DIALECT, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_CORE_TYPE, TinkarTerm.DESCRIPTION_DIALECT_PAIR, TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.DESCRIPTUM, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EXACT, TinkarTerm.EXTENDED_DESCRIPTION_TYPE, TinkarTerm.EXTENDED_RELATIONSHIP_TYPE, TinkarTerm.FLOAT_LITERAL, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.FRENCH_DIALECT, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.GROUPING, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.INSTANT_LITERAL, TinkarTerm.INSTANT_SUBSTITUTION, TinkarTerm.INVERSE_NAME, TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.IRISH_DIALECT, TinkarTerm.IS_A, TinkarTerm.KOMET_MODULE, TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.KOREAN_DIALECT, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_COORDINATE_NAME, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.LOGIC_COORDINATE_NAME, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.LOGICALLY_EQUIVALENT_TO, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_FOR_USER, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.NAVIGATION, TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_PATTERN, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PART_OF, TinkarTerm.PARTIAL, TinkarTerm.PATH_CONCEPT, TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_FOR_USER, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.PATH_ORIGINS, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.PATHS_PATTERN, TinkarTerm.PHENOMENON, TinkarTerm.POLISH_DIALECT, TinkarTerm.PRESENTATION_UNIT_DIFFERENT, TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION, TinkarTerm.ROLE_GROUP, TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.RUSSIAN_DIALECT, TinkarTerm.SEMANTIC_FIELD_NAME, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.TREE_LIST, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.UUID_LIST_FOR_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.LONG, TinkarTerm.NID, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.USERS_MODULE, TinkarTerm.ROOT_VERTEX), List.of(TinkarTerm.ROOT_VERTEX))
+                .inferredNavigation(List.of(axiomSyntax, expressAxiom, TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.ANY_COMPONENT, TinkarTerm.ARRAY, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.COMMENT, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_REFERENCE, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.CONDITIONAL_TRIGGERS, TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.CZECH_DIALECT, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_CORE_TYPE, TinkarTerm.DESCRIPTION_DIALECT_PAIR, TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.DESCRIPTUM, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EXACT, TinkarTerm.EXTENDED_DESCRIPTION_TYPE, TinkarTerm.EXTENDED_RELATIONSHIP_TYPE, TinkarTerm.FLOAT_LITERAL, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.FRENCH_DIALECT, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.GROUPING, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.INSTANT_LITERAL, TinkarTerm.INSTANT_SUBSTITUTION, TinkarTerm.INVERSE_NAME, TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.IRISH_DIALECT, TinkarTerm.IS_A, TinkarTerm.KOMET_MODULE, TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.KOREAN_DIALECT, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_COORDINATE_NAME, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.LOGIC_COORDINATE_NAME, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.LOGICALLY_EQUIVALENT_TO, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_FOR_USER, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.NAVIGATION, TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_PATTERN, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PART_OF, TinkarTerm.PARTIAL, TinkarTerm.PATH_CONCEPT, TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_FOR_USER, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.PATH_ORIGINS, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.PATHS_PATTERN, TinkarTerm.PHENOMENON, TinkarTerm.POLISH_DIALECT, TinkarTerm.PRESENTATION_UNIT_DIFFERENT, TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION, TinkarTerm.ROLE_GROUP, TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.RUSSIAN_DIALECT, TinkarTerm.SEMANTIC_FIELD_NAME, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.TREE_LIST, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.UUID_LIST_FOR_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.LONG, TinkarTerm.NID, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.USERS_MODULE, TinkarTerm.ROOT_VERTEX), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(axiomSyntax, expressAxiom, TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.ANY_COMPONENT, TinkarTerm.ARRAY, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION, TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.COMMENT, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_REFERENCE, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.CONDITIONAL_TRIGGERS, TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.CZECH_DIALECT, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_CORE_TYPE, TinkarTerm.DESCRIPTION_DIALECT_PAIR, TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.DESCRIPTUM, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EXACT, TinkarTerm.EXTENDED_DESCRIPTION_TYPE, TinkarTerm.EXTENDED_RELATIONSHIP_TYPE, TinkarTerm.FLOAT_LITERAL, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.FRENCH_DIALECT, TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.GROUPING, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.INSTANT_LITERAL, TinkarTerm.INSTANT_SUBSTITUTION, TinkarTerm.INVERSE_NAME, TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.IRISH_DIALECT, TinkarTerm.IS_A, TinkarTerm.KOMET_MODULE, TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.KOREAN_DIALECT, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_COORDINATE_NAME, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.LOGIC_COORDINATE_NAME, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.LOGICALLY_EQUIVALENT_TO, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_FOR_USER, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.NAVIGATION, TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_PATTERN, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.OBJECT, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PART_OF, TinkarTerm.PARTIAL, TinkarTerm.PATH_CONCEPT, TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_FOR_USER, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.PATH_ORIGINS, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.PATHS_PATTERN, TinkarTerm.PHENOMENON, TinkarTerm.POLISH_DIALECT, TinkarTerm.PRESENTATION_UNIT_DIFFERENT, TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION, TinkarTerm.ROLE_GROUP, TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.RUSSIAN_DIALECT, TinkarTerm.SEMANTIC_FIELD_NAME, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.TREE_LIST, TinkarTerm.US_ENGLISH_DIALECT, TinkarTerm.UUID_DATA_TYPE, TinkarTerm.UUID_LIST_FOR_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, TinkarTerm.VIEW_COORDINATE_KEY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.LONG, TinkarTerm.NID, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.USERS_MODULE, TinkarTerm.ROOT_VERTEX), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+                .build();
+
+        //Get coordinates to work via Komet's KometTerm
+        starterData.concept(TinkarTerm.POSITION_ON_PATH)
+                .fullyQualifiedName(TinkarTerm.POSITION_ON_PATH.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.POSITION_ON_PATH.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.POSITION_ON_PATH.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.POSITION_ON_PATH.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                .fullyQualifiedName(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                .fullyQualifiedName(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                .fullyQualifiedName(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE)
+                .fullyQualifiedName(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE)
+                .fullyQualifiedName(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+
+
+        //Create Description Pattern
+        starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
+                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                .fieldDefinition(
+                        TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION,
+                        TinkarTerm.LANGUAGE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.TEXT_FOR_DESCRIPTION,
+                        TinkarTerm.DESCRIPTION,
+                        TinkarTerm.STRING)
+                .fieldDefinition(
+                        TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE,
+                        TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.DESCRIPTION_TYPE,
+                        TinkarTerm.DESCRIPTION_TYPE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+        //Create Stated Navigation Pattern
+        starterData.pattern(TinkarTerm.STATED_NAVIGATION_PATTERN)
+                .meaning(TinkarTerm.IS_A)
+                .purpose(TinkarTerm.IS_A)
+                .fieldDefinition(
+                        TinkarTerm.RELATIONSHIP_DESTINATION,
+                        TinkarTerm.IS_A,
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.RELATIONSHIP_ORIGIN,
+                        TinkarTerm.IS_A,
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .build();
+
+        //Create Inferred Navigation Pattern
+        starterData.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
+                .meaning(TinkarTerm.IS_A)
+                .purpose(TinkarTerm.IS_A)
+                .fieldDefinition(
+                        TinkarTerm.RELATIONSHIP_DESTINATION,
+                        TinkarTerm.IS_A,
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.RELATIONSHIP_ORIGIN,
+                        TinkarTerm.IS_A,
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .build();
+
+        //Create Identifier Pattern
+        starterData.pattern(StarterData.identifierPattern)
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.STRING)
+                .build();
+
+        //Create US Dialect Pattern
+        starterData.pattern(TinkarTerm.US_DIALECT_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
+                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                .fieldDefinition(
+                        TinkarTerm.US_ENGLISH_DIALECT,
+                        TinkarTerm.DESCRIPTION_ACCEPTABILITY,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+        //Create Axiom Syntax Pattern
+        starterData.pattern(StarterData.axiomSyntaxPattern)
+                .meaning(axiomSyntax)
+                .purpose(expressAxiom)
+                .fieldDefinition(
+                        axiomSyntax,
+                        expressAxiom,
+                        TinkarTerm.STRING)
+                .build();
+
+        //Create Stated Definition Pattern
+        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTUM)
+                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .fieldDefinition(
+                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.DITREE_FIELD)
+                .build();
+
+        //Create Inferred Definition Pattern
+        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTUM)
+                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .fieldDefinition(
+                        TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.DITREE_FIELD)
+                .build();
+
+        //Create Path Membership Pattern
+        starterData.pattern(StarterData.pathMembershipPattern)
+                .meaning(TinkarTerm.PATH)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+
+        //Create STAMP Pattern
+        starterData.pattern(TinkarTerm.STAMP_PATTERN)
+                .meaning(TinkarTerm.VERSION_PROPERTIES)
+                .purpose(TinkarTerm.VERSION_PROPERTIES)
+                .fieldDefinition(
+                        TinkarTerm.STATUS_VALUE,
+                        TinkarTerm.STATUS_FOR_VERSION,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.TIME_FOR_VERSION,
+                        TinkarTerm.TIME_FOR_VERSION,
+                        TinkarTerm.LONG)
+                .fieldDefinition(
+                        TinkarTerm.AUTHOR_FOR_VERSION,
+                        TinkarTerm.AUTHOR_FOR_VERSION,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.MODULE_FOR_VERSION,
+                        TinkarTerm.MODULE_FOR_VERSION,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.PATH_FOR_VERSION,
+                        TinkarTerm.PATH_FOR_VERSION,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+        //Create Tinkar base model component pattern
+        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
+                .meaning(TinkarTerm.PATH)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+
+        //Create Version control path origin pattern
+        starterData.pattern(StarterData.versionControlPathOriginPattern) //Try TinkarTerm.Path-origins with instant
+                .meaning(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH)
+                .purpose(TinkarTerm.PATH_ORIGINS)
+                .fieldDefinition(
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.STRING)
+                .build();
+
+        //Create Comment Pattern
+        starterData.pattern(TinkarTerm.COMMENT_PATTERN)
+                .meaning(TinkarTerm.COMMENT)
+                .purpose(TinkarTerm.COMMENT)
+                .fieldDefinition(
+                        TinkarTerm.COMMENT,
+                        TinkarTerm.COMMENT,
+                        TinkarTerm.STRING)
+                .build();
+
+        //Create Komet base model component pattern
+        starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
+                .meaning(TinkarTerm.PATH)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
     }
 
@@ -2742,5 +2838,46 @@ public class TinkarStarterData {
         } catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
+    }
+
+    private static void importStarterData() {
+        LOG.info("Starting database");
+        LOG.info("Loading data from " + importDataStore.getAbsolutePath());
+        CachingService.clearAll();
+        ServiceProperties.set(ServiceKeys.DATA_STORE_ROOT, importDataStore);
+        PrimitiveData.selectControllerByName("Open SpinedArrayStore");
+        PrimitiveData.start();
+
+        try {
+            LoadEntitiesFromProtobufFile loadEntitiesFromProtobufFile = new LoadEntitiesFromProtobufFile(exportFile);
+            loadEntitiesFromProtobufFile.call();
+        }catch (Exception e){
+            LOG.severe(e.getMessage());
+            e.printStackTrace();
+        }
+
+        List<Integer> patternNids = new ArrayList<>();
+        PrimitiveData.get().forEachPatternNid(patternNids::add);
+
+
+        System.out.println("break");
+
+        PrimitiveData.stop();
+    }
+
+    private static void transformAnalysis(UUIDUtility uuidUtility){
+        TinkarSchemaToEntityTransformer importTransform = TinkarSchemaToEntityTransformer.getInstance();
+        EntityToTinkarSchemaTransformer exportTransform = EntityToTinkarSchemaTransformer.getInstance();
+        int diTreeNid=  Entity.provider().semanticNidsOfPattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN.nid())[0];
+        Entity<? extends EntityVersion> originalDiTreeEntity = Entity.getFast(diTreeNid);
+
+        //Export transform from Entity to TinkarMsg
+        TinkarMsg tinkarSchemaDiTree = exportTransform.transform(originalDiTreeEntity);
+
+        //Import transform from TinkarMsg to Entity
+        final List<Entity<? extends EntityVersion>> entities = new ArrayList<>();
+        importTransform.transform(tinkarSchemaDiTree, entities::add, stampEntity -> {});
+
+        System.out.println("break");
     }
 }
