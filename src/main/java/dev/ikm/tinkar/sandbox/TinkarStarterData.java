@@ -14,6 +14,7 @@ import dev.ikm.tinkar.entity.transfom.EntityToTinkarSchemaTransformer;
 import dev.ikm.tinkar.entity.transfom.TinkarSchemaToEntityTransformer;
 import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
+import dev.ikm.tinkar.starterdata.StarterDataTerm;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
@@ -75,7 +76,17 @@ public class TinkarStarterData {
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
-        Concept uncategorizedGrouper = EntityProxy.Concept.make("UNCATEGORIZED_GROUPER", UUID.randomUUID());
+        Concept uncategorizedGrouper = EntityProxy.Concept.make("UNCATEGORIZED_GROUPER", uuidUtility.createUUID());
+
+        Concept starterDataAuthoring = EntityProxy.Concept.make("Starter Data Authoring", uuidUtility.createUUID());
+        starterData.concept(starterDataAuthoring)
+                .fullyQualifiedName(starterDataAuthoring.description(), TinkarTerm.PREFERRED)
+                .synonym("Metadata Authoring", TinkarTerm.ACCEPTABLE)
+                .definition("Define necessary minimum viable concepts to use Tinkar Data", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, starterDataAuthoring.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .build();
 
         Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
         starterData.concept(axiomSyntax)
@@ -2580,9 +2591,9 @@ public class TinkarStarterData {
                 .synonym("Tinkar root concept ", TinkarTerm.PREFERRED)
                 .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString())
-//                .inferredNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
-//                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
-//                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+                .inferredNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
+                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, uncategorizedGrouper), null)
+                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
         starterData.concept(uncategorizedGrouper)
@@ -2709,7 +2720,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Identifier Pattern
-        starterData.pattern(StarterData.identifierPattern)
+        starterData.pattern(StarterDataTerm.IDENTIFIER_PATTERN)
                 .meaning(TinkarTerm.IDENTIFIER_SOURCE)
                 .purpose(TinkarTerm.IDENTIFIER_SOURCE)
                 .fieldDefinition(
@@ -2733,7 +2744,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Axiom Syntax Pattern
-        starterData.pattern(StarterData.axiomSyntaxPattern)
+        starterData.pattern(StarterDataTerm.AXIOM_SYNTAX_PATTERN)
                 .meaning(axiomSyntax)
                 .purpose(expressAxiom)
                 .fieldDefinition(
@@ -2763,7 +2774,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Path Membership Pattern
-        starterData.pattern(StarterData.pathMembershipPattern)
+        starterData.pattern(StarterDataTerm.PATH_MEMBERSHIP_PATTERN)
                 .meaning(TinkarTerm.PATH)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
@@ -2794,14 +2805,8 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
-        //Create Tinkar base model component pattern
-        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(TinkarTerm.PATH)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
-
         //Create Version control path origin pattern
-        starterData.pattern(StarterData.versionControlPathOriginPattern) //Try TinkarTerm.Path-origins with instant
+        starterData.pattern(StarterDataTerm.VERSION_CONTROL_PATTERN) //Try TinkarTerm.Path-origins with instant
                 .meaning(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH)
                 .purpose(TinkarTerm.PATH_ORIGINS)
                 .fieldDefinition(
@@ -2824,9 +2829,21 @@ public class TinkarStarterData {
                         TinkarTerm.STRING)
                 .build();
 
+        //Create Authoring base model pattern
+        starterData.pattern(StarterDataTerm.AUTHORING_BASE_MODEL_PATTERN)
+                .meaning(starterDataAuthoring)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+
+        //Create Tinkar Core base model pattern
+        starterData.pattern(StarterDataTerm.TINKAR_CORE_BASE_MODEL_PATTERN)
+                .meaning(starterDataAuthoring)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+
         //Create Komet base model component pattern
-        starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(TinkarTerm.PATH)
+        starterData.pattern(StarterDataTerm.KOMET_BASE_MODEL_PATTERN)
+                .meaning(starterDataAuthoring)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
     }

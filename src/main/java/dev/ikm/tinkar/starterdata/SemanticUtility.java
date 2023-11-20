@@ -125,7 +125,7 @@ class SemanticUtility {
                 .leastSignificantBits(navigationSemanticUUID.getLeastSignificantBits())
                 .mostSignificantBits(navigationSemanticUUID.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterData.identifierPattern.nid())
+                .patternNid(StarterDataTerm.IDENTIFIER_PATTERN.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -184,7 +184,7 @@ class SemanticUtility {
                 .leastSignificantBits(axiomSyntaxSemantic.getLeastSignificantBits())
                 .mostSignificantBits(axiomSyntaxSemantic.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterData.axiomSyntaxPattern.nid())
+                .patternNid(StarterDataTerm.AXIOM_SYNTAX_PATTERN.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -231,8 +231,9 @@ class SemanticUtility {
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }
 
-    protected Entity<? extends EntityVersion> createPathMembershipSemantic(int referencedComponentNid,
-                                                                           Entity<? extends EntityVersion> authoringSTAMP){
+    protected Entity<? extends EntityVersion> createMembershipSemantic(int referencedComponentNid,
+                                                                       EntityProxy.Pattern membershipPattern,
+                                                                       Entity<? extends EntityVersion> authoringSTAMP){
         LOG.info("Building Path Membership Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
         UUID pathMembershipSemantic = uuidUtility.createUUID();
@@ -241,7 +242,7 @@ class SemanticUtility {
                 .leastSignificantBits(pathMembershipSemantic.getLeastSignificantBits())
                 .mostSignificantBits(pathMembershipSemantic.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterData.pathMembershipPattern.nid())
+                .patternNid(membershipPattern.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -266,7 +267,7 @@ class SemanticUtility {
                 .leastSignificantBits(versionControlSemantic.getLeastSignificantBits())
                 .mostSignificantBits(versionControlSemantic.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterData.versionControlPathOriginPattern.nid())
+                .patternNid(StarterDataTerm.VERSION_CONTROL_PATTERN.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();

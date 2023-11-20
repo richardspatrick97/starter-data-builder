@@ -14,7 +14,6 @@ import org.eclipse.collections.api.list.MutableList;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -31,13 +30,6 @@ public class StarterData {
     private final ConceptUtility conceptUtility;
     private final PatternUtility patternUtility;
     private final SemanticUtility semanticUtility;
-
-    //TODO-aks8m: These Patterns below need to be in Tinkar Bindings
-    public static final EntityProxy.Pattern identifierPattern = EntityProxy.Pattern.make("Identifier Pattern", UUID.fromString("5d60e14b-c410-5172-9559-3c4253278ae2"));
-    public static final EntityProxy.Pattern axiomSyntaxPattern = EntityProxy.Pattern.make("Axiom Syntax Pattern", UUID.fromString("c0ca180b-aae2-5fa1-9ab7-4a24f2dfe16b"));
-    public static final EntityProxy.Pattern pathMembershipPattern = EntityProxy.Pattern.make("Path membership", UUID.fromString("1eb187f9-9844-55de-b575-9487ea0b2c61"));
-    public static final EntityProxy.Pattern versionControlPathOriginPattern = EntityProxy.Pattern.make("Version Control Pattern", UUID.fromString("cad7b375-e4c0-5fd8-a346-63b8718f74a3"));
-
 
     public StarterData(File datastore, UUIDUtility uuidUtility) {
         this.datastore = datastore;
@@ -67,14 +59,10 @@ public class StarterData {
     public StarterData build() {
         starterDataEntities.forEach(entity -> EntityService.get().putEntity(entity));
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("STAMPs: " + starterDataEntities.stream().filter(entity -> entity instanceof StampRecord).count() + "\n");
-        sb.append("Concepts: " + starterDataEntities.stream().filter(entity -> entity instanceof ConceptRecord).count() + "\n");
-        sb.append("Semantics: " + starterDataEntities.stream().filter(entity -> entity instanceof SemanticRecord).count() + "\n");
-        sb.append("Patterns: " + starterDataEntities.stream().filter(entity -> entity instanceof PatternRecord).count());
-
-        LOG.info(sb.toString());
+        LOG.info("STAMPs: " + starterDataEntities.stream().filter(entity -> entity instanceof StampRecord).count());
+        LOG.info("Concepts: " + starterDataEntities.stream().filter(entity -> entity instanceof ConceptRecord).count());
+        LOG.info("Semantics: " + starterDataEntities.stream().filter(entity -> entity instanceof SemanticRecord).count());
+        LOG.info("Patterns: " + starterDataEntities.stream().filter(entity -> entity instanceof PatternRecord).count());
 
         starterDataEntities.clear();
         return this;
@@ -155,7 +143,7 @@ public class StarterData {
         }
 
         public ConceptBuilder pathMembership(){
-            builderEntities.add(semanticUtility.createPathMembershipSemantic(conceptNid, authoringSTAMP));
+            builderEntities.add(semanticUtility.createMembershipSemantic(conceptNid, StarterDataTerm.PATH_MEMBERSHIP_PATTERN, authoringSTAMP));
             return this;
         }
 
@@ -168,6 +156,19 @@ public class StarterData {
             builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConceptList, authoringSTAMP));
             return this;
         }
+
+        public ConceptBuilder authoringMembership(){
+            return this;
+        }
+
+        public ConceptBuilder coreMembership(){
+            return this;
+        }
+
+        public ConceptBuilder kometMembership(){
+            return this;
+        }
+
 
         public EntityProxy.Concept build(){
             starterDataEntities.addAll(builderEntities);
