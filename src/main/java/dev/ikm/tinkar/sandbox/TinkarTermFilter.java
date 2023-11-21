@@ -7,7 +7,10 @@ import dev.ikm.tinkar.terms.TinkarTerm;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,12 +33,19 @@ public class TinkarTermFilter {
         int neededCount = 0;
 
         String uncatDestinationsList = "";
+        Set<String> conceptsBuilt = new HashSet<>();
+        List<String> issueConcepts = new ArrayList<>();
 
         for(Field field : TinkarTerm.class.getDeclaredFields()){
             Matcher matcher = pattern.matcher(field.getName().toLowerCase());
 
             if (!field.getAnnotatedType().getType().getTypeName().equals("dev.ikm.tinkar.terms.EntityProxy$Pattern")) {
                 if (!matcher.find() || additionalTinkarTerms.contains(field.getName())){
+                    if (jsonNode.get(field.getName()) == null) {
+                        issueConcepts.add(field.getName());
+                        continue;
+                    }
+                    conceptsBuilt.add(field.getName());
 //                    System.out.println(field.getName());
 
                     // Print concept definition code with **default values**
@@ -44,7 +54,7 @@ public class TinkarTermFilter {
                     // Print concept definition code with **supplied data**
                     JsonNode termNode = jsonNode.get(field.getName());
 
-                    if (termNode.get("Origins").isEmpty()) {
+                    if (termNode.get("Origins").isEmpty() && field.getName() != "ROOT_VERTEX") {
                         uncatDestinationsList += "TinkarTerm." + field.getName() + ", ";
                     }
 
@@ -55,11 +65,20 @@ public class TinkarTermFilter {
             totalCount++;
         }
 
-        printUncategorizedGrouperDefinition(uncatDestinationsList.substring(0, uncatDestinationsList.length()-2));
+        printUncategorizedGrouperDefinition(uncatDestinationsList);
         neededCount++;
 
         System.out.println("Needed Count: " + neededCount);
         System.out.println("Total Count: " + totalCount);
+
+        Set<String> conceptsInSuppliedData = new HashSet<>();
+        jsonNode.fieldNames().forEachRemaining(conceptsInSuppliedData::add);
+
+        System.out.println("Concepts Built: " + conceptsBuilt);
+        System.out.println("Concepts in Supplied Data: " + conceptsInSuppliedData);
+        conceptsInSuppliedData.removeAll(conceptsBuilt);
+        System.out.println("Concepts in Supplied Data NOT Built: " + conceptsInSuppliedData);
+        System.out.println("Issue Concepts: " + issueConcepts);
     }
 
     public static void printWithDefaultData(Field field) {
@@ -93,9 +112,9 @@ public class TinkarTermFilter {
         StringBuilder starterDataPOJO = new StringBuilder();
 
         starterDataPOJO.append("starterData.concept(TinkarTerm." + field.getName() + ")").append("\n");
-        starterDataPOJO.append(".fullyQualifiedName(\"" + termNode.get("FullyQualifiedName").asText() + "\", TinkarTerm.PREFERRED" + ")").append("\n");
-        starterDataPOJO.append(".synonym(\"" + termNode.get("Synonym").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
-        starterDataPOJO.append(".definition(\"" + termNode.get("Definition").asText() + "\", TinkarTerm.PREFERRED)").append("\n");
+        starterDataPOJO.append(".fullyQualifiedName(\"" + termNode.get("FullyQualifiedName").asText().replace('"','\'') + "\", TinkarTerm.PREFERRED" + ")").append("\n");
+        starterDataPOJO.append(".synonym(\"" + termNode.get("Synonym").asText().replace('"','\'') + "\", TinkarTerm.PREFERRED)").append("\n");
+        starterDataPOJO.append(".definition(\"" + termNode.get("Definition").asText().replace('"','\'') + "\", TinkarTerm.PREFERRED)").append("\n");
         starterDataPOJO.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm." + field.getName() + ".asUuidArray()[0].toString())").append("\n");
         starterDataPOJO.append(".inferredNavigation(" + destinations + ", " + origins + ")").append("\n");
         starterDataPOJO.append(".statedNavigation(" + destinations + ", " + origins + ")").append("\n");
@@ -260,7 +279,7 @@ public class TinkarTermFilter {
         sb.append("^type").append("|");
         sb.append("^name").append("|");
         sb.append("umls").append("|");
-        sb.append("properties").append("|");//working
+//        sb.append("properties").append("|");//working
         sb.append("participant").append("|");
         sb.append("normal").append("|");
         sb.append("narrative").append("|");
@@ -322,15 +341,22 @@ public class TinkarTermFilter {
     }
 
     private static void printUncategorizedGrouperDefinition(String destinationConceptList) {
+        String listOfDestinationConcepts;
+        if (destinationConceptList == "") {
+            listOfDestinationConcepts = "null";
+        } else {
+            listOfDestinationConcepts = "List.of(" + destinationConceptList.substring(0, Math.max(0, destinationConceptList.length()-2)) + ")";
+        }
+
         StringBuilder uncategorizedGrouperSB = new StringBuilder();
 
         uncategorizedGrouperSB.append("starterData.concept(uncategorizedGrouper)").append("\n");
         uncategorizedGrouperSB.append(".fullyQualifiedName(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED" + ")").append("\n");
         uncategorizedGrouperSB.append(".synonym(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED)").append("\n");
         uncategorizedGrouperSB.append(".definition(\"UNCATEGORIZED_GROUPER\", TinkarTerm.PREFERRED)").append("\n");
-        uncategorizedGrouperSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())").append("\n");
-        uncategorizedGrouperSB.append(".inferredNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
-        uncategorizedGrouperSB.append(".statedNavigation(List.of(" + destinationConceptList + "), List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
+        uncategorizedGrouperSB.append(".identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, uncategorizedGrouper.asUuidArray()[0].toString())").append("\n");
+        uncategorizedGrouperSB.append(".inferredNavigation(" + listOfDestinationConcepts + ", List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
+        uncategorizedGrouperSB.append(".statedNavigation(" + listOfDestinationConcepts + ", List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
         uncategorizedGrouperSB.append(".statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))").append("\n");
         uncategorizedGrouperSB.append(".build();").append("\n");
 
