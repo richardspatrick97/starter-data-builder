@@ -2,7 +2,7 @@
   "ACCEPTABLE": {
     "FullyQualifiedName": "Acceptable (foundation metadata concept)",
     "Synonym": "Acceptable (SOLOR)",
-    "Definition": "foundation metadata concept",
+    "Definition": "defines whethere a value is allowable for a given field ",
     "Origins": [
       "DESCRIPTION_ACCEPTABILITY"
     ],
@@ -11,7 +11,7 @@
   "ACTIVE_STATE": {
     "FullyQualifiedName": "Active status (SOLOR)",
     "Synonym": "Active",
-    "Definition": "Active Status",
+    "Definition": "the status of the concept (Active, Cancelled, Inactive, Primordial)",
     "Origins": [
       "STATUS_VALUE"
     ],
@@ -20,14 +20,16 @@
   "ALLOWED_STATES_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Allowed states for stamp coordinate (SOLOR)",
     "Synonym": "Allowed states",
-    "Definition": "Acceptable state for STAMP",
-    "Origins": null,
+    "Definition": "predefined list of values for STAMP coordinate",
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "AND": {
     "FullyQualifiedName": "And (SOLOR)",
     "Synonym": "And",
-    "Definition": "Operator",
+    "Definition": "an operator that typically is employed to combine two conditions ",
     "Origins": [
       "CONNECTIVE_OPERATOR"
     ],
@@ -36,55 +38,64 @@
   "ANNOTATION_TYPE": {
     "FullyQualifiedName": "Annotation type (SOLOR)",
     "Synonym": "Annotation type",
-    "Definition": "Text -Explanation/Comment",
+    "Definition": "metadata about program elements, and annotation types define the structure of these annotations ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "ROOT_VERTEX"
     ],
     "Destinations": [
+      "COMMENT",
       "KOMET_ISSUE"
     ]
   },
   "ANONYMOUS_CONCEPT": {
     "FullyQualifiedName": "Anonynmous concept (SOLOR)",
     "Synonym": "Anynonymous concept",
-    "Definition": "not named or identified/ Unknown",
-    "Origins": null,
+    "Definition": "concepts or entities that do not have a speicfic, named identity, (defined on-the-fly without a dedicated name)",
+    "Origins": [
+      "CONCEPT_TYPE"
+    ],
     "Destinations": null
   },
   "ANY_COMPONENT": {
     "FullyQualifiedName": "Any component (SOLOR)",
     "Synonym": "Any component",
-    "Definition": "Elements (a part or whole)",
-    "Origins": null,
+    "Definition": "a general-purpose container to represent any component with generic data structure. Modifyable based on the specific requirements and characteristics of the components. ",
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "ARRAY": {
     "FullyQualifiedName": "Array (SOLOR)",
     "Synonym": "Array",
-    "Definition": "Linear data structure",
-    "Origins": null,
+    "Definition": "Linear data structure ",
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "ARRAY_FIELD": {
     "FullyQualifiedName": "Array field (Solor)",
     "Synonym": "Array field ",
-    "Definition": "a lexical set of semantically related elements/items",
+    "Definition": "a lexical set of semantically related elements/items ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "AUTHOR_FOR_EDIT_COORDINATE": {
     "FullyQualifiedName": "Author for edit coordinate (SOLOR)",
     "Synonym": "Author",
-    "Definition": "Writer/Editer",
-    "Origins": null,
+    "Definition": "indidvidual or enitity who made a particular edit or reivsion in a document (authoring a specific location or point in the codebase where an edit was made)",
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "AUTHOR_FOR_VERSION": {
     "FullyQualifiedName": "Author for version (SOLOR)",
     "Synonym": "Author",
-    "Definition": "Version Author ",
+    "Definition": "indidvidual or enitity who made a speicfic set of changes or modifications to a codebase/terminology resulting in the creation of a new version or revision ",
     "Origins": [
       "VERSION_PROPERTIES"
     ],
@@ -93,14 +104,16 @@
   "AUTHORS_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Author for stamp coordinate (SOLOR)",
     "Synonym": "Authors",
-    "Definition": "STAMP Author",
-    "Origins": null,
+    "Definition": "an individualy or an entity responsible for defining or updating the values associated with the STAMP coordinate",
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "AXIOM_FOCUS": {
     "FullyQualifiedName": "Axiom focus (SOLOR)",
     "Synonym": "Axiom focus",
-    "Definition": "Identification/Statement that is true (attributes?)",
+    "Definition": "a statement or proposition that is assumed to be true without requiring proof, it serves as a foundation principles on which a system or theory is built. Focus refers to the central point of attention or concentration on a speicfic concept/axioms ",
     "Origins": [
       "COMPONENT_TYPE_FOCUS"
     ],
@@ -109,7 +122,7 @@
   "AXIOM_ORIGIN": {
     "FullyQualifiedName": "Axiom origin (SOLOR)",
     "Synonym": "Axiom origin",
-    "Definition": "Derived from ?",
+    "Definition": "the parent concept for the axiom? ",
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -123,7 +136,7 @@
     "Synonym": "Boolean field ",
     "Definition": "true (1) or false (0)",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
@@ -131,21 +144,27 @@
     "FullyQualifiedName": "Boolean literal (SOLOR)",
     "Synonym": "Boolean literal",
     "Definition": "TRUE, FALSE, UKNOWN ",
-    "Origins": null,
+    "Origins": [
+      "LITERAL_VALUE"
+    ],
     "Destinations": null
   },
   "BOOLEAN_REFERENCE": {
     "FullyQualifiedName": "Boolean reference (SOLOR)",
     "Synonym": "Boolean reference",
-    "Definition": "Refernce(a pointer) to a Boolean object",
-    "Origins": null,
+    "Definition": "Reference(a pointer) to a Boolean object",
+    "Origins": [
+      "QUERY_CLAUSES"
+    ],
     "Destinations": null
   },
   "BOOLEAN_SUBSTITUTION": {
     "FullyQualifiedName": "Boolean substitution (SOLOR)",
     "Synonym": "Boolean substitution",
-    "Definition": "logical equivalence?",
-    "Origins": null,
+    "Definition": "the process of replacing or substituting boolean values or expression in a logical context",
+    "Origins": [
+      "FIELD_SUBSTITUTION"
+    ],
     "Destinations": null
   },
   "BYTE_ARRAY_FIELD": {
@@ -153,14 +172,14 @@
     "Synonym": "Byte array field",
     "Definition": "an arrary of bytes ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "CANCELED_STATE": {
     "FullyQualifiedName": "Canceled status (SOLOR)",
     "Synonym": "Canceled ",
-    "Definition": "Canceled status ",
+    "Definition": "the status of the concept (Active, Cancelled, Primordial)",
     "Origins": [
       "STATUS_VALUE"
     ],
@@ -169,28 +188,34 @@
   "CASE_INSENSITIVE_EVALUATION": {
     "FullyQualifiedName": "Case insensitive evaluation (SOLOR)",
     "Synonym": "Ignore case",
-    "Definition": "evaluates values regardless of the case",
-    "Origins": null,
+    "Definition": "evaluates values regardless of the case ",
+    "Origins": [
+      "TEXT_COMPARISON"
+    ],
     "Destinations": null
   },
   "CASE_SENSITIVE_EVALUATION": {
     "FullyQualifiedName": "Case sensitive evaluation (SOLOR)",
     "Synonym": "Compare case",
-    "Definition": "evaluated based on the case",
-    "Origins": null,
+    "Definition": "evaluated based on the case ",
+    "Origins": [
+      "TEXT_COMPARISON"
+    ],
     "Destinations": null
   },
   "CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Case significance concept nid for description (SOLOR)",
     "Synonym": "Case significance ",
-    "Definition": "Case significance concept NID for description",
-    "Origins": null,
+    "Definition": "a field label which captures the case significance for a given concept descrtiption",
+    "Origins": [
+      "DESCRIPTION_VERSION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CHINESE_LANGUAGE": {
     "FullyQualifiedName": "Chinese language (SOLOR)",
     "Synonym": "Chinese language",
-    "Definition": "Chinese language",
+    "Definition": "Chinese language ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -199,8 +224,10 @@
   "COMMENT": {
     "FullyQualifiedName": "Comment (SOLOR)",
     "Synonym": "Comment",
-    "Definition": "A component to store comments on arbitrary items (concepts, relationships, semantics, etc)",
-    "Origins": null,
+    "Definition": "A filed lable to capture free text information which may be necessary to add or change (concepts, relationships, semantics, etc)",
+    "Origins": [
+      "ANNOTATION_TYPE"
+    ],
     "Destinations": null
   },
   "COMPONENT_ID_LIST_FIELD": {
@@ -208,7 +235,7 @@
     "Synonym": "Component Id list ",
     "Definition": "Id list of component",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
@@ -217,7 +244,7 @@
     "Synonym": "Component Id set ",
     "Definition": "Id set of component",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
@@ -226,17 +253,17 @@
     "Synonym": "Component field ",
     "Definition": "Component field ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
-    "Destinations": [
-      "CONCEPT_FIELD"
-    ]
+    "Destinations": null
   },
   "COMPONENT_FOR_SEMANTIC": {
     "FullyQualifiedName": "Component for semantic (SOLOR)",
     "Synonym": "Component",
     "Definition": "Component for semantic ",
-    "Origins": null,
+    "Origins": [
+      "SEMANTIC_PROPERTIES"
+    ],
     "Destinations": null
   },
   "COMPONENT_SEMANTIC": {
@@ -264,30 +291,34 @@
   "CONCEPT_CONSTRAINTS": {
     "FullyQualifiedName": "Concept constraints(SOLOR)",
     "Synonym": "Concept constraints",
-    "Definition": "Constraints for concept",
-    "Origins": null,
+    "Definition": "defined filters for a given concept ",
+    "Origins": [
+      "ACTION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CONCEPT_DETAILS_TREE_TABLE": {
     "FullyQualifiedName": "Concept details tree table (SOLOR)",
     "Synonym": "Concept details tree table ",
     "Definition": "Tree table with concept details",
-    "Origins": null,
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
     "Destinations": null
   },
   "CONCEPT_FIELD": {
     "FullyQualifiedName": "Concept field (SOLOR)",
     "Synonym": " Concept field ",
-    "Definition": "Filed for concept ",
+    "Definition": "field for the human readable description for the given concept ",
     "Origins": [
-      "COMPONENT_FIELD"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "CONCEPT_FOCUS": {
     "FullyQualifiedName": "Concept focus (SOLOR)",
     "Synonym": "Concept focus ",
-    "Definition": "Focus for concept ",
+    "Definition": null,
     "Origins": [
       "COMPONENT_TYPE_FOCUS"
     ],
@@ -296,14 +327,16 @@
   "CONCEPT_REFERENCE": {
     "FullyQualifiedName": "Concept reference (SOLOR)",
     "Synonym": "Concept reference",
-    "Definition": "Refrence for concept ",
-    "Origins": null,
+    "Definition": "a field to capture a refrence to validate concept ",
+    "Origins": [
+      "CONNECTIVE_OPERATOR"
+    ],
     "Destinations": null
   },
   "CONCEPT_SEMANTIC": {
     "FullyQualifiedName": "Concept semantic (SOLOR)",
     "Synonym": "Concept semantic ",
-    "Definition": "Concept semantic ",
+    "Definition": "value to define a given semantic as a concept ",
     "Origins": [
       "SEMANTIC_TYPE"
     ],
@@ -312,37 +345,50 @@
   "CONCEPT_SUBSTITUTION": {
     "FullyQualifiedName": "Concept subtitution (SOLOR)",
     "Synonym": "Concept subsitution ",
-    "Definition": "Substitution for concept ",
-    "Origins": null,
+    "Definition": "Substitution for concept",
+    "Origins": [
+      "FIELD_SUBSTITUTION"
+    ],
     "Destinations": null
   },
   "CONCEPT_TO_FIND": {
     "FullyQualifiedName": "Concept to find (SOLOR)",
     "Synonym": "Concept to find",
-    "Definition": "Find concept ",
-    "Origins": null,
+    "Definition": "Find concept (if searching on Komet shows us the results \"details and futher information?)",
+    "Origins": [
+      "ACTION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CONCEPT_TYPE": {
     "FullyQualifiedName": "Concept type (SOLOR)",
     "Synonym": "Concept type ",
-    "Definition": "Type of concept ",
-    "Origins": null,
-    "Destinations": null
+    "Definition": "a field that captures a defined concept label ",
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
+    "Destinations": [
+      "ANONYMOUS_CONCEPT",
+      "HEALTH_CONCEPT",
+      "PATH_CONCEPT",
+      "SEMANTIC_FIELD_CONCEPTS"
+    ]
   },
   "CONCEPT_VERSION": {
     "FullyQualifiedName": "Concept version (SOLOR)",
     "Synonym": "Version",
-    "Definition": "Version of concept ",
-    "Origins": null,
+    "Definition": "a filed that captures the version of the terminology that it came from",
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
     "Destinations": null
   },
   "CONCRETE_DOMAIN_OPERATOR": {
     "FullyQualifiedName": "Concrete domain operator (SOLOR)",
     "Synonym": "Concrete domain operator ",
-    "Definition": "Domain operators for concepts",
+    "Definition": "Domain operators for concepts ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "MEANING"
     ],
     "Destinations": [
       "EQUAL_TO",
@@ -355,56 +401,69 @@
   "CONDITIONAL_TRIGGERS": {
     "FullyQualifiedName": "Conditional triggers (SOLOR)",
     "Synonym": "Conditional triggers",
-    "Definition": "Conditional triggers based on circumstances? ",
-    "Origins": null,
+    "Definition": "Conditional triggers based on actions, reasoner",
+    "Origins": [
+      "ACTION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CONNECTIVE_OPERATOR": {
     "FullyQualifiedName": "Conncective operator (SOLOR)",
     "Synonym": "Connective operator ",
-    "Definition": "logical connective",
+    "Definition": "a filed that captures what the operator is  (logical connective)",
     "Origins": [
-      "MODEL_CONCEPT"
+      "MEANING"
     ],
     "Destinations": [
       "AND",
       "DEFINITION_ROOT",
       "DISJOINT_WITH",
-      "OR"
+      "OR",
+      "IS_A",
+      "PART_OF",
+      "CONCEPT_REFERENCE"
     ]
   },
   "CORELATION_EXPRESSION": {
     "FullyQualifiedName": "Corelation expresson (SOLOR)",
     "Synonym": "Corelation expression",
-    "Definition": "Corelation expression",
-    "Origins": null,
+    "Definition": "a value for Corelation properties",
+    "Origins": [
+      "CORRELATION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CORELATION_REFERENCE_EXPRESSION": {
     "FullyQualifiedName": "Corelation reference expresson (SOLOR)",
-    "Synonym": "Corelation reference ecpression",
-    "Definition": "Refrence expression for corelaiton",
-    "Origins": null,
+    "Synonym": "Corelation reference expression",
+    "Definition": "a value for corelation",
+    "Origins": [
+      "CORRELATION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "CREATIVE_COMMONS_BY_LICENSE": {
     "FullyQualifiedName": "Creative Commons BY license (SOLOR)",
     "Synonym": "Creative Commons BY license",
-    "Definition": "Creative Commons BY license",
-    "Origins": null,
+    "Definition": "Creative Commons (CC) licenses are a set of public copyright licenses that enable the free distribution of an otherwise copyrighted work",
+    "Origins": [
+      "ROOT_VERTEX"
+    ],
     "Destinations": null
   },
   "CZECH_DIALECT": {
     "FullyQualifiedName": "Czech dialect (SOLOR)",
     "Synonym": "Czech dialect",
-    "Definition": "Czech dialect ",
-    "Origins": null,
+    "Definition": "Czech dialect  ",
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": null
   },
   "CZECH_LANGUAGE": {
     "FullyQualifiedName": "Czech language (SOLOR)",
     "Synonym": "Czech language ",
-    "Definition": "Czech Language ",
+    "Definition": "Czech Language  ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -422,14 +481,16 @@
   "DEFAULT_MODULE_FOR_EDIT_COORDINATE": {
     "FullyQualifiedName": "Default module for edit coordinate (SOLOR)",
     "Synonym": "Default module ",
-    "Definition": "Edit coordinate default module ",
-    "Origins": null,
+    "Definition": "a value for coordinate  ",
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DEFINITION_DESCRIPTION_TYPE": {
     "FullyQualifiedName": "Definition description type (SOLOR)",
     "Synonym": "Definition",
-    "Definition": "Definition (core metadata concept)",
+    "Definition": "a value for description type",
     "Origins": [
       "DESCRIPTION_TYPE"
     ],
@@ -438,21 +499,31 @@
   "DEFINITION_ROOT": {
     "FullyQualifiedName": "Definition root (SOLOR)",
     "Synonym": "Definition root",
-    "Definition": "Root of definition",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "CONNECTIVE_OPERATOR"
+    ],
     "Destinations": null
   },
   "DESCRIPTION": {
     "FullyQualifiedName": "Description (SOLOR)",
     "Synonym": "Description",
-    "Definition": "A concept used as a placeholder in the computabel columns configuration of maps",
-    "Origins": null,
-    "Destinations": null
+    "Definition": "A concept used as a placeholder in the computabel columns configuration of maps -> this is a komet defintion - (a value for maping display field which captures human readable name for a concept",
+    "Origins": [
+      "OBJECT"
+    ],
+    "Destinations": [
+      "DESCRIPTION_ACCEPTABILITY",
+      "DESCRIPTION_CASE_SIGNIFICANCE",
+      "DESCRIPTION_TYPE",
+      "TEXT_FOR_DESCRIPTION",
+      "DESCRIPTION_LOGIC_PROFILE"
+    ]
   },
   "DESCRIPTION_ACCEPTABILITY": {
     "FullyQualifiedName": "Description acceptability (SOLOR)",
     "Synonym": "Description acceptability ",
-    "Definition": "Acceptable description",
+    "Definition": "defining metadata to the nth degree- whether a given human readable term for a concept is permissible ",
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -464,7 +535,7 @@
   "DESCRIPTION_CASE_SENSITIVE": {
     "FullyQualifiedName": "Description case sensitive (SOLOR)",
     "Synonym": "Case sensitive ",
-    "Definition": "Entire term case sensitive (Core metadata concept)",
+    "Definition": "a field value for case significance for a description",
     "Origins": [
       "DESCRIPTION_CASE_SIGNIFICANCE"
     ],
@@ -473,7 +544,7 @@
   "DESCRIPTION_CASE_SIGNIFICANCE": {
     "FullyQualifiedName": "Description case significance (SOLOR)",
     "Synonym": "Description case significance ",
-    "Definition": "Description case significance ",
+    "Definition": "a field label which is looking for a value to define case significance for a description",
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -488,15 +559,22 @@
     "FullyQualifiedName": "Description core type (SOLOR)",
     "Synonym": "Description core type ",
     "Definition": "Used to mark non-snomed descriptions as one of the core snomed types ",
-    "Origins": null,
+    "Origins": [
+      "DESCRIPTION_TYPE"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_DIALECT_PAIR": {
     "FullyQualifiedName": "Description dialect pair (SOLOR)",
     "Synonym": "Description dialect pair ",
-    "Definition": "Description dialect pair ",
-    "Origins": null,
-    "Destinations": null
+    "Definition": "Description dialect pair - linking together dialects with language descriptions",
+    "Origins": [
+      "DESCRIPTION_VERSION_PROPERTIES"
+    ],
+    "Destinations": [
+      "DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR",
+      "DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR"
+    ]
   },
   "DESCRIPTION_FOCUS": {
     "FullyQualifiedName": "Description focus (SOLOR)",
@@ -510,14 +588,16 @@
   "DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR": {
     "FullyQualifiedName": "Description for dialect/description pair (SOLOR)",
     "Synonym": "Description for dialect/description pair ",
-    "Definition": "Description for dialect/description pair ",
-    "Origins": null,
+    "Definition": "linking together dialects with language descriptions",
+    "Origins": [
+      "DESCRIPTION_DIALECT_PAIR"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_INITIAL_CHARACTER_CASE_SENSITIVE": {
     "FullyQualifiedName": "Description initial character case sensitive (SOLOR)",
     "Synonym": "Initial characted case insensitive ",
-    "Definition": "Only initial character case insensitive (core metadata concept)",
+    "Definition": "value which designates initial character as sensitive for a given description ",
     "Origins": [
       "DESCRIPTION_CASE_SIGNIFICANCE"
     ],
@@ -526,23 +606,25 @@
   "DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE": {
     "FullyQualifiedName": "Description logic profile for logic coordinate (SOLOR)",
     "Synonym": "Logic profile",
-    "Definition": "Logic profile for logic coordinate ",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_NOT_CASE_SENSITIVE": {
     "FullyQualifiedName": "Decription not case sensitive (SOLOR)",
     "Synonym": "Case insensitive",
-    "Definition": "Not case sensitive",
+    "Definition": "value which designate character as not sensitive for a given description ",
     "Origins": [
       "DESCRIPTION_CASE_SIGNIFICANCE"
     ],
     "Destinations": null
   },
   "DESCRIPTION_SEMANTIC": {
-    "FullyQualifiedName": "Description smenatic (SOLOR)",
+    "FullyQualifiedName": "Description semantic (SOLOR)",
     "Synonym": "Description semantic ",
-    "Definition": "Description semantic ",
+    "Definition": "value for semantic type which designates it as a description",
     "Origins": [
       "SEMANTIC_TYPE"
     ],
@@ -551,34 +633,42 @@
   "DESCRIPTION_TYPE": {
     "FullyQualifiedName": "Description type (SOLOR)",
     "Synonym": "Description type ",
-    "Definition": "Description tyoe ",
+    "Definition": "specifying what type of description it is i.e. is it fully qualified or regular and etc. ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "DESCRIPTION"
     ],
     "Destinations": [
       "DEFINITION_DESCRIPTION_TYPE",
       "FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE",
-      "REGULAR_NAME_DESCRIPTION_TYPE"
+      "REGULAR_NAME_DESCRIPTION_TYPE",
+      "DESCRIPTION_CORE_TYPE",
+      "EXTENDED_DESCRIPTION_TYPE",
+      "EXTENDED_RELATIONSHIP_TYPE",
+      "INVERSE_NAME"
     ]
   },
   "DESCRIPTION_TYPE_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Description type for description (SOLOR)",
     "Synonym": "Decription type ",
-    "Definition": "Descritption type for description",
-    "Origins": null,
+    "Definition": "linking for each description -> what type it is",
+    "Origins": [
+      "DESCRIPTION_VERSION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE": {
     "FullyQualifiedName": "Description type preference list for language coordinate (SOLOR)",
     "Synonym": "Type order",
-    "Definition": "Description type preference list for langauge coordinate ",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_LOGIC_PROFILE": {
     "FullyQualifiedName": "Decription-logic profile (SOLOR)",
     "Synonym": "Description-logic profile ",
-    "Definition": "Description-logic profile ",
+    "Definition": null,
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -589,21 +679,25 @@
   "DESCRIPTUM": {
     "FullyQualifiedName": "Descriptum (SOLOR)",
     "Synonym": "Descriptum",
-    "Definition": "Descriptum",
-    "Origins": null,
+    "Definition": "refers to something that has been described or the result of a description - the item being described",
+    "Origins": [
+      "PURPOSE"
+    ],
     "Destinations": null
   },
   "DESTINATION_MODULE_FOR_EDIT_COORDINATE": {
     "FullyQualifiedName": "Destination module for edit coordinate (SOLOR)",
     "Synonym": "Destination module ",
-    "Definition": "Destination module for edit coordinate ",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DEVELOPMENT_MODULE": {
     "FullyQualifiedName": "Development module (SOLOR)",
     "Synonym": "Development module ",
-    "Definition": "Development module ",
+    "Definition": "predefines or standard module within a systsem or application that is specifically desgined to support the development phase of a project ",
     "Origins": [
       "MODULE"
     ],
@@ -612,7 +706,7 @@
   "DEVELOPMENT_PATH": {
     "FullyQualifiedName": "Development path (SOLOR)",
     "Synonym": "Development path ",
-    "Definition": "Development path ",
+    "Definition": null,
     "Origins": [
       "PATH"
     ],
@@ -621,39 +715,43 @@
   "DIGRAPH_FIELD": {
     "FullyQualifiedName": "DiGraph field (SOLOR)",
     "Synonym": "Instant/ DiGraph",
-    "Definition": "Instant field ",
+    "Definition": "Instant field - a directed graph is a collection of nodes (vertices) connected by edges, where each edge has a direction - a value which desribes a semantic field type ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "DITREE_FIELD": {
     "FullyQualifiedName": "DiTree field (SOLOR)",
     "Synonym": "DiTree",
-    "Definition": "DiTree field ",
+    "Definition": "a value which describes a semantic field type ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR": {
     "FullyQualifiedName": "Dialect for dialect/description pair (SOLOR)",
     "Synonym": "Dialect for dialect/description pair ",
-    "Definition": "Description pair ",
-    "Origins": null,
+    "Definition": "specific dialect",
+    "Origins": [
+      "DESCRIPTION_DIALECT_PAIR"
+    ],
     "Destinations": null
   },
   "DIGRAPH_FOR_LOGIC_COORDINATE": {
     "FullyQualifiedName": "Digraph for logic coordinate (SOLOR)",
     "Synonym": "Digraph ",
-    "Definition": "Digraph for logic coordinate ",
-    "Origins": null,
+    "Definition": "a value which describes a immutable coordinate property ",
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "DIRECTED_GRAPH": {
     "FullyQualifiedName": "Directed graph (SOLOR)",
     "Synonym": "NavigationCoordinate/Directed graph",
-    "Definition": "Directed graph",
+    "Definition": null,
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -664,7 +762,7 @@
   "DISJOINT_WITH": {
     "FullyQualifiedName": "Disjjoint with (SOLOR)",
     "Synonym": "Disjoint with ",
-    "Definition": "Operator ",
+    "Definition": "an operator ",
     "Origins": [
       "CONNECTIVE_OPERATOR"
     ],
@@ -673,23 +771,41 @@
   "DISPLAY_FIELDS": {
     "FullyQualifiedName": "Display Fields (SOLOR)",
     "Synonym": "Display fields ",
-    "Definition": "Stores the mapping fields in ana array corresponding to an ordered displayable row ",
-    "Origins": null,
-    "Destinations": null
+    "Definition": "Stores the mapping fields in an array corresponding to an ordered displayable row ",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "SEMANTIC_FIELD_TYPE",
+      "ARRAY_FIELD",
+      "BOOLEAN_FIELD",
+      "BYTE_ARRAY_FIELD",
+      "COMPONENT_ID_LIST_FIELD",
+      "COMPONENT_ID_SET_FIELD",
+      "COMPONENT_FIELD",
+      "CONCEPT_FIELD",
+      "DIGRAPH_FIELD",
+      "DITREE_FIELD",
+      "DOUBLE_FIELD",
+      "FLOAT_FIELD",
+      "LOGICAL_EXPRESSION_FIELD",
+      "UUID_FIELD",
+      "VERTEX_FIELD"
+    ]
   },
   "DOUBLE_FIELD": {
     "FullyQualifiedName": "Double field (SOLOR)",
     "Synonym": "Double field ",
-    "Definition": "Double field ",
+    "Definition": "a data value (type of structure for data)",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "DUTCH_LANGUAGE": {
     "FullyQualifiedName": "Dutch language (SOLOR)",
     "Synonym": "Dutch language ",
-    "Definition": "Dutch language ",
+    "Definition": "Dutch language",
     "Origins": [
       "LANGUAGE"
     ],
@@ -700,7 +816,7 @@
     "Synonym": "EL profile set operator ",
     "Definition": "EL profile set operator ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "MEANING"
     ],
     "Destinations": [
       "NECESSARY_SET",
@@ -710,52 +826,52 @@
   "EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION": {
     "FullyQualifiedName": "El++ Inferred Concept Definition (SOLOR)",
     "Synonym": "EL++ Inferred Concept Definition ",
-    "Definition": "EL++ nferred Concept Definition",
+    "Definition": null,
     "Origins": [
-      "MEANING"
+      "LOGICAL_DEFINITION"
     ],
     "Destinations": null
   },
   "EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS": {
     "FullyQualifiedName": "EL++ Inferred terminological axioms (SOLOR)",
     "Synonym": "EL++ Inferred terminological axioms",
-    "Definition": "EL++ Inferred terminological axioms",
+    "Definition": null,
     "Origins": [
-      "MEANING"
+      "LOGICAL_DEFINITION"
     ],
     "Destinations": null
   },
   "EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION": {
     "FullyQualifiedName": "EL++ Stated Concept Definition (SOLOR)",
     "Synonym": "EL++ Stated Concept Definition (SOLOR)",
-    "Definition": "EL++ Stated Concept Definition ",
+    "Definition": null,
     "Origins": [
-      "MEANING"
+      "LOGICAL_DEFINITION"
     ],
     "Destinations": null
   },
   "EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS": {
     "FullyQualifiedName": "EL++ Stated terminological axioms (SOLOR)",
     "Synonym": "EL++ Stated terminological axioms ",
-    "Definition": "EL++ Stated terminological axioms ",
+    "Definition": null,
     "Origins": [
-      "MEANING"
+      "LOGICAL_DEFINITION"
     ],
     "Destinations": null
   },
   "EL_PLUS_PLUS_DIGRAPH": {
     "FullyQualifiedName": "EL++ digraph (SOLOR)",
     "Synonym": "EL++ digraph ",
-    "Definition": "The directed graph that results from classifying a set of EL++ axioms ",
+    "Definition": "The directed graph that results from classifying a set of EL++ axioms",
     "Origins": [
       "DIRECTED_GRAPH"
     ],
     "Destinations": null
   },
   "EL_PLUS_PLUS_PROFILE": {
-    "FullyQualifiedName": "EL++v logic profile (SOLOR)",
+    "FullyQualifiedName": "EL++ logic profile (SOLOR)",
     "Synonym": "EL ++ logic profile",
-    "Definition": "EL ++ profile ",
+    "Definition": "EL ++ profile",
     "Origins": [
       "DESCRIPTION_LOGIC_PROFILE"
     ],
@@ -764,7 +880,7 @@
   "ENGLISH_LANGUAGE": {
     "FullyQualifiedName": "English Language (SOLOR)",
     "Synonym": "English language ",
-    "Definition": "English Language",
+    "Definition": "English Language ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -773,7 +889,7 @@
   "EQUAL_TO": {
     "FullyQualifiedName": "Equal to (SOLOR)",
     "Synonym": "Equal to ",
-    "Definition": "Equal to - Operator ",
+    "Definition": "an operator",
     "Origins": [
       "CONCRETE_DOMAIN_OPERATOR"
     ],
@@ -783,57 +899,69 @@
     "FullyQualifiedName": "Exact (SOLOR)",
     "Synonym": "Exact",
     "Definition": "Source and target are semantic or exact lexical match ",
-    "Origins": null,
+    "Origins": [
+      "GROUPING"
+    ],
     "Destinations": null
   },
   "EXTENDED_DESCRIPTION_TYPE": {
     "FullyQualifiedName": "Extended description type (SOLOR)",
     "Synonym": "Extended description type ",
     "Definition": "Used to store non-snomed description types when other terminologies are imported ",
-    "Origins": null,
+    "Origins": [
+      "DESCRIPTION_TYPE"
+    ],
     "Destinations": null
   },
   "EXTENDED_RELATIONSHIP_TYPE": {
     "FullyQualifiedName": "Extended relationship type (SOLOR)",
     "Synonym": "Extended relationship type ",
     "Definition": "Used to store non-snomed relationship types when other terminologies are imported- especially when a relationship is mapped onto a snomed relationship type (such as isa)",
-    "Origins": null,
+    "Origins": [
+      "DESCRIPTION_TYPE"
+    ],
     "Destinations": null
   },
   "FLOAT_FIELD": {
     "FullyQualifiedName": "Float field (SOLOR)",
     "Synonym": "Float field ",
-    "Definition": "floating point number ",
+    "Definition": "floating point number supporting arithmetic operations ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "FLOAT_LITERAL": {
     "FullyQualifiedName": "Float literal (SOLOR)",
     "Synonym": "Float literal ",
-    "Definition": "Numbers with decimal point or an exponential part ",
-    "Origins": null,
+    "Definition": "Numbers with decimal point or an exponential part",
+    "Origins": [
+      "LITERAL_VALUE"
+    ],
     "Destinations": null
   },
   "FLOAT_SUBSTITUTION": {
     "FullyQualifiedName": "Float substitution (SOLOR)",
     "Synonym": "Float substitution",
-    "Definition": "Float substitution",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "FIELD_SUBSTITUTION"
+    ],
     "Destinations": null
   },
   "FRENCH_DIALECT": {
     "FullyQualifiedName": "French dialect (SOLOR)",
     "Synonym": "French dialect",
-    "Definition": "French dialect",
-    "Origins": null,
+    "Definition": "French dialect  ",
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": null
   },
   "FRENCH_LANGUAGE": {
     "FullyQualifiedName": "French Language (SOLOR)",
     "Synonym": "French language",
-    "Definition": "French Language",
+    "Definition": "French Language ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -842,7 +970,7 @@
   "FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE": {
     "FullyQualifiedName": "Fully qualified name description type (SOLOR)",
     "Synonym": "Fully quailified name ",
-    "Definition": "Fully specified name",
+    "Definition": " it is the unambigious, human readable term for a concept as a value in the description type",
     "Origins": [
       "DESCRIPTION_TYPE"
     ],
@@ -852,13 +980,15 @@
     "FullyQualifiedName": "Great Britian English dialect (SOLOR)",
     "Synonym": "GB English dialect / GB English",
     "Definition": "Great Britain: English Langauge reference set ",
-    "Origins": null,
+    "Origins": [
+      "ENGLISH_DIALECT"
+    ],
     "Destinations": null
   },
   "GERMAN_LANGUAGE": {
     "FullyQualifiedName": "German Language (SOLOR)",
     "Synonym": "German language",
-    "Definition": "German Language ",
+    "Definition": "German Language  ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -867,7 +997,7 @@
   "GREATER_THAN": {
     "FullyQualifiedName": "Greater than (SOLOR)",
     "Synonym": "Greater than ",
-    "Definition": "Operator ",
+    "Definition": "an operator",
     "Origins": [
       "CONCRETE_DOMAIN_OPERATOR"
     ],
@@ -876,7 +1006,7 @@
   "GREATER_THAN_OR_EQUAL_TO": {
     "FullyQualifiedName": "Greater than or equal to (SOLOR)",
     "Synonym": "Greater than or equal to ",
-    "Definition": "Operator ",
+    "Definition": "an operator ",
     "Origins": [
       "CONCRETE_DOMAIN_OPERATOR"
     ],
@@ -886,20 +1016,27 @@
     "FullyQualifiedName": "Grouping (SOLOR)",
     "Synonym": "Grouping",
     "Definition": "The grouping attached to the mapping ",
-    "Origins": null,
-    "Destinations": null
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
+    "Destinations": [
+      "EXACT",
+      "PARTIAL"
+    ]
   },
   "HEALTH_CONCEPT": {
     "FullyQualifiedName": "Health concept (SOLOR)",
     "Synonym": "Health concept ",
-    "Definition": "Medical health concepts",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "CONCEPT_TYPE"
+    ],
     "Destinations": null
   },
   "INACTIVE_STATE": {
     "FullyQualifiedName": "Inactive status (SOLOR)",
     "Synonym": "Inactive",
-    "Definition": "Inactive status",
+    "Definition": "the status of the concept (Active, Cancelled, Inactive, Primordial)",
     "Origins": [
       "STATUS_VALUE"
     ],
@@ -908,7 +1045,7 @@
   "INFERRED_PREMISE_TYPE": {
     "FullyQualifiedName": "Inferred premise type (SOLOR)",
     "Synonym": "Inferred relationship / Inferred",
-    "Definition": "Inferred relationship (core metadata concept)",
+    "Definition": "the axiom view following the application of the reasoner ",
     "Origins": [
       "AXIOM_ORIGIN"
     ],
@@ -917,36 +1054,46 @@
   "INSTANT_LITERAL": {
     "FullyQualifiedName": "Instant literal (SOLOR)",
     "Synonym": "Instant literal",
-    "Definition": "Instant literal",
-    "Origins": null,
+    "Definition": "may refer to a speicfic point in time which is often represented by a date or time value ",
+    "Origins": [
+      "LITERAL_VALUE"
+    ],
     "Destinations": null
   },
   "INSTANT_SUBSTITUTION": {
     "FullyQualifiedName": "Instant substitution (SOLOR)",
     "Synonym": "Instant substitution",
-    "Definition": "Instant substitution",
-    "Origins": null,
+    "Definition": "subtitution of instant literal? ",
+    "Origins": [
+      "FIELD_SUBSTITUTION"
+    ],
     "Destinations": null
   },
   "INVERSE_NAME": {
     "FullyQualifiedName": "Inverse name (SOLOR)",
     "Synonym": "Inverse name ",
     "Definition": "This is the extended desrciption type that maye be attached to a description within a concept that defines as Association refex to signify that the referenced description  is the inverse of the association name ",
-    "Origins": null,
+    "Origins": [
+      "DESCRIPTION_TYPE"
+    ],
     "Destinations": null
   },
   "INVERSE_TREE_LIST": {
     "FullyQualifiedName": "Inverse tree list (SOLOR)",
     "Synonym": "Inverse tree list",
     "Definition": "Inverse tree list",
-    "Origins": null,
+    "Origins": [
+      "TREE_AMALGAM_PROPERTIES"
+    ],
     "Destinations": null
   },
   "IRISH_DIALECT": {
     "FullyQualifiedName": "Irish dialect (SOLOR)",
     "Synonym": "Irish dialect",
     "Definition": "Irish dialect ",
-    "Origins": null,
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": null
   },
   "IRISH_LANGUAGE": {
@@ -961,14 +1108,16 @@
   "IS_A": {
     "FullyQualifiedName": "Is-a (SOLOR)",
     "Synonym": "Is a",
-    "Definition": "Is a (attribute)",
-    "Origins": null,
+    "Definition": "designates the parent child relationship",
+    "Origins": [
+      "CONNECTIVE_OPERATOR"
+    ],
     "Destinations": null
   },
   "IS_A_INFERRED_NAVIGATION": {
     "FullyQualifiedName": "Is-a inferred navigation (SOLOR)",
     "Synonym": "Is-a inferred navigation (SOLOR)",
-    "Definition": "Is-a (inferred navigation) (attribute)",
+    "Definition": "designates the parent child relationship following the application of the reasoner ",
     "Origins": [
       "NAVIGATION_PATTERN"
     ],
@@ -977,7 +1126,7 @@
   "IS_A_STATED_NAVIGATION": {
     "FullyQualifiedName": "Is-a stated navigation (SOLOR)",
     "Synonym": "is-a stated navigation",
-    "Definition": "Is-a (stated naigation) (attribute)",
+    "Definition": "designates the parent child relationship as authored ",
     "Origins": [
       "NAVIGATION_PATTERN"
     ],
@@ -995,28 +1144,34 @@
   "KOMET_MODULE": {
     "FullyQualifiedName": "KOMET module (SOLOR)",
     "Synonym": "KOMET module",
-    "Definition": "Komet Module ",
-    "Origins": null,
+    "Definition": "Komet specific values?",
+    "Origins": [
+      "MODULE"
+    ],
     "Destinations": null
   },
   "KOMET_USER": {
     "FullyQualifiedName": "KOMET user (SOLOR)",
     "Synonym": "KOMET user",
-    "Definition": "Komet User ",
-    "Origins": null,
+    "Definition": "Authorized to author, edit and/or view in Komet",
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "KOMET_USER_LIST": {
     "FullyQualifiedName": "KOMET user list (SOLOR",
     "Synonym": "KOMET user list ",
-    "Definition": "KOMET user list ",
-    "Origins": null,
+    "Definition": "inventory of authorized komet users",
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "KOMET_ISSUE": {
     "FullyQualifiedName": "Komet issue (SOLOR)",
     "Synonym": "Komet issue",
-    "Definition": "Komet issue",
+    "Definition": "komet being the \"annotation type\" - specified type",
     "Origins": [
       "ANNOTATION_TYPE"
     ],
@@ -1025,8 +1180,10 @@
   "KOREAN_DIALECT": {
     "FullyQualifiedName": "Korean dialect (SOLOR)",
     "Synonym": "Korean dialect",
-    "Definition": "Korean dialect",
-    "Origins": null,
+    "Definition": "Korean dialect ",
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": [
       "STANDARD_KOREAN_DIALECT"
     ]
@@ -1034,7 +1191,7 @@
   "KOREAN_LANGUAGE": {
     "FullyQualifiedName": "Korean Language (SOLOR)",
     "Synonym": "Korean language",
-    "Definition": "Korean language",
+    "Definition": "Korean language  ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -1042,8 +1199,8 @@
   },
   "LANGUAGE": {
     "FullyQualifiedName": "Language (SOLOR)",
-    "Synonym": "Langauge",
-    "Definition": "List of languages",
+    "Synonym": "Language ",
+    "Definition": "field which captures the defined language for a komet description",
     "Origins": [
       "MODEL_CONCEPT"
     ],
@@ -1068,35 +1225,43 @@
   "LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Language concept nid for description (SOLOR)",
     "Synonym": "Language for description",
-    "Definition": "Language concept NID for description",
-    "Origins": null,
+    "Definition": "captures the language code for a descriptiom",
+    "Origins": [
+      "DESCRIPTION_VERSION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LANGUAGE_COORDINATE_NAME": {
     "FullyQualifiedName": "Language coordinate name (SOLOR)",
     "Synonym": "Language coordinate name",
-    "Definition": "Language coordinate name",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "LANGUAGE_COORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LANGUAGE_NID_FOR_LANGUAGE_COORDINATE": {
     "FullyQualifiedName": "Lanuage nid for language coordinate (SOLOR)",
     "Synonym": "Language nid",
-    "Definition": "Language nid for language coordinate ",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE": {
     "FullyQualifiedName": "Language specification for language coordinate (SOLOR)",
     "Synonym": "Language",
-    "Definition": "Language specification for language coordinate",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LESS_THAN": {
     "FullyQualifiedName": "Less than (SOLOR)",
     "Synonym": "Less than",
-    "Definition": "Domain Operator",
+    "Definition": "an operator",
     "Origins": [
       "CONCRETE_DOMAIN_OPERATOR"
     ],
@@ -1105,7 +1270,7 @@
   "LESS_THAN_OR_EQUAL_TO": {
     "FullyQualifiedName": "Less than or equal to (SOLOR)",
     "Synonym": "Less than or eual to ",
-    "Definition": "Domain Operator",
+    "Definition": "an operator",
     "Origins": [
       "CONCRETE_DOMAIN_OPERATOR"
     ],
@@ -1114,7 +1279,7 @@
   "LITHUANIAN_LANGUAGE": {
     "FullyQualifiedName": "Lithuanian langauge (SOLOR)",
     "Synonym": "Lithuanian Language",
-    "Definition": "Lithuanian Language",
+    "Definition": "Lithuanian Language ",
     "Origins": [
       "LANGUAGE"
     ],
@@ -1123,30 +1288,39 @@
   "LOGIC_COORDINATE_NAME": {
     "FullyQualifiedName": "Logic coordinate name (SOLOR)",
     "Synonym": "Logic coordinate name ",
-    "Definition": "Logic coordinate name",
-    "Origins": null,
+    "Definition": null,
+    "Origins": [
+      "LOGIC_COORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LOGICAL_DEFINITION": {
     "FullyQualifiedName": "Logical Definition (SOLOR)",
     "Synonym": "Logical Definition",
-    "Definition": "Logic behind definition",
-    "Origins": null,
-    "Destinations": null
+    "Definition": null,
+    "Origins": [
+      "PURPOSE"
+    ],
+    "Destinations": [
+      "EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION",
+      "EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION",
+      "EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS",
+      "EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS"
+    ]
   },
   "LOGICAL_EXPRESSION_FIELD": {
     "FullyQualifiedName": "Logical expression field (SOLOR)",
     "Synonym": "Logical expression field",
-    "Definition": "Logical expression field",
+    "Definition": null,
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
   "LOGICAL_EXPRESSION_SEMANTIC": {
     "FullyQualifiedName": "Logical expression semantic  (SOLOR)",
     "Synonym": "Logical expression semantic ",
-    "Definition": "Logical expression semantic ",
+    "Definition": null,
     "Origins": [
       "SEMANTIC_TYPE"
     ],
@@ -1155,14 +1329,16 @@
   "LOGICALLY_EQUIVALENT_TO": {
     "FullyQualifiedName": "Logically eqivalent to (Solor)",
     "Synonym": "Logically equivalent to",
-    "Definition": "Logically equivalent to (operator)",
-    "Origins": null,
+    "Definition": "an operator for the reasoner to determine the equivalence",
+    "Origins": [
+      "TAXONOMY_OPERATOR"
+    ],
     "Destinations": null
   },
   "MASTER_PATH": {
     "FullyQualifiedName": "Master path (SOLOR)",
     "Synonym": "Master path ",
-    "Definition": "Path concept?",
+    "Definition": null,
     "Origins": [
       "PATH"
     ],
@@ -1171,16 +1347,24 @@
   "MEANING": {
     "FullyQualifiedName": "Meaning  (SOLOR)",
     "Synonym": "Meaning",
-    "Definition": "Meaning",
+    "Definition": "the interpretation and explanation which provides a definition for a komet concept ",
     "Origins": [
       "MODEL_CONCEPT"
     ],
     "Destinations": [
-      "EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION",
-      "EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS",
-      "EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION",
-      "EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS",
-      "NAVIGATION_VERTEX",
+      "SEMANTIC_TYPE",
+      "DISPLAY_FIELDS",
+      "FIELD_SUBSTITUTION",
+      "LITERAL_VALUE",
+      "DYNAMIC_COLUMN_DATA_TYPES",
+      "PRESENTATION_UNIT_DIFFERENT",
+      "EL_PROFILE_SET_OPERATOR",
+      "CONNECTIVE_OPERATOR",
+      "CONCRETE_DOMAIN_OPERATOR",
+      "TEXT_COMPARISON",
+      "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR",
+      "TAXONOMY_OPERATOR",
+      "QUERY_CLAUSES",
       "RELATIONSHIP_DESTINATION",
       "RELATIONSHIP_ORIGIN"
     ]
@@ -1199,25 +1383,32 @@
     "Synonym": "Module",
     "Definition": "Module (Core metadata concept)",
     "Origins": [
-      "MODULE"
+      "OBJECT"
     ],
     "Destinations": [
       "DEVELOPMENT_MODULE",
-      "SANDBOX_MODULE"
+      "SANDBOX_MODULE",
+      "KOMET_MODULE",
+      "PRIMORDIAL_MODULE",
+      "USERS_MODULE"
     ]
   },
   "MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Module exclusion set for stamp coordinate (SOLOR)",
     "Synonym": "Module exclusions ",
     "Definition": "Module exclusion set for stamp coordinate ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "MODULE_FOR_USER": {
     "FullyQualifiedName": "Module for user (SOLOR)",
     "Synonym": "Module for user",
     "Definition": "User preference for Module?",
-    "Origins": null,
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "MODULE_FOR_VERSION": {
@@ -1233,56 +1424,76 @@
     "FullyQualifiedName": "Module options for edit coordinate (SOLOR)",
     "Synonym": "Module options",
     "Definition": "Coordinate edit options for Module",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE": {
     "FullyQualifiedName": "Module preference list for language coordinate (SOLOR)",
     "Synonym": "Module nids",
     "Definition": "Module preference list for language coordinate",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Module preference list for stamp coordinate (SOLOR)",
     "Synonym": "Module Preference list ",
     "Definition": "Module preference list for stamp coordinate",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Module preference order for stamp coordinate (SOLOR)",
     "Synonym": "Module order ",
     "Definition": "Module preference order for stamp coordinate",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "MODULES_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Modules for stamp coordinate (SOLOR)",
     "Synonym": "Modules",
     "Definition": "Stamp coordinate modules",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "NAVIGATION": {
     "FullyQualifiedName": "Navigation (SOLOR)",
     "Synonym": "Navigation",
     "Definition": "Navigation",
-    "Origins": null,
-    "Destinations": null
+    "Origins": [
+      "PURPOSE"
+    ],
+    "Destinations": [
+      "NAVIGATION_CONCEPT_SET",
+      "NAVIGATION_VERTEX",
+      "NAVIGATION_PATTERN"
+    ]
   },
   "NAVIGATION_CONCEPT_SET": {
     "FullyQualifiedName": "Navigation concept set (SOLOR)",
     "Synonym": "Navigation set ",
     "Definition": "Navigating sets of concepts?",
-    "Origins": null,
+    "Origins": [
+      "NAVIGATION"
+    ],
     "Destinations": null
   },
   "NAVIGATION_PATTERN": {
     "FullyQualifiedName": "Navigation pattern (SOLOR)",
     "Synonym": "Navigation pattern",
     "Definition": "Navigation pattern (Inferred/Stated)",
-    "Origins": null,
+    "Origins": [
+      "NAVIGATION"
+    ],
     "Destinations": [
       "IS_A_INFERRED_NAVIGATION",
       "IS_A_STATED_NAVIGATION"
@@ -1293,7 +1504,7 @@
     "Synonym": "Navigation vertex",
     "Definition": "Navigation vertex",
     "Origins": [
-      "MEANING"
+      "NAVIGATION"
     ],
     "Destinations": null
   },
@@ -1301,7 +1512,9 @@
     "FullyQualifiedName": "Necessary but not sufficicent concept definition (SOLOR)",
     "Synonym": "Necessary but not sufficient concept definition",
     "Definition": "Not sufficicently defined by necessary conditions defintion status ",
-    "Origins": null,
+    "Origins": [
+      "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR"
+    ],
     "Destinations": null
   },
   "NECESSARY_SET": {
@@ -1326,8 +1539,23 @@
     "FullyQualifiedName": "Object (SOLOR)",
     "Synonym": "Object ",
     "Definition": "an encapsulation of data together with procedures ",
-    "Origins": null,
-    "Destinations": null
+    "Origins": [
+      "ROOT_VERTEX"
+    ],
+    "Destinations": [
+      "STATUS_VALUE",
+      "DESCRIPTION",
+      "NID",
+      "UNIVERSALLY_UNIQUE_IDENTIFIER",
+      "ANY_COMPONENT",
+      "UNINITIALIZED_COMPONENT",
+      "SANDBOX_COMPONENT",
+      "MODULE",
+      "PATH",
+      "PATH_ORIGINS_PATTERN",
+      "PATHS_PATTERN",
+      "OBJECT_PROPERTIES"
+    ]
   },
   "OR": {
     "FullyQualifiedName": "Or (SOLOR)",
@@ -1342,35 +1570,45 @@
     "FullyQualifiedName": "Order for axiom attachments (SOLOR)",
     "Synonym": "Axiom attachment order(SOLOR)",
     "Definition": "Order in which axioms are attached ",
-    "Origins": null,
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "ORDER_FOR_CONCEPT_ATTACHMENTS": {
     "FullyQualifiedName": "Order for concept attachments  (SOLOR)",
     "Synonym": "Concept attachment order",
     "Definition": "Order in which concepts are attached ",
-    "Origins": null,
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "ORDER_FOR_DESCRIPTION_ATTACHMENTS": {
     "FullyQualifiedName": "Order for description attachments (SOLOR)",
     "Synonym": "Description attachment order",
     "Definition": "Order in which descriptions are attached",
-    "Origins": null,
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "PART_OF": {
     "FullyQualifiedName": "Part of (SOLOR)",
     "Synonym": "Part of ",
     "Definition": "Part of an attribute ",
-    "Origins": null,
+    "Origins": [
+      "CONNECTIVE_OPERATOR"
+    ],
     "Destinations": null
   },
   "PARTIAL": {
     "FullyQualifiedName": "Partial (SOLOR)",
     "Synonym": "Partial ",
     "Definition": "Exists in/ Inclusion of ?",
-    "Origins": null,
+    "Origins": [
+      "GROUPING"
+    ],
     "Destinations": null
   },
   "PATH": {
@@ -1378,7 +1616,7 @@
     "Synonym": "Path",
     "Definition": "Type of path ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "OBJECT"
     ],
     "Destinations": [
       "DEVELOPMENT_PATH",
@@ -1391,28 +1629,36 @@
     "FullyQualifiedName": "Path concept (SOLOR)",
     "Synonym": "Path concept ",
     "Definition": "Path concept ",
-    "Origins": null,
+    "Origins": [
+      "CONCEPT_TYPE"
+    ],
     "Destinations": null
   },
   "PATH_COORDINATE_NAME": {
     "FullyQualifiedName": "Path coordinate name (SOLOR)",
     "Synonym": "Path coordinate name",
     "Definition": "Path coordinate name ",
-    "Origins": null,
+    "Origins": [
+      "PATH_COORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PATH_FOR_PATH_COORDINATE": {
     "FullyQualifiedName": "Path for path cooridnate (SOLOR)",
     "Synonym": "Path",
     "Definition": "Path for path coordinate ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PATH_FOR_USER": {
     "FullyQualifiedName": "Path for user (SOLOR)",
     "Synonym": "Path for user",
     "Definition": "Path for user ",
-    "Origins": null,
+    "Origins": [
+      "USER"
+    ],
     "Destinations": null
   },
   "PATH_FOR_VERSION": {
@@ -1428,42 +1674,54 @@
     "FullyQualifiedName": "Path options for edit cordinate (SOLOR)",
     "Synonym": "Path options",
     "Definition": "Path options for edit coordinate ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PATH_ORIGINS": {
     "FullyQualifiedName": "Path origins (SOLOR)",
     "Synonym": "Path origins ",
     "Definition": "Path origins",
-    "Origins": null,
+    "Origins": [
+      "PATH_COORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PATH_ORIGINS_PATTERN": {
     "FullyQualifiedName": "Path origins pattern (SOLOR)",
     "Synonym": "Path origins pattern ",
     "Definition": "Pattern of path origins ",
-    "Origins": null,
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "PATH_ORIGINS_FOR_STAMP_PATH": {
     "FullyQualifiedName": "Path origins for stamp path (SOLOR)",
     "Synonym": "Path origins ",
     "Definition": "Path origins for stamp path ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PATHS_PATTERN": {
     "FullyQualifiedName": "Paths pattern (SOLOR)",
     "Synonym": "Paths pattern",
     "Definition": "Pattern of path",
-    "Origins": null,
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "PHENOMENON": {
     "FullyQualifiedName": "Phenomenon (SOLOR)",
     "Synonym": "Phenomenon ",
     "Definition": "Phenomenon ",
-    "Origins": null,
+    "Origins": [
+      "HEALTH_CONCEPT"
+    ],
     "Destinations": [
       "UNCATEGORIZED_PHENOMENON"
     ]
@@ -1472,7 +1730,9 @@
     "FullyQualifiedName": "Polish dialect (SOLOR)",
     "Synonym": "Polish dialect ",
     "Definition": "Polish Dialect ",
-    "Origins": null,
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": null
   },
   "POLISH_LANGUAGE": {
@@ -1497,21 +1757,27 @@
     "FullyQualifiedName": "Presentation unit different (SOLOR)",
     "Synonym": "Presentation unit different ",
     "Definition": "Unit difference ",
-    "Origins": null,
+    "Origins": [
+      "MEANING"
+    ],
     "Destinations": null
   },
   "PRIMORDIAL_UUID_FOR_CHRONICLE": {
     "FullyQualifiedName": "Primodridal UUID for chronicle (SOLOR)",
     "Synonym": "Primordial UUID ",
     "Definition": "Primordial UUID",
-    "Origins": null,
+    "Origins": [
+      "CHRONICLE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "PRIMORDIAL_MODULE": {
     "FullyQualifiedName": "Primordial module (SOLOR)",
     "Synonym": "Primordial module ",
     "Definition": "Primordial module ",
-    "Origins": null,
+    "Origins": [
+      "MODULE"
+    ],
     "Destinations": null
   },
   "PRIMORDIAL_PATH": {
@@ -1536,21 +1802,27 @@
     "FullyQualifiedName": "Refrenced component nid for semantic (SOLOR)",
     "Synonym": "Refrenced component id",
     "Definition": "Component id Refrenced ",
-    "Origins": null,
+    "Origins": [
+      "SEMANTIC_PROPERTIES"
+    ],
     "Destinations": null
   },
   "REFERENCED_COMPONENT_SUBTYPE_RESTRICTION": {
     "FullyQualifiedName": "Refrenced component subtype restriction (SOLOR)",
     "Synonym": "Refrenced component subtype restriction",
     "Definition": "Stores the (optional) refrenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field. ",
-    "Origins": null,
+    "Origins": [
+      "ROLE_OPERATOR"
+    ],
     "Destinations": null
   },
   "REFERENCED_COMPONENT_TYPE_RESTRICTION": {
     "FullyQualifiedName": "Referenced component type restriction (SOLOR)",
     "Synonym": "Refrenced component type restriction",
     "Definition": "Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field",
-    "Origins": null,
+    "Origins": [
+      "ROLE_OPERATOR"
+    ],
     "Destinations": null
   },
   "REGULAR_NAME_DESCRIPTION_TYPE": {
@@ -1585,15 +1857,21 @@
     "Synonym": "Role",
     "Definition": "Concept model attribute",
     "Origins": [
-      "MODEL_CONCEPT"
+      "ROOT_VERTEX"
     ],
-    "Destinations": null
+    "Destinations": [
+      "ROLE_GROUP",
+      "ROLE_TYPE",
+      "ROLE_OPERATOR"
+    ]
   },
   "ROLE_GROUP": {
     "FullyQualifiedName": "Role group (SOLOR)",
     "Synonym": "Role group",
     "Definition": "Attribute?",
-    "Origins": null,
+    "Origins": [
+      "ROLE"
+    ],
     "Destinations": null
   },
   "ROLE_OPERATOR": {
@@ -1601,38 +1879,48 @@
     "Synonym": "Role operator ",
     "Definition": "Role operator?",
     "Origins": [
-      "MODEL_CONCEPT"
+      "ROLE"
     ],
     "Destinations": [
-      "UNIVERSAL_RESTRICTION"
+      "UNIVERSAL_RESTRICTION",
+      "REFERENCED_COMPONENT_SUBTYPE_RESTRICTION",
+      "REFERENCED_COMPONENT_TYPE_RESTRICTION"
     ]
   },
   "ROLE_TYPE": {
     "FullyQualifiedName": "Role type (SOLOR)",
     "Synonym": "Role type",
     "Definition": "Type - attribute?",
-    "Origins": null,
+    "Origins": [
+      "ROLE"
+    ],
     "Destinations": null
   },
   "ROLE_TYPE_TO_ADD": {
     "FullyQualifiedName": "Role type to add (SOLOR)",
     "Synonym": "Role type to add",
     "Definition": "Action - add role type ",
-    "Origins": null,
+    "Origins": [
+      "ACTION_PROPERTIES"
+    ],
     "Destinations": null
   },
   "ROOT_FOR_LOGIC_COORDINATE": {
     "FullyQualifiedName": "Root for logic coordinate (SOLOR)",
     "Synonym": "Root",
     "Definition": "Logic coordinate root",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "RUSSIAN_DIALECT": {
     "FullyQualifiedName": "Russian dialect (SOLOR)",
     "Synonym": "Russian dialect ",
     "Definition": "Russian Dialect ",
-    "Origins": null,
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
     "Destinations": null
   },
   "RUSSIAN_LANGUAGE": {
@@ -1649,7 +1937,7 @@
     "Synonym": "Sandbox component",
     "Definition": "Sandbox componet ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "OBJECT"
     ],
     "Destinations": [
       "SANDBOX_MODULE",
@@ -1692,7 +1980,7 @@
     "Synonym": "Semantic field concepts ",
     "Definition": "Semantic field concepts ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "CONCEPT_TYPE"
     ],
     "Destinations": null
   },
@@ -1700,7 +1988,9 @@
     "FullyQualifiedName": "Semantic field name (SOLOR)",
     "Synonym": "Field name ",
     "Definition": "Field name - semantics ",
-    "Origins": null,
+    "Origins": [
+      "SEMANTIC_PROPERTIES"
+    ],
     "Destinations": null
   },
   "SEMANTIC_FIELD_TYPE": {
@@ -1708,29 +1998,16 @@
     "Synonym": "Semantic field type ",
     "Definition": "list of fields-  semantic ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "DISPLAY_FIELDS"
     ],
-    "Destinations": [
-      "ARRAY_FIELD",
-      "BOOLEAN_FIELD",
-      "BYTE_ARRAY_FIELD",
-      "COMPONENT_ID_LIST_FIELD",
-      "COMPONENT_ID_SET_FIELD",
-      "COMPONENT_FIELD",
-      "DIGRAPH_FIELD",
-      "DITREE_FIELD",
-      "DOUBLE_FIELD",
-      "LOGICAL_EXPRESSION_FIELD",
-      "UUID_FIELD",
-      "VERTEX_FIELD"
-    ]
+    "Destinations": null
   },
   "SEMANTIC_TYPE": {
     "FullyQualifiedName": "Semantic type (SOLOR)",
     "Synonym": "Semantic type ",
     "Definition": "Type- semantic ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "MEANING"
     ],
     "Destinations": [
       "COMPONENT_SEMANTIC",
@@ -1744,7 +2021,9 @@
     "FullyQualifiedName": "Signed integer (SOLOR)",
     "Synonym": "Signed integer ",
     "Definition": "Signed integer (Foundation metadata concept)",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "SPANISH_LANGUAGE": {
@@ -1787,14 +2066,18 @@
     "FullyQualifiedName": "String (SOLOR)",
     "Synonym": "String",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "SUFFICIENT_CONCEPT_DEFINITION": {
     "FullyQualifiedName": "Sufficient concept definition (SOLOR)",
     "Synonym": "Sufficient concept definition",
     "Definition": "Concept definition - Sufficicent ",
-    "Origins": null,
+    "Origins": [
+      "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR"
+    ],
     "Destinations": null
   },
   "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR": {
@@ -1802,9 +2085,12 @@
     "Synonym": "Sufficient concept definition operator ",
     "Definition": "Concept definition operator ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "MEANING"
     ],
-    "Destinations": null
+    "Destinations": [
+      "SUFFICIENT_CONCEPT_DEFINITION",
+      "NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION"
+    ]
   },
   "SUFFICIENT_SET": {
     "FullyQualifiedName": "Sufficient set (SOLOR)",
@@ -1828,7 +2114,9 @@
     "FullyQualifiedName": "Text for description (SOLOR)",
     "Synonym": "Text",
     "Definition": "Described text",
-    "Origins": null,
+    "Origins": [
+      "DESCRIPTION"
+    ],
     "Destinations": null
   },
   "TIME_FOR_VERSION": {
@@ -1844,14 +2132,18 @@
     "FullyQualifiedName": "Tree list (SOLOR)",
     "Synonym": "Tree list ",
     "Definition": "List - Tree",
-    "Origins": null,
+    "Origins": [
+      "TREE_AMALGAM_PROPERTIES"
+    ],
     "Destinations": null
   },
   "US_ENGLISH_DIALECT": {
     "FullyQualifiedName": "United States of America English dialect (SOLOR)",
     "Synonym": "US English dialect ",
     "Definition": "USA -english dialect ",
-    "Origins": null,
+    "Origins": [
+      "ENGLISH_DIALECT"
+    ],
     "Destinations": [
       "US_NURSING_DIALECT"
     ]
@@ -1869,7 +2161,9 @@
     "FullyQualifiedName": "UUID data type (SOLOR)",
     "Synonym": "UUID data type",
     "Definition": "disctinction of data type of UUID",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "UUID_FIELD": {
@@ -1877,7 +2171,7 @@
     "Synonym": "UUID field ",
     "Definition": "Universally unique identifier field ",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
@@ -1885,7 +2179,9 @@
     "FullyQualifiedName": "UUID list for component (SOLOR)",
     "Synonym": "UUIDs",
     "Definition": "UUIDs",
-    "Origins": null,
+    "Origins": [
+      "CHRONICLE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "UNCATEGORIZED_PHENOMENON": {
@@ -1901,7 +2197,9 @@
     "FullyQualifiedName": "Uninitialized Component (SOLOR)",
     "Synonym": "Uninitalized ",
     "Definition": "not initialized component ",
-    "Origins": null,
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "UNIVERSAL_RESTRICTION": {
@@ -1917,7 +2215,9 @@
     "FullyQualifiedName": "Universally Unique Identifier (SOLOR)",
     "Synonym": "Universally Unique Identifier ",
     "Definition": "UUID",
-    "Origins": null,
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "USER": {
@@ -1925,15 +2225,25 @@
     "Synonym": "user",
     "Definition": "Approved users ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "ROOT_VERTEX"
     ],
-    "Destinations": null
+    "Destinations": [
+      "KOMET_USER",
+      "KOMET_USER_LIST",
+      "MODULE_FOR_USER",
+      "ORDER_FOR_AXIOM_ATTACHMENTS",
+      "ORDER_FOR_CONCEPT_ATTACHMENTS",
+      "ORDER_FOR_DESCRIPTION_ATTACHMENTS",
+      "PATH_FOR_USER"
+    ]
   },
   "VERSION_LIST_FOR_CHRONICLE": {
     "FullyQualifiedName": "Version list for chronicle (SOLOR)",
     "Synonym": "Versions",
     "Definition": "Chronicle version list ",
-    "Origins": null,
+    "Origins": [
+      "CHRONICLE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "VERTEX_FIELD": {
@@ -1941,7 +2251,7 @@
     "Synonym": "Vertex ",
     "Definition": "Field for Vertex",
     "Origins": [
-      "SEMANTIC_FIELD_TYPE"
+      "DISPLAY_FIELDS"
     ],
     "Destinations": null
   },
@@ -1949,91 +2259,117 @@
     "FullyQualifiedName": "Vertex sort (SOLOR)",
     "Synonym": "Sort",
     "Definition": "Vertext sort ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "VERTEX_STATE_SET": {
     "FullyQualifiedName": "Vertex state set (SOLOR)",
     "Synonym": "Vertex states",
     "Definition": "Vertext states ",
-    "Origins": null,
+    "Origins": [
+      "IMMUTABLECOORDINATE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "VIEW_COORDINATE_KEY": {
     "FullyQualifiedName": "View coordinate key (SOLOR)",
     "Synonym": "View Key ",
     "Definition": "View Key ",
-    "Origins": null,
+    "Origins": [
+      "QUERY_CLAUSES"
+    ],
     "Destinations": null
   },
   "BOOLEAN": {
     "FullyQualifiedName": "Boolean (SOLOR)",
     "Synonym": "Boolean ",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "BYTE_ARRAY": {
     "FullyQualifiedName": "byte array (SOLOR)",
     "Synonym": "byte array ",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "DESCRIPTION_LIST_FOR_CONCEPT": {
     "FullyQualifiedName": "Description list for concept (SOLOR)",
     "Synonym": "Description list for concept ",
     "Definition": "list of description ",
-    "Origins": null,
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
     "Destinations": null
   },
   "DOUBLE": {
     "FullyQualifiedName": "double (SOLOR)",
     "Synonym": "double",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "FLOAT": {
     "FullyQualifiedName": "float (SOLOR)",
     "Synonym": "float",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "LOGIC_GRAPH_FOR_SEMANTIC": {
     "FullyQualifiedName": "logic graph for semantic (SOLOR)",
     "Synonym": "Logic graph",
     "Definition": "Semantic ",
-    "Origins": null,
+    "Origins": [
+      "SEMANTIC_PROPERTIES"
+    ],
     "Destinations": null
   },
   "LONG": {
     "FullyQualifiedName": "Long (SOLOR)",
     "Synonym": "Long",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "DYNAMIC_COLUMN_DATA_TYPES"
+    ],
     "Destinations": null
   },
   "NID": {
     "FullyQualifiedName": "nid (SOLOR)",
     "Synonym": "nid",
     "Definition": "Data type",
-    "Origins": null,
+    "Origins": [
+      "OBJECT"
+    ],
     "Destinations": null
   },
   "SEMANTIC_LIST_FOR_CHRONICLE": {
     "FullyQualifiedName": "semantic list for chronicle (SOLOR)",
     "Synonym": "semantic list for chronicle ",
     "Definition": "semantic list ",
-    "Origins": null,
+    "Origins": [
+      "CHRONICLE_PROPERTIES"
+    ],
     "Destinations": null
   },
   "USERS_MODULE": {
     "FullyQualifiedName": "users module (SOLOR)",
     "Synonym": "user module",
     "Definition": "Module - user",
-    "Origins": null,
+    "Origins": [
+      "MODULE"
+    ],
     "Destinations": null
   },
   "ROOT_VERTEX": {
@@ -2042,7 +2378,13 @@
     "Definition": "Terminologies that are represented in a harmonized manner",
     "Origins": null,
     "Destinations": [
-      "MODEL_CONCEPT"
+      "MODEL_CONCEPT",
+      "MEANING",
+      "OBJECT",
+      "ROLE",
+      "USER",
+      "ANNOTATION_TYPE",
+      "CREATIVE_COMMONS_BY_LICENSE"
     ]
   },
   "IDENTIFIER_SOURCE": {
@@ -2058,13 +2400,16 @@
     "FullyQualifiedName": "Version Properties (SOLOR)",
     "Synonym": "Version properties ",
     "Definition": null,
-    "Origins": null,
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
     "Destinations": [
       "AUTHOR_FOR_VERSION",
       "MODULE_FOR_VERSION",
       "PATH_FOR_VERSION",
       "STATUS_FOR_VERSION",
-      "TIME_FOR_VERSION"
+      "TIME_FOR_VERSION",
+      "DESCRIPTION_VERSION_PROPERTIES"
     ]
   },
   "STATUS_VALUE": {
@@ -2072,7 +2417,7 @@
     "Synonym": "Status value",
     "Definition": "Status ",
     "Origins": [
-      "MODEL_CONCEPT"
+      "OBJECT"
     ],
     "Destinations": [
       "ACTIVE_STATE",
@@ -2084,36 +2429,311 @@
   "MODEL_CONCEPT": {
     "FullyQualifiedName": "Model concept (SOLOR)",
     "Synonym": "Model concept ",
-    "Definition": null,
+    "Definition": "abstract conceptualizations to concrete, quanttitative models used for simulation or analysis ",
     "Origins": [
       "ROOT_VERTEX"
     ],
     "Destinations": [
-      "ANNOTATION_TYPE",
+      "CONCEPT_DETAILS_TREE_TABLE",
+      "CONCEPT_TYPE",
+      "CONCEPT_VERSION",
+      "DESCRIPTION_LIST_FOR_CONCEPT",
       "AXIOM_ORIGIN",
       "COMPONENT_TYPE_FOCUS",
-      "CONNECTIVE_OPERATOR",
-      "CONCRETE_DOMAIN_OPERATOR",
-      "DESCRIPTION_ACCEPTABILITY",
-      "DESCRIPTION_CASE_SIGNIFICANCE",
-      "DESCRIPTION_TYPE",
-      "DESCRIPTION_LOGIC_PROFILE",
       "DIRECTED_GRAPH",
-      "EL_PROFILE_SET_OPERATOR",
       "IDENTIFIER_SOURCE",
       "LANGUAGE",
-      "MEANING",
-      "MODULE",
-      "PATH",
-      "ROLE",
-      "ROLE_OPERATOR",
-      "SANDBOX_COMPONENT",
-      "SEMANTIC_FIELD_CONCEPTS",
-      "SEMANTIC_FIELD_TYPE",
-      "SEMANTIC_TYPE",
-      "STATUS_VALUE",
-      "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR",
-      "USER"
+      "DIALECT_ASSEMBLAGE",
+      "PURPOSE"
+    ]
+  },
+  "IMMUTABLECOORDINATE_PROPERTIES": {
+    "FullyQualifiedName": "ImmutableCoordinate Properties (SOLOR)",
+    "Synonym": "ImmutableCoordinate properties ",
+    "Definition": "A set of values or data representing a point in space that one established cannot be changed?",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "ALLOWED_STATES_FOR_STAMP_COORDINATE",
+      "AUTHORS_FOR_STAMP_COORDINATE",
+      "MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE",
+      "MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE",
+      "MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE",
+      "MODULES_FOR_STAMP_COORDINATE",
+      "AUTHOR_FOR_EDIT_COORDINATE",
+      "DEFAULT_MODULE_FOR_EDIT_COORDINATE",
+      "DESTINATION_MODULE_FOR_EDIT_COORDINATE",
+      "MODULE_OPTIONS_FOR_EDIT_COORDINATE",
+      "PATH_OPTIONS_FOR_EDIT_CORDINATE",
+      "DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE",
+      "DIGRAPH_FOR_LOGIC_COORDINATE",
+      "ROOT_FOR_LOGIC_COORDINATE",
+      "DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE",
+      "LANGUAGE_NID_FOR_LANGUAGE_COORDINATE",
+      "LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE",
+      "MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE",
+      "PATH_FOR_PATH_COORDINATE",
+      "PATH_ORIGINS_FOR_STAMP_PATH",
+      "VERTEX_SORT",
+      "VERTEX_STATE_SET"
+    ]
+  },
+  "DYNAMIC_COLUMN_DATA_TYPES": {
+    "FullyQualifiedName": "Dynamic column data types (SOLOR)",
+    "Synonym": "Dynamic column data types ",
+    "Definition": "Data storage system where the structure of the data can be altered or extended dynamically?",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "ARRAY",
+      "BOOLEAN",
+      "BYTE_ARRAY",
+      "DOUBLE",
+      "FLOAT",
+      "LONG",
+      "SIGNED_INTEGER",
+      "STRING",
+      "UUID_DATA_TYPE"
+    ]
+  },
+  "LITERAL_VALUE": {
+    "FullyQualifiedName": "Literal value (SOLOR)",
+    "Synonym": "Literal value ",
+    "Definition": "Fixed Value/Constant?",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "BOOLEAN_LITERAL",
+      "FLOAT_LITERAL",
+      "INSTANT_LITERAL"
+    ]
+  },
+  "QUERY_CLAUSES": {
+    "FullyQualifiedName": "Query clauses (SOLOR)",
+    "Synonym": "Query clauses",
+    "Definition": "a distinct component/query that serves a specific purpose ",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "BOOLEAN_REFERENCE",
+      "VIEW_COORDINATE_KEY"
+    ]
+  },
+  "FIELD_SUBSTITUTION": {
+    "FullyQualifiedName": "Field substitution (SOLOR)",
+    "Synonym": "Field substituion ",
+    "Definition": "Replacing a placeholder variable in a field with a specific value ",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "BOOLEAN_SUBSTITUTION",
+      "CONCEPT_SUBSTITUTION",
+      "FLOAT_SUBSTITUTION",
+      "INSTANT_SUBSTITUTION"
+    ]
+  },
+  "TEXT_COMPARISON": {
+    "FullyQualifiedName": "Text comparison measure semantic (SOLOR)",
+    "Synonym": "Text comparsion",
+    "Definition": "Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure. ",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "CASE_INSENSITIVE_EVALUATION",
+      "CASE_SENSITIVE_EVALUATION"
+    ]
+  },
+  "DESCRIPTION_VERSION_PROPERTIES": {
+    "FullyQualifiedName": "Description version properties (SOLOR)",
+    "Synonym": "Description version properties ",
+    "Definition": "combination of terms that might be used in a specific context or domain ",
+    "Origins": [
+      "VERSION_PROPERTIES"
+    ],
+    "Destinations": [
+      "CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION",
+      "DESCRIPTION_TYPE_FOR_DESCRIPTION",
+      "LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION",
+      "DESCRIPTION_DIALECT_PAIR"
+    ]
+  },
+  "SEMANTIC_PROPERTIES": {
+    "FullyQualifiedName": "Semantic properties (SOLOR)",
+    "Synonym": "Semantic properties",
+    "Definition": "the attributes or characteristics of a concept, term, or element that convery meaning or semantics in a given context",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "REFERENCED_COMPONENT_NID_FOR_SEMANTIC",
+      "COMPONENT_FOR_SEMANTIC",
+      "LOGIC_GRAPH_FOR_SEMANTIC",
+      "SEMANTIC_FIELD_NAME"
+    ]
+  },
+  "DIALECT_ASSEMBLAGE": {
+    "FullyQualifiedName": "Dialect assemblage (SOLOR)",
+    "Synonym": "Dialect assemblage",
+    "Definition": "Language assembling, collection or grouping ",
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
+    "Destinations": [
+      "CZECH_DIALECT",
+      "ENGLISH_DIALECT",
+      "FRENCH_DIALECT",
+      "IRISH_DIALECT",
+      "KOREAN_DIALECT",
+      "POLISH_DIALECT",
+      "RUSSIAN_DIALECT"
+    ]
+  },
+  "ENGLISH_DIALECT": {
+    "FullyQualifiedName": "English Dialect (SOLOR)",
+    "Synonym": "English dialect ",
+    "Definition": "Dialect/ grouping ",
+    "Origins": [
+      "DIALECT_ASSEMBLAGE"
+    ],
+    "Destinations": [
+      "GB_ENGLISH_DIALECT",
+      "US_ENGLISH_DIALECT"
+    ]
+  },
+  "PURPOSE": {
+    "FullyQualifiedName": "Purpose (SOLOR)",
+    "Synonym": "Purpose",
+    "Definition": "Reason ",
+    "Origins": [
+      "MODEL_CONCEPT"
+    ],
+    "Destinations": [
+      "DESCRIPTUM",
+      "LOGICAL_DEFINITION",
+      "NAVIGATION"
+    ]
+  },
+  "TAXONOMY_OPERATOR": {
+    "FullyQualifiedName": "Taxonomy operator (SOLOR)",
+    "Synonym": "Taxonomy operator ",
+    "Definition": "an operator or set of operations applied within the contect of a taxonomy ",
+    "Origins": [
+      "MEANING"
+    ],
+    "Destinations": [
+      "LOGICALLY_EQUIVALENT_TO"
+    ]
+  },
+  "OBJECT_PROPERTIES": {
+    "FullyQualifiedName": "Object Properties (SOLOR)",
+    "Synonym": "Object properties",
+    "Definition": "objects are instances of classes, the properties describe the data or attributes that an object can have ",
+    "Origins": [
+      "OBJECT"
+    ],
+    "Destinations": [
+      "ACTION_PROPERTIES",
+      "CHRONICLE_PROPERTIES",
+      "VERSION_PROPERTIES",
+      "IMMUTABLECOORDINATE_PROPERTIES",
+      "LANGUAGE_COORDINATE_PROPERTIES",
+      "LOGIC_COORDINATE_PROPERTIES",
+      "PATH_COORDINATE_PROPERTIES",
+      "SEMANTIC_PROPERTIES",
+      "TREE_AMALGAM_PROPERTIES",
+      "CORRELATION_PROPERTIES"
+    ]
+  },
+  "ACTION_PROPERTIES": {
+    "FullyQualifiedName": "Action properties (SOLOR)",
+    "Synonym": "Action properties ",
+    "Definition": "attributes of an action object",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "CONCEPT_CONSTRAINTS",
+      "CONCEPT_TO_FIND",
+      "ROLE_TYPE_TO_ADD",
+      "CONDITIONAL_TRIGGERS"
+    ]
+  },
+  "CHRONICLE_PROPERTIES": {
+    "FullyQualifiedName": "Chronicle properties (SOLOR)",
+    "Synonym": "Chronicle properties",
+    "Definition": "attributes or characteristic associated with a historical record or an account of events (metadata, timestamps)",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "PRIMORDIAL_UUID_FOR_CHRONICLE",
+      "VERSION_LIST_FOR_CHRONICLE",
+      "SEMANTIC_LIST_FOR_CHRONICLE",
+      "UUID_LIST_FOR_COMPONENT"
+    ]
+  },
+  "LANGUAGE_COORDINATE_PROPERTIES": {
+    "FullyQualifiedName": "Language coordinate properties (SOLOR)",
+    "Synonym": "Langauge coordinate properties ",
+    "Definition": "Spatial representation of language, attributes or language coordinates, programming language metadata?",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "LANGUAGE_COORDINATE_NAME"
+    ]
+  },
+  "LOGIC_COORDINATE_PROPERTIES": {
+    "FullyQualifiedName": "Logic coordinate properties (SOLOR)",
+    "Synonym": "Logic coordinate properites",
+    "Definition": "Structural characteristics of logical elements, Attributes of Logical coordinates, Mathematical Representation of logical relationships ?",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "LOGIC_COORDINATE_NAME"
+    ]
+  },
+  "PATH_COORDINATE_PROPERTIES": {
+    "FullyQualifiedName": "Path coordinate properites (SOLOR)",
+    "Synonym": "Path coordinate properties ",
+    "Definition": "character or attribute of coordinates refering to a series of connected points, that form a shape or trajectory",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "PATH_COORDINATE_NAME",
+      "PATH_ORIGINS"
+    ]
+  },
+  "TREE_AMALGAM_PROPERTIES": {
+    "FullyQualifiedName": "Tree amalgam properties (SOLOR)",
+    "Synonym": "Tree amalgam properties (SOLOR)",
+    "Definition": "data structure that conists of nodes connected by edges (a mixture or blend of different elements)",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "INVERSE_TREE_LIST",
+      "TREE_LIST"
+    ]
+  },
+  "CORRELATION_PROPERTIES": {
+    "FullyQualifiedName": "Correlation properties (SOLOR)",
+    "Synonym": "Correlation properties ",
+    "Definition": "characteristics or measures that describe the relationship between two or more variables",
+    "Origins": [
+      "OBJECT_PROPERTIES"
+    ],
+    "Destinations": [
+      "CORELATION_EXPRESSION",
+      "CORELATION_REFERENCE_EXPRESSION"
     ]
   }
 }
