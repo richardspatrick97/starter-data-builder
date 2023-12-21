@@ -2939,6 +2939,16 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
+        //Create GB Dialect Pattern
+        starterData.pattern(TinkarTerm.GB_DIALECT_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
+                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                .fieldDefinition(
+                        TinkarTerm.GB_ENGLISH_DIALECT,
+                        TinkarTerm.DESCRIPTION_ACCEPTABILITY,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
         //Create Axiom Syntax Pattern
         starterData.pattern(StarterDataTerm.AXIOM_SYNTAX_PATTERN)
                 .meaning(axiomSyntax)
