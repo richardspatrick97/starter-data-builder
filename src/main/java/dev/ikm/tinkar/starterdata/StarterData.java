@@ -218,6 +218,7 @@ public class StarterData {
         }
 
         public EntityProxy.Pattern build(){
+            assert patternProxy.description() != null;
             starterDataEntities.add(patternUtility.createPattern(
                     patternProxy,
                     meaning,
