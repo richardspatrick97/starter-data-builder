@@ -2864,6 +2864,26 @@ public class TinkarStarterData {
                 .build();
 
 
+        starterData.concept(TinkarTerm.SOLOR_OVERLAY_MODULE)
+                .fullyQualifiedName("SOLOR overlay module (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("SOLOR overlay module", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.SOLOR_OVERLAY_MODULE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SOLOR_OVERLAY_MODULE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+
+        starterData.concept(TinkarTerm.SOLOR_MODULE)
+                .fullyQualifiedName("SOLOR module (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("SOLOR module", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.SOLOR_MODULE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SOLOR_MODULE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
 
         //Create Description Pattern
         starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
