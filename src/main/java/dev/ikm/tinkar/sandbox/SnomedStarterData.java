@@ -4,16 +4,15 @@ import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
-import dev.ikm.tinkar.common.util.io.FileUtil;
 import dev.ikm.tinkar.common.util.uuid.UuidUtil;
-import dev.ikm.tinkar.entity.*;
+import dev.ikm.tinkar.entity.Entity;
+import dev.ikm.tinkar.entity.EntityVersion;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.entity.load.LoadEntitiesFromProtobufFile;
 import dev.ikm.tinkar.entity.transfom.EntityToTinkarSchemaTransformer;
 import dev.ikm.tinkar.entity.transfom.TinkarSchemaToEntityTransformer;
 import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
-import dev.ikm.tinkar.starterdata.StarterDataTerm;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
@@ -22,8 +21,6 @@ import dev.ikm.tinkar.terms.TinkarTerm;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
@@ -190,6 +187,5 @@ public class SnomedStarterData {
         final List<Entity<? extends EntityVersion>> entities = new ArrayList<>();
         importTransform.transform(tinkarSchemaDiTree, entities::add, stampEntity -> {});
 
-        System.out.println("break");
     }
 }
