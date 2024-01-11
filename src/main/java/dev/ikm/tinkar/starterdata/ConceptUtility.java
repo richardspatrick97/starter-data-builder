@@ -3,7 +3,6 @@ package dev.ikm.tinkar.starterdata;
 import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 class ConceptUtility {
