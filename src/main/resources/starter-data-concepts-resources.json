@@ -2,7 +2,7 @@
   "ACCEPTABLE": {
     "FullyQualifiedName": "Acceptable (foundation metadata concept)",
     "Synonym": "Acceptable (SOLOR)",
-    "Definition": "defines whethere a value is allowable for a given field ",
+    "Definition": "defines where the value is allowable for a given field ",
     "Origins": [
       "DESCRIPTION_ACCEPTABILITY"
     ],
@@ -48,9 +48,9 @@
     ]
   },
   "ANONYMOUS_CONCEPT": {
-    "FullyQualifiedName": "Anonynmous concept (SOLOR)",
-    "Synonym": "Anynonymous concept",
-    "Definition": "concepts or entities that do not have a speicfic, named identity, (defined on-the-fly without a dedicated name)",
+    "FullyQualifiedName": "Anonymous concept (SOLOR)",
+    "Synonym": "Anonymous concept",
+    "Definition": "concepts or entities that do not have a specific, named identity, (defined on-the-fly without a dedicated name)",
     "Origins": [
       "CONCEPT_TYPE"
     ],
@@ -59,7 +59,7 @@
   "ANY_COMPONENT": {
     "FullyQualifiedName": "Any component (SOLOR)",
     "Synonym": "Any component",
-    "Definition": "a general-purpose container to represent any component with generic data structure. Modifyable based on the specific requirements and characteristics of the components. ",
+    "Definition": "a general-purpose container to represent any component with generic data structure. Modifiable based on the specific requirements and characteristics of the components. ",
     "Origins": [
       "OBJECT"
     ],
@@ -86,7 +86,7 @@
   "AUTHOR_FOR_EDIT_COORDINATE": {
     "FullyQualifiedName": "Author for edit coordinate (SOLOR)",
     "Synonym": "Author",
-    "Definition": "indidvidual or enitity who made a particular edit or reivsion in a document (authoring a specific location or point in the codebase where an edit was made)",
+    "Definition": "Person or entity who created, edited or wrote the term or concept and associated axioms",
     "Origins": [
       "IMMUTABLECOORDINATE_PROPERTIES"
     ],
@@ -95,7 +95,7 @@
   "AUTHOR_FOR_VERSION": {
     "FullyQualifiedName": "Author for version (SOLOR)",
     "Synonym": "Author",
-    "Definition": "indidvidual or enitity who made a speicfic set of changes or modifications to a codebase/terminology resulting in the creation of a new version or revision ",
+    "Definition": "individual or entity who made a specific set of changes or modifications to a codebase/terminology resulting in the creation of a new version or revision ",
     "Origins": [
       "VERSION_PROPERTIES"
     ],
@@ -104,7 +104,7 @@
   "AUTHORS_FOR_STAMP_COORDINATE": {
     "FullyQualifiedName": "Author for stamp coordinate (SOLOR)",
     "Synonym": "Authors",
-    "Definition": "an individualy or an entity responsible for defining or updating the values associated with the STAMP coordinate",
+    "Definition": "an individual or an entity responsible for defining or updating the values associated with the STAMP coordinate",
     "Origins": [
       "IMMUTABLECOORDINATE_PROPERTIES"
     ],
@@ -206,7 +206,7 @@
   "CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Case significance concept nid for description (SOLOR)",
     "Synonym": "Case significance ",
-    "Definition": "a field label which captures the case significance for a given concept descrtiption",
+    "Definition": "a field label which captures the case significance for a given concept description",
     "Origins": [
       "DESCRIPTION_VERSION_PROPERTIES"
     ],
@@ -224,7 +224,7 @@
   "COMMENT": {
     "FullyQualifiedName": "Comment (SOLOR)",
     "Synonym": "Comment",
-    "Definition": "A filed lable to capture free text information which may be necessary to add or change (concepts, relationships, semantics, etc)",
+    "Definition": "A field label to capture free text information which may be necessary to add or change (concepts, relationships, semantics, etc)",
     "Origins": [
       "ANNOTATION_TYPE"
     ],
@@ -327,7 +327,7 @@
   "CONCEPT_REFERENCE": {
     "FullyQualifiedName": "Concept reference (SOLOR)",
     "Synonym": "Concept reference",
-    "Definition": "a field to capture a refrence to validate concept ",
+    "Definition": "a field to capture a reference to validate concept ",
     "Origins": [
       "CONNECTIVE_OPERATOR"
     ],
@@ -343,8 +343,8 @@
     "Destinations": null
   },
   "CONCEPT_SUBSTITUTION": {
-    "FullyQualifiedName": "Concept subtitution (SOLOR)",
-    "Synonym": "Concept subsitution ",
+    "FullyQualifiedName": "Concept substitution (SOLOR)",
+    "Synonym": "Concept substitution ",
     "Definition": "Substitution for concept",
     "Origins": [
       "FIELD_SUBSTITUTION"
@@ -354,7 +354,7 @@
   "CONCEPT_TO_FIND": {
     "FullyQualifiedName": "Concept to find (SOLOR)",
     "Synonym": "Concept to find",
-    "Definition": "Find concept (if searching on Komet shows us the results \"details and futher information?)",
+    "Definition": "Find concept (if searching on Komet shows us the results \"details and further information?)",
     "Origins": [
       "ACTION_PROPERTIES"
     ],
@@ -408,7 +408,7 @@
     "Destinations": null
   },
   "CONNECTIVE_OPERATOR": {
-    "FullyQualifiedName": "Conncective operator (SOLOR)",
+    "FullyQualifiedName": "Connective operator (SOLOR)",
     "Synonym": "Connective operator ",
     "Definition": "a filed that captures what the operator is  (logical connective)",
     "Origins": [
@@ -424,16 +424,16 @@
       "CONCEPT_REFERENCE"
     ]
   },
-  "CORELATION_EXPRESSION": {
-    "FullyQualifiedName": "Corelation expresson (SOLOR)",
-    "Synonym": "Corelation expression",
-    "Definition": "a value for Corelation properties",
+  "CORRELATION_EXPRESSION": {
+    "FullyQualifiedName": "Correlation expression (SOLOR)",
+    "Synonym": "Correlation expression",
+    "Definition": "a value for Correlation properties",
     "Origins": [
       "CORRELATION_PROPERTIES"
     ],
     "Destinations": null
   },
-  "CORELATION_REFERENCE_EXPRESSION": {
+  "CORRELATION_REFERENCE_EXPRESSION": {
     "FullyQualifiedName": "Corelation reference expresson (SOLOR)",
     "Synonym": "Corelation reference expression",
     "Definition": "a value for corelation",
@@ -508,7 +508,7 @@
   "DESCRIPTION": {
     "FullyQualifiedName": "Description (SOLOR)",
     "Synonym": "Description",
-    "Definition": "A concept used as a placeholder in the computabel columns configuration of maps -> this is a komet defintion - (a value for maping display field which captures human readable name for a concept",
+    "Definition": "A concept used as a placeholder in the compute label columns configuration of maps -> this is a komet definition - (a value for mapping display field which captures human readable name for a concept",
     "Origins": [
       "OBJECT"
     ],
@@ -596,7 +596,7 @@
   },
   "DESCRIPTION_INITIAL_CHARACTER_CASE_SENSITIVE": {
     "FullyQualifiedName": "Description initial character case sensitive (SOLOR)",
-    "Synonym": "Initial characted case insensitive ",
+    "Synonym": "Initial character case insensitive ",
     "Definition": "value which designates initial character as sensitive for a given description ",
     "Origins": [
       "DESCRIPTION_CASE_SIGNIFICANCE"
@@ -613,7 +613,7 @@
     "Destinations": null
   },
   "DESCRIPTION_NOT_CASE_SENSITIVE": {
-    "FullyQualifiedName": "Decription not case sensitive (SOLOR)",
+    "FullyQualifiedName": "Description not case sensitive (SOLOR)",
     "Synonym": "Case insensitive",
     "Definition": "value which designate character as not sensitive for a given description ",
     "Origins": [
@@ -649,7 +649,7 @@
   },
   "DESCRIPTION_TYPE_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Description type for description (SOLOR)",
-    "Synonym": "Decription type ",
+    "Synonym": "Description type ",
     "Definition": "linking for each description -> what type it is",
     "Origins": [
       "DESCRIPTION_VERSION_PROPERTIES"
@@ -666,7 +666,7 @@
     "Destinations": null
   },
   "DESCRIPTION_LOGIC_PROFILE": {
-    "FullyQualifiedName": "Decription-logic profile (SOLOR)",
+    "FullyQualifiedName": "Description-logic profile (SOLOR)",
     "Synonym": "Description-logic profile ",
     "Definition": null,
     "Origins": [
@@ -676,9 +676,9 @@
       "EL_PLUS_PLUS_PROFILE"
     ]
   },
-  "DESCRIPTUM": {
-    "FullyQualifiedName": "Descriptum (SOLOR)",
-    "Synonym": "Descriptum",
+  "DESCRIPTION": {
+    "FullyQualifiedName": "Description (SOLOR)",
+    "Synonym": "Description",
     "Definition": "refers to something that has been described or the result of a description - the item being described",
     "Origins": [
       "PURPOSE"
@@ -697,7 +697,7 @@
   "DEVELOPMENT_MODULE": {
     "FullyQualifiedName": "Development module (SOLOR)",
     "Synonym": "Development module ",
-    "Definition": "predefines or standard module within a systsem or application that is specifically desgined to support the development phase of a project ",
+    "Definition": "predefines or standard module within a system or application that is specifically designed to support the development phase of a project ",
     "Origins": [
       "MODULE"
     ],
@@ -760,7 +760,7 @@
     ]
   },
   "DISJOINT_WITH": {
-    "FullyQualifiedName": "Disjjoint with (SOLOR)",
+    "FullyQualifiedName": "Disjoint with (SOLOR)",
     "Synonym": "Disjoint with ",
     "Definition": "an operator ",
     "Origins": [
@@ -969,8 +969,8 @@
   },
   "FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE": {
     "FullyQualifiedName": "Fully qualified name description type (SOLOR)",
-    "Synonym": "Fully quailified name ",
-    "Definition": " it is the unambigious, human readable term for a concept as a value in the description type",
+    "Synonym": "Fully qualified name ",
+    "Definition": " it is the unambiguous, human readable term for a concept as a value in the description type",
     "Origins": [
       "DESCRIPTION_TYPE"
     ],
@@ -1054,7 +1054,7 @@
   "INSTANT_LITERAL": {
     "FullyQualifiedName": "Instant literal (SOLOR)",
     "Synonym": "Instant literal",
-    "Definition": "may refer to a speicfic point in time which is often represented by a date or time value ",
+    "Definition": "may refer to a specific point in time which is often represented by a date or time value ",
     "Origins": [
       "LITERAL_VALUE"
     ],
@@ -1063,7 +1063,7 @@
   "INSTANT_SUBSTITUTION": {
     "FullyQualifiedName": "Instant substitution (SOLOR)",
     "Synonym": "Instant substitution",
-    "Definition": "subtitution of instant literal? ",
+    "Definition": "substitution of instant literal? ",
     "Origins": [
       "FIELD_SUBSTITUTION"
     ],
@@ -1072,7 +1072,7 @@
   "INVERSE_NAME": {
     "FullyQualifiedName": "Inverse name (SOLOR)",
     "Synonym": "Inverse name ",
-    "Definition": "This is the extended desrciption type that maye be attached to a description within a concept that defines as Association refex to signify that the referenced description  is the inverse of the association name ",
+    "Definition": "This is the extended description type that maye be attached to a description within a concept that defines as Association refex to signify that the referenced description  is the inverse of the association name ",
     "Origins": [
       "DESCRIPTION_TYPE"
     ],
@@ -1225,7 +1225,7 @@
   "LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION": {
     "FullyQualifiedName": "Language concept nid for description (SOLOR)",
     "Synonym": "Language for description",
-    "Definition": "captures the language code for a descriptiom",
+    "Definition": "captures the language code for a description",
     "Origins": [
       "DESCRIPTION_VERSION_PROPERTIES"
     ],
@@ -1277,7 +1277,7 @@
     "Destinations": null
   },
   "LITHUANIAN_LANGUAGE": {
-    "FullyQualifiedName": "Lithuanian langauge (SOLOR)",
+    "FullyQualifiedName": "Lithuanian language (SOLOR)",
     "Synonym": "Lithuanian Language",
     "Definition": "Lithuanian Language ",
     "Origins": [
@@ -1327,7 +1327,7 @@
     "Destinations": null
   },
   "LOGICALLY_EQUIVALENT_TO": {
-    "FullyQualifiedName": "Logically eqivalent to (Solor)",
+    "FullyQualifiedName": "Logically equivalent to (Solor)",
     "Synonym": "Logically equivalent to",
     "Definition": "an operator for the reasoner to determine the equivalence",
     "Origins": [
@@ -1509,9 +1509,9 @@
     "Destinations": null
   },
   "NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION": {
-    "FullyQualifiedName": "Necessary but not sufficicent concept definition (SOLOR)",
+    "FullyQualifiedName": "Necessary but not sufficient concept definition (SOLOR)",
     "Synonym": "Necessary but not sufficient concept definition",
-    "Definition": "Not sufficicently defined by necessary conditions defintion status ",
+    "Definition": "Not sufficicently defined by necessary conditions definition status ",
     "Origins": [
       "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR"
     ],
@@ -1718,7 +1718,7 @@
   "PHENOMENON": {
     "FullyQualifiedName": "Phenomenon (SOLOR)",
     "Synonym": "Phenomenon ",
-    "Definition": "Phenomenon ",
+    "Definition": "A unique thought, fact, or circumstance ",
     "Origins": [
       "HEALTH_CONCEPT"
     ],
@@ -1745,9 +1745,9 @@
     "Destinations": null
   },
   "PREFERRED": {
-    "FullyQualifiedName": "Preffered (SOLOR)",
-    "Synonym": "Preffered ",
-    "Definition": "Preffered( Foundation metadata concept)",
+    "FullyQualifiedName": "Preferred (SOLOR)",
+    "Synonym": "Preferred ",
+    "Definition": "Preferred( Foundation metadata concept)",
     "Origins": [
       "DESCRIPTION_ACCEPTABILITY"
     ],
@@ -1783,7 +1783,7 @@
   "PRIMORDIAL_PATH": {
     "FullyQualifiedName": "Primordial path (SOLOR)",
     "Synonym": "Primordial path",
-    "Definition": "Primodial path ",
+    "Definition": "Primordial path ",
     "Origins": [
       "PATH"
     ],
@@ -1799,18 +1799,18 @@
     "Destinations": null
   },
   "REFERENCED_COMPONENT_NID_FOR_SEMANTIC": {
-    "FullyQualifiedName": "Refrenced component nid for semantic (SOLOR)",
-    "Synonym": "Refrenced component id",
-    "Definition": "Component id Refrenced ",
+    "FullyQualifiedName": "Referenced component nid for semantic (SOLOR)",
+    "Synonym": "Referenced component id",
+    "Definition": "Component id Referenced ",
     "Origins": [
       "SEMANTIC_PROPERTIES"
     ],
     "Destinations": null
   },
   "REFERENCED_COMPONENT_SUBTYPE_RESTRICTION": {
-    "FullyQualifiedName": "Refrenced component subtype restriction (SOLOR)",
-    "Synonym": "Refrenced component subtype restriction",
-    "Definition": "Stores the (optional) refrenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field. ",
+    "FullyQualifiedName": "Referenced component subtype restriction (SOLOR)",
+    "Synonym": "Referenced component subtype restriction",
+    "Definition": "Stores the (optional) referenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field. ",
     "Origins": [
       "ROLE_OPERATOR"
     ],
@@ -1818,7 +1818,7 @@
   },
   "REFERENCED_COMPONENT_TYPE_RESTRICTION": {
     "FullyQualifiedName": "Referenced component type restriction (SOLOR)",
-    "Synonym": "Refrenced component type restriction",
+    "Synonym": "Referenced component type restriction",
     "Definition": "Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field",
     "Origins": [
       "ROLE_OPERATOR"
@@ -2074,7 +2074,7 @@
   "SUFFICIENT_CONCEPT_DEFINITION": {
     "FullyQualifiedName": "Sufficient concept definition (SOLOR)",
     "Synonym": "Sufficient concept definition",
-    "Definition": "Concept definition - Sufficicent ",
+    "Definition": "Concept definition - Sufficient ",
     "Origins": [
       "SUFFICIENT_CONCEPT_DEFINITION_OPERATOR"
     ],
@@ -2160,7 +2160,7 @@
   "UUID_DATA_TYPE": {
     "FullyQualifiedName": "UUID data type (SOLOR)",
     "Synonym": "UUID data type",
-    "Definition": "disctinction of data type of UUID",
+    "Definition": "distinction of data type of UUID",
     "Origins": [
       "DYNAMIC_COLUMN_DATA_TYPES"
     ],
@@ -2195,7 +2195,7 @@
   },
   "UNINITIALIZED_COMPONENT": {
     "FullyQualifiedName": "Uninitialized Component (SOLOR)",
-    "Synonym": "Uninitalized ",
+    "Synonym": "Uninitialized ",
     "Definition": "not initialized component ",
     "Origins": [
       "OBJECT"
@@ -2258,7 +2258,7 @@
   "VERTEX_SORT": {
     "FullyQualifiedName": "Vertex sort (SOLOR)",
     "Synonym": "Sort",
-    "Definition": "Vertext sort ",
+    "Definition": "Vertex sort ",
     "Origins": [
       "IMMUTABLECOORDINATE_PROPERTIES"
     ],
@@ -2267,7 +2267,7 @@
   "VERTEX_STATE_SET": {
     "FullyQualifiedName": "Vertex state set (SOLOR)",
     "Synonym": "Vertex states",
-    "Definition": "Vertext states ",
+    "Definition": "Vertex states ",
     "Origins": [
       "IMMUTABLECOORDINATE_PROPERTIES"
     ],
@@ -2429,7 +2429,7 @@
   "MODEL_CONCEPT": {
     "FullyQualifiedName": "Model concept (SOLOR)",
     "Synonym": "Model concept ",
-    "Definition": "abstract conceptualizations to concrete, quanttitative models used for simulation or analysis ",
+    "Definition": "abstract conceptualizations to concrete, quantitative models used for simulation or analysis ",
     "Origins": [
       "ROOT_VERTEX"
     ],
@@ -2525,7 +2525,7 @@
   },
   "FIELD_SUBSTITUTION": {
     "FullyQualifiedName": "Field substitution (SOLOR)",
-    "Synonym": "Field substituion ",
+    "Synonym": "Field substitution ",
     "Definition": "Replacing a placeholder variable in a field with a specific value ",
     "Origins": [
       "MEANING"
@@ -2539,7 +2539,7 @@
   },
   "TEXT_COMPARISON": {
     "FullyQualifiedName": "Text comparison measure semantic (SOLOR)",
-    "Synonym": "Text comparsion",
+    "Synonym": "Text comparison",
     "Definition": "Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure. ",
     "Origins": [
       "MEANING"
@@ -2622,7 +2622,7 @@
   "TAXONOMY_OPERATOR": {
     "FullyQualifiedName": "Taxonomy operator (SOLOR)",
     "Synonym": "Taxonomy operator ",
-    "Definition": "an operator or set of operations applied within the contect of a taxonomy ",
+    "Definition": "an operator or set of operations applied within the context of a taxonomy ",
     "Origins": [
       "MEANING"
     ],
@@ -2691,7 +2691,7 @@
   },
   "LOGIC_COORDINATE_PROPERTIES": {
     "FullyQualifiedName": "Logic coordinate properties (SOLOR)",
-    "Synonym": "Logic coordinate properites",
+    "Synonym": "Logic coordinate properties",
     "Definition": "Structural characteristics of logical elements, Attributes of Logical coordinates, Mathematical Representation of logical relationships ?",
     "Origins": [
       "OBJECT_PROPERTIES"
@@ -2701,9 +2701,9 @@
     ]
   },
   "PATH_COORDINATE_PROPERTIES": {
-    "FullyQualifiedName": "Path coordinate properites (SOLOR)",
+    "FullyQualifiedName": "Path coordinate properties (SOLOR)",
     "Synonym": "Path coordinate properties ",
-    "Definition": "character or attribute of coordinates refering to a series of connected points, that form a shape or trajectory",
+    "Definition": "character or attribute of coordinates referring to a series of connected points, that form a shape or trajectory",
     "Origins": [
       "OBJECT_PROPERTIES"
     ],
@@ -2715,7 +2715,7 @@
   "TREE_AMALGAM_PROPERTIES": {
     "FullyQualifiedName": "Tree amalgam properties (SOLOR)",
     "Synonym": "Tree amalgam properties (SOLOR)",
-    "Definition": "data structure that conists of nodes connected by edges (a mixture or blend of different elements)",
+    "Definition": "data structure that consists of nodes connected by edges (a mixture or blend of different elements)",
     "Origins": [
       "OBJECT_PROPERTIES"
     ],
