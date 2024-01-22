@@ -2087,8 +2087,8 @@ public class TinkarStarterData {
 
         starterData.concept(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE)
                 .fullyQualifiedName("Regular name description type (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Synonym", TinkarTerm.PREFERRED)
-                .definition("Synonym (core metadata concept)", TinkarTerm.PREFERRED)
+                .synonym("Regular name", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
@@ -2850,7 +2850,7 @@ public class TinkarStarterData {
 
         starterData.concept(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE)
                 .fullyQualifiedName(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .synonym(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym("Dialect order", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(uncategorizedGrouper))
