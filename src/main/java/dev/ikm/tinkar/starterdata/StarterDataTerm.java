@@ -15,4 +15,11 @@ public class StarterDataTerm {
     public static final EntityProxy.Pattern TINKAR_CORE_BASE_MODEL_PATTERN = EntityProxy.Pattern.make("Tinkar Core Base Model Pattern", UUID.fromString("b8669480-0527-4a85-b4fc-ea7445faa517"));
     public static final EntityProxy.Pattern KOMET_BASE_MODEL_PATTERN = EntityProxy.Pattern.make("Komet Base Model Pattern", UUID.fromString("bbbbf1fe-00f0-55e0-a19c-6300dbaab9b2"));
 
+    public static final EntityProxy.Concept STATED_NAVIGATION =
+            EntityProxy.Concept.make("Stated navigation (SOLOR)", UUID.fromString("614017af-9903-53d9-aab4-15fd02193dce"));
+    public static final EntityProxy.Concept INFERRED_NAVIGATION =
+            EntityProxy.Concept.make("Inferred navigation (SOLOR)", UUID.fromString("4bc6c333-7fc9-52f1-942d-f8decba19dc2"));
+
+    public static final EntityProxy.Pattern STATED_DESCRIPTION_PATTERN = EntityProxy.Pattern.make("Stated description pattern", UUID.fromString("e813eb92-7d07-5035-8d43-e81249f5b36e"));
+    public static final EntityProxy.Pattern INFERRED_DESCRIPTION_PATTERN = EntityProxy.Pattern.make("Inferred definition pattern", UUID.fromString("9f011812-15c9-5b1b-85f8-bb262bc1b2a2"));
 }
