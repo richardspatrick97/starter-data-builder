@@ -2809,7 +2809,7 @@ public class TinkarStarterData {
 
         starterData.concept(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
                 .fullyQualifiedName(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .synonym(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym("Stated assemblage", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(uncategorizedGrouper))
@@ -2819,7 +2819,7 @@ public class TinkarStarterData {
 
         starterData.concept(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
                 .fullyQualifiedName(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .synonym(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym("Inferred assemblage", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(uncategorizedGrouper))
@@ -2829,7 +2829,7 @@ public class TinkarStarterData {
 
         starterData.concept(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
                 .fullyQualifiedName(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .synonym(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym("Concepts to classify", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
@@ -2990,6 +2990,17 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
+
+        starterData.concept(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                .fullyQualifiedName("Concept assemblage for logic coordinate (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Concepts to classify", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
         starterData.concept(TinkarTerm.PROPERTY_SET)
                 .fullyQualifiedName("Property set (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Property set", TinkarTerm.PREFERRED)
@@ -3083,21 +3094,21 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
-        starterData.pattern(StarterDataTerm.INFERRED_DESCRIPTION_PATTERN)
+        starterData.pattern(StarterDataTerm.INFERRED_DEFINITION_PATTERN)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.MEANING,
                         TinkarTerm.DITREE_FIELD)
                         .build();
 
-        starterData.pattern(StarterDataTerm.STATED_DESCRIPTION_PATTERN)
+        starterData.pattern(StarterDataTerm.STATED_DEFINITION_PATTERN)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
                         TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.MEANING,
                         TinkarTerm.DITREE_FIELD)
                 .build();
 

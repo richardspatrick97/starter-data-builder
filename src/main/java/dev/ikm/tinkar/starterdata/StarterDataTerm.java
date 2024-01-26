@@ -20,6 +20,7 @@ public class StarterDataTerm {
     public static final EntityProxy.Concept INFERRED_NAVIGATION =
             EntityProxy.Concept.make("Inferred navigation (SOLOR)", UUID.fromString("4bc6c333-7fc9-52f1-942d-f8decba19dc2"));
 
-    public static final EntityProxy.Pattern STATED_DESCRIPTION_PATTERN = EntityProxy.Pattern.make("Stated description pattern", UUID.fromString("e813eb92-7d07-5035-8d43-e81249f5b36e"));
-    public static final EntityProxy.Pattern INFERRED_DESCRIPTION_PATTERN = EntityProxy.Pattern.make("Inferred definition pattern", UUID.fromString("9f011812-15c9-5b1b-85f8-bb262bc1b2a2"));
+    public static final EntityProxy.Pattern STATED_DEFINITION_PATTERN = EntityProxy.Pattern.make("Stated definition pattern", UUID.fromString("e813eb92-7d07-5035-8d43-e81249f5b36e"));
+    public static final EntityProxy.Pattern INFERRED_DEFINITION_PATTERN = EntityProxy.Pattern.make("Inferred definition pattern", UUID.fromString("9f011812-15c9-5b1b-85f8-bb262bc1b2a2"));
+
 }
