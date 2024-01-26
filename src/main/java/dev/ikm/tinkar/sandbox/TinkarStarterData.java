@@ -2833,14 +2833,14 @@ public class TinkarStarterData {
                 .synonym(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(uncategorizedGrouper))
-                .statedNavigation(null, List.of(uncategorizedGrouper))
-                .statedDefinition(List.of(uncategorizedGrouper))
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
         starterData.concept(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE)
                 .fullyQualifiedName(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .synonym(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
+                .synonym("Classifier", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(uncategorizedGrouper))
@@ -2881,6 +2881,56 @@ public class TinkarStarterData {
                 .build();
 
 
+        starterData.concept(TinkarTerm.TRANSITIVE_FEATURE)
+                .fullyQualifiedName("Transitive Feature (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Transitive Feature", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.TRANSITIVE_FEATURE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TRANSITIVE_FEATURE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.REFLEXIVE_FEATURE)
+                .fullyQualifiedName("Reflexive Feature (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Reflexive Feature", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.REFLEXIVE_FEATURE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFLEXIVE_FEATURE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.LATERALITY)
+                .fullyQualifiedName("Laterality (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Laterality", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.LATERALITY.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LATERALITY.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.HAS_ACTIVE_INGREDIENT)
+                .fullyQualifiedName("Has Active Ingredient (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Has Active Ingredient", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.HAS_ACTIVE_INGREDIENT.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.HAS_ACTIVE_INGREDIENT.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.HAS_DOSE_FORM)
+                .fullyQualifiedName("Has Dose Form (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Has Dose Form", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.HAS_DOSE_FORM.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.HAS_DOSE_FORM.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
         starterData.concept(TinkarTerm.UNMODELED_ROLE_CONCEPT)
                 .fullyQualifiedName("Unmodeled role concept (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Unmodeled role concept", TinkarTerm.PREFERRED)
@@ -2916,6 +2966,47 @@ public class TinkarStarterData {
                 .synonym("Intrinsic role", TinkarTerm.PREFERRED)
                 .definition(TinkarTerm.INTRINSIC_ROLE.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INTRINSIC_ROLE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+        starterData.concept(TinkarTerm.PROPERTY_PATTERN_IMPLICATION)
+                .fullyQualifiedName("Property pattern implication (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Property pattern implication", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.PROPERTY_PATTERN_IMPLICATION.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PROPERTY_PATTERN_IMPLICATION.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+        starterData.concept(TinkarTerm.SNOROCKET_CLASSIFIER)
+                .fullyQualifiedName("SnoRocket classifier (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("SnoRocket classifier", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.SNOROCKET_CLASSIFIER.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SNOROCKET_CLASSIFIER.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+        starterData.concept(TinkarTerm.PROPERTY_SET)
+                .fullyQualifiedName("Property set (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Property set", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.PROPERTY_SET.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PROPERTY_SET.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+
+        starterData.concept(TinkarTerm.FEATURE)
+                .fullyQualifiedName("Feature (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Feature", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.FEATURE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FEATURE.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
@@ -2958,6 +3049,16 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
+        starterData.concept(StarterDataTerm.STATED_NAVIGATION)
+                .fullyQualifiedName("Stated navigation (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Stated navigation", TinkarTerm.PREFERRED)
+                .definition(StarterDataTerm.STATED_NAVIGATION.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
         //Create Inferred Navigation Pattern
         starterData.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
                 .meaning(TinkarTerm.IS_A)
@@ -2970,6 +3071,35 @@ public class TinkarStarterData {
                         TinkarTerm.RELATIONSHIP_ORIGIN,
                         TinkarTerm.IS_A,
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .build();
+
+
+        starterData.concept(StarterDataTerm.INFERRED_NAVIGATION)
+                .fullyQualifiedName("Inferred navigation (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Inferred navigation", TinkarTerm.PREFERRED)
+                .definition(StarterDataTerm.INFERRED_NAVIGATION.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
+                .build();
+
+        starterData.pattern(StarterDataTerm.INFERRED_DESCRIPTION_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTUM)
+                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .fieldDefinition(
+                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.DITREE_FIELD)
+                        .build();
+
+        starterData.pattern(StarterDataTerm.STATED_DESCRIPTION_PATTERN)
+                .meaning(TinkarTerm.DESCRIPTUM)
+                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .fieldDefinition(
+                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.LOGICAL_DEFINITION,
+                        TinkarTerm.DITREE_FIELD)
                 .build();
 
         //Create Identifier Pattern
@@ -3042,6 +3172,12 @@ public class TinkarStarterData {
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
+        starterData.pattern(TinkarTerm.SOLOR_CONCEPT_ASSEMBLAGE)
+                .meaning(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+
+
         //Create STAMP Pattern
         starterData.pattern(TinkarTerm.STAMP_PATTERN)
                 .meaning(TinkarTerm.VERSION_PROPERTIES)
@@ -3109,6 +3245,8 @@ public class TinkarStarterData {
                 .meaning(starterDataAuthoring)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
+
+
     }
 
     private static void exportStarterData(){
