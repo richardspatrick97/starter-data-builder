@@ -57,7 +57,6 @@ public class TinkarStarterData {
 
         authoringSTAMP = starterData.getAuthoringSTAMP();
 
-
         configureConceptsAndPatterns(starterData, uuidUtility);
         starterData.build(); //Natively writing data to spined array
         transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms

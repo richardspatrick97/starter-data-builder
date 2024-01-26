@@ -233,6 +233,15 @@ public class StarterData {
             starterDataEntities.add(descriptionSemantic);
             starterDataEntities.add(semanticUtility.createDialectSemantic(descriptionSemantic.nid(), TinkarTerm.PREFERRED, authoringSTAMP));
 
+            descriptionSemantic = semanticUtility.createDescriptionSemantic(
+                    patternNid,
+                    TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE,
+                    patternProxy.description(),
+                    authoringSTAMP);
+            starterDataEntities.add(descriptionSemantic);
+            starterDataEntities.add(semanticUtility.createDialectSemantic(descriptionSemantic.nid(), TinkarTerm.PREFERRED, authoringSTAMP));
+
+
             return patternProxy;
         }
     }
