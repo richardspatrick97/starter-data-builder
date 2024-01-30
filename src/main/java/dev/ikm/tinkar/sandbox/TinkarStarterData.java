@@ -2990,17 +2990,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
-
-        starterData.concept(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
-                .fullyQualifiedName("Concept assemblage for logic coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Concepts to classify", TinkarTerm.PREFERRED)
-                .definition(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description(), TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
-                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
-                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
-                .build();
-
         starterData.concept(TinkarTerm.PROPERTY_SET)
                 .fullyQualifiedName("Property set (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Property set", TinkarTerm.PREFERRED)
