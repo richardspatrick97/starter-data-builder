@@ -43,8 +43,6 @@ public class SnomedStarterData {
                 .synonym("SNOMED CT Author", TinkarTerm.PREFERRED)
                 .definition("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT Author", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedAuthor.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.USER))
-                .statedNavigation(null, List.of(TinkarTerm.USER))
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .build();
 
@@ -55,8 +53,6 @@ public class SnomedStarterData {
                 .synonym("SCTID", TinkarTerm.PREFERRED)
                 .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedIdentifier.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .statedNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
 
@@ -66,8 +62,6 @@ public class SnomedStarterData {
                 .synonym("Health Concept", TinkarTerm.PREFERRED)
                 .definition("A grouper concept that contains the SNOMED CT hierarchy", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedGrouper.asUuidArray()[0].toString())
-                .inferredNavigation(List.of(TinkarTerm.PHENOMENON), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedNavigation(List.of(TinkarTerm.PHENOMENON), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
     }
