@@ -70,16 +70,7 @@ public class SnomedLoincStarterData {
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-        EntityProxy.Concept snomedAuthor = EntityProxy.Concept.make("IHTSDO SNOMED CT Author", uuidUtility.createUUID("IHTSDO SNOMED CT Author"));
-        starterData.concept(snomedAuthor)
-                .fullyQualifiedName("IHTSDO SNOMED CT Author", TinkarTerm.PREFERRED)
-                .synonym("SNOMED CT Author", TinkarTerm.PREFERRED)
-                .definition("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT Author", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedAuthor.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.USER))
-                .statedNavigation(null, List.of(TinkarTerm.USER))
-                .statedDefinition(List.of(TinkarTerm.USER))
-                .build();
+
 
         EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
         starterData.concept(snomedIdentifier)
@@ -88,8 +79,6 @@ public class SnomedLoincStarterData {
                 .synonym("SCTID", TinkarTerm.PREFERRED)
                 .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedIdentifier.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .statedNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
 
@@ -99,19 +88,15 @@ public class SnomedLoincStarterData {
                 .synonym("Health Concept", TinkarTerm.PREFERRED)
                 .definition("A grouper concept that contains the SNOMED CT hierarchy", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedGrouper.asUuidArray()[0].toString())
-                .inferredNavigation(List.of(TinkarTerm.PHENOMENON), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedNavigation(List.of(TinkarTerm.PHENOMENON), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
-        EntityProxy.Concept snomedLoincAuthor = EntityProxy.Concept.make("SNOMED LOINC Collaboration Author", uuidUtility.createUUID("SNOMED LOINC Collaboration Author"));
-        starterData.concept(snomedLoincAuthor)
-                .fullyQualifiedName("SNOMED LOINC Collaboration Author", TinkarTerm.PREFERRED)
-                .synonym("snomedLoincAuthor", TinkarTerm.PREFERRED)
-                .definition("SNOMED LOINC Collaboration Author", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedLoincAuthor.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.USER))
-                .statedNavigation(null, List.of(TinkarTerm.USER))
+        EntityProxy.Concept snomedAuthor = EntityProxy.Concept.make("SNOMED CT LOINC Collaboration Author", uuidUtility.createUUID("SNOMED CT LOINC Collaboration Author"));
+        starterData.concept(snomedAuthor)
+                .fullyQualifiedName("SNOMED CT LOINC Collaboration Author", TinkarTerm.PREFERRED)
+                .synonym("SNOMED CT LOINC Collaboration Author", TinkarTerm.PREFERRED)
+                .definition("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT and LOINC Author", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedAuthor.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .build();
 
@@ -122,8 +107,6 @@ public class SnomedLoincStarterData {
                 .synonym("LOINC Num", TinkarTerm.PREFERRED)
                 .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincIdentifier.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .statedNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
 
@@ -133,37 +116,8 @@ public class SnomedLoincStarterData {
                 .synonym("ID starting point", TinkarTerm.PREFERRED)
                 .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincIdentifier.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .statedNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
-
-
-//        Optional<Entity<EntityVersion>> phenomenonVersion = EntityService.get().getEntity(TinkarTerm.PHENOMENON.asUuidArray()[0]);
-//        if (phenomenonVersion.isEmpty()) {
-//            throw new RuntimeException("OOPS...");
-//        }
-//        Entity<? extends EntityVersion> phenomenon = phenomenonVersion.get();
-//        EntityService.get().getEntity(TinkarTerm.PHENOMENON.asUuidArray()[0]).get().versions()
-
-//        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
-//        versions.add(SemanticVersionRecordBuilder.builder()
-//                .chronology(semanticRecord)
-//                .stampNid(starterData.getAuthoringSTAMP().nid())
-//                .fieldValues(navigationFields.toImmutable())
-//                .build());
-//
-//        SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
-//
-//
-//
-//        starterData.concept(TinkarTerm.PHENOMENON)
-//                .definition("A unique thought, fact, or circumstance", TinkarTerm.PREFERRED)
-//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PHENOMENON.asUuidArray()[0].toString())
-//                .inferredNavigation(List.of(TinkarTerm.IDENTIFIER_SOURCE), null)
-//                .statedNavigation(List.of(TinkarTerm.IDENTIFIER_SOURCE), null)
-//                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-//                .build();
     }
 
     /*
