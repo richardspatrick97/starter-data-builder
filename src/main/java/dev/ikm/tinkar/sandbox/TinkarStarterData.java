@@ -892,6 +892,7 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.DIGRAPH_FIELD)
@@ -1567,11 +1568,12 @@ public class TinkarStarterData {
         starterData.concept(TinkarTerm.MASTER_PATH)
                 .fullyQualifiedName("Master path (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Master path", TinkarTerm.PREFERRED)
-                .definition("null", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.MASTER_PATH.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MASTER_PATH.asUuidArray()[0].toString())
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.MEANING)
@@ -1954,15 +1956,16 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .build();
 
-        starterData.concept(TinkarTerm.PATHS_PATTERN)
-                .fullyQualifiedName("Paths pattern (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Paths pattern", TinkarTerm.PREFERRED)
-                .definition("Pattern of path", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATHS_PATTERN.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
+        starterData.concept(TinkarTerm.PROMOTION_PATH_FOR_EDIT_CORDINATE)
+                .fullyQualifiedName("Promotion Path for Edit Coordinate (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Promotion Path for Edit Coordinate", TinkarTerm.PREFERRED)
+                .definition("Promotion Path for Edit Coordinate", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PROMOTION_PATH_FOR_EDIT_CORDINATE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(TinkarTerm.PATH_COORDINATE_PROPERTIES))
+                .statedNavigation(null, List.of(TinkarTerm.PATH_COORDINATE_PROPERTIES))
+                .statedDefinition(List.of(TinkarTerm.PATH_COORDINATE_PROPERTIES))
                 .build();
+
 
         starterData.concept(TinkarTerm.PHENOMENON)
                 .fullyQualifiedName("Phenomenon (SOLOR)", TinkarTerm.PREFERRED)
@@ -2042,6 +2045,7 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH))
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.PRIMORDIAL_STATE)
@@ -2222,6 +2226,7 @@ public class TinkarStarterData {
                 .inferredNavigation(null, List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
                 .statedNavigation(null, List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
                 .statedDefinition(List.of(TinkarTerm.PATH, TinkarTerm.SANDBOX_COMPONENT))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.SANDBOX_PATH_MODULE)
