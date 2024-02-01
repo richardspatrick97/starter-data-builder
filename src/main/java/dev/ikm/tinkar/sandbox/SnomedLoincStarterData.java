@@ -109,15 +109,6 @@ public class SnomedLoincStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincIdentifier.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
-
-        EntityProxy.Concept snomedctIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier Source", UuidUtil.fromSNOMED("900000000000294009"));
-        starterData.concept(snomedctIdentifier)
-                .fullyQualifiedName("SNOMED CT Identifier Source", TinkarTerm.PREFERRED)
-                .synonym("ID starting point", TinkarTerm.PREFERRED)
-                .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincIdentifier.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
     }
 
     /*
