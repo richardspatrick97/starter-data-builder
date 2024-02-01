@@ -26,8 +26,6 @@ public class SnomedLoincStarterData {
     private static File exportDataStore;
     private static File importDataStore;
     private static File exportFile;
-
-    private static Entity<? extends EntityVersion> authoringSTAMP;
     public static void main(String args[]){
 
         exportDataStore = new File(args[0]);
@@ -45,19 +43,6 @@ public class SnomedLoincStarterData {
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
-
-        starterData.concept(TinkarTerm.COMPONENT_FIELD)
-                .fullyQualifiedName("Component field (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Component field", TinkarTerm.PREFERRED)
-                .definition("Component field", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.COMPONENT_FIELD.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
-                .build();
-
-        authoringSTAMP = starterData.getAuthoringSTAMP();
-
         configureConceptsAndPatterns(starterData, uuidUtility);
         starterData.build(); //Natively writing data to spined array
 //        transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
@@ -74,7 +59,7 @@ public class SnomedLoincStarterData {
 
         EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
         starterData.concept(snomedIdentifier)
-                .fullyQualifiedName("SNOMED CT Identifier", TinkarTerm.PREFERRED)
+                .fullyQualifiedName("SNOMED CT integer identifier", TinkarTerm.PREFERRED)
                 .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
                 .synonym("SCTID", TinkarTerm.PREFERRED)
                 .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
