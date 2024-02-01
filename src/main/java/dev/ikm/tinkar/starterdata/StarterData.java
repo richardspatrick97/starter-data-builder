@@ -227,14 +227,6 @@ public class StarterData {
                     fieldDefinitions.toImmutable()));
             Entity<? extends EntityVersion> descriptionSemantic = semanticUtility.createDescriptionSemantic(
                     patternNid,
-                    TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE,
-                    patternProxy.description(),
-                    authoringSTAMP);
-            starterDataEntities.add(descriptionSemantic);
-            starterDataEntities.add(semanticUtility.createDialectSemantic(descriptionSemantic.nid(), TinkarTerm.PREFERRED, authoringSTAMP));
-
-            descriptionSemantic = semanticUtility.createDescriptionSemantic(
-                    patternNid,
                     TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE,
                     patternProxy.description(),
                     authoringSTAMP);
