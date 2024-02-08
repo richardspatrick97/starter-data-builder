@@ -124,6 +124,7 @@ public class TinkarStarterData {
                 .synonym("Express Axiom", TinkarTerm.ACCEPTABLE)
                 .definition("Expressing description logic through syntax", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, expressAxiom.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(uncategorizedGrouper))
                 .statedDefinition(List.of(axiomSyntax))
                 .build();
 
@@ -1096,6 +1097,7 @@ public class TinkarStarterData {
                 .synonym("Grouping", TinkarTerm.PREFERRED)
                 .definition("The grouping attached to the mapping", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GROUPING.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.EXACT, TinkarTerm.PARTIAL), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
@@ -1447,7 +1449,7 @@ public class TinkarStarterData {
                 .synonym("Model concept", TinkarTerm.PREFERRED)
                 .definition("abstract conceptualizations to concrete, quanttitative models used for simulation or analysis", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.AXIOM_ORIGIN, TinkarTerm.COMPONENT_TYPE_FOCUS, TinkarTerm.DIRECTED_GRAPH, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.LANGUAGE, TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.PURPOSE), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TinkarTerm.CONCEPT_DETAILS_TREE_TABLE, TinkarTerm.CONCEPT_TYPE, TinkarTerm.CONCEPT_VERSION, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT, TinkarTerm.AXIOM_ORIGIN, TinkarTerm.COMPONENT_TYPE_FOCUS, TinkarTerm.DIRECTED_GRAPH, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.LANGUAGE, TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.PURPOSE, TinkarTerm.DESCRIPTION_ACCEPTABILITY), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
