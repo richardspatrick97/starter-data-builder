@@ -1,22 +1,15 @@
 package dev.ikm.tinkar.sandbox;
 
-import dev.ikm.tinkar.common.service.CachingService;
-import dev.ikm.tinkar.common.service.PrimitiveData;
-import dev.ikm.tinkar.common.service.ServiceKeys;
-import dev.ikm.tinkar.common.service.ServiceProperties;
 import dev.ikm.tinkar.common.util.uuid.UuidUtil;
-import dev.ikm.tinkar.entity.Entity;
-import dev.ikm.tinkar.entity.EntityVersion;
-import dev.ikm.tinkar.entity.load.LoadEntitiesFromProtobufFile;
+import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.starterdata.StarterData;
-import dev.ikm.tinkar.starterdata.StarterDataTerm;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 public class SnomedLoincStarterData {
@@ -24,13 +17,11 @@ public class SnomedLoincStarterData {
     private static final Logger LOG = Logger.getLogger(SnomedLoincStarterData.class.getSimpleName());
 
     private static File exportDataStore;
-    private static File importDataStore;
     private static File exportFile;
     public static void main(String args[]){
 
         exportDataStore = new File(args[0]);
         exportFile = new File(args[1]);
-        importDataStore = new File(args[2]);
 
         UUIDUtility uuidUtility = new UUIDUtility();
 
@@ -45,13 +36,8 @@ public class SnomedLoincStarterData {
 
         configureConceptsAndPatterns(starterData, uuidUtility);
         starterData.build(); //Natively writing data to spined array
-//        transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
-//        exportStarterData();  //exports starter data to pb.zip
+        exportStarterData(); //exports starter data to pb.zip
         starterData.shutdown();
-
-        //Load exported starter data into clean database
-        importStarterData(); //load pb.zip into database
-
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
@@ -96,36 +82,12 @@ public class SnomedLoincStarterData {
                 .build();
     }
 
-    /*
-    Do these concepts from the excel file.
-
-    SNOMED LOINC Collaboration Author
-    LOINC Number
-    SNOMED CT Identifier Source
-     */
-
-    private static void importStarterData() {
-        LOG.info("Starting database");
-        LOG.info("Loading data from " + importDataStore.getAbsolutePath());
-        CachingService.clearAll();
-        ServiceProperties.set(ServiceKeys.DATA_STORE_ROOT, importDataStore);
-        PrimitiveData.selectControllerByName("Open SpinedArrayStore");
-        PrimitiveData.start();
-
+    private static void exportStarterData(){
+        ExportEntitiesController exportEntitiesController = new ExportEntitiesController();
         try {
-            LoadEntitiesFromProtobufFile loadEntitiesFromProtobufFile = new LoadEntitiesFromProtobufFile(exportFile);
-            loadEntitiesFromProtobufFile.call();
-        }catch (Exception e){
-            LOG.severe(e.getMessage());
+            exportEntitiesController.export(exportFile).get();
+        } catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
-
-        List<Integer> patternNids = new ArrayList<>();
-        PrimitiveData.get().forEachPatternNid(patternNids::add);
-
-
-        System.out.println("break");
-
-        PrimitiveData.stop();
     }
 }
