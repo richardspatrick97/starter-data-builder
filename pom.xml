@@ -12,8 +12,8 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tinkar-core.version>1.27.0</tinkar-core.version>
-        <tinkar-schema.version>1.14.0</tinkar-schema.version>
+        <tinkar-core.version>1.30.0</tinkar-core.version>
+        <tinkar-schema.version>1.26.0</tinkar-schema.version>
         <tinkar-transformer-api.version>1.7.0</tinkar-transformer-api.version>
         <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
