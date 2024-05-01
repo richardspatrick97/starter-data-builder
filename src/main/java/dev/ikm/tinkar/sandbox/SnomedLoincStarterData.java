@@ -40,36 +40,8 @@ public class SnomedLoincStarterData {
         starterData.shutdown();
     }
 
-    private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-
-
-        EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
-        starterData.concept(snomedIdentifier)
-                .fullyQualifiedName("SNOMED CT integer identifier", TinkarTerm.PREFERRED)
-                .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
-                .synonym("SCTID", TinkarTerm.PREFERRED)
-                .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedIdentifier.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
-
-        EntityProxy.Concept snomedGrouper = EntityProxy.Concept.make("SNOMED CT Concept", uuidUtility.createUUID("SNOMED CT Concept"));
-        starterData.concept(snomedGrouper)
-                .fullyQualifiedName("SNOMED CT Concept", TinkarTerm.PREFERRED)
-                .synonym("Health Concept", TinkarTerm.PREFERRED)
-                .definition("A grouper concept that contains the SNOMED CT hierarchy", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedGrouper.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .build();
-
-        EntityProxy.Concept snomedAuthor = EntityProxy.Concept.make("SNOMED CT LOINC Collaboration Author", uuidUtility.createUUID("SNOMED CT LOINC Collaboration Author"));
-        starterData.concept(snomedAuthor)
-                .fullyQualifiedName("SNOMED CT LOINC Collaboration Author", TinkarTerm.PREFERRED)
-                .synonym("SNOMED CT LOINC Collaboration Author", TinkarTerm.PREFERRED)
-                .definition("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT and LOINC Author", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedAuthor.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.USER))
-                .build();
+    protected static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
+        SnomedStarterData.configureConceptsAndPatterns(starterData, uuidUtility);
 
         /* UUID from SNOMED Browser - This is the ECL query : '705114005 |LOINC Code System (qualifier value)|'  */
         EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UuidUtil.fromSNOMED("705114005"));
