@@ -225,7 +225,7 @@ public class SnomedLoincLidrStarterData {
                 .fieldDefinition(
                         allowedResultSetIdentifier,
                         TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
         publicId = PublicIds.of(UUID.nameUUIDFromBytes("Allowed Result".getBytes()));
@@ -316,16 +316,6 @@ public class SnomedLoincLidrStarterData {
                 .fullyQualifiedName("Device", TinkarTerm.PREFERRED)
                 .definition("A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.MODEL_CONCEPT, instrumentIdentifier.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
-
-        publicId = PublicIds.of(UUID.nameUUIDFromBytes("LIDR Records".getBytes()));
-        EntityProxy.Concept lidrRecords = EntityProxy.Concept.make(publicId);
-        starterData.concept(lidrRecords)
-                .fullyQualifiedName("LIDR Records", TinkarTerm.PREFERRED)
-                .synonym("LIDR Records", TinkarTerm.PREFERRED)
-                .definition("A model concept to hold LIDR records", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.MODEL_CONCEPT, lidrRecords.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
@@ -900,7 +890,7 @@ public class SnomedLoincLidrStarterData {
 
 
     private static void buildSampleLIDRConcept(StarterData starterData, List<EntityProxy.Concept> definitionConcepts,
-                                                EntityProxy.Concept lidrRecordConcept)
+                                               EntityProxy.Concept lidrRecordConcept)
     {
         UUIDUtility uuidUtility = new UUIDUtility();
         EntityProxy.Concept lidrConceptExample = EntityProxy.Concept.make("Abbot Labs - AdviseDX SARS-CoV-2 IgM Architect i1000SR", uuidUtility.createUUID("Abbot Labs - AdviseDX SARS-CoV-2 IgM Architect i1000SR"));
