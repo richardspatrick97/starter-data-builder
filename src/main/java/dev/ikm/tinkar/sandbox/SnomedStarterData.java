@@ -36,7 +36,7 @@ public class SnomedStarterData {
         starterData.shutdown();
     }
 
-    private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
+    protected static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
         Concept snomedAuthor = EntityProxy.Concept.make("IHTSDO SNOMED CT Author", uuidUtility.createUUID("IHTSDO SNOMED CT Author"));
         starterData.concept(snomedAuthor)
                 .fullyQualifiedName("IHTSDO SNOMED CT Author", TinkarTerm.PREFERRED)
@@ -48,22 +48,22 @@ public class SnomedStarterData {
 
         Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
         starterData.concept(snomedIdentifier)
-                .fullyQualifiedName("SNOMED CT Identifier", TinkarTerm.PREFERRED)
-                .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
-                .synonym("SCTID", TinkarTerm.PREFERRED)
-                .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedIdentifier.asUuidArray()[0].toString())
+//                .fullyQualifiedName("SNOMED CT Identifier", TinkarTerm.PREFERRED)
+//                .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
+//                .synonym("SCTID", TinkarTerm.PREFERRED)
+//                .definition("Unique point of origin for identifier", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedIdentifier.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
 
-        Concept snomedGrouper = EntityProxy.Concept.make("SNOMED CT Concept", uuidUtility.createUUID("SNOMED CT Concept"));
-        starterData.concept(snomedGrouper)
-                .fullyQualifiedName("SNOMED CT Concept", TinkarTerm.PREFERRED)
-                .synonym("Health Concept", TinkarTerm.PREFERRED)
-                .definition("A grouper concept that contains the SNOMED CT hierarchy", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedGrouper.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .build();
+//        Concept snomedGrouper = EntityProxy.Concept.make("SNOMED CT Concept", TinkarTerm.HEALTH_CONCEPT.asUuidArray()[1]);//"SNOMED CT Concept", uuidUtility.createUUID("SNOMED CT Concept"));
+//        starterData.concept(snomedGrouper)
+////                .fullyQualifiedName("SNOMED CT Concept", TinkarTerm.PREFERRED)
+////                .synonym("Health Concept", TinkarTerm.PREFERRED)
+////                .definition("A grouper concept that contains the SNOMED CT hierarchy", TinkarTerm.PREFERRED)
+////                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedGrouper.asUuidArray()[0].toString())
+//                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+//                .build();
     }
 
     private static void exportStarterData(){
