@@ -788,15 +788,15 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Units from SNOMED-LOINC :  From SNOMED-LOINC : 246514001 |Units (attribute)|
-        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
-        starterData.concept(loincUnitsType)
-                .fullyQualifiedName("Units (attribute)", TinkarTerm.PREFERRED)
-                .synonym("Units of Measure", TinkarTerm.PREFERRED)
-                .definition("Provides expected UCUM (Unified Code for Units of Measure) units of measure for  values of an observation", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincUnitsType.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincUnitsType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
-                .build();
+//        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
+//        starterData.concept(loincUnitsType)
+//                .fullyQualifiedName("Units (attribute)", TinkarTerm.PREFERRED)
+//                .synonym("Units of Measure", TinkarTerm.PREFERRED)
+//                .definition("Provides expected UCUM (Unified Code for Units of Measure) units of measure for  values of an observation", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincUnitsType.asUuidArray()[0].toString())
+//                .statedDefinition(List.of(phenomenonConcept))
+//                .statedNavigation(List.of(loincUnitsType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+//                .build();
 
         EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", UuidUtil.fromSNOMED("246514001"));
         starterData.concept(referenceRanges)
@@ -822,8 +822,8 @@ public class SnomedLoincLidrStarterData {
                 .meaning( fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
                 .purpose(fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
                 .fieldDefinition(
-                        loincUnitsType,
-                        loincUnitsType,
+                        TinkarTerm.MEANING,//loincUnitsType,  This was causing a problem
+                        TinkarTerm.PURPOSE,//loincUnitsType,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         referenceRanges,
