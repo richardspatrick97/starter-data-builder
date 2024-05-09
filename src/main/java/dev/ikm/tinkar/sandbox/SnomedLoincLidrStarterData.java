@@ -179,12 +179,57 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        EntityProxy.Concept dataResultsType = EntityProxy.Concept.make("Data Results Type", uuidUtility.createUUID("Data Results Type"));
+        starterData.concept(dataResultsType)
+                .fullyQualifiedName("Data Results Type", TinkarTerm.PREFERRED)
+                .synonym("Results Type", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a qualitative vs quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.MODEL_CONCEPT, dataResultsType.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        fullyQualifiedNameToConceptMap.put("Data Results Type", dataResultsType);
+
+        //Quantitative Data Results
+        EntityProxy.Concept quantDataResults = EntityProxy.Concept.make("Quantitative Data Result", uuidUtility.createUUID("Quantitative Data Results"));
+        starterData.concept(quantDataResults)
+                .fullyQualifiedName("Quantitative Data Result", TinkarTerm.PREFERRED)
+                .synonym("Quantitative", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, quantDataResults.asUuidArray()[0].toString())
+                .statedDefinition(List.of(dataResultsType))
+                .statedNavigation( List.of(quantDataResults) ,List.of(dataResultsType))
+                .build();
+
+        fullyQualifiedNameToConceptMap.put("Quantitative Data Result", quantDataResults);
+
+
+
+        //Qualitative Data Results
+        EntityProxy.Concept qualDataResults = EntityProxy.Concept.make("Qualitative Data Result", uuidUtility.createUUID("Qualitative Data Results"));
+        starterData.concept(qualDataResults)
+                .fullyQualifiedName("Qualitative Data Result", TinkarTerm.PREFERRED)
+                .synonym("Qualitative", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a qualitative measure.Used to deterimine how the test results were interpreted and communicated.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, qualDataResults.asUuidArray()[0].toString())
+                .statedDefinition(List.of(dataResultsType))
+                .statedNavigation( List.of(qualDataResults) ,List.of(dataResultsType))
+                .build();
+
+
+        //Data Results Type
+        List<EntityProxy.Concept> resultConcepts = Arrays.asList( qualDataResults,quantDataResults );
+
+        starterData.concept(dataResultsType)
+                .statedNavigation(resultConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
         starterData.pattern( EntityProxy.Pattern.make("Qualitative Allowed Result Set Pattern", uuidUtility.createUUID("Qualitative Allowed Result Set Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(qualDataResults)
+                .purpose(qualDataResults)
                 .fieldDefinition(
                         allowedResultSetIdentifier,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        allowedResultSetIdentifier,
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
@@ -238,11 +283,11 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Instrument Equipment Pattern", uuidUtility.createUUID("Instrument Equipment Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(instEquipmentConcept)
+                .purpose(instEquipmentConcept)
                 .fieldDefinition(
                         instEquipmentConcept,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        instEquipmentConcept,
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
@@ -338,45 +383,7 @@ public class SnomedLoincLidrStarterData {
 
         fullyQualifiedNameToConceptMap.put("Result Conformance", resultConformanceConcept);
 
-        EntityProxy.Concept dataResultsType = EntityProxy.Concept.make("Data Results Type", uuidUtility.createUUID("Data Results Type"));
-        starterData.concept(dataResultsType)
-                .fullyQualifiedName("Data Results Type", TinkarTerm.PREFERRED)
-                .synonym("Results Type", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a qualitative vs quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.MODEL_CONCEPT, dataResultsType.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
 
-        fullyQualifiedNameToConceptMap.put("Data Results Type", dataResultsType);
-
-        //Quantitative Data Results
-        EntityProxy.Concept quantDataResults = EntityProxy.Concept.make("Quantitative Data Result", uuidUtility.createUUID("Quantitative Data Results"));
-        starterData.concept(quantDataResults)
-                .fullyQualifiedName("Quantitative Data Result", TinkarTerm.PREFERRED)
-                .synonym("Quantitative", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, quantDataResults.asUuidArray()[0].toString())
-                .statedDefinition(List.of(dataResultsType))
-                .statedNavigation( List.of(quantDataResults) ,List.of(dataResultsType))
-                .build();
-
-        //Qualitative Data Results
-        EntityProxy.Concept qualDataResults = EntityProxy.Concept.make("Qualitative Data Result", uuidUtility.createUUID("Qualitative Data Results"));
-        starterData.concept(qualDataResults)
-                .fullyQualifiedName("Qualitative Data Result", TinkarTerm.PREFERRED)
-                .synonym("Qualitative", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a qualitative measure.Used to deterimine how the test results were interpreted and communicated.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, qualDataResults.asUuidArray()[0].toString())
-                .statedDefinition(List.of(dataResultsType))
-                .statedNavigation( List.of(qualDataResults) ,List.of(dataResultsType))
-                .build();
-
-        //Data Results Type
-        List<EntityProxy.Concept> resultConcepts = Arrays.asList( qualDataResults,quantDataResults );
-
-        starterData.concept(dataResultsType)
-                .statedNavigation(resultConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
 
         starterData.concept(analyteConcept)
                 .statedNavigation(List.of(analyteConcept),List.of(analyteConcept,TinkarTerm.MODEL_CONCEPT))
@@ -483,15 +490,15 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        //Result Conformance Range Pattern
-        starterData.pattern( EntityProxy.Pattern.make("Result Conformance Range Pattern", uuidUtility.createUUID("Result Conformance Range Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
-                .fieldDefinition(
-                        referenceRanges,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .build();
+//        //Result Conformance Range Pattern
+//        starterData.pattern( EntityProxy.Pattern.make("Result Conformance Range Pattern", uuidUtility.createUUID("Result Conformance Range Pattern")))
+//                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+//                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+//                .fieldDefinition(
+//                        referenceRanges,
+//                        TinkarTerm.IDENTIFIER_SOURCE,
+//                        TinkarTerm.COMPONENT_FIELD)
+//                .build();
 
         //Detection Limit
         EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", uuidUtility.createUUID("Detection Limit"));
@@ -503,18 +510,18 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        starterData.pattern( EntityProxy.Pattern.make("Analyte Range Pattern", uuidUtility.createUUID("Analyte Range Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
-                .fieldDefinition(
-                        referenceRanges,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        detectionLimit,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .build();
+//        starterData.pattern( EntityProxy.Pattern.make("Analyte Range Pattern", uuidUtility.createUUID("Analyte Range Pattern")))
+//                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+//                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+//                .fieldDefinition(
+//                        referenceRanges,
+//                        referenceRanges,
+//                        TinkarTerm.COMPONENT_FIELD)
+//                .fieldDefinition(
+//                        detectionLimit,
+//                        detectionLimit,
+//                        TinkarTerm.COMPONENT_FIELD)
+//                .build();
     }
 
     private static void configureVendorCodeDescriptionPattern(StarterData starterData, UUIDUtility uuidUtility){
@@ -539,15 +546,15 @@ public class SnomedLoincLidrStarterData {
 
 
         starterData.pattern( EntityProxy.Pattern.make("Vendor Code/Description Pattern", uuidUtility.createUUID("Vendor Code/Description Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(vendorDescription)
+                .purpose(vendorDescription)
                 .fieldDefinition(
                         vendorCode,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        vendorCode,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         vendorDescription,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        vendorDescription,
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
@@ -669,36 +676,36 @@ public class SnomedLoincLidrStarterData {
                 .purpose(TinkarTerm.IDENTIFIER_SOURCE)
                 .fieldDefinition(
                         dateMappingPerformed,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        dateMappingPerformed,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         loincVersionID,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        loincVersionID,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         sourceOfEntry,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        sourceOfEntry,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         committeeReviewed,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        committeeReviewed,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         vendorReviewed,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        vendorReviewed,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         vendorComment,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        vendorComment,
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Diagnostic Device Pattern", uuidUtility.createUUID("Diagnostic Device Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(testOrdered)
+                .purpose(testOrdered)
                 .fieldDefinition(
                         testOrdered,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        testOrdered,
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
     }
@@ -791,22 +798,46 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(loincUnitsType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", UuidUtil.fromSNOMED("246514001"));
+        starterData.concept(referenceRanges)
+                .fullyQualifiedName("Reference Ranges", TinkarTerm.PREFERRED)
+                .synonym("Range of Values", TinkarTerm.PREFERRED)
+                .definition("A range of normal values expected for a healthy person based on a group of otherwise healthy people", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, referenceRanges.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(referenceRanges),List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", UuidUtil.fromSNOMED("246514001"));
+        starterData.concept(detectionLimit)
+                .fullyQualifiedName("Detection Limit", TinkarTerm.PREFERRED)
+                .synonym("Limit of Detection (LOD)", TinkarTerm.PREFERRED)
+                .definition("The limit of detection LOD (or detection limit, DL) is the lowest possible concentration at which the method can detect (but not quantify!) the analyte within the matrix with certain degree of confidence.", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, detectionLimit.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(detectionLimit),List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
         starterData.pattern( EntityProxy.Pattern.make("Quantitative Allowed Result Pattern", uuidUtility.createUUID("Quantitative Allowed Result Pattern")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning( fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
+                .purpose(fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
                 .fieldDefinition(
                         loincUnitsType,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        loincUnitsType,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
-                        TinkarTerm.STRING,
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
+                        referenceRanges,
+                        referenceRanges,
+                        TinkarTerm.STRING)
+                .fieldDefinition(
+                        detectionLimit,
+                        detectionLimit,
+                        TinkarTerm.STRING)
                 .build();
 
 
         lidrPhenomenonConcepts.addAll(List.of(loincComponent,loincProperty,loincTimeAspect,
-                loincDirectSite, loincScaleType, methodType,loincUnitsType));
+                loincDirectSite, loincScaleType, methodType));
 
         starterData.concept(phenomenonConcept)
                 .statedNavigation(lidrPhenomenonConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
@@ -818,31 +849,31 @@ public class SnomedLoincLidrStarterData {
     {
 
         starterData.pattern( EntityProxy.Pattern.make("Test Performed Pattern (LIDR Record)", uuidUtility.createUUID("Test Performed Pattern (LIDR Record)")))
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(fullyQualifiedNameToConceptMap.get("Test Performed"))
+                .purpose(fullyQualifiedNameToConceptMap.get("Test Performed"))
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Test Performed"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Test Performed"),
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Data Results Type"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Data Results Type"),
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Analyte"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Analyte"),
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Target"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Target"),
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Specimen"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Specimen"),
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Result Conformance"),
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        fullyQualifiedNameToConceptMap.get("Result Conformance"),
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
