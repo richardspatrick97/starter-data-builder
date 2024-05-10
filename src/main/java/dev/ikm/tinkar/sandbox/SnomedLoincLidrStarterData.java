@@ -490,38 +490,6 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-//        //Result Conformance Range Pattern
-//        starterData.pattern( EntityProxy.Pattern.make("Result Conformance Range Pattern", uuidUtility.createUUID("Result Conformance Range Pattern")))
-//                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-//                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
-//                .fieldDefinition(
-//                        referenceRanges,
-//                        TinkarTerm.IDENTIFIER_SOURCE,
-//                        TinkarTerm.COMPONENT_FIELD)
-//                .build();
-
-        //Detection Limit
-        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", uuidUtility.createUUID("Detection Limit"));
-        starterData.concept(detectionLimit)
-                .fullyQualifiedName("Detection Limit", TinkarTerm.PREFERRED)
-                .synonym("Limit of Detection (LOD)", TinkarTerm.DESCRIPTION_TYPE)
-                .definition("The limit of detection LOD (or detection limit, DL) is the lowest possible concentration at which the method can detect (but not quantify!) the analyte within the matrix with certain degree of confidence.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.MODEL_CONCEPT, detectionLimit.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
-
-//        starterData.pattern( EntityProxy.Pattern.make("Analyte Range Pattern", uuidUtility.createUUID("Analyte Range Pattern")))
-//                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-//                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
-//                .fieldDefinition(
-//                        referenceRanges,
-//                        referenceRanges,
-//                        TinkarTerm.COMPONENT_FIELD)
-//                .fieldDefinition(
-//                        detectionLimit,
-//                        detectionLimit,
-//                        TinkarTerm.COMPONENT_FIELD)
-//                .build();
     }
 
     private static void configureVendorCodeDescriptionPattern(StarterData starterData, UUIDUtility uuidUtility){
@@ -713,15 +681,7 @@ public class SnomedLoincLidrStarterData {
     private static void configurePhenomenonNavigation(StarterData starterData, UUIDUtility uuidUtility) {
         /* PHENOMENON - as specified by TE team for LOINC axes   */
         List<EntityProxy.Concept> lidrPhenomenonConcepts = new ArrayList<>();
-        EntityProxy.Concept phenomenonConcept = EntityProxy.Concept.make("PHENOMENON", uuidUtility.createUUID("PHENOMENON"));
-        starterData.concept(phenomenonConcept)
-                .fullyQualifiedName("PHENOMENON", TinkarTerm.PREFERRED)
-                .synonym("PHENOMENON", TinkarTerm.PREFERRED)
-                .definition("The LOINC axes concepts", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, phenomenonConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedNavigation(lidrPhenomenonConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
+
 
         //Component   From SNOMED-LOINC : 246093002  |Component (attribute)|
         EntityProxy.Concept loincComponent = EntityProxy.Concept.make("Component", UuidUtil.fromSNOMED("246093002"));
@@ -729,8 +689,8 @@ public class SnomedLoincLidrStarterData {
                 .fullyQualifiedName("Component (attribute)", TinkarTerm.PREFERRED)
                 .definition("The substance or entity being measured or observed", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincComponent.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincComponent),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincComponent),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         //Property   From SNOMED-LOINC : 370130000 |Property (attribute)|
@@ -739,8 +699,8 @@ public class SnomedLoincLidrStarterData {
                 .fullyQualifiedName("Property (attribute)", TinkarTerm.PREFERRED)
                 .definition("The characteristic or attribute of the analyte, distinguishes between different kinds of quantities relating to the same substance, e.g. Mass versus Counts vs time duration", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincProperty.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincProperty),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincProperty),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         //Time Aspect   From SNOMED-LOINC : 370134009 |Time aspect (attribute)|
@@ -750,8 +710,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Time; Timing", TinkarTerm.PREFERRED)
                 .definition("One can either measure a Property at a moment (point) in time or measure it over a time interval and integrate, in the mathematical sense, over time.The interval of time over which an observation was made. (e.g., Point in time vs 24 hrs collection)", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincTimeAspect.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincTimeAspect),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincTimeAspect),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         //Direct site   From SNOMED-LOINC : 704327008 |Direct site (attribute)|
@@ -761,8 +721,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("System", TinkarTerm.PREFERRED)
                 .definition("Refers to the specific anatomical location or site where a particular observation or test is performed.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincDirectSite.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincDirectSite),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincDirectSite),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         //Scale type   From SNOMED-LOINC : 370132008 |Scale type (attribute)|
@@ -772,10 +732,9 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Scale", TinkarTerm.PREFERRED)
                 .definition("How the observation value is quantified or expressed. Type of scale specifies the scale of the measure. The following scale types are defined: Quantitative (Qn), Ordinal (Ord), Nominal (Nom), Narrative (Nar)", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincScaleType.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(loincScaleType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincScaleType),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
-
         //Method From SNOMED-LOINC :  From SNOMED-LOINC : 260686004 |Method (attribute)|
         EntityProxy.Concept methodType = EntityProxy.Concept.make("Method", UuidUtil.fromSNOMED("260686004"));
         starterData.concept(methodType)
@@ -783,22 +742,14 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Technique", TinkarTerm.PREFERRED)
                 .definition("A high-level classification of how the observation was made. What methodology is being used to make the measurement. Only needed when the technique affects the clinical interpretation of the results.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, methodType.asUuidArray()[0].toString())
-                .statedDefinition(List.of(phenomenonConcept))
-                .statedNavigation(List.of(methodType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(methodType),List.of(TinkarTerm.PHENOMENON,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         //Units from SNOMED-LOINC :  From SNOMED-LOINC : 246514001 |Units (attribute)|
-//        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
-//        starterData.concept(loincUnitsType)
-//                .fullyQualifiedName("Units (attribute)", TinkarTerm.PREFERRED)
-//                .synonym("Units of Measure", TinkarTerm.PREFERRED)
-//                .definition("Provides expected UCUM (Unified Code for Units of Measure) units of measure for  values of an observation", TinkarTerm.PREFERRED)
-//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincUnitsType.asUuidArray()[0].toString())
-//                .statedDefinition(List.of(phenomenonConcept))
-//                .statedNavigation(List.of(loincUnitsType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
-//                .build();
+        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
 
-        EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", UuidUtil.fromSNOMED("246514001"));
+        EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", new UUIDUtility().createUUID("LIDR Reference Ranges"));
         starterData.concept(referenceRanges)
                 .fullyQualifiedName("Reference Ranges", TinkarTerm.PREFERRED)
                 .synonym("Range of Values", TinkarTerm.PREFERRED)
@@ -808,7 +759,7 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(referenceRanges),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", UuidUtil.fromSNOMED("246514001"));
+        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", new UUIDUtility().createUUID("Detection Limit"));
         starterData.concept(detectionLimit)
                 .fullyQualifiedName("Detection Limit", TinkarTerm.PREFERRED)
                 .synonym("Limit of Detection (LOD)", TinkarTerm.PREFERRED)
@@ -822,8 +773,8 @@ public class SnomedLoincLidrStarterData {
                 .meaning( fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
                 .purpose(fullyQualifiedNameToConceptMap.get("Quantitative Data Result"))
                 .fieldDefinition(
-                        TinkarTerm.MEANING,//loincUnitsType,  This was causing a problem
-                        TinkarTerm.PURPOSE,//loincUnitsType,
+                        loincUnitsType,
+                        loincUnitsType,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         referenceRanges,
@@ -839,7 +790,7 @@ public class SnomedLoincLidrStarterData {
         lidrPhenomenonConcepts.addAll(List.of(loincComponent,loincProperty,loincTimeAspect,
                 loincDirectSite, loincScaleType, methodType));
 
-        starterData.concept(phenomenonConcept)
+        starterData.concept(TinkarTerm.PHENOMENON)
                 .statedNavigation(lidrPhenomenonConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
