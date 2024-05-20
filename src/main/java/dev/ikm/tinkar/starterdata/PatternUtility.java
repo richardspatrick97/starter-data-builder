@@ -4,11 +4,12 @@ import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 import org.eclipse.collections.api.list.ImmutableList;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class PatternUtility {
 
-    private static final Logger LOG = Logger.getLogger(PatternUtility.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(PatternUtility.class.getSimpleName());
 
     private final UUIDUtility uuidUtility;
 

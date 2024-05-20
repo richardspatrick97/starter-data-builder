@@ -13,6 +13,7 @@ module tinkar.sandbox {
     requires org.eclipse.collections.api;
     requires java.logging;
     requires com.fasterxml.jackson.databind;
+    requires org.slf4j;
 
     opens dev.ikm.tinkar.starterdata;
     opens dev.ikm.tinkar.sandbox;

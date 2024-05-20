@@ -18,12 +18,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.stream.Collectors;
 
 public class TinkarMigration {
 
-    private final Logger LOG = Logger.getLogger(TinkarMigration.class.getSimpleName());
+    private final Logger LOG = LoggerFactory.getLogger(TinkarMigration.class.getSimpleName());
 
     private final File sourceDatastore = new File("/Users/asills/Solor/solor-ids-256.sa");
     private final File targetDatastore = new File("/Users/asills/Solor/starter-data");
