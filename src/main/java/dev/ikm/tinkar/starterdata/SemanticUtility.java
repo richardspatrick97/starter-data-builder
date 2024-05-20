@@ -23,11 +23,12 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class SemanticUtility {
 
-    private static final Logger LOG = Logger.getLogger(SemanticUtility.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(SemanticUtility.class.getSimpleName());
 
     private final UUIDUtility uuidUtility;
 

@@ -16,11 +16,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StarterData {
 
-    private static final Logger LOG = Logger.getLogger(StarterData.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(StarterData.class.getSimpleName());
 
     private final File datastore;
     private Entity<? extends EntityVersion> authoringSTAMP;

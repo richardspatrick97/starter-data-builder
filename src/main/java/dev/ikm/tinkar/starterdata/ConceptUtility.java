@@ -5,11 +5,12 @@ import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.util.UUID;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class ConceptUtility {
 
-    private static final Logger LOG = Logger.getLogger(ConceptUtility.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(ConceptUtility.class.getSimpleName());
 
     private final UUIDUtility uuidUtility;
 

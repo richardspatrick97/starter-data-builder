@@ -10,11 +10,12 @@ import dev.ikm.tinkar.terms.TinkarTerm;
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SnomedLoincStarterData {
 
-    private static final Logger LOG = Logger.getLogger(SnomedLoincStarterData.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(SnomedLoincStarterData.class.getSimpleName());
 
     private static File exportDataStore;
     private static File exportFile;

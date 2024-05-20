@@ -20,12 +20,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class TinkarStarterData {
 
-    private static final Logger LOG = Logger.getLogger(TinkarStarterData.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(TinkarStarterData.class.getSimpleName());
 
     private static File exportDataStore;
     private static File importDataStore;
@@ -3282,7 +3283,7 @@ public class TinkarStarterData {
             LoadEntitiesFromProtobufFile loadEntitiesFromProtobufFile = new LoadEntitiesFromProtobufFile(exportFile);
             loadEntitiesFromProtobufFile.call();
         }catch (Exception e){
-            LOG.severe(e.getMessage());
+            LOG.error(e.getMessage());
             e.printStackTrace();
         }
 

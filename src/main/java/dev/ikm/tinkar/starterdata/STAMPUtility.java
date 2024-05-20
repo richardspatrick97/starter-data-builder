@@ -4,11 +4,12 @@ import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 
 import java.util.UUID;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class STAMPUtility {
 
-    private static final Logger LOG = Logger.getLogger(STAMPUtility.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(STAMPUtility.class.getSimpleName());
 
     private final UUIDUtility uuidUtility;
 
