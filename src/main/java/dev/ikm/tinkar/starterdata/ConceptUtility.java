@@ -21,16 +21,23 @@ class ConceptUtility {
     protected Entity<? extends EntityVersion> createConcept(EntityProxy.Concept concept,
                                                             Entity<? extends EntityVersion> stampEntity){
         UUID uuid = concept.asUuidArray()[0];
-        if (concept.equals(TinkarTerm.HEALTH_CONCEPT)) {
-            uuid = concept.asUuidArray()[1];
+
+        long[] additionalUuidLongsArr = null;
+        if (concept.asUuidArray().length > 1) {
+            additionalUuidLongsArr = new long[(concept.asUuidArray().length-1)*2];
+            for (int i=1; i < concept.asUuidArray().length; i++) {
+                additionalUuidLongsArr[(i*2)-2] = concept.asUuidArray()[i].getMostSignificantBits();
+                additionalUuidLongsArr[(i*2)-1] = concept.asUuidArray()[i].getLeastSignificantBits();
+            }
         }
+
         LOG.info("Building Concept");
         RecordListBuilder<ConceptVersionRecord> versions = RecordListBuilder.make();
         ConceptRecord conceptRecord = ConceptRecordBuilder.builder()
                 .nid(concept.nid())
-                .leastSignificantBits(uuid.getLeastSignificantBits())
                 .mostSignificantBits(uuid.getMostSignificantBits())
-                .additionalUuidLongs(null)
+                .leastSignificantBits(uuid.getLeastSignificantBits())
+                .additionalUuidLongs(additionalUuidLongsArr)
                 .versions(versions.toImmutable())
                 .build();
 
