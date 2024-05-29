@@ -26,8 +26,8 @@ public class TinkarMigration {
 
     private final Logger LOG = LoggerFactory.getLogger(TinkarMigration.class.getSimpleName());
 
-    private final File sourceDatastore = new File("/Users/asills/Solor/solor-ids-256.sa");
-    private final File targetDatastore = new File("/Users/asills/Solor/starter-data");
+    private final File sourceDatastore = new File(System.getProperty("user.home") + "/Solor/solor-ids-256.sa");
+    private final File targetDatastore = new File(System.getProperty("user.home") + "/Solor/starter-data");
     private final List<Integer> stampNids = new ArrayList<>();
     private final List<Entity<? extends EntityVersion>> entitiesToMigrate = new ArrayList<>();
     private CompletableFuture<List<Entity<? extends EntityVersion>>> extractConceptsFuture;
