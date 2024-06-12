@@ -15,13 +15,13 @@ import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.TinkarTerm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 public class TinkarStarterData {
@@ -47,7 +47,7 @@ public class TinkarStarterData {
                 .init()
                 .authoringSTAMP(
                         TinkarTerm.ACTIVE_STATE,
-                        System.currentTimeMillis(),
+                        PrimitiveData.PREMUNDANE_TIME,
                         TinkarTerm.USER,
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
