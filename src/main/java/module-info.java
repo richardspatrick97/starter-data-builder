@@ -1,4 +1,4 @@
-module tinkar.sandbox {
+open module tinkar.sandbox {
     requires dev.ikm.tinkar.terms;
     requires dev.ikm.tinkar.schema;
     requires dev.ikm.tinkar.provider.ephemeral;
@@ -16,6 +16,7 @@ module tinkar.sandbox {
     requires org.slf4j;
     requires org.eclipse.collections;
 
-    opens dev.ikm.tinkar.starterdata;
-    opens dev.ikm.tinkar.sandbox;
+
+    exports dev.ikm.tinkar.starterdata;
+
 }
