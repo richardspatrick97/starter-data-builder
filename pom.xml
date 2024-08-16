@@ -69,11 +69,11 @@
             <version>${tinkar-schema.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>dev.ikm.tinkar</groupId>
             <artifactId>tinkar-transformer-api</artifactId>
             <version>${tinkar-transformer-api.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
         <dependency>
@@ -88,6 +88,18 @@
             <version>${jackson-databind.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>dev.ikm.jpms</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.22.0-r5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.jpms</groupId>
+            <artifactId>activej-common</artifactId>
+            <version>4.3-r5</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -100,7 +112,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
     </dependencies>
 </project>
