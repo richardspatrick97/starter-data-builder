@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
+import static dev.ikm.tinkar.terms.TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC;
+
 
 public class TinkarStarterData {
 
@@ -65,21 +68,21 @@ public class TinkarStarterData {
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-        starterData.concept(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE)
+        starterData.concept(ENGLISH_DIALECT_ASSEMBLAGE)
                 .fullyQualifiedName("English Dialect", TinkarTerm.PREFERRED)
                 .synonym("English dialect", TinkarTerm.PREFERRED)
                 .definition("Specifies the dialect of the English language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, ENGLISH_DIALECT_ASSEMBLAGE.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT), List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
                 .statedDefinition(List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC)
+        starterData.concept(TEXT_COMPARISON_MEASURE_SEMANTIC)
                 .fullyQualifiedName("Text comparison measure semantic (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Text comparison", TinkarTerm.PREFERRED)
                 .definition("Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TEXT_COMPARISON_MEASURE_SEMANTIC.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION), List.of(TinkarTerm.MEANING))
                 .statedDefinition(List.of(TinkarTerm.MEANING))
                 .tinkarBaseModelMembership()
@@ -320,8 +323,8 @@ public class TinkarStarterData {
                 .synonym("Ignore case", TinkarTerm.PREFERRED)
                 .definition("Evaluates values regardless of the case", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CASE_INSENSITIVE_EVALUATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
-                .statedDefinition(List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedNavigation(null, List.of(TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedDefinition(List.of(TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -330,8 +333,8 @@ public class TinkarStarterData {
                 .synonym("Compare case", TinkarTerm.PREFERRED)
                 .definition("Evaluated based on the case", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CASE_SENSITIVE_EVALUATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
-                .statedDefinition(List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedNavigation(null, List.of(TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedDefinition(List.of(TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -967,6 +970,16 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
+        starterData.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)
+                .fullyQualifiedName("EL++ terminological axioms", TinkarTerm.PREFERRED)
+                .synonym("EL++ terminological axioms", TinkarTerm.PREFERRED)
+                .definition("The set of relationships or axioms has defined by the EL++ Logic", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .tinkarBaseModelMembership()
+                .build();
+
         starterData.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION)
                 .fullyQualifiedName("El++ Inferred Concept Definition (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("EL++ Inferred Concept Definition", TinkarTerm.PREFERRED)
@@ -977,13 +990,13 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)
-                .fullyQualifiedName("EL++ terminological axioms", TinkarTerm.PREFERRED)
-                .synonym("EL++ terminological axioms", TinkarTerm.PREFERRED)
-                .definition("The set of relationships or axioms has defined by the EL++ Logic", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+        starterData.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS)
+                .fullyQualifiedName("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
+                .synonym("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
+                .definition("Null", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -994,6 +1007,16 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.LOGICAL_DEFINITION))
                 .statedDefinition(List.of(TinkarTerm.LOGICAL_DEFINITION))
+                .tinkarBaseModelMembership()
+                .build();
+
+        starterData.concept(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)
+                .fullyQualifiedName("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
+                .synonym("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
+                .definition("Null", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1132,8 +1155,8 @@ public class TinkarStarterData {
                 .synonym("GB English dialect / GB English", TinkarTerm.PREFERRED)
                 .definition("Great Britain: English Language reference set", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GB_ENGLISH_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE))
+                .statedNavigation(null, List.of(ENGLISH_DIALECT_ASSEMBLAGE))
+                .statedDefinition(List.of(ENGLISH_DIALECT_ASSEMBLAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2427,8 +2450,8 @@ public class TinkarStarterData {
                 .synonym("US English dialect", TinkarTerm.PREFERRED)
                 .definition("USA -english dialect", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.US_ENGLISH_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.US_NURSING_DIALECT), List.of(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE))
+                .statedNavigation(List.of(TinkarTerm.US_NURSING_DIALECT), List.of(ENGLISH_DIALECT_ASSEMBLAGE))
+                .statedDefinition(List.of(ENGLISH_DIALECT_ASSEMBLAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2778,7 +2801,7 @@ public class TinkarStarterData {
                 .synonym("Dialect", TinkarTerm.PREFERRED)
                 .definition("Specifies the dialect of the language.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIALECT_ASSEMBLAGE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CZECH_DIALECT, TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE, TinkarTerm.FRENCH_DIALECT, TinkarTerm.IRISH_DIALECT, TinkarTerm.KOREAN_DIALECT, TinkarTerm.POLISH_DIALECT, TinkarTerm.RUSSIAN_DIALECT), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.CZECH_DIALECT, ENGLISH_DIALECT_ASSEMBLAGE, TinkarTerm.FRENCH_DIALECT, TinkarTerm.IRISH_DIALECT, TinkarTerm.KOREAN_DIALECT, TinkarTerm.POLISH_DIALECT, TinkarTerm.RUSSIAN_DIALECT), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
