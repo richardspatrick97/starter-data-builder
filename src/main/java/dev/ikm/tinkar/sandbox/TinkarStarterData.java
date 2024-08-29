@@ -3386,6 +3386,39 @@ public class TinkarStarterData {
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .kometBaseModelMembership()
                 .build();
+
+        starterData.pattern(TinkarTerm.VALUE_CONSTRAINT_PATTERN)
+                .fullyQualifiedName("Value Constraint Pattern", TinkarTerm.PREFERRED)
+                .synonym("Value Constraint Pattern", TinkarTerm.PREFERRED)
+                .definition("A pattern specifying value constraint pattern", TinkarTerm.PREFERRED)
+                .meaning(TinkarTerm.VALUE_CONSTRAINT)
+                .purpose(TinkarTerm.VALUE_CONSTRAINT)
+                .fieldDefinition(
+                        TinkarTerm.VALUE_CONSTRAINT_SOURCE,
+                        TinkarTerm.VALUE_CONSTRAINT_SOURCE,
+                        TinkarTerm.CONCEPT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.MINIMUM_VALUE_OPERATOR,
+                        TinkarTerm.CONCRETE_DOMAIN_OPERATOR,
+                        TinkarTerm.CONCEPT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.REFERENCE_RANGE_MINIMUM,
+                        TinkarTerm.REFERENCE_RANGE,
+                        TinkarTerm.FLOAT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.MAXIMUM_VALUE_OPERATOR,
+                        TinkarTerm.CONCRETE_DOMAIN_OPERATOR,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.REFERENCE_RANGE_MAXIMUM,
+                        TinkarTerm.REFERENCE_RANGE,
+                        TinkarTerm.FLOAT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.EXAMPLE_UCUM_UNITS,
+                        TinkarTerm.EXAMPLE_UCUM_UNITS,
+                        TinkarTerm.STRING)
+                .tinkarBaseModelMembership()
+                .build();
     }
 
     private static void exportStarterData(){
