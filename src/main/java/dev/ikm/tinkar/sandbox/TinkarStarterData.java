@@ -970,6 +970,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
+
         starterData.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)
                 .fullyQualifiedName("EL++ terminological axioms", TinkarTerm.PREFERRED)
                 .synonym("EL++ terminological axioms", TinkarTerm.PREFERRED)
@@ -1225,8 +1226,8 @@ public class TinkarStarterData {
                 .synonym("Inclusion set", TinkarTerm.PREFERRED)
                 .definition("A set of relationships that indicate something is has an inclusion. Not necessarily or sufficient but inclusive.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INCLUSION_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1617,7 +1618,15 @@ public class TinkarStarterData {
                 .synonym("Tinkar Model concept", TinkarTerm.PREFERRED)
                 .definition("", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY, TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE, TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A, TinkarTerm.LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE, TinkarTerm.PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN, TinkarTerm.REFERENCE_RANGE, TinkarTerm.STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.VALUE_CONSTRAINT, TinkarTerm.VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX), List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.AXIOM_ORIGIN, TinkarTerm.CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY,
+                        TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE,
+                        TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
+                        TinkarTerm.LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
+                        TinkarTerm.PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
+                        TinkarTerm.REFERENCE_RANGE, TinkarTerm.STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.VALUE_CONSTRAINT,
+                        TinkarTerm.VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX),
+                        List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1757,8 +1766,8 @@ public class TinkarStarterData {
                 .synonym("Necessary set", TinkarTerm.PREFERRED)
                 .definition("A set of relationships that is always true of a concept.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NECESSARY_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2118,8 +2127,8 @@ public class TinkarStarterData {
                 .synonym("Role", TinkarTerm.PREFERRED)
                 .definition("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2128,8 +2137,9 @@ public class TinkarStarterData {
                 .synonym("Role group", TinkarTerm.PREFERRED)
                 .definition("An association between a set of attribute or axiom value pairs that causes them to be considered together within a concept definition or post coordinated expression.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_GROUP.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.ROLE), List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2390,8 +2400,8 @@ public class TinkarStarterData {
                 .synonym("Sufficient set", TinkarTerm.PREFERRED)
                 .definition("A set of relationships that differentiate a concept and its subtypes from all other concepts. A concept that contains at least one set of necessary and sufficient conditions is considered defined.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SUFFICIENT_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -3286,7 +3296,7 @@ public class TinkarStarterData {
                 .meaning(TinkarTerm.STATED_DEFINITION)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
                         TinkarTerm.LOGICAL_DEFINITION,
                         TinkarTerm.DITREE_FIELD)
                 .tinkarBaseModelMembership()
@@ -3299,7 +3309,7 @@ public class TinkarStarterData {
                 .meaning(TinkarTerm.INFERRED_DEFINITION)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                        TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
                         TinkarTerm.LOGICAL_DEFINITION,
                         TinkarTerm.DITREE_FIELD)
                 .tinkarBaseModelMembership()
