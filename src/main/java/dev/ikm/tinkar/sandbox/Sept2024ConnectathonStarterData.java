@@ -75,9 +75,79 @@ public class Sept2024ConnectathonStarterData {
 
     protected static void configureConnectathonPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
+        createPresenceOfCovidPattern(starterData, uuidUtility);
+
+        createAbsenceOfCovidPattern(starterData, uuidUtility);
+
+        createUndeterminedCovidTestResultPattern(starterData, uuidUtility);
+
+        createInvalidCovidTestResultPattern(starterData, uuidUtility);
+
+
+    }
+
+    private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
+        Concept invalid = Concept.make("Undetermined", UuidUtil.fromSNOMED("455371000124106"));
+        starterData.concept(invalid)
+                .build();
+
+        starterData.pattern( EntityProxy.Pattern.make("Invalid Covid Test Result Pattern", uuidUtility.createUUID("Invalid Covid Test Result Pattern")))
+                .meaning(invalid)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+    }
+
+    private static void createUndeterminedCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
+        Concept undetermined = Concept.make("Undetermined", UuidUtil.fromSNOMED("373068000"));
+        starterData.concept(undetermined)
+                .build();
+
+        starterData.pattern( EntityProxy.Pattern.make("Undetermined Covid Test Result Pattern", uuidUtility.createUUID("Undetermined Covid Test Result Pattern")))
+                .meaning(undetermined)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .build();
+    }
+
+    private static void createAbsenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
+        Concept absenceFindings = Concept.make("Abscence findings", UuidUtil.fromSNOMED("272519000"));
+        starterData.concept(absenceFindings)
+                .build();
+
+        Concept absent = Concept.make("Absent", UuidUtil.fromSNOMED("2667000"));
+        starterData.concept(absent)
+                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .build();
+
+        Concept negative = Concept.make("Negative", UuidUtil.fromSNOMED("260385009"));
+        starterData.concept(negative)
+                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .build();
+
+        Concept notDetected = Concept.make("Not Detected", UuidUtil.fromSNOMED("260415000"));
+        starterData.concept(notDetected)
+                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .build();
+
+        List<Concept> resultConcepts = Arrays.asList(absent, negative,  notDetected);
+
+        starterData.concept(absenceFindings)
+                .statedDefinition(List.of(absenceFindings))
+                .statedNavigation(resultConcepts, List.of(absenceFindings))
+                .build();
+
+        starterData.pattern( EntityProxy.Pattern.make("Absence Of Covid Pattern", uuidUtility.createUUID("Absence Of Covid Pattern")))
+                .meaning(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(TinkarTerm.MEANING)
+                .fieldDefinition(
+                        absenceFindings,
+                        absenceFindings,
+                        TinkarTerm.CONCEPT_TYPE)
+                .build();
+    }
+
+    private static void createPresenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept presenceFindings = Concept.make("Presence findings", UuidUtil.fromSNOMED("260411009"));
         starterData.concept(presenceFindings)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
                 .build();
 
         Concept present = Concept.make("Present", UuidUtil.fromSNOMED("52101004"));
@@ -100,9 +170,10 @@ public class Sept2024ConnectathonStarterData {
                 .statedDefinition(List.of(presenceFindings))
                 .build();
 
-        List<EntityProxy.Concept> resultConcepts = Arrays.asList(present, detected,  positive, presumptivePositive);
+        List<Concept> resultConcepts = Arrays.asList(present, detected,  positive, presumptivePositive);
 
         starterData.concept(presenceFindings)
+                .statedDefinition(List.of(presenceFindings))
                 .statedNavigation(resultConcepts, List.of(presenceFindings))
                 .build();
 
@@ -114,8 +185,6 @@ public class Sept2024ConnectathonStarterData {
                         presenceFindings,
                         TinkarTerm.CONCEPT_TYPE)
                 .build();
-
-
     }
 
     private static void exportStarterData(){
