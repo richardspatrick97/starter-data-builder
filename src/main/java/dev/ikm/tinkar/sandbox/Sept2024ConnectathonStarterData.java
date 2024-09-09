@@ -17,6 +17,8 @@ public class Sept2024ConnectathonStarterData {
     private static File exportFile;
 
     public static void main(String[] args){
+
+        TinkarStarterData.main(args);
         File exportDataStore = new File(args[0]);
         exportFile = new File(args[1]);
         UUIDUtility uuidUtility = new UUIDUtility();
@@ -111,37 +113,34 @@ public class Sept2024ConnectathonStarterData {
     private static void createAbsenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept absenceFindings = Concept.make("Abscence findings", UuidUtil.fromSNOMED("272519000"));
         starterData.concept(absenceFindings)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, absenceFindings.asUuidArray()[0].toString())
                 .build();
 
         Concept absent = Concept.make("Absent", UuidUtil.fromSNOMED("2667000"));
         starterData.concept(absent)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, absent.asUuidArray()[0].toString())
                 .build();
 
         Concept negative = Concept.make("Negative", UuidUtil.fromSNOMED("260385009"));
         starterData.concept(negative)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, negative.asUuidArray()[0].toString())
                 .build();
 
         Concept notDetected = Concept.make("Not Detected", UuidUtil.fromSNOMED("260415000"));
         starterData.concept(notDetected)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, notDetected.asUuidArray()[0].toString())
                 .build();
 
-        List<Concept> resultConcepts = Arrays.asList(absent, negative,  notDetected);
-
-        starterData.concept(absenceFindings)
-                .statedDefinition(List.of(absenceFindings))
-                .statedNavigation(resultConcepts, List.of(absenceFindings))
-                .build();
+//        List<Concept> resultConcepts = Arrays.asList(absent, negative,  notDetected);
+//
+//        starterData.concept(absenceFindings)
+//                .statedDefinition(List.of(absenceFindings))
+//                .statedNavigation(resultConcepts, List.of(absenceFindings))
+//                .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Absence Of Covid Pattern", uuidUtility.createUUID("Absence Of Covid Pattern")))
-                .meaning(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .meaning(absenceFindings)
                 .purpose(TinkarTerm.MEANING)
-                .fieldDefinition(
-                        absenceFindings,
-                        absenceFindings,
-                        TinkarTerm.CONCEPT_TYPE)
                 .build();
     }
 
