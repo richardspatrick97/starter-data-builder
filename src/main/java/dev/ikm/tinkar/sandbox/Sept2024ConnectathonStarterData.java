@@ -91,6 +91,7 @@ public class Sept2024ConnectathonStarterData {
     private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept invalid = Concept.make("Undetermined", UuidUtil.fromSNOMED("455371000124106"));
         starterData.concept(invalid)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, invalid.asUuidArray()[0].toString())
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Invalid Covid Test Result Pattern", uuidUtility.createUUID("Invalid Covid Test Result Pattern")))
@@ -102,6 +103,7 @@ public class Sept2024ConnectathonStarterData {
     private static void createUndeterminedCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept undetermined = Concept.make("Undetermined", UuidUtil.fromSNOMED("373068000"));
         starterData.concept(undetermined)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, undetermined.asUuidArray()[0].toString())
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Undetermined Covid Test Result Pattern", uuidUtility.createUUID("Undetermined Covid Test Result Pattern")))
@@ -151,22 +153,22 @@ public class Sept2024ConnectathonStarterData {
 
         Concept present = Concept.make("Present", UuidUtil.fromSNOMED("52101004"));
         starterData.concept(present)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, present.asUuidArray()[0].toString())
                 .build();
 
         Concept detected = Concept.make("Detected", UuidUtil.fromSNOMED("260373001"));
         starterData.concept(detected)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, detected.asUuidArray()[0].toString())
                 .build();
 
         Concept positive = Concept.make("Positive", UuidUtil.fromSNOMED("10828004"));
         starterData.concept(positive)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, positive.asUuidArray()[0].toString())
                 .build();
 
         Concept presumptivePositive = Concept.make("Presumptive Positive", UuidUtil.fromSNOMED("720735008"));
         starterData.concept(presumptivePositive)
-                .statedDefinition(List.of(presenceFindings))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, presumptivePositive.asUuidArray()[0].toString())
                 .build();
 
         List<Concept> resultConcepts = Arrays.asList(present, detected,  positive, presumptivePositive);
