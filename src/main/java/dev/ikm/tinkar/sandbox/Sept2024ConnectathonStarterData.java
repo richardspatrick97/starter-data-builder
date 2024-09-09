@@ -107,8 +107,12 @@ public class Sept2024ConnectathonStarterData {
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Presence of Covid Pattern", uuidUtility.createUUID("Presence of Covid Pattern")))
-                .meaning(presenceFindings)
-                .purpose(presenceFindings)
+                .meaning(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(TinkarTerm.MEANING)
+                .fieldDefinition(
+                        presenceFindings,
+                        presenceFindings,
+                        TinkarTerm.CONCEPT_TYPE)
                 .build();
 
 
