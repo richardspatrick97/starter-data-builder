@@ -95,8 +95,9 @@ public class Sept2024ConnectathonStarterData {
     }
 
     private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
-        Concept invalid = Concept.make("Undetermined", UuidUtil.fromSNOMED("455371000124106"));
+        Concept invalid = Concept.make("Invalid", UuidUtil.fromSNOMED("455371000124106"));
         starterData.concept(invalid)
+                .synonym("Invalid",TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, invalid.asUuidArray()[0].toString())
                 .build();
 
@@ -109,6 +110,7 @@ public class Sept2024ConnectathonStarterData {
     private static void createUndeterminedCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept undetermined = Concept.make("Undetermined", UuidUtil.fromSNOMED("373068000"));
         starterData.concept(undetermined)
+                .synonym("Undetermined",TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, undetermined.asUuidArray()[0].toString())
                 .build();
 
