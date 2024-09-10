@@ -1,22 +1,30 @@
 package dev.ikm.tinkar.sandbox;
 
+import dev.ikm.tinkar.common.id.PublicId;
+import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.common.util.uuid.UuidUtil;
+import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
 import dev.ikm.tinkar.terms.TinkarTerm;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class Sept2024ConnectathonStarterData {
     private static File exportFile;
 
     public static void main(String[] args){
+
+        TinkarStarterData.main(args);
         File exportDataStore = new File(args[0]);
         exportFile = new File(args[1]);
         UUIDUtility uuidUtility = new UUIDUtility();
@@ -87,8 +95,10 @@ public class Sept2024ConnectathonStarterData {
     }
 
     private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
-        Concept invalid = Concept.make("Undetermined", UuidUtil.fromSNOMED("455371000124106"));
+        Concept invalid = Concept.make("Invalid", UuidUtil.fromSNOMED("455371000124106"));
         starterData.concept(invalid)
+                .synonym("Invalid",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, invalid.asUuidArray()[0].toString())
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Invalid Covid Test Result Pattern", uuidUtility.createUUID("Invalid Covid Test Result Pattern")))
@@ -100,6 +110,8 @@ public class Sept2024ConnectathonStarterData {
     private static void createUndeterminedCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept undetermined = Concept.make("Undetermined", UuidUtil.fromSNOMED("373068000"));
         starterData.concept(undetermined)
+                .synonym("Undetermined",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, undetermined.asUuidArray()[0].toString())
                 .build();
 
         starterData.pattern( EntityProxy.Pattern.make("Undetermined Covid Test Result Pattern", uuidUtility.createUUID("Undetermined Covid Test Result Pattern")))
@@ -109,82 +121,86 @@ public class Sept2024ConnectathonStarterData {
     }
 
     private static void createAbsenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
-        Concept absenceFindings = Concept.make("Abscence findings", UuidUtil.fromSNOMED("272519000"));
+        Concept absenceFindings = Concept.make("Absence findings", UuidUtil.fromSNOMED("272519000"));
         starterData.concept(absenceFindings)
+                .synonym("Absence findings",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, absenceFindings.asUuidArray()[0].toString())
                 .build();
 
         Concept absent = Concept.make("Absent", UuidUtil.fromSNOMED("2667000"));
         starterData.concept(absent)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Absent",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, absent.asUuidArray()[0].toString())
                 .build();
 
         Concept negative = Concept.make("Negative", UuidUtil.fromSNOMED("260385009"));
         starterData.concept(negative)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Negative",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, negative.asUuidArray()[0].toString())
                 .build();
 
         Concept notDetected = Concept.make("Not Detected", UuidUtil.fromSNOMED("260415000"));
         starterData.concept(notDetected)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Not Detected", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, notDetected.asUuidArray()[0].toString())
                 .build();
 
-        List<Concept> resultConcepts = Arrays.asList(absent, negative,  notDetected);
 
-        starterData.concept(absenceFindings)
-                .statedDefinition(List.of(absenceFindings))
-                .statedNavigation(resultConcepts, List.of(absenceFindings))
+
+        String pattern = "Absence Of Covid Pattern";
+        starterData.pattern( EntityProxy.Pattern.make(pattern , uuidUtility.createUUID(pattern)))
+                .meaning(absenceFindings)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
-        starterData.pattern( EntityProxy.Pattern.make("Absence Of Covid Pattern", uuidUtility.createUUID("Absence Of Covid Pattern")))
-                .meaning(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .purpose(TinkarTerm.MEANING)
-                .fieldDefinition(
-                        absenceFindings,
-                        absenceFindings,
-                        TinkarTerm.CONCEPT_TYPE)
-                .build();
+        addConceptToSemanticPatterns(absent,pattern,starterData);
+        addConceptToSemanticPatterns(negative,pattern,starterData);
+        addConceptToSemanticPatterns(notDetected,pattern,starterData);
     }
 
     private static void createPresenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
         Concept presenceFindings = Concept.make("Presence findings", UuidUtil.fromSNOMED("260411009"));
         starterData.concept(presenceFindings)
+                .synonym("Presence Findings", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, presenceFindings.asUuidArray()[0].toString())
                 .build();
 
         Concept present = Concept.make("Present", UuidUtil.fromSNOMED("52101004"));
         starterData.concept(present)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Present",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, present.asUuidArray()[0].toString())
                 .build();
 
         Concept detected = Concept.make("Detected", UuidUtil.fromSNOMED("260373001"));
         starterData.concept(detected)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Detected", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, detected.asUuidArray()[0].toString())
                 .build();
 
         Concept positive = Concept.make("Positive", UuidUtil.fromSNOMED("10828004"));
         starterData.concept(positive)
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .synonym("Positive",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, positive.asUuidArray()[0].toString())
                 .build();
 
         Concept presumptivePositive = Concept.make("Presumptive Positive", UuidUtil.fromSNOMED("720735008"));
         starterData.concept(presumptivePositive)
-                .statedDefinition(List.of(presenceFindings))
+                .synonym("Presumptive Positive",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, presumptivePositive.asUuidArray()[0].toString())
                 .build();
 
-        List<Concept> resultConcepts = Arrays.asList(present, detected,  positive, presumptivePositive);
 
-        starterData.concept(presenceFindings)
-                .statedDefinition(List.of(presenceFindings))
-                .statedNavigation(resultConcepts, List.of(presenceFindings))
+        String pattern = "Presence of Covid Pattern";
+
+        starterData.pattern( EntityProxy.Pattern.make(pattern, uuidUtility.createUUID(pattern)))
+                .meaning(presenceFindings)
+                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
-        starterData.pattern( EntityProxy.Pattern.make("Presence of Covid Pattern", uuidUtility.createUUID("Presence of Covid Pattern")))
-                .meaning(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .purpose(TinkarTerm.MEANING)
-                .fieldDefinition(
-                        presenceFindings,
-                        presenceFindings,
-                        TinkarTerm.CONCEPT_TYPE)
-                .build();
+        addConceptToSemanticPatterns(positive,pattern,starterData);
+        addConceptToSemanticPatterns(present,pattern,starterData);
+        addConceptToSemanticPatterns(detected,pattern,starterData);
+        addConceptToSemanticPatterns(presumptivePositive,pattern,starterData);
     }
 
     private static void exportStarterData(){
@@ -194,5 +210,56 @@ public class Sept2024ConnectathonStarterData {
         } catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
+    }
+    private static void addConceptToSemanticPatterns(EntityProxy.Concept concept, String semanticPattern, StarterData starterData) {
+
+        MutableList<Object> classPatternFields = Lists.mutable.empty();
+
+        UUIDUtility uuidUtility = new UUIDUtility();
+        PublicId patternPublicId = PublicIds.of(uuidUtility.createUUID(semanticPattern));
+        int patternNid = EntityService.get().nidForPublicId(patternPublicId);
+        PublicId referencedComponentPublicID = concept.publicId();
+        int referencedComponentNid = EntityService.get().nidForPublicId(referencedComponentPublicID);
+        PublicId semantic = PublicIds.singleSemanticId(patternPublicId, referencedComponentPublicID);
+        int semanticNid = EntityService.get().nidForPublicId(semantic);
+        UUID primordialUUID = semantic.asUuidArray()[0];
+        int stampNid = EntityService.get().nidForPublicId(starterData.getAuthoringSTAMP());
+
+        writeSemantic(semanticNid, primordialUUID, patternNid, referencedComponentNid, stampNid, classPatternFields);
+
+    }
+    private static void writeSemantic(int semanticNid, UUID primordialUUID, int patternNid, int referencedComponentNid, int stampNid, MutableList<Object> lidrRecordFields) {
+        /************
+         * Below: Creates the semantic with one version and write it to the database
+         */
+        //Create empty version list
+        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
+
+        //Create Semantic Chronology
+        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
+                .nid(semanticNid)
+                .leastSignificantBits(primordialUUID.getLeastSignificantBits())
+                .mostSignificantBits(primordialUUID.getMostSignificantBits())
+                .additionalUuidLongs(null)
+                .patternNid(patternNid)
+                .referencedComponentNid(referencedComponentNid)
+                .versions(versions.toImmutable())
+                .build();
+
+        //Create Semantic Version
+        SemanticVersionRecord semanticVersionRecord = SemanticVersionRecordBuilder.builder()
+                .chronology(semanticRecord)
+                .stampNid(stampNid)
+                .fieldValues(lidrRecordFields.toImmutable())
+                .build();
+
+        versions.add(semanticVersionRecord);
+
+        //Rebuild the Semantic with the now populated version data
+        SemanticEntity<? extends SemanticEntityVersion> semanticEntity = SemanticRecordBuilder
+                .builder(semanticRecord)
+                .versions(versions.toImmutable()).build();
+        EntityService.get().putEntity(semanticEntity);
+
     }
 }
