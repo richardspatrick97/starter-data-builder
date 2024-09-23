@@ -1,10 +1,19 @@
 package dev.ikm.tinkar.sandbox;
 
+import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
 import dev.ikm.tinkar.common.util.io.FileUtil;
+import dev.ikm.tinkar.composer.Composer;
+import dev.ikm.tinkar.composer.Session;
+import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
+import dev.ikm.tinkar.composer.template.Definition;
+import dev.ikm.tinkar.composer.template.FullyQualifiedName;
+import dev.ikm.tinkar.composer.template.Identifier;
+import dev.ikm.tinkar.composer.template.Synonym;
+import dev.ikm.tinkar.composer.template.USDialect;
 import dev.ikm.tinkar.entity.Entity;
 import dev.ikm.tinkar.entity.EntityVersion;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
@@ -14,6 +23,8 @@ import dev.ikm.tinkar.entity.transform.TinkarSchemaToEntityTransformer;
 import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
+import dev.ikm.tinkar.terms.EntityProxy;
+import dev.ikm.tinkar.terms.State;
 import dev.ikm.tinkar.terms.TinkarTerm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +45,14 @@ public class TinkarStarterData {
     private static File exportDataStore;
     private static File importDataStore;
     private static File exportFile;
-
     private static Entity<? extends EntityVersion> authoringSTAMP;
+    private static  final Composer composer = new Composer("ConceptComposer");
+    private static final Session session = composer.open(State.ACTIVE,
+            PrimitiveData.PREMUNDANE_TIME,
+            TinkarTerm.USER,
+            TinkarTerm.PRIMORDIAL_MODULE,
+            TinkarTerm.PRIMORDIAL_PATH);
+    private static final EntityProxy.Concept myConcept = EntityProxy.Concept.make(PublicIds.newRandom());
 
     public static void main(String[] args){
         exportDataStore = new File(args[0]);
@@ -57,7 +74,7 @@ public class TinkarStarterData {
 
         authoringSTAMP = starterData.getAuthoringSTAMP();
 
-        configureConceptsAndPatterns(starterData, uuidUtility);
+        configureConceptsAndPatterns(starterData);
         starterData.build(); //Natively writing data to spined array
         transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
         exportStarterData();  //exports starter data to pb.zip
@@ -67,7 +84,7 @@ public class TinkarStarterData {
         importStarterData(); //load pb.zip into database
     }
 
-    private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
+    private static void configureConceptsAndPatterns(StarterData starterData){
         starterData.concept(ENGLISH_DIALECT_ASSEMBLAGE)
                 .fullyQualifiedName("English Dialect", TinkarTerm.PREFERRED)
                 .synonym("English dialect", TinkarTerm.PREFERRED)
@@ -2734,6 +2751,15 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
+
+        //converting above concept to composer api format.
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(EntityProxy.Concept.make("Concept", myConcept))
+                        .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)"))
+                        .attach(new USDialect().acceptability(TinkarTerm.PREFERRED)))
+                .attach((new Synonym().text("Tinkar root concept"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
+                .attach((new Definition().text("Terminologies that are represented in a harmonized manner"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
+                .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()));
+        composer.commitSession(session);
 
         //Necessary Terms Filtered out in generation routine - START
         starterData.concept(TinkarTerm.QUERY_CLAUSES)

@@ -12,12 +12,13 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tinkar-core.version>1.67.0</tinkar-core.version>
+        <tinkar-core.version>1.70.0</tinkar-core.version>
         <tinkar-schema.version>1.27.0</tinkar-schema.version>
         <tinkar-transformer-api.version>1.7.0</tinkar-transformer-api.version>
         <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <slf4j.version>2.0.13</slf4j.version>
+        <tinkar-composer.version>1.0.0</tinkar-composer.version>
     </properties>
 
     <dependencies>
@@ -113,6 +114,12 @@
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
 <!--            <scope>test</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>composer</artifactId>
+            <version>${tinkar-composer.version}</version>
         </dependency>
     </dependencies>
 </project>
