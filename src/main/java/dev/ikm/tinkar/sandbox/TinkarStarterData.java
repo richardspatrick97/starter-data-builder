@@ -52,7 +52,6 @@ public class TinkarStarterData {
             TinkarTerm.USER,
             TinkarTerm.PRIMORDIAL_MODULE,
             TinkarTerm.PRIMORDIAL_PATH);
-    private static final EntityProxy.Concept myConcept = EntityProxy.Concept.make(PublicIds.newRandom());
 
     public static void main(String[] args){
         exportDataStore = new File(args[0]);
@@ -2753,9 +2752,9 @@ public class TinkarStarterData {
                 .build();
 
         //converting above concept to composer api format.
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(EntityProxy.Concept.make("Concept", myConcept))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
                         .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)"))
-                        .attach(new USDialect().acceptability(TinkarTerm.PREFERRED)))
+                        .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Synonym().text("Tinkar root concept"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Definition().text("Terminologies that are represented in a harmonized manner"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()));
