@@ -12,25 +12,27 @@ import dev.ikm.tinkar.terms.EntityProxy.Concept;
 import dev.ikm.tinkar.terms.TinkarTerm;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class Sept2024ConnectathonStarterData {
-    public static final String EXAMPLE_UUCM = "lb/in^2";
-    //public static final String EXAMPLE_UUCM = "kg/m^2";
-    private static File exportFile;
-    public static void main(String[] args){
 
-        File exportDataStore = new File(args[0]);
-        exportFile = new File(args[1]);
-        UUIDUtility uuidUtility = new UUIDUtility();
+    private static final Logger log = LoggerFactory.getLogger(Sept2024ConnectathonStarterData.class);
+    private static final String EXAMPLE_UUCM = "lb/in^2";
 
-        //Build, export, and shutdown database
-        StarterData starterData = new StarterData(exportDataStore, uuidUtility)
+    private final File exportFile;
+    private final StarterData starterData;
+    private final UUIDUtility uuidUtility = new UUIDUtility();
+
+    public Sept2024ConnectathonStarterData(File exportDataStore, File exportFile) {
+        this.exportFile = exportFile;
+
+        starterData = new StarterData(exportDataStore, uuidUtility)
                 .init()
                 .authoringSTAMP(
                         TinkarTerm.ACTIVE_STATE,
@@ -39,13 +41,13 @@ public class Sept2024ConnectathonStarterData {
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
-        configureConceptsAndPatterns(starterData, uuidUtility);
-        starterData.build(); //Natively writing data to spined array
-        exportStarterData();  //exports starter data to pb.zip
+        configureConceptsAndPatterns();
+        starterData.build();
+        exportStarterData();
         starterData.shutdown();
     }
 
-    protected static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
+    private void configureConceptsAndPatterns(){
 
         Concept performance = Concept.make("Performance", UUID.fromString("395cc864-7c51-4072-b3e7-f9195b40053a"));
         starterData.concept(performance)
@@ -55,13 +57,11 @@ public class Sept2024ConnectathonStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        configureConnectathonPatterns( starterData,  uuidUtility);
-
-        configureValueContraintSemantics(starterData,uuidUtility);
+        configureConnectathonPatterns();
+        configureValueContraintSemantics();
     }
 
-    protected static void configureValueContraintSemantics(StarterData starterData, UUIDUtility uuidUtility){
-
+    private void configureValueContraintSemantics(){
         Concept cdcField1 = Concept.make("CDC", UUID.nameUUIDFromBytes("LP207920-2".getBytes()));
         starterData.concept(cdcField1)
                 .synonym("CDC",TinkarTerm.PREFERRED)
@@ -69,65 +69,31 @@ public class Sept2024ConnectathonStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, cdcField1.asUuidArray()[0].toString())
                 .build();
 
-        BMIConcept concept = new BMIConcept("248342006", "Underweight (finding)");
-        Concept bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO,  0F, TinkarTerm.LESS_THAN, 18.5F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("43664005", "Normal weight (finding)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 18.5F, TinkarTerm.LESS_THAN_OR_EQUAL_TO, 24.99F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("414915002", "Obese (finding)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 30F, TinkarTerm.LESS_THAN, 500F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("162864005", "Body mass index 30+ - obesity (finding)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 30F, TinkarTerm.LESS_THAN, 500F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("443371000124107", "Obese class I (finding) (Body mass index 30.00 to 34.99)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 30F, TinkarTerm.LESS_THAN_OR_EQUAL_TO,  34.99F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("443381000124105", "Obese class II (finding) ( Body mass index 35.00 to 39.99)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 35F, TinkarTerm.LESS_THAN_OR_EQUAL_TO, 39.99F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("408512008", "Body mass index 40+ - severely obese (finding)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 40F, TinkarTerm.LESS_THAN, 500F, EXAMPLE_UUCM);
-
-        concept = new BMIConcept("819948005", "Obese class III (finding) (Body mass index equal to or greater than 40)");
-        bmiConcept = getBmiConcept(starterData, concept);
-        createBMISematic(starterData, bmiConcept, cdcField1, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, 40F, TinkarTerm.LESS_THAN, 500F, EXAMPLE_UUCM);
+        createBMISemantic("Underweight (finding)", "248342006", cdcField1, 0F, TinkarTerm.LESS_THAN, 18.5F);
+        createBMISemantic("Normal weight (finding)", "43664005", cdcField1, 18.5F, TinkarTerm.LESS_THAN_OR_EQUAL_TO, 24.99F);
+        createBMISemantic("Obese (finding)", "414915002", cdcField1, 30F, TinkarTerm.LESS_THAN, 500F);
+        createBMISemantic("Body mass index 30+ - obesity (finding)", "162864005", cdcField1, 30F, TinkarTerm.LESS_THAN, 500F);
+        createBMISemantic("Obese class I (finding) (Body mass index 30.00 to 34.99)", "443371000124107", cdcField1, 30F, TinkarTerm.LESS_THAN_OR_EQUAL_TO,  34.99F);
+        createBMISemantic("Obese class II (finding) ( Body mass index 35.00 to 39.99)","443381000124105" , cdcField1, 35F, TinkarTerm.LESS_THAN_OR_EQUAL_TO, 39.99F);
+        createBMISemantic("Body mass index 40+ - severely obese (finding)", "408512008", cdcField1, 40F, TinkarTerm.LESS_THAN, 500F);
+        createBMISemantic("Obese class III (finding) (Body mass index equal to or greater than 40)", "819948005", cdcField1, 40F, TinkarTerm.LESS_THAN, 500F);
     }
 
-    private static Concept getBmiConcept(StarterData starterData, BMIConcept concept) {
-        Concept bmiConcept = concept.makeConcept();
-        starterData.concept(bmiConcept)
-                .synonym(concept.getDecription(),TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, bmiConcept.asUuidArray()[0].toString())
-                .build();
-        return bmiConcept;
-    }
+    private void createBMISemantic(String description, String snomedctId, Concept cdcField1, float referenceRangeMinimum,
+                                   Concept maxRefRangeOperator, float referenceRangeMaximum) {
 
-    private static void createBMISematic(StarterData starterData,
-                                         Concept bmiConcept, Concept cdcField1,
-                                         Concept minRefRangeOperator, float referenceRangeMinimum,
-                                         Concept maxRefRangeOperator, float referenceRangeMaximum, String exampleUUCM) {
+        Concept concept = makeBmiConcept(description, snomedctId);
 
         MutableList<Object> classPatternFields = Lists.mutable.empty();
         classPatternFields.add(cdcField1);
-        classPatternFields.add(minRefRangeOperator);
+        classPatternFields.add(TinkarTerm.GREATER_THAN_OR_EQUAL_TO);
         classPatternFields.add(referenceRangeMinimum);
         classPatternFields.add(maxRefRangeOperator);
         classPatternFields.add(referenceRangeMaximum);
-        classPatternFields.add(exampleUUCM);
+        classPatternFields.add(EXAMPLE_UUCM);
 
-        //UUIDUtility uuidUtility = new UUIDUtility();
-        //PublicId patternPublicId = PublicIds.of(uuidUtility.createUUID("Value Constraint Pattern"));
         int patternNid = EntityService.get().nidForPublicId(TinkarTerm.VALUE_CONSTRAINT_PATTERN);
-        PublicId referencedComponentPublicID = bmiConcept.publicId();
+        PublicId referencedComponentPublicID = concept.publicId();
         int referencedComponentNid = EntityService.get().nidForPublicId(referencedComponentPublicID);
         PublicId semantic = PublicIds.singleSemanticId(TinkarTerm.VALUE_CONSTRAINT_PATTERN, referencedComponentPublicID);
         int semanticNid = EntityService.get().nidForPublicId(semantic);
@@ -137,18 +103,14 @@ public class Sept2024ConnectathonStarterData {
         writeSemantic(semanticNid, primordialUUID, patternNid, referencedComponentNid, stampNid, classPatternFields);
     }
 
-    protected static void configureConnectathonPatterns(StarterData starterData, UUIDUtility uuidUtility){
-
-        createPresenceOfCovidPattern(starterData, uuidUtility);
-
-        createAbsenceOfCovidPattern(starterData, uuidUtility);
-
-        createUndeterminedCovidTestResultPattern(starterData, uuidUtility);
-
-        createInvalidCovidTestResultPattern(starterData, uuidUtility);
+    private void configureConnectathonPatterns() {
+        createPresenceOfCovidPattern();
+        createAbsenceOfCovidPattern();
+        createUndeterminedCovidTestResultPattern();
+        createInvalidCovidTestResultPattern();
     }
 
-    private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
+    private void createInvalidCovidTestResultPattern() {
         Concept invalid = Concept.make("Invalid", UuidUtil.fromSNOMED("455371000124106"));
         starterData.concept(invalid)
                 .synonym("Invalid",TinkarTerm.PREFERRED)
@@ -161,7 +123,7 @@ public class Sept2024ConnectathonStarterData {
                 .build();
     }
 
-    private static void createUndeterminedCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
+    private void createUndeterminedCovidTestResultPattern() {
         Concept undetermined = Concept.make("Undetermined", UuidUtil.fromSNOMED("373068000"));
         starterData.concept(undetermined)
                 .synonym("Undetermined",TinkarTerm.PREFERRED)
@@ -174,7 +136,7 @@ public class Sept2024ConnectathonStarterData {
                 .build();
     }
 
-    private static void createAbsenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
+    private void createAbsenceOfCovidPattern() {
         Concept absenceFindings = Concept.make("Absence findings", UuidUtil.fromSNOMED("272519000"));
         starterData.concept(absenceFindings)
                 .synonym("Absence findings",TinkarTerm.PREFERRED)
@@ -205,12 +167,12 @@ public class Sept2024ConnectathonStarterData {
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
-        addConceptToSemanticPatterns(absent,pattern,starterData);
-        addConceptToSemanticPatterns(negative,pattern,starterData);
-        addConceptToSemanticPatterns(notDetected,pattern,starterData);
+        addConceptToSemanticPatterns(absent, pattern);
+        addConceptToSemanticPatterns(negative, pattern);
+        addConceptToSemanticPatterns(notDetected, pattern);
     }
 
-    private static void createPresenceOfCovidPattern(StarterData starterData, UUIDUtility uuidUtility) {
+    private void createPresenceOfCovidPattern() {
         Concept presenceFindings = Concept.make("Presence findings", UuidUtil.fromSNOMED("260411009"));
         starterData.concept(presenceFindings)
                 .synonym("Presence Findings", TinkarTerm.PREFERRED)
@@ -249,22 +211,13 @@ public class Sept2024ConnectathonStarterData {
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
-        addConceptToSemanticPatterns(positive,pattern,starterData);
-        addConceptToSemanticPatterns(present,pattern,starterData);
-        addConceptToSemanticPatterns(detected,pattern,starterData);
-        addConceptToSemanticPatterns(presumptivePositive,pattern,starterData);
+        addConceptToSemanticPatterns(positive, pattern);
+        addConceptToSemanticPatterns(present, pattern);
+        addConceptToSemanticPatterns(detected, pattern);
+        addConceptToSemanticPatterns(presumptivePositive, pattern);
     }
 
-    private static void exportStarterData(){
-        ExportEntitiesController exportEntitiesController = new ExportEntitiesController();
-        try {
-            exportEntitiesController.export(exportFile).get();
-        } catch (ExecutionException | InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-
-    private static void addConceptToSemanticPatterns(EntityProxy.Concept concept, String semanticPattern, StarterData starterData) {
+    private void addConceptToSemanticPatterns(EntityProxy.Concept concept, String semanticPattern) {
 
         MutableList<Object> classPatternFields = Lists.mutable.empty();
 
@@ -281,10 +234,7 @@ public class Sept2024ConnectathonStarterData {
         writeSemantic(semanticNid, primordialUUID, patternNid, referencedComponentNid, stampNid, classPatternFields);
     }
 
-    private static void writeSemantic(int semanticNid, UUID primordialUUID, int patternNid, int referencedComponentNid, int stampNid, MutableList<Object> lidrRecordFields) {
-        /************
-         * Below: Creates the semantic with one version and write it to the database
-         */
+    private void writeSemantic(int semanticNid, UUID primordialUUID, int patternNid, int referencedComponentNid, int stampNid, MutableList<Object> lidrRecordFields) {
         //Create empty version list
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
 
@@ -313,6 +263,29 @@ public class Sept2024ConnectathonStarterData {
                 .builder(semanticRecord)
                 .versions(versions.toImmutable()).build();
         EntityService.get().putEntity(semanticEntity);
+    }
+
+    private EntityProxy.Concept makeBmiConcept(String description, String snomedctId){
+        Concept concept = EntityProxy.Concept.make(description, UuidUtil.fromSNOMED(snomedctId));
+        starterData.concept(concept)
+                .synonym(description,TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, concept.asUuidArray()[0].toString())
+                .build();
+
+        return concept;
+    }
+
+    private void exportStarterData() {
+        ExportEntitiesController exportEntitiesController = new ExportEntitiesController();
+        try {
+            exportEntitiesController.export(exportFile).get();
+        } catch (ExecutionException | InterruptedException e){
+            log.error("Unexpected exception while exporting", e);
+        }
+    }
+
+    public static void main(String[] args){
+        new Sept2024ConnectathonStarterData(new File(args[0]), new File(args[1]));
     }
 
 }
