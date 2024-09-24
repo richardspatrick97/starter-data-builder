@@ -12,6 +12,7 @@ import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
 import dev.ikm.tinkar.composer.template.Definition;
 import dev.ikm.tinkar.composer.template.FullyQualifiedName;
 import dev.ikm.tinkar.composer.template.Identifier;
+import dev.ikm.tinkar.composer.template.StatedAxiom;
 import dev.ikm.tinkar.composer.template.Synonym;
 import dev.ikm.tinkar.composer.template.USDialect;
 import dev.ikm.tinkar.entity.Entity;
@@ -2757,7 +2758,17 @@ public class TinkarStarterData {
                         .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Synonym().text("Tinkar root concept"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Definition().text("Terminologies that are represented in a harmonized manner"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()));
+                .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
+                .attach((new StatedAxiom()
+                        .isA(TinkarTerm.MODEL_CONCEPT))
+                        .isA(TinkarTerm.MEANING)
+                        .isA(TinkarTerm.OBJECT)
+                        .isA(TinkarTerm.ROLE)
+                        .isA(TinkarTerm.USER)
+                        .isA(TinkarTerm.ANNOTATION_TYPE)
+                        .isA(TinkarTerm.CREATIVE_COMMONS_BY_LICENSE)
+                        .isA(TinkarTerm.HEALTH_CONCEPT));
+        //composer api doesnt currently support statedDefinition
         composer.commitSession(session);
 
         //Necessary Terms Filtered out in generation routine - START
