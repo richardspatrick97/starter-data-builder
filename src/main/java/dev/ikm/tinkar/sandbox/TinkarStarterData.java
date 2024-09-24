@@ -2752,7 +2752,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        //converting above concept to composer api format.
+        //converting above concept "ROOT_VERTEX" to composer api format.
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
                         .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)"))
                         .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
