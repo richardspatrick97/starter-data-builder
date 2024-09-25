@@ -35,8 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static dev.ikm.tinkar.terms.TinkarTerm.CASE_INSENSITIVE_EVALUATION;
 import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC;
+import static dev.ikm.tinkar.terms.TinkarTerm.US_ENGLISH_DIALECT;
 
 
 public class TinkarStarterData {
@@ -47,12 +49,6 @@ public class TinkarStarterData {
     private static File importDataStore;
     private static File exportFile;
     private static Entity<? extends EntityVersion> authoringSTAMP;
-    private static  final Composer composer = new Composer("ConceptComposer");
-    private static final Session session = composer.open(State.ACTIVE,
-            PrimitiveData.PREMUNDANE_TIME,
-            TinkarTerm.USER,
-            TinkarTerm.PRIMORDIAL_MODULE,
-            TinkarTerm.PRIMORDIAL_PATH);
 
     public static void main(String[] args){
         exportDataStore = new File(args[0]);
@@ -85,6 +81,14 @@ public class TinkarStarterData {
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData){
+        Composer composer = new Composer("ConceptComposer");
+        Session session = composer.open(
+                State.ACTIVE,
+                PrimitiveData.PREMUNDANE_TIME,
+                TinkarTerm.USER,
+                TinkarTerm.PRIMORDIAL_MODULE,
+                TinkarTerm.PRIMORDIAL_PATH);
+
         starterData.concept(ENGLISH_DIALECT_ASSEMBLAGE)
                 .fullyQualifiedName("English Dialect", TinkarTerm.PREFERRED)
                 .synonym("English dialect", TinkarTerm.PREFERRED)
@@ -2742,7 +2746,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.ROOT_VERTEX)
+        /*starterData.concept(TinkarTerm.ROOT_VERTEX)
                 .fullyQualifiedName("Integrated Knowledge Management (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Tinkar root concept", TinkarTerm.PREFERRED)
                 .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
@@ -2750,14 +2754,22 @@ public class TinkarStarterData {
                 .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT), null)
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
-                .build();
+                .build();*/
 
         //converting above concept "ROOT_VERTEX" to composer api format.
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
-                        .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)"))
+                        .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)")
+                                .caseSignificance(TinkarTerm.CASE_INSENSITIVE_EVALUATION)
+                                .language(TinkarTerm.US_ENGLISH_DIALECT))
                         .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Synonym().text("Tinkar root concept"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Definition().text("Terminologies that are represented in a harmonized manner"))).attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
+                .attach((new Synonym().text("Tinkar root concept")
+                        .caseSignificance(CASE_INSENSITIVE_EVALUATION)
+                        .language(US_ENGLISH_DIALECT)))
+                .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
+                .attach((new Definition().text("Terminologies that are represented in a harmonized manner")
+                        .caseSignificance(CASE_INSENSITIVE_EVALUATION)
+                        .language(US_ENGLISH_DIALECT)))
+                .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
                 .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
                 .attach((new StatedAxiom()
                         .isA(TinkarTerm.MODEL_CONCEPT))

@@ -12,13 +12,14 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tinkar-core.version>1.70.0</tinkar-core.version>
+        <tinkar-core.version>1.71.0-SNAPSHOT</tinkar-core.version>
         <tinkar-schema.version>1.27.0</tinkar-schema.version>
         <tinkar-transformer-api.version>1.7.0</tinkar-transformer-api.version>
         <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <tinkar-composer.version>1.0.0</tinkar-composer.version>
+        <tinkar-composer.version>1.2.0</tinkar-composer.version>
+        <log4j.version>2.21.1</log4j.version>
     </properties>
 
     <dependencies>
@@ -101,13 +102,14 @@
             <version>4.3-r5</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+<!--
+         https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -121,5 +123,6 @@
             <artifactId>composer</artifactId>
             <version>${tinkar-composer.version}</version>
         </dependency>
+
     </dependencies>
 </project>
