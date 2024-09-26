@@ -13,7 +13,7 @@ open module tinkar.sandbox {
     requires com.fasterxml.uuid;
     requires org.slf4j;
     requires org.eclipse.collections;
-
+    requires dev.ikm.tinkar.composer;
 
     exports dev.ikm.tinkar.starterdata;
 

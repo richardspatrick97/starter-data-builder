@@ -18,6 +18,7 @@
         <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <slf4j.version>2.0.13</slf4j.version>
+        <tinkar-composer.version>1.2.0</tinkar-composer.version>
     </properties>
 
     <dependencies>
@@ -69,12 +70,6 @@
             <version>${tinkar-schema.version}</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>dev.ikm.tinkar</groupId>
-            <artifactId>tinkar-transformer-api</artifactId>
-            <version>${tinkar-transformer-api.version}</version>
-        </dependency>-->
-
         <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
@@ -113,6 +108,12 @@
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
 <!--            <scope>test</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>composer</artifactId>
+            <version>${tinkar-composer.version}</version>
         </dependency>
     </dependencies>
 </project>
