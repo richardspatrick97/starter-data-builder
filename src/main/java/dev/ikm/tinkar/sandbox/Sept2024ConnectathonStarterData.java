@@ -6,6 +6,7 @@ import dev.ikm.tinkar.common.util.uuid.UuidUtil;
 import dev.ikm.tinkar.composer.Composer;
 import dev.ikm.tinkar.composer.Session;
 import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
+import dev.ikm.tinkar.composer.assembler.PatternAssembler;
 import dev.ikm.tinkar.composer.template.FullyQualifiedName;
 import dev.ikm.tinkar.composer.template.Identifier;
 import dev.ikm.tinkar.composer.template.StatedAxiom;
@@ -48,6 +49,7 @@ public class Sept2024ConnectathonStarterData {
     private final UUIDUtility uuidUtility = new UUIDUtility();
 
     private final Composer composer = new Composer("Sept 2024 Connectathon Starter Data");
+    private final Session session;
 
     public Sept2024ConnectathonStarterData(File exportDataStore, File exportFile) {
         this.exportFile = exportFile;
@@ -61,21 +63,19 @@ public class Sept2024ConnectathonStarterData {
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
+        session = composer.open(State.ACTIVE, TinkarTerm.USER, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.PRIMORDIAL_PATH);
+
         createComposerConcepts();
         configureConceptsAndPatterns();
+
+        composer.commitSession(session);
+
         starterData.build();
         exportStarterData();
-
         starterData.shutdown();
     }
 
     private void createComposerConcepts() {
-        Session session = composer.open(State.ACTIVE,
-                System.currentTimeMillis(),
-                TinkarTerm.USER,
-                TinkarTerm.PRIMORDIAL_MODULE,
-                TinkarTerm.PRIMORDIAL_PATH);
-
         Concept performance = Concept.make("Performance", UUID.fromString("395cc864-7c51-4072-b3e7-f9195b40053a"));
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler
                 .concept(performance)
@@ -95,7 +95,7 @@ public class Sept2024ConnectathonStarterData {
                 .attach((StatedAxiom axiom) -> axiom
                         .isA(TinkarTerm.MODEL_CONCEPT))
         );
-        composer.commitSession(session);
+
     }
 
     private void configureConceptsAndPatterns() {
@@ -154,15 +154,35 @@ public class Sept2024ConnectathonStarterData {
 
     private void createInvalidCovidTestResultPattern() {
         Concept invalid = Concept.make("Invalid", UuidUtil.fromSNOMED("455371000124106"));
-        starterData.concept(invalid)
-                .synonym("Invalid", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, invalid.asUuidArray()[0].toString())
-                .build();
 
-        starterData.pattern(EntityProxy.Pattern.make("Invalid Covid Test Result Pattern", uuidUtility.createUUID("Invalid Covid Test Result Pattern")))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler
+                .concept(invalid)
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .language(ENGLISH_LANGUAGE)
+                        .text("Invalid")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach((USDialect usDialect) -> usDialect.acceptability(TinkarTerm.PREFERRED)))
+                .attach((Synonym synonym) -> synonym
+                        .text("Invalid")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach((USDialect usDialect) -> usDialect.acceptability(TinkarTerm.PREFERRED)))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(invalid.asUuidArray()[0].toString()))
+        );
+
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler
+                .pattern(EntityProxy.Pattern.make("Invalid Covid Test Result Pattern", uuidUtility.createUUID("Invalid Covid Test Result Pattern")))
                 .meaning(invalid)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
+                .attach((Synonym synonym) -> synonym
+                        .text("Invalid Covid Test Result Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach((USDialect usDialect) -> usDialect.acceptability(TinkarTerm.PREFERRED)))
+        );
+
     }
 
     private void createUndeterminedCovidTestResultPattern() {

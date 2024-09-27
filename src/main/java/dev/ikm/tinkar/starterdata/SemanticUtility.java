@@ -2,7 +2,14 @@ package dev.ikm.tinkar.starterdata;
 
 import dev.ikm.tinkar.common.id.IntIdSet;
 import dev.ikm.tinkar.common.id.IntIds;
-import dev.ikm.tinkar.entity.*;
+import dev.ikm.tinkar.entity.Entity;
+import dev.ikm.tinkar.entity.EntityService;
+import dev.ikm.tinkar.entity.EntityVersion;
+import dev.ikm.tinkar.entity.RecordListBuilder;
+import dev.ikm.tinkar.entity.SemanticRecord;
+import dev.ikm.tinkar.entity.SemanticRecordBuilder;
+import dev.ikm.tinkar.entity.SemanticVersionRecord;
+import dev.ikm.tinkar.entity.SemanticVersionRecordBuilder;
 import dev.ikm.tinkar.entity.graph.DiTreeEntity;
 import dev.ikm.tinkar.entity.graph.EntityVertex;
 import dev.ikm.tinkar.terms.ConceptFacade;
@@ -39,8 +46,8 @@ class SemanticUtility {
     protected Entity<? extends EntityVersion> createDescriptionSemantic(int referencedComponentNid,
                                                                         EntityProxy.Concept descriptionType,
                                                                         String text,
-                                                                        Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building FQN Description Semantic: " + text);
+                                                                        Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building FQN Description Semantic: " + text);
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID descriptionSemanticUUID = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -73,8 +80,8 @@ class SemanticUtility {
                                                                        EntityProxy.Pattern navigationPattern,
                                                                        List<EntityProxy.Concept> destinations,
                                                                        List<EntityProxy.Concept> origins,
-                                                                       Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building " + navigationPattern.description() + " Navigation Semantic");
+                                                                       Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building " + navigationPattern.description() + " Navigation Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID navigationSemanticUUID = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -87,16 +94,16 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building " + navigationPattern.description() + " Navigation Fields: " + "DES-" + destinations + " ORG-" + origins );
+        LOG.debug("Building " + navigationPattern.description() + " Navigation Fields: " + "DES-" + destinations + " ORG-" + origins);
         MutableList<Object> navigationFields = Lists.mutable.empty();
         IntIdSet destinationIntIdSet;
         IntIdSet originIntIdSet;
-        if (destinations == null ){
+        if (destinations == null) {
             destinationIntIdSet = IntIds.set.empty();
         } else {
             destinationIntIdSet = IntIds.set.of(destinations.stream().mapToInt(EntityProxy::nid).toArray());
         }
-        if (origins == null){
+        if (origins == null) {
             originIntIdSet = IntIds.set.empty();
         } else {
             originIntIdSet = IntIds.set.of(origins.stream().mapToInt(EntityProxy::nid).toArray());
@@ -116,8 +123,8 @@ class SemanticUtility {
     protected Entity<? extends EntityVersion> createIdentifierSemantic(int referencedComponentNid,
                                                                        EntityProxy.Concept source,
                                                                        String id,
-                                                                       Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Identifier Semantic");
+                                                                       Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Identifier Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
 
         UUID navigationSemanticUUID = uuidUtility.createUUID();
@@ -131,7 +138,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Identifier Semantic Fields");
+        LOG.debug("Building Identifier Semantic Fields");
         MutableList<Object> identifierFields = Lists.mutable.empty();
         identifierFields.add(source);
         identifierFields.add(id);
@@ -147,8 +154,8 @@ class SemanticUtility {
 
     protected Entity<? extends EntityVersion> createDialectSemantic(int referencedComponentNid,
                                                                     EntityProxy.Concept dialect,
-                                                                    Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Dialect Semantic");
+                                                                    Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Dialect Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID dialectSemanticUUID = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -161,7 +168,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Dialect Semantic Fields");
+        LOG.debug("Building Dialect Semantic Fields");
         MutableList<Object> dialectFields = Lists.mutable.empty();
         dialectFields.add(dialect);
 
@@ -176,8 +183,8 @@ class SemanticUtility {
 
     protected Entity<? extends EntityVersion> createAxiomSyntaxSemantic(int referencedComponentNid,
                                                                         String axiomSyntax,
-                                                                        Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Axiom Syntax Semantic");
+                                                                        Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Axiom Syntax Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID axiomSyntaxSemantic = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -190,7 +197,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Axiom Syntax Semantic Fields");
+        LOG.debug("Building Axiom Syntax Semantic Fields");
         MutableList<Object> axiomSyntaxFields = Lists.mutable.empty();
         axiomSyntaxFields.add(axiomSyntax);
 
@@ -205,8 +212,8 @@ class SemanticUtility {
 
     protected Entity<? extends EntityVersion> createCommentSemantic(int referencedComponentNid,
                                                                     String comment,
-                                                                    Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Comment Semantic");
+                                                                    Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Comment Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID commentSemantic = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -219,7 +226,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Comment Semantics Fields");
+        LOG.debug("Building Comment Semantics Fields");
         MutableList<Object> commentFields = Lists.mutable.empty();
         commentFields.add(comment);
 
@@ -234,10 +241,10 @@ class SemanticUtility {
 
 
     protected Entity<? extends EntityVersion> createSemanticFromPatternWithFields(int referencedComponentNid,
-                                                                        EntityProxy.Pattern pattern,
-                                                                        MutableList<Object> fields,
-                                                                        Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Semantic Record");
+                                                                                  EntityProxy.Pattern pattern,
+                                                                                  MutableList<Object> fields,
+                                                                                  Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Semantic Record");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID semanticUuid = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -260,8 +267,8 @@ class SemanticUtility {
 
     protected Entity<? extends EntityVersion> createStatedDefinitionSemantic(int referencedComponentNid,
                                                                              List<EntityProxy.Concept> originConceptList,
-                                                                             Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Stated Definition Semantic");
+                                                                             Entity<? extends EntityVersion> authoringSTAMP) {
+        LOG.debug("Building Stated Definition Semantic");
         RecordListBuilder<SemanticVersionRecord> versions = make();
         UUID statedDefinitionSemantic = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
@@ -274,7 +281,7 @@ class SemanticUtility {
                 .versions(versions.toImmutable())
                 .build();
 
-        LOG.info("Building Stated Definition Semantics Fields");
+        LOG.debug("Building Stated Definition Semantics Fields");
         MutableList<Object> statedDefinitionFields = Lists.mutable.empty();
 
         MutableList<EntityVertex> vertexMap = Lists.mutable.empty();
@@ -293,7 +300,7 @@ class SemanticUtility {
             int referenceIndex = vertexIdx++;
             referenceVertexIdxList.add(referenceIndex);
 
-            MutableIntObjectMap<Object> referenceProperty =  IntObjectMaps.mutable.empty();
+            MutableIntObjectMap<Object> referenceProperty = IntObjectMaps.mutable.empty();
             referenceProperty.put(TinkarTerm.CONCEPT_REFERENCE.nid(), abstractObject(originConcept));
 
             EntityVertex referenceVertex = EntityVertex.make(originConcept);
@@ -335,8 +342,8 @@ class SemanticUtility {
     }
 
 
-    public EntityVertex createEntityVertex(int vertexIndex, ConceptFacade conceptFacade){
-        MutableIntObjectMap<Object> properties =  IntObjectMaps.mutable.empty();
+    public EntityVertex createEntityVertex(int vertexIndex, ConceptFacade conceptFacade) {
+        MutableIntObjectMap<Object> properties = IntObjectMaps.mutable.empty();
         EntityVertex entityVertex = EntityVertex.make(conceptFacade);
         entityVertex.setVertexIndex(vertexIndex);
         entityVertex.setProperties(properties);
