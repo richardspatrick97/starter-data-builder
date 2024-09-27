@@ -36,7 +36,12 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static dev.ikm.tinkar.terms.TinkarTerm.CASE_INSENSITIVE_EVALUATION;
+import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE;
 import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
+import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_LANGUAGE;
+import static dev.ikm.tinkar.terms.TinkarTerm.PREFERRED;
+import static dev.ikm.tinkar.terms.TinkarTerm.PURPOSE;
+import static dev.ikm.tinkar.terms.TinkarTerm.ROOT_VERTEX;
 import static dev.ikm.tinkar.terms.TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC;
 import static dev.ikm.tinkar.terms.TinkarTerm.US_ENGLISH_DIALECT;
 
@@ -2746,7 +2751,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        /*starterData.concept(TinkarTerm.ROOT_VERTEX)
+        starterData.concept(TinkarTerm.ROOT_VERTEX)
                 .fullyQualifiedName("Integrated Knowledge Management (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Tinkar root concept", TinkarTerm.PREFERRED)
                 .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
@@ -2754,23 +2759,31 @@ public class TinkarStarterData {
                 .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT), null)
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
-                .build();*/
+                .build();
 
         //converting above concept "ROOT_VERTEX" to composer api format.
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
-                        .attach((FullyQualifiedName fqn) -> fqn.text("Integrated Knowledge Management (SOLOR)")
-                                .caseSignificance(TinkarTerm.CASE_INSENSITIVE_EVALUATION)
-                                .language(TinkarTerm.US_ENGLISH_DIALECT))
-                        .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Synonym().text("Tinkar root concept")
-                        .caseSignificance(CASE_INSENSITIVE_EVALUATION)
-                        .language(US_ENGLISH_DIALECT)))
+        /*session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler
+                        .concept(TinkarTerm.ROOT_VERTEX))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Integrated Knowledge Management (SOLOR)")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Definition().text("Terminologies that are represented in a harmonized manner")
-                        .caseSignificance(CASE_INSENSITIVE_EVALUATION)
-                        .language(US_ENGLISH_DIALECT)))
+                .attach((new Synonym()
+                        .text("Tinkar root concept")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)))
                 .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
-                .attach((new Identifier().source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)).identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
+                .attach((new Definition()
+                        .text("Terminologies that are represented in a harmonized manner")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect().acceptability(TinkarTerm.PREFERRED))
+                .attach((new Identifier()
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
+                        .identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
+                .attach(new StatedAxiom()
+                        .isA(ROOT_VERTEX))
                 .attach((new StatedAxiom()
                         .isA(TinkarTerm.MODEL_CONCEPT))
                         .isA(TinkarTerm.MEANING)
@@ -2780,8 +2793,8 @@ public class TinkarStarterData {
                         .isA(TinkarTerm.ANNOTATION_TYPE)
                         .isA(TinkarTerm.CREATIVE_COMMONS_BY_LICENSE)
                         .isA(TinkarTerm.HEALTH_CONCEPT));
-        //composer api doesnt currently support statedDefinition
-        composer.commitSession(session);
+        //composer api doesn't currently support statedDefinition
+        composer.commitSession(session);*/
 
         //Necessary Terms Filtered out in generation routine - START
         starterData.concept(TinkarTerm.QUERY_CLAUSES)
@@ -2824,7 +2837,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.PURPOSE)
+        /*starterData.concept(TinkarTerm.PURPOSE)
                 .fullyQualifiedName("Purpose", TinkarTerm.PREFERRED)
                 .synonym("Purpose", TinkarTerm.PREFERRED)
                 .definition("The reason for which a Tinkar value in a pattern was created or for which it exist.", TinkarTerm.PREFERRED)
@@ -2832,7 +2845,30 @@ public class TinkarStarterData {
                 .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
-                .build();
+                .build();*/
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PURPOSE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Purpose")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Purpose")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("The reason for which a Tinkar value in a pattern was created or for which it exist.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.PURPOSE.asUuidArray()[0].toString()))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
 
         starterData.concept(TinkarTerm.ACTION_PROPERTIES)
                 .fullyQualifiedName("Action properties (SOLOR)", TinkarTerm.PREFERRED)
@@ -3477,6 +3513,8 @@ public class TinkarStarterData {
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
                 .build();
+
+        composer.commitSession(session);
     }
 
     private static void exportStarterData(){
