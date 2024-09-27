@@ -28,7 +28,7 @@ jobs:
           sonarcloud_host_url: ${{ 'https://sonarcloud.io/' }}
           sonarcloud_organization: ${{ github.repository_owner }}
           sonarcloud_sources: ${{ '' }}
-          sonarcloud_projectKey: ${{ github.repository_owner }}_${{ github.event.repository.name }}
+          sonarcloud_projectKey: ${{ '' }}
           sonarcloud_coverage_jacoco_xmlReportPaths: ${{ '' }}
           sonarcloud_java_binaries: ${{ '' }}
           sonarcloud_tests: ${{ '' }}
