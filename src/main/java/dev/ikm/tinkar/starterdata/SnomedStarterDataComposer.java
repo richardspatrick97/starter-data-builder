@@ -35,7 +35,6 @@ public class SnomedStarterDataComposer {
         UUIDUtility uuidUtility = new UUIDUtility();
 
         Session session = composer.open(State.ACTIVE,
-                PrimitiveData.PREMUNDANE_TIME,
                 TinkarTerm.USER,
                 TinkarTerm.PRIMORDIAL_MODULE,
                 TinkarTerm.PRIMORDIAL_PATH);
@@ -95,64 +94,7 @@ public class SnomedStarterDataComposer {
         );
 
         composer.commitSession(session);
-    }
-
-    private void createConcepts(Session session, UUIDUtility uuidUtility) {
-
-        EntityProxy.Concept snomedAuthor = EntityProxy.Concept.make("IHTSDO SNOMED CT Author", uuidUtility.createUUID("IHTSDO SNOMED CT Author"));
-        session.compose((ConceptAssembler concept) -> concept
-                .concept(snomedAuthor)
-                .attach((FullyQualifiedName fqn) -> fqn
-                        .language(ENGLISH_LANGUAGE)
-                        .text("IHTSDO SNOMED CT Author")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Synonym synonym)-> synonym
-                        .language(ENGLISH_LANGUAGE)
-                        .text("SNOMED CT Author")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Definition definition) -> definition
-                        .language(ENGLISH_LANGUAGE)
-                        .text("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT Author")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Identifier identifier) -> identifier
-                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(snomedAuthor.asUuidArray()[0].toString())
-                )
-                .attach((StatedAxiom statedAxiom) -> statedAxiom
-                        .isA(TinkarTerm.USER)
-                )
-        );
-
-        EntityProxy.Concept  snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
-        session.compose((ConceptAssembler concept) -> concept
-                .concept(snomedIdentifier)
-                .attach((FullyQualifiedName fqn) -> fqn
-                        .language(ENGLISH_LANGUAGE)
-                        .text("SNOMED CT Identifier")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Synonym synonym)-> synonym
-                        .language(ENGLISH_LANGUAGE)
-                        .text("SCTID")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Definition definition) -> definition
-                        .language(ENGLISH_LANGUAGE)
-                        .text("Unique point of origin for identifier")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                )
-                .attach((Identifier identifier) -> identifier
-                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(snomedIdentifier.asUuidArray()[0].toString())
-                )
-                .attach((StatedAxiom statedAxiom) -> statedAxiom
-                        .isA(TinkarTerm.IDENTIFIER_SOURCE)
-                )
-        );
-
+        PrimitiveData.stop();
     }
 
 }
