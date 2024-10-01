@@ -2745,16 +2745,6 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC)
-                .fullyQualifiedName("Logic graph for semantic (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Logic graph", TinkarTerm.PREFERRED)
-                .definition("Semantic", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.SEMANTIC_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.SEMANTIC_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Logic graph for semantic (SOLOR)")
@@ -2779,17 +2769,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.SEMANTIC_PROPERTIES))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.SEMANTIC_PROPERTIES));
-
-
-        starterData.concept(TinkarTerm.LONG)
-                .fullyQualifiedName("Long (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Long", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LONG.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LONG))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2816,17 +2795,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(DYNAMIC_COLUMN_DATA_TYPES));
 
-
-        starterData.concept(TinkarTerm.NID)
-                .fullyQualifiedName("NID (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Native Identifier", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NID.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
-                .tinkarBaseModelMembership()
-                .build();
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NID))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("NID (SOLOR)")
@@ -2851,17 +2819,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.OBJECT))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.OBJECT));
-
-
-        starterData.concept(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE)
-                .fullyQualifiedName("Semantic list for chronicle (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Semantic list for chronicle", TinkarTerm.PREFERRED)
-                .definition("Semantic list", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2888,17 +2845,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.CHRONICLE_PROPERTIES));
 
-
-        starterData.concept(USERS_MODULE)
-                .fullyQualifiedName("Users module (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("User module", TinkarTerm.PREFERRED)
-                .definition("Module - user", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, USERS_MODULE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.MODULE))
-                .statedDefinition(List.of(TinkarTerm.MODULE))
-                .tinkarBaseModelMembership()
-                .build();
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(USERS_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Users module (SOLOR)")
@@ -2923,16 +2869,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.MODULE))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.MODULE));
-
-        starterData.concept(TinkarTerm.ROOT_VERTEX)
-                .fullyQualifiedName("Integrated Knowledge Management (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Tinkar root concept", TinkarTerm.PREFERRED)
-                .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT), null)
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .tinkarBaseModelMembership()
-                .build();
 
         //converting above concept "ROOT_VERTEX" to composer api format.
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler
