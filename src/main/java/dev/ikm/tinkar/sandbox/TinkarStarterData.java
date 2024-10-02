@@ -38,11 +38,13 @@ import java.util.concurrent.ExecutionException;
 
 import static dev.ikm.tinkar.terms.TinkarTerm.ACTION_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.CASE_INSENSITIVE_EVALUATION;
+import static dev.ikm.tinkar.terms.TinkarTerm.CHRONICLE_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE;
 import static dev.ikm.tinkar.terms.TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE;
+import static dev.ikm.tinkar.terms.TinkarTerm.DISPLAY_FIELDS;
 import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES;
 import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_REFERENCED_COMPONENT_RESTRICTION;
 import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
@@ -53,16 +55,21 @@ import static dev.ikm.tinkar.terms.TinkarTerm.FEATURE;
 import static dev.ikm.tinkar.terms.TinkarTerm.FIELD_SUBSTITUTION;
 import static dev.ikm.tinkar.terms.TinkarTerm.HAS_ACTIVE_INGREDIENT;
 import static dev.ikm.tinkar.terms.TinkarTerm.HAS_DOSE_FORM;
+import static dev.ikm.tinkar.terms.TinkarTerm.IDENTIFIER_SOURCE;
 import static dev.ikm.tinkar.terms.TinkarTerm.IDENTIFIER_VALUE;
 import static dev.ikm.tinkar.terms.TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
 import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_DEFINITION;
 import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_NAVIGATION;
 import static dev.ikm.tinkar.terms.TinkarTerm.INTRINSIC_ROLE;
+import static dev.ikm.tinkar.terms.TinkarTerm.LANGUAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.LATERALITY;
 import static dev.ikm.tinkar.terms.TinkarTerm.LITERAL_VALUE;
 import static dev.ikm.tinkar.terms.TinkarTerm.MAXIMUM_VALUE_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.MINIMUM_VALUE_OPERATOR;
+import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT;
+import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT_PROPERTIES;
+import static dev.ikm.tinkar.terms.TinkarTerm.PHENOMENON;
 import static dev.ikm.tinkar.terms.TinkarTerm.POSITION_ON_PATH;
 import static dev.ikm.tinkar.terms.TinkarTerm.PREFERRED;
 import static dev.ikm.tinkar.terms.TinkarTerm.PROPERTY_PATTERN_IMPLICATION;
@@ -73,6 +80,7 @@ import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MAXIMUM;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MINIMUM;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFLEXIVE_PROPERTY;
+import static dev.ikm.tinkar.terms.TinkarTerm.ROLE_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.ROOT_VERTEX;
 import static dev.ikm.tinkar.terms.TinkarTerm.SNOROCKET_CLASSIFIER;
 import static dev.ikm.tinkar.terms.TinkarTerm.SOLOR_MODULE;
@@ -82,12 +90,16 @@ import static dev.ikm.tinkar.terms.TinkarTerm.STATED_DEFINITION;
 import static dev.ikm.tinkar.terms.TinkarTerm.STATED_NAVIGATION;
 import static dev.ikm.tinkar.terms.TinkarTerm.TAXONOMY_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC;
+import static dev.ikm.tinkar.terms.TinkarTerm.TINKAR_MODEL_CONCEPT;
 import static dev.ikm.tinkar.terms.TinkarTerm.TRANSITIVE_PROPERTY;
+import static dev.ikm.tinkar.terms.TinkarTerm.TREE_AMALGAM_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.UNMODELED_ROLE_CONCEPT;
 import static dev.ikm.tinkar.terms.TinkarTerm.USERS_MODULE;
 import static dev.ikm.tinkar.terms.TinkarTerm.US_ENGLISH_DIALECT;
+import static dev.ikm.tinkar.terms.TinkarTerm.US_NURSING_DIALECT;
 import static dev.ikm.tinkar.terms.TinkarTerm.VALUE_CONSTRAINT;
 import static dev.ikm.tinkar.terms.TinkarTerm.VALUE_CONSTRAINT_SOURCE;
+import static dev.ikm.tinkar.terms.TinkarTerm.VERSION_PROPERTIES;
 
 
 public class TinkarStarterData {
@@ -173,8 +185,8 @@ public class TinkarStarterData {
                 .synonym("Axiom Syntax", TinkarTerm.ACCEPTABLE)
                 .definition("Syntax defining description logic", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.AXIOM_SYNTAX.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -253,8 +265,8 @@ public class TinkarStarterData {
                 .synonym("Any component", TinkarTerm.PREFERRED)
                 .definition("A general-purpose container to represent any component with generic data structure. Modifiable based on the specific requirements and characteristics of the components.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
+                .statedNavigation(null, List.of(OBJECT))
+                .statedDefinition(List.of(OBJECT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -273,8 +285,8 @@ public class TinkarStarterData {
                 .synonym("Array field", TinkarTerm.PREFERRED)
                 .definition("A lexical set of semantically related elements/items", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ARRAY_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -293,8 +305,8 @@ public class TinkarStarterData {
                 .synonym("Author", TinkarTerm.PREFERRED)
                 .definition("Individual or entity who made a specific set of changes or modifications to a codebase/terminology resulting in the creation of a new version or revision", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.AUTHOR_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
+                .statedNavigation(null, List.of(VERSION_PROPERTIES))
+                .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -323,8 +335,8 @@ public class TinkarStarterData {
                 .synonym("Axiom origin", TinkarTerm.PREFERRED)
                 .definition("The parent concept for the axiom?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.AXIOM_ORIGIN.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.STATED_PREMISE_TYPE, TinkarTerm.INFERRED_PREMISE_TYPE), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.STATED_PREMISE_TYPE, TinkarTerm.INFERRED_PREMISE_TYPE), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -333,8 +345,8 @@ public class TinkarStarterData {
                 .synonym("Boolean field", TinkarTerm.PREFERRED)
                 .definition("True (1) or false (0)", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.BOOLEAN_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -373,8 +385,8 @@ public class TinkarStarterData {
                 .synonym("Byte array field", TinkarTerm.PREFERRED)
                 .definition("An array of bytes", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.BYTE_ARRAY_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -423,18 +435,18 @@ public class TinkarStarterData {
                 .synonym("Chinese language", TinkarTerm.PREFERRED)
                 .definition("Chinese language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CHINESE_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.CHRONICLE_PROPERTIES)
+        starterData.concept(CHRONICLE_PROPERTIES)
                 .fullyQualifiedName("Chronicle properties (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Chronicle properties", TinkarTerm.PREFERRED)
                 .definition("Attributes or characteristic associated with a historical record or an account of events (metadata, timestamps)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CHRONICLE_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.UUID_LIST_FOR_COMPONENT), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, CHRONICLE_PROPERTIES.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.UUID_LIST_FOR_COMPONENT), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -453,8 +465,8 @@ public class TinkarStarterData {
                 .synonym("Component Id list", TinkarTerm.PREFERRED)
                 .definition("A display field that references an ordered list of Concept IDs.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.COMPONENT_ID_LIST_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -463,8 +475,8 @@ public class TinkarStarterData {
                 .synonym("Component Id set", TinkarTerm.PREFERRED)
                 .definition("A display field that references an unordered list of Concept IDs.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.COMPONENT_ID_SET_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -473,8 +485,8 @@ public class TinkarStarterData {
                 .synonym("Component field", TinkarTerm.PREFERRED)
                 .definition("A display field type that references a concept ID.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.COMPONENT_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -503,8 +515,8 @@ public class TinkarStarterData {
                 .synonym("Component type focus", TinkarTerm.PREFERRED)
                 .definition("Focus type of component", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.COMPONENT_TYPE_FOCUS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.AXIOM_FOCUS, TinkarTerm.CONCEPT_FOCUS, TinkarTerm.DESCRIPTION_FOCUS), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.AXIOM_FOCUS, TinkarTerm.CONCEPT_FOCUS, TinkarTerm.DESCRIPTION_FOCUS), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -523,8 +535,8 @@ public class TinkarStarterData {
                 .synonym("Concept details tree table", TinkarTerm.PREFERRED)
                 .definition("Tree table with concept details", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_DETAILS_TREE_TABLE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -533,8 +545,8 @@ public class TinkarStarterData {
                 .synonym(" Concept field", TinkarTerm.PREFERRED)
                 .definition("Field for the human readable description for the given concept", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -593,8 +605,8 @@ public class TinkarStarterData {
                 .synonym("Concept type", TinkarTerm.PREFERRED)
                 .definition("A field that captures a defined concept label", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.PATH_CONCEPT, TinkarTerm.SEMANTIC_FIELD_CONCEPTS), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.PATH_CONCEPT, TinkarTerm.SEMANTIC_FIELD_CONCEPTS), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -603,8 +615,8 @@ public class TinkarStarterData {
                 .synonym("Version", TinkarTerm.PREFERRED)
                 .definition("A filed that captures the version of the terminology that it came from", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -613,8 +625,8 @@ public class TinkarStarterData {
                 .synonym("Concrete value operator", TinkarTerm.PREFERRED)
                 .definition("A concept that specifies value operators", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCRETE_DOMAIN_OPERATOR.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EQUAL_TO, TinkarTerm.GREATER_THAN, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, TinkarTerm.LESS_THAN, TinkarTerm.LESS_THAN_OR_EQUAL_TO, MAXIMUM_VALUE_OPERATOR, MINIMUM_VALUE_OPERATOR), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.EQUAL_TO, TinkarTerm.GREATER_THAN, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, TinkarTerm.LESS_THAN, TinkarTerm.LESS_THAN_OR_EQUAL_TO, MAXIMUM_VALUE_OPERATOR, MINIMUM_VALUE_OPERATOR), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -663,8 +675,8 @@ public class TinkarStarterData {
                 .synonym("Correlation properties", TinkarTerm.PREFERRED)
                 .definition("Characteristics or measures that describe the relationship between two or more variables", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CORRELATION_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -693,8 +705,8 @@ public class TinkarStarterData {
                 .synonym("Czech language", TinkarTerm.PREFERRED)
                 .definition("Czech Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CZECH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -703,8 +715,8 @@ public class TinkarStarterData {
                 .synonym("Danish language", TinkarTerm.PREFERRED)
                 .definition("Danish Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DANISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -743,8 +755,8 @@ public class TinkarStarterData {
                 .synonym("Description", TinkarTerm.PREFERRED)
                 .definition("Human readable text for a concept", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -753,8 +765,8 @@ public class TinkarStarterData {
                 .synonym("Description acceptability", TinkarTerm.PREFERRED)
                 .definition("Whether a given human readable text for a concept is permissible", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_ACCEPTABILITY.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ACCEPTABLE, TinkarTerm.PREFERRED), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.ACCEPTABLE, TinkarTerm.PREFERRED), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -773,8 +785,8 @@ public class TinkarStarterData {
                 .synonym("Description case significance", TinkarTerm.PREFERRED)
                 .definition("Specifies how to handle the description text in terms of case sensitivity", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.DESCRIPTION_CASE_SENSITIVE, TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.DESCRIPTION_CASE_SENSITIVE, TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -853,8 +865,8 @@ public class TinkarStarterData {
                 .synonym("Description semantic", TinkarTerm.PREFERRED)
                 .definition("Purpose and meaning for the description pattern and dialect patterns", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_SEMANTIC.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -863,8 +875,8 @@ public class TinkarStarterData {
                 .synonym("Description type", TinkarTerm.PREFERRED)
                 .definition("Specifying what type of description it is i.e. is it fully qualified or regular and etc.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.DEFINITION_DESCRIPTION_TYPE, TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.DEFINITION_DESCRIPTION_TYPE, TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -893,8 +905,8 @@ public class TinkarStarterData {
                 .synonym("Description version properties", TinkarTerm.PREFERRED)
                 .definition("Combination of terms that might be used in a specific context or domain", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_VERSION_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_DIALECT_PAIR), List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_DIALECT_PAIR), List.of(VERSION_PROPERTIES))
+                .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -903,8 +915,8 @@ public class TinkarStarterData {
                 .synonym("Description-logic profile", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_LOGIC_PROFILE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_PROFILE), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_PROFILE), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -945,8 +957,8 @@ public class TinkarStarterData {
                 .synonym("Instant/ DiGraph", TinkarTerm.PREFERRED)
                 .definition("A display field that references a di-graph whose edges are ordered pairs of vertices. Each edge can be followed from one vertex to another vertex.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIGRAPH_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -955,8 +967,8 @@ public class TinkarStarterData {
                 .synonym("DiTree", TinkarTerm.PREFERRED)
                 .definition("A display field that references a graph obtained from an undirected tree by replacing each undirected edge by two directed edges with opposite directions.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DITREE_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -985,8 +997,8 @@ public class TinkarStarterData {
                 .synonym("NavigationCoordinate/Directed graph", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIRECTED_GRAPH.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_DIGRAPH), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_DIGRAPH), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1000,13 +1012,13 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.DISPLAY_FIELDS)
+        starterData.concept(DISPLAY_FIELDS)
                 .fullyQualifiedName("Display Fields", TinkarTerm.PREFERRED)
                 .synonym("Display fields", TinkarTerm.PREFERRED)
                 .definition("Captures the human readable terms", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DISPLAY_FIELDS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.COMPONENT_FIELD, TinkarTerm.COMPONENT_ID_LIST_FIELD, TinkarTerm.COMPONENT_ID_SET_FIELD, TinkarTerm.CONCEPT_FIELD, TinkarTerm.DIGRAPH_FIELD, TinkarTerm.DITREE_FIELD, TinkarTerm.FLOAT_FIELD, TinkarTerm.INTEGER_FIELD, TinkarTerm.SEMANTIC_FIELD_TYPE, TinkarTerm.STRING), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, DISPLAY_FIELDS.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.COMPONENT_FIELD, TinkarTerm.COMPONENT_ID_LIST_FIELD, TinkarTerm.COMPONENT_ID_SET_FIELD, TinkarTerm.CONCEPT_FIELD, TinkarTerm.DIGRAPH_FIELD, TinkarTerm.DITREE_FIELD, TinkarTerm.FLOAT_FIELD, TinkarTerm.INTEGER_FIELD, TinkarTerm.SEMANTIC_FIELD_TYPE, TinkarTerm.STRING), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1015,8 +1027,8 @@ public class TinkarStarterData {
                 .synonym("Double field", TinkarTerm.PREFERRED)
                 .definition("A data value (type of structure for data)", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DOUBLE_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1025,8 +1037,8 @@ public class TinkarStarterData {
                 .synonym("Dutch language", TinkarTerm.PREFERRED)
                 .definition("Dutch language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DUTCH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1046,8 +1058,8 @@ public class TinkarStarterData {
                 .synonym("EL++ terminological axioms", TinkarTerm.PREFERRED)
                 .definition("The set of relationships or axioms has defined by the EL++ Logic", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1116,8 +1128,8 @@ public class TinkarStarterData {
                 .synonym("English language", TinkarTerm.PREFERRED)
                 .definition("Value for description language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ENGLISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1166,8 +1178,8 @@ public class TinkarStarterData {
                 .synonym("Float field", TinkarTerm.PREFERRED)
                 .definition("Represents values as high-precision fractional values.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FLOAT_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1206,8 +1218,8 @@ public class TinkarStarterData {
                 .synonym("French language", TinkarTerm.PREFERRED)
                 .definition("French Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FRENCH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1236,8 +1248,8 @@ public class TinkarStarterData {
                 .synonym("German language", TinkarTerm.PREFERRED)
                 .definition("German Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GERMAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1266,8 +1278,8 @@ public class TinkarStarterData {
                 .synonym("Grouping", TinkarTerm.PREFERRED)
                 .definition("The grouping attached to the mapping", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GROUPING.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EXACT, TinkarTerm.PARTIAL), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.EXACT, TinkarTerm.PARTIAL), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1281,13 +1293,13 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.IDENTIFIER_SOURCE)
+        starterData.concept(IDENTIFIER_SOURCE)
                 .fullyQualifiedName("Identifier Source", TinkarTerm.PREFERRED)
                 .synonym("Identifier source", TinkarTerm.PREFERRED)
                 .definition("An identifier used to label the identity of a unique component.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IDENTIFIER_SOURCE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, IDENTIFIER_SOURCE.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1346,8 +1358,8 @@ public class TinkarStarterData {
                 .synonym("Integer field", TinkarTerm.PREFERRED)
                 .definition("Data type that represents some range of mathematical integers", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INTEGER_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1366,8 +1378,8 @@ public class TinkarStarterData {
                 .synonym("Inverse tree list", TinkarTerm.PREFERRED)
                 .definition("Inverse tree list", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INVERSE_TREE_LIST.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TREE_AMALGAM_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.TREE_AMALGAM_PROPERTIES))
+                .statedNavigation(null, List.of(TREE_AMALGAM_PROPERTIES))
+                .statedDefinition(List.of(TREE_AMALGAM_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1386,8 +1398,8 @@ public class TinkarStarterData {
                 .synonym("Irish language", TinkarTerm.PREFERRED)
                 .definition("Irish language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IRISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1396,8 +1408,8 @@ public class TinkarStarterData {
                 .synonym("Is a", TinkarTerm.PREFERRED)
                 .definition("Designates the parent child relationship", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1426,8 +1438,8 @@ public class TinkarStarterData {
                 .synonym("Italian language", TinkarTerm.PREFERRED)
                 .definition("Italian language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ITALIAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1486,18 +1498,18 @@ public class TinkarStarterData {
                 .synonym("Korean language", TinkarTerm.PREFERRED)
                 .definition("Korean language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.KOREAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.LANGUAGE)
+        starterData.concept(LANGUAGE)
                 .fullyQualifiedName("Language", TinkarTerm.PREFERRED)
                 .synonym("Language", TinkarTerm.PREFERRED)
                 .definition("Specifies the language of the description text.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ENGLISH_LANGUAGE, TinkarTerm.SPANISH_LANGUAGE), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, LANGUAGE.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.ENGLISH_LANGUAGE, TinkarTerm.SPANISH_LANGUAGE), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1526,8 +1538,8 @@ public class TinkarStarterData {
                 .synonym("Language coordinate properties", TinkarTerm.PREFERRED)
                 .definition("Spatial representation of language, attributes or language coordinates, programming language metadata?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.LANGUAGE_COORDINATE_NAME, DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.LANGUAGE_COORDINATE_NAME, DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1576,8 +1588,8 @@ public class TinkarStarterData {
                 .synonym("Lithuanian Language", TinkarTerm.PREFERRED)
                 .definition("Lithuanian Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LITHUANIAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1596,8 +1608,8 @@ public class TinkarStarterData {
                 .synonym("Logic coordinate properties", TinkarTerm.PREFERRED)
                 .definition("Structural characteristics of logical elements, Attributes of Logical coordinates, Mathematical Representation of logical relationships ?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LOGIC_COORDINATE_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.LOGIC_COORDINATE_NAME), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.LOGIC_COORDINATE_NAME), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1606,8 +1618,8 @@ public class TinkarStarterData {
                 .synonym("Logical Definition", TinkarTerm.PREFERRED)
                 .definition("The semantic value describing the purpose of the stated and inferred terminological axioms.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LOGICAL_DEFINITION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1616,8 +1628,8 @@ public class TinkarStarterData {
                 .synonym("Logical expression field", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LOGICAL_EXPRESSION_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1658,8 +1670,8 @@ public class TinkarStarterData {
                 .synonym("Meaning", TinkarTerm.PREFERRED)
                 .definition("The interpretation or explanation field for a pattern/semantics", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MEANING.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1678,22 +1690,22 @@ public class TinkarStarterData {
                 .synonym("Model concept", TinkarTerm.PREFERRED)
                 .definition("", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TINKAR_MODEL_CONCEPT), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.TINKAR_MODEL_CONCEPT)
+        starterData.concept(TINKAR_MODEL_CONCEPT)
                 .fullyQualifiedName("Tinkar Model concept", TinkarTerm.PREFERRED)
                 .synonym("Tinkar Model concept", TinkarTerm.PREFERRED)
                 .definition("", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.AXIOM_ORIGIN, TinkarTerm.CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY,
                         TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE,
-                        DIALECT_ASSEMBLAGE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.IDENTIFIER_SOURCE, IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
-                        TinkarTerm.LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
-                        TinkarTerm.PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
+                        DIALECT_ASSEMBLAGE, DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                        IDENTIFIER_SOURCE, IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
+                        LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
+                        PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
                         REFERENCE_RANGE, STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, VALUE_CONSTRAINT,
                         VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX),
                         List.of(TinkarTerm.MODEL_CONCEPT))
@@ -1736,8 +1748,8 @@ public class TinkarStarterData {
                 .synonym("Module", TinkarTerm.PREFERRED)
                 .definition("Module Version", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
+                .statedNavigation(null, List.of(VERSION_PROPERTIES))
+                .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1851,23 +1863,23 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.OBJECT)
+        starterData.concept(OBJECT)
                 .fullyQualifiedName("Object (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Object", TinkarTerm.PREFERRED)
                 .definition("An encapsulation of data together with procedures", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.OBJECT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, TinkarTerm.OBJECT_PROPERTIES, HAS_ACTIVE_INGREDIENT, HAS_DOSE_FORM, LATERALITY), List.of(TinkarTerm.ROOT_VERTEX))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, OBJECT.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, OBJECT_PROPERTIES, HAS_ACTIVE_INGREDIENT, HAS_DOSE_FORM, LATERALITY), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.OBJECT_PROPERTIES)
+        starterData.concept(OBJECT_PROPERTIES)
                 .fullyQualifiedName("Object Properties (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Object properties", TinkarTerm.PREFERRED)
                 .definition("Objects are instances of classes, the properties describe the data or attributes that an object can have", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.OBJECT_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(ACTION_PROPERTIES, TinkarTerm.CHRONICLE_PROPERTIES, TinkarTerm.VERSION_PROPERTIES, IMMUTABLECOORDINATE_PROPERTIES, TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES, TinkarTerm.LOGIC_COORDINATE_PROPERTIES, TinkarTerm.PATH_COORDINATE_PROPERTIES, TinkarTerm.SEMANTIC_PROPERTIES, TinkarTerm.TREE_AMALGAM_PROPERTIES, TinkarTerm.CORRELATION_PROPERTIES, TRANSITIVE_PROPERTY, REFLEXIVE_PROPERTY), List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, OBJECT_PROPERTIES.asUuidArray()[0].toString())
+                .statedNavigation(List.of(ACTION_PROPERTIES, CHRONICLE_PROPERTIES, VERSION_PROPERTIES, IMMUTABLECOORDINATE_PROPERTIES, TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES, TinkarTerm.LOGIC_COORDINATE_PROPERTIES, TinkarTerm.PATH_COORDINATE_PROPERTIES, TinkarTerm.SEMANTIC_PROPERTIES, TREE_AMALGAM_PROPERTIES, TinkarTerm.CORRELATION_PROPERTIES, TRANSITIVE_PROPERTY, REFLEXIVE_PROPERTY), List.of(OBJECT))
+                .statedDefinition(List.of(OBJECT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1966,8 +1978,8 @@ public class TinkarStarterData {
                 .synonym("Path coordinate properties", TinkarTerm.PREFERRED)
                 .definition("Character or attribute of coordinates referring to a series of connected points, that form a shape or trajectory", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH_COORDINATE_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_ORIGINS), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_ORIGINS), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1996,8 +2008,8 @@ public class TinkarStarterData {
                 .synonym("Path", TinkarTerm.PREFERRED)
                 .definition("Version path", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
+                .statedNavigation(null, List.of(VERSION_PROPERTIES))
+                .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2041,13 +2053,13 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.PHENOMENON)
+        starterData.concept(PHENOMENON)
                 .fullyQualifiedName("Phenomenon", TinkarTerm.PREFERRED)
                 .synonym("Phenomenon", TinkarTerm.PREFERRED)
                 .definition("A unique thought, fact, or circumstance", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PHENOMENON.asUuidArray()[0].toString())
-                .statedNavigation(List.of(EXAMPLE_UCUM_UNITS), List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, PHENOMENON.asUuidArray()[0].toString())
+                .statedNavigation(List.of(EXAMPLE_UCUM_UNITS), List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2066,8 +2078,8 @@ public class TinkarStarterData {
                 .synonym("Polish language", TinkarTerm.PREFERRED)
                 .definition("Polish Language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.POLISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2096,8 +2108,8 @@ public class TinkarStarterData {
                 .synonym("Primordial UUID", TinkarTerm.PREFERRED)
                 .definition("Primordial UUID", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.CHRONICLE_PROPERTIES))
+                .statedNavigation(null, List.of(CHRONICLE_PROPERTIES))
+                .statedDefinition(List.of(CHRONICLE_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2147,8 +2159,8 @@ public class TinkarStarterData {
                 .synonym("Referenced component subtype restriction", TinkarTerm.PREFERRED)
                 .definition("Stores the (optional) referenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ROLE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.ROLE_OPERATOR))
+                .statedNavigation(null, List.of(ROLE_OPERATOR))
+                .statedDefinition(List.of(ROLE_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2157,8 +2169,8 @@ public class TinkarStarterData {
                 .synonym("Referenced component type restriction", TinkarTerm.PREFERRED)
                 .definition("Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ROLE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.ROLE_OPERATOR))
+                .statedNavigation(null, List.of(ROLE_OPERATOR))
+                .statedDefinition(List.of(ROLE_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2177,8 +2189,8 @@ public class TinkarStarterData {
                 .synonym("Relationship destination", TinkarTerm.PREFERRED)
                 .definition("Signifies path to child concepts which are more specific than the Tinkar term", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.RELATIONSHIP_DESTINATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2187,8 +2199,8 @@ public class TinkarStarterData {
                 .synonym("Relationship origin", TinkarTerm.PREFERRED)
                 .definition("Signifies path to parent concepts which are more general than the Tinkar term", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.RELATIONSHIP_ORIGIN.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
+                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2197,7 +2209,7 @@ public class TinkarStarterData {
                 .synonym("Role", TinkarTerm.PREFERRED)
                 .definition("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .statedDefinition(List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
@@ -2213,11 +2225,11 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.ROLE_OPERATOR)
+        starterData.concept(ROLE_OPERATOR)
                 .fullyQualifiedName("Role operator", TinkarTerm.PREFERRED)
                 .synonym("Role operator", TinkarTerm.PREFERRED)
                 .definition("Concept that is used to describe universal vs existential restrictions.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_OPERATOR.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, ROLE_OPERATOR.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.UNIVERSAL_RESTRICTION, EXISTENTIAL_RESTRICTION), List.of(TinkarTerm.ROLE))
                 .statedDefinition(List.of(TinkarTerm.ROLE))
                 .tinkarBaseModelMembership()
@@ -2278,8 +2290,8 @@ public class TinkarStarterData {
                 .synonym("Russian language", TinkarTerm.PREFERRED)
                 .definition("Russian language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.RUSSIAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2288,8 +2300,8 @@ public class TinkarStarterData {
                 .synonym("Sandbox component", TinkarTerm.PREFERRED)
                 .definition("Sandbox component", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SANDBOX_COMPONENT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.SANDBOX_MODULE, TinkarTerm.SANDBOX_PATH), List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
+                .statedNavigation(List.of(TinkarTerm.SANDBOX_MODULE, TinkarTerm.SANDBOX_PATH), List.of(OBJECT))
+                .statedDefinition(List.of(OBJECT))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2350,8 +2362,8 @@ public class TinkarStarterData {
                 .synonym("Semantic field type", TinkarTerm.PREFERRED)
                 .definition("List of fields-  semantic", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SEMANTIC_FIELD_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2360,8 +2372,8 @@ public class TinkarStarterData {
                 .synonym("Semantic properties", TinkarTerm.PREFERRED)
                 .definition("The attributes or characteristics of a concept, term, or element that convey meaning or semantics in a given context", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SEMANTIC_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.SEMANTIC_FIELD_NAME), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.SEMANTIC_FIELD_NAME), List.of(OBJECT_PROPERTIES))
+                .statedDefinition(List.of(OBJECT_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2390,8 +2402,8 @@ public class TinkarStarterData {
                 .synonym("Spanish language", TinkarTerm.PREFERRED)
                 .definition("Value for the description language dialect", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SPANISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
+                .statedNavigation(null, List.of(LANGUAGE))
+                .statedDefinition(List.of(LANGUAGE))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2420,8 +2432,8 @@ public class TinkarStarterData {
                 .synonym("Status for version", TinkarTerm.PREFERRED)
                 .definition("Version status?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATUS_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
+                .statedNavigation(null, List.of(VERSION_PROPERTIES))
+                .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2440,8 +2452,8 @@ public class TinkarStarterData {
                 .synonym("String", TinkarTerm.PREFERRED)
                 .definition("A sequence of characters, either as a literal constant or as a variable. Strings could be used to represent terms from code systems or URLs, textual definitions, etc.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STRING.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
+                .statedNavigation(null, List.of(DISPLAY_FIELDS))
+                .statedDefinition(List.of(DISPLAY_FIELDS))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -2465,285 +2477,711 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.SUFFICIENT_SET)
-                .fullyQualifiedName("Sufficient set", TinkarTerm.PREFERRED)
-                .synonym("Sufficient set", TinkarTerm.PREFERRED)
-                .definition("A set of relationships that differentiate a concept and its subtypes from all other concepts. A concept that contains at least one set of necessary and sufficient conditions is considered defined.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SUFFICIENT_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SUFFICIENT_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Sufficient set")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Sufficient set")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A set of relationships that differentiate a concept and its subtypes from all other concepts. A concept that contains at least one set of necessary and sufficient conditions is considered defined.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.SUFFICIENT_SET.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
 
-        starterData.concept(TinkarTerm.SWEDISH_LANGUAGE)
-                .fullyQualifiedName("Swedish language (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Swedish language", TinkarTerm.PREFERRED)
-                .definition("Swedish Language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SWEDISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LANGUAGE))
-                .statedDefinition(List.of(TinkarTerm.LANGUAGE))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.TEXT_FOR_DESCRIPTION)
-                .fullyQualifiedName("Text for description", TinkarTerm.PREFERRED)
-                .synonym("Text", TinkarTerm.PREFERRED)
-                .definition("Captures the human readable text for a description in Komet", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TEXT_FOR_DESCRIPTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SWEDISH_LANGUAGE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Swedish language (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Swedish language")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Swedish Language")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.SWEDISH_LANGUAGE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LANGUAGE))
+                .attach(new StatedAxiom()
+                        .isA(LANGUAGE));
 
-        starterData.concept(TinkarTerm.TIME_FOR_VERSION)
-                .fullyQualifiedName("Time for version (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Time for version", TinkarTerm.PREFERRED)
-                .definition("Version time", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TIME_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.VERSION_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.VERSION_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.TREE_AMALGAM_PROPERTIES)
-                .fullyQualifiedName("Tree amalgam properties (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Tree amalgam properties", TinkarTerm.PREFERRED)
-                .definition("Data structure that consists of nodes connected by edges (a mixture or blend of different elements)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TREE_AMALGAM_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.TREE_LIST), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TEXT_FOR_DESCRIPTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Text for description")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Text")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Captures the human readable text for a description in Komet")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.TEXT_FOR_DESCRIPTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
 
-        starterData.concept(TinkarTerm.TREE_LIST)
-                .fullyQualifiedName("Tree list (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Tree list", TinkarTerm.PREFERRED)
-                .definition("List - Tree", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TREE_LIST.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TREE_AMALGAM_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.TREE_AMALGAM_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.US_ENGLISH_DIALECT)
-                .fullyQualifiedName("United States of America English dialect (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("US English dialect", TinkarTerm.PREFERRED)
-                .definition("USA -english dialect", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.US_ENGLISH_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.US_NURSING_DIALECT), List.of(ENGLISH_DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(ENGLISH_DIALECT_ASSEMBLAGE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TIME_FOR_VERSION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Time for version (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Time for version")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Version time")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.TIME_FOR_VERSION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(VERSION_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(VERSION_PROPERTIES));
 
-        starterData.concept(TinkarTerm.US_NURSING_DIALECT)
-                .fullyQualifiedName("US Nursing dialect (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("United States English Nursing Dialect", TinkarTerm.PREFERRED)
-                .definition("Nursing Dialect -US English", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.US_NURSING_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.US_ENGLISH_DIALECT))
-                .statedDefinition(List.of(TinkarTerm.US_ENGLISH_DIALECT))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.UUID_DATA_TYPE)
-                .fullyQualifiedName("UUID data type (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("UUID data type", TinkarTerm.PREFERRED)
-                .definition("Distinction of data type of UUID", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UUID_DATA_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TREE_AMALGAM_PROPERTIES))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Tree amalgam properties (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Tree amalgam properties")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Data structure that consists of nodes connected by edges (a mixture or blend of different elements)")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.TREE_AMALGAM_PROPERTIES.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.TREE_LIST)
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES));
 
-        starterData.concept(TinkarTerm.UUID_FIELD)
-                .fullyQualifiedName("UUID field (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("UUID field", TinkarTerm.PREFERRED)
-                .definition("Universally unique identifier field", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UUID_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.UUID_LIST_FOR_COMPONENT)
-                .fullyQualifiedName("UUID list for component (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("UUIDs", TinkarTerm.PREFERRED)
-                .definition("UUIDs", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UUID_LIST_FOR_COMPONENT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TREE_LIST))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Tree list (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Tree list")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("List - Tree")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.TREE_LIST.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TREE_AMALGAM_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(TREE_AMALGAM_PROPERTIES));
 
-        starterData.concept(TinkarTerm.UNCATEGORIZED_PHENOMENON)
-                .fullyQualifiedName("Uncategorized phenomenon (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Uncategorized phenomenon", TinkarTerm.PREFERRED)
-                .definition("Unknown", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UNCATEGORIZED_PHENOMENON.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.PHENOMENON))
-                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.UNINITIALIZED_COMPONENT)
-                .fullyQualifiedName("Uninitialized Component (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Uninitialized", TinkarTerm.PREFERRED)
-                .definition("Not initialized component", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UNINITIALIZED_COMPONENT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.US_ENGLISH_DIALECT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("United States of America English dialect (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("US English dialect")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("USA -english dialect")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.US_ENGLISH_DIALECT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(US_NURSING_DIALECT)
+                        .parents(ENGLISH_DIALECT_ASSEMBLAGE))
+                .attach(new StatedAxiom()
+                        .isA(ENGLISH_DIALECT_ASSEMBLAGE));
 
-        starterData.concept(TinkarTerm.UNIVERSAL_RESTRICTION)
-                .fullyQualifiedName("Universal Restriction", TinkarTerm.PREFERRED)
-                .synonym("Universal Restriction", TinkarTerm.PREFERRED)
-                .definition("Universal restrictions constrain the relationships along a given property to concepts that are members of a specific class.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UNIVERSAL_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ROLE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.ROLE_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                .fullyQualifiedName("UNIVERSALLY_UNIQUE_IDENTIFIER", TinkarTerm.PREFERRED)
-                .synonym("UUID", TinkarTerm.PREFERRED)
-                .definition("A universally unique identifier that uniquely represents a concept in Tinkar", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(US_NURSING_DIALECT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("US Nursing dialect (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("United States English Nursing Dialect")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Nursing Dialect -US English")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(US_NURSING_DIALECT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(US_ENGLISH_DIALECT))
+                .attach(new StatedAxiom()
+                        .isA(US_ENGLISH_DIALECT));
 
-        starterData.concept(TinkarTerm.USER)
-                .fullyQualifiedName("Author", TinkarTerm.PREFERRED)
-                .synonym("Author", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.USER.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, TinkarTerm.STARTER_DATA_AUTHORING), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.VERSION_LIST_FOR_CHRONICLE)
-                .fullyQualifiedName("Version list for chronicle (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Versions", TinkarTerm.PREFERRED)
-                .definition("Chronicle version list", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_LIST_FOR_CHRONICLE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.CHRONICLE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_DATA_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("UUID data type (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("UUID data type")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Distinction of data type of UUID")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UUID_DATA_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DYNAMIC_COLUMN_DATA_TYPES))
+                .attach(new StatedAxiom()
+                        .isA(DYNAMIC_COLUMN_DATA_TYPES));
 
-        starterData.concept(TinkarTerm.VERSION_PROPERTIES)
-                .fullyQualifiedName("Version Properties (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Version properties", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERSION_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.AUTHOR_FOR_VERSION, TinkarTerm.MODULE_FOR_VERSION, TinkarTerm.PATH_FOR_VERSION, TinkarTerm.STATUS_FOR_VERSION, TinkarTerm.TIME_FOR_VERSION, TinkarTerm.DESCRIPTION_VERSION_PROPERTIES), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.VERTEX_FIELD)
-                .fullyQualifiedName("Vertex field (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Vertex", TinkarTerm.PREFERRED)
-                .definition("Field for Vertex", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERTEX_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
-                .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("UUID field (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("UUID field")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Universally unique identifier field")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UUID_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
 
-        starterData.concept(TinkarTerm.VERTEX_SORT)
-                .fullyQualifiedName("Vertex sort (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Sort", TinkarTerm.PREFERRED)
-                .definition("Vertex sort", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERTEX_SORT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.VERTEX_STATE_SET)
-                .fullyQualifiedName("Vertex state set (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Vertex states", TinkarTerm.PREFERRED)
-                .definition("Vertex states", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VERTEX_STATE_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_LIST_FOR_COMPONENT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("UUID list for component (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("UUIDs")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("UUIDs")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UUID_LIST_FOR_COMPONENT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CHRONICLE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(CHRONICLE_PROPERTIES));
 
-        starterData.concept(TinkarTerm.VIEW_COORDINATE_KEY)
-                .fullyQualifiedName("View coordinate key (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("View Key", TinkarTerm.PREFERRED)
-                .definition("View Key", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.VIEW_COORDINATE_KEY.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(QUERY_CLAUSES))
-                .statedDefinition(List.of(QUERY_CLAUSES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.WITHDRAWN_STATE)
-                .fullyQualifiedName("Withdrawn state", TinkarTerm.PREFERRED)
-                .synonym("Withdrawn", TinkarTerm.PREFERRED)
-                .definition("Concept used to represent a status for components that are withdrawn.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.WITHDRAWN_STATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.STATUS_VALUE))
-                .statedDefinition(List.of(TinkarTerm.STATUS_VALUE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNCATEGORIZED_PHENOMENON))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Uncategorized phenomenon (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Uncategorized phenomenon")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Unknown")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UNCATEGORIZED_PHENOMENON.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(PHENOMENON))
+                .attach(new StatedAxiom()
+                        .isA(PHENOMENON));
 
-        starterData.concept(TinkarTerm.BOOLEAN)
-                .fullyQualifiedName("Boolean (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Boolean", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.BOOLEAN.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.BYTE_ARRAY)
-                .fullyQualifiedName("Byte array (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Byte array", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.BYTE_ARRAY.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNINITIALIZED_COMPONENT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Uninitialized Component (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Uninitialized")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Not initialized component")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UNINITIALIZED_COMPONENT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT));
 
-        starterData.concept(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT)
-                .fullyQualifiedName("Description list for concept (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Description list for concept", TinkarTerm.PREFERRED)
-                .definition("List of description", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.DOUBLE)
-                .fullyQualifiedName("Double (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Double", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DOUBLE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSAL_RESTRICTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Universal Restriction")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Universal Restriction")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Universal restrictions constrain the relationships along a given property to concepts that are members of a specific class.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UNIVERSAL_RESTRICTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(ROLE_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(ROLE_OPERATOR));
 
-        starterData.concept(TinkarTerm.FLOAT)
-                .fullyQualifiedName("Float (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Float", TinkarTerm.PREFERRED)
-                .definition("Data type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FLOAT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .statedDefinition(List.of(DYNAMIC_COLUMN_DATA_TYPES))
-                .tinkarBaseModelMembership()
-                .build();
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("UNIVERSALLY_UNIQUE_IDENTIFIER")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("UUID")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A universally unique identifier that uniquely represents a concept in Tinkar")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IDENTIFIER_SOURCE))
+                .attach(new StatedAxiom()
+                        .isA(IDENTIFIER_SOURCE));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.USER))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Author")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Author")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.USER.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, TinkarTerm.STARTER_DATA_AUTHORING)
+                        .parents(ROOT_VERTEX))
+                .attach(new StatedAxiom()
+                        .isA(ROOT_VERTEX));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERSION_LIST_FOR_CHRONICLE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Version list for chronicle (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Versions")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Chronicle version list")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.VERSION_LIST_FOR_CHRONICLE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CHRONICLE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(CHRONICLE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VERSION_PROPERTIES))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Version Properties (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Version properties")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(VERSION_PROPERTIES.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.AUTHOR_FOR_VERSION, TinkarTerm.MODULE_FOR_VERSION, TinkarTerm.PATH_FOR_VERSION, TinkarTerm.STATUS_FOR_VERSION, TinkarTerm.TIME_FOR_VERSION, TinkarTerm.DESCRIPTION_VERSION_PROPERTIES)
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Vertex field (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Vertex")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Field for Vertex")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.VERTEX_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_SORT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Vertex sort (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Sort")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Vertex sort")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.VERTEX_SORT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VIEW_COORDINATE_KEY))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("View coordinate key (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("View Key")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("View Key")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.VIEW_COORDINATE_KEY.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.QUERY_CLAUSES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.QUERY_CLAUSES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.WITHDRAWN_STATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Withdrawn state")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Withdrawn")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Concept used to represent a status for components that are withdrawn.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.WITHDRAWN_STATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.STATUS_VALUE))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.STATUS_VALUE));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Boolean (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Boolean")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Data type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.BOOLEAN.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BYTE_ARRAY))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Byte array (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Byte array")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Data type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.BYTE_ARRAY.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Description list for concept (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Description list for concept")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("List of description")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DOUBLE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Double (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Double")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Data type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DOUBLE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Float (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Float")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Data type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FLOAT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2816,9 +3254,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NID.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT))
+                        .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT));
+                        .isA(OBJECT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2841,9 +3279,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.CHRONICLE_PROPERTIES))
+                        .parents(CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.CHRONICLE_PROPERTIES));
+                        .isA(CHRONICLE_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(USERS_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2891,7 +3329,7 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                         .identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
+                        .children(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(ROOT_VERTEX));
 
@@ -2996,9 +3434,9 @@ public class TinkarStarterData {
                         .identifier(IMMUTABLECOORDINATE_PROPERTIES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, CLASSIFIER_FOR_LOGIC_COORDINATE, TinkarTerm.POSITION_ON_PATH)
-                        .parents(TinkarTerm.OBJECT_PROPERTIES))
+                        .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PURPOSE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3021,9 +3459,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PURPOSE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(ACTION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3047,9 +3485,9 @@ public class TinkarStarterData {
                         .identifier(ACTION_PROPERTIES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.CONDITIONAL_TRIGGERS)
-                        .parents(TinkarTerm.OBJECT_PROPERTIES))
+                        .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LITERAL_VALUE))
@@ -3101,9 +3539,9 @@ public class TinkarStarterData {
                         .identifier(DIALECT_ASSEMBLAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.CZECH_DIALECT, ENGLISH_DIALECT_ASSEMBLAGE, TinkarTerm.FRENCH_DIALECT, TinkarTerm.IRISH_DIALECT, TinkarTerm.KOREAN_DIALECT, TinkarTerm.POLISH_DIALECT, TinkarTerm.RUSSIAN_DIALECT)
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DYNAMIC_COLUMN_DATA_TYPES))
@@ -3356,9 +3794,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TRANSITIVE_PROPERTY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT_PROPERTIES))
+                        .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFLEXIVE_PROPERTY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3381,9 +3819,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(REFLEXIVE_PROPERTY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT_PROPERTIES))
+                        .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LATERALITY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3406,9 +3844,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LATERALITY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT))
+                        .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT));
+                        .isA(OBJECT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(HAS_ACTIVE_INGREDIENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3431,9 +3869,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(HAS_ACTIVE_INGREDIENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT))
+                        .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT));
+                        .isA(OBJECT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(HAS_DOSE_FORM))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3456,9 +3894,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(HAS_DOSE_FORM.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.OBJECT))
+                        .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT));
+                        .isA(OBJECT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(UNMODELED_ROLE_CONCEPT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3531,9 +3969,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(EXISTENTIAL_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.ROLE_OPERATOR))
+                        .parents(ROLE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROLE_OPERATOR));
+                        .isA(ROLE_OPERATOR));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INTRINSIC_ROLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3684,9 +4122,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(EXAMPLE_UCUM_UNITS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.PHENOMENON))
+                        .parents(PHENOMENON))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.PHENOMENON));
+                        .isA(PHENOMENON));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INFERRED_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3709,9 +4147,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(INFERRED_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(IDENTIFIER_VALUE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3734,9 +4172,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(IDENTIFIER_VALUE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MAXIMUM_VALUE_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3810,9 +4248,9 @@ public class TinkarStarterData {
                         .identifier(REFERENCE_RANGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(REFERENCE_RANGE_MAXIMUM, REFERENCE_RANGE_MINIMUM)
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFERENCE_RANGE_MAXIMUM))
@@ -3886,9 +4324,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(STATED_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VALUE_CONSTRAINT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3911,9 +4349,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(VALUE_CONSTRAINT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VALUE_CONSTRAINT_SOURCE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3936,9 +4374,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(VALUE_CONSTRAINT_SOURCE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                        .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT));
 
 
         //Create Description Pattern
@@ -3950,7 +4388,7 @@ public class TinkarStarterData {
                 .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
                 .fieldDefinition(
                         TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION,
-                        TinkarTerm.LANGUAGE,
+                        LANGUAGE,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         TinkarTerm.TEXT_FOR_DESCRIPTION,
@@ -4060,11 +4498,11 @@ public class TinkarStarterData {
                 .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
                 .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
                 .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value.", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
-                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .meaning(IDENTIFIER_SOURCE)
+                .purpose(IDENTIFIER_SOURCE)
                 .fieldDefinition(
-                        TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.IDENTIFIER_SOURCE,
+                        IDENTIFIER_SOURCE,
+                        IDENTIFIER_SOURCE,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
                         IDENTIFIER_VALUE,
@@ -4152,8 +4590,8 @@ public class TinkarStarterData {
 
         //Create STAMP Pattern
         starterData.pattern(TinkarTerm.STAMP_PATTERN)
-                .meaning(TinkarTerm.VERSION_PROPERTIES)
-                .purpose(TinkarTerm.VERSION_PROPERTIES)
+                .meaning(VERSION_PROPERTIES)
+                .purpose(VERSION_PROPERTIES)
                 .fieldDefinition(
                         TinkarTerm.STATUS_VALUE,
                         TinkarTerm.STATUS_FOR_VERSION,
