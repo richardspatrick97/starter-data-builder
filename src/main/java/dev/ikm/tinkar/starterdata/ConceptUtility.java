@@ -1,12 +1,17 @@
 package dev.ikm.tinkar.starterdata;
 
-import dev.ikm.tinkar.entity.*;
+import dev.ikm.tinkar.entity.ConceptRecord;
+import dev.ikm.tinkar.entity.ConceptRecordBuilder;
+import dev.ikm.tinkar.entity.ConceptVersionRecord;
+import dev.ikm.tinkar.entity.ConceptVersionRecordBuilder;
+import dev.ikm.tinkar.entity.Entity;
+import dev.ikm.tinkar.entity.EntityVersion;
+import dev.ikm.tinkar.entity.RecordListBuilder;
 import dev.ikm.tinkar.terms.EntityProxy;
-import dev.ikm.tinkar.terms.TinkarTerm;
-
-import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.UUID;
 
 class ConceptUtility {
 
@@ -19,19 +24,19 @@ class ConceptUtility {
     }
 
     protected Entity<? extends EntityVersion> createConcept(EntityProxy.Concept concept,
-                                                            Entity<? extends EntityVersion> stampEntity){
+                                                            Entity<? extends EntityVersion> stampEntity) {
         UUID uuid = concept.asUuidArray()[0];
 
         long[] additionalUuidLongsArr = null;
         if (concept.asUuidArray().length > 1) {
-            additionalUuidLongsArr = new long[(concept.asUuidArray().length-1)*2];
-            for (int i=1; i < concept.asUuidArray().length; i++) {
-                additionalUuidLongsArr[(i*2)-2] = concept.asUuidArray()[i].getMostSignificantBits();
-                additionalUuidLongsArr[(i*2)-1] = concept.asUuidArray()[i].getLeastSignificantBits();
+            additionalUuidLongsArr = new long[(concept.asUuidArray().length - 1) * 2];
+            for (int i = 1; i < concept.asUuidArray().length; i++) {
+                additionalUuidLongsArr[(i * 2) - 2] = concept.asUuidArray()[i].getMostSignificantBits();
+                additionalUuidLongsArr[(i * 2) - 1] = concept.asUuidArray()[i].getLeastSignificantBits();
             }
         }
 
-        LOG.info("Building Concept");
+        LOG.debug("Building Concept");
         RecordListBuilder<ConceptVersionRecord> versions = RecordListBuilder.make();
         ConceptRecord conceptRecord = ConceptRecordBuilder.builder()
                 .nid(concept.nid())
