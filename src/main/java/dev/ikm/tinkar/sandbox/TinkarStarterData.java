@@ -2871,8 +2871,7 @@ public class TinkarStarterData {
                         .isA(TinkarTerm.MODULE));
 
         //converting above concept "ROOT_VERTEX" to composer api format.
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler
-                        .concept(TinkarTerm.ROOT_VERTEX))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Integrated Knowledge Management (SOLOR)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
@@ -2974,17 +2973,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.MEANING))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.MEANING));
-
-
-        starterData.concept(IMMUTABLECOORDINATE_PROPERTIES)
-                .fullyQualifiedName("ImmutableCoordinate Properties (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("ImmutableCoordinate properties", TinkarTerm.PREFERRED)
-                .definition("A set of values or data representing a point in space that one established cannot be changed?", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, IMMUTABLECOORDINATE_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, CLASSIFIER_FOR_LOGIC_COORDINATE, TinkarTerm.POSITION_ON_PATH), List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
