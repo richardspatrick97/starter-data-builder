@@ -2528,7 +2528,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(LANGUAGE));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TEXT_FOR_DESCRIPTION))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Text for description")
@@ -2553,7 +2552,6 @@ public class TinkarStarterData {
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(TINKAR_MODEL_CONCEPT));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TIME_FOR_VERSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2580,8 +2578,7 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(VERSION_PROPERTIES));
 
-
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TREE_AMALGAM_PROPERTIES))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TREE_AMALGAM_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Tree amalgam properties (SOLOR)")
                         .language(ENGLISH_LANGUAGE)
@@ -2600,13 +2597,12 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.TREE_AMALGAM_PROPERTIES.asUuidArray()[0].toString()))
+                        .identifier(TREE_AMALGAM_PROPERTIES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.TREE_LIST)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
                         .isA(OBJECT_PROPERTIES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TREE_LIST))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2632,7 +2628,6 @@ public class TinkarStarterData {
                         .parents(TREE_AMALGAM_PROPERTIES))
                 .attach(new StatedAxiom()
                         .isA(TREE_AMALGAM_PROPERTIES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.US_ENGLISH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2660,7 +2655,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(ENGLISH_DIALECT_ASSEMBLAGE));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(US_NURSING_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("US Nursing dialect (SOLOR)")
@@ -2685,7 +2679,6 @@ public class TinkarStarterData {
                         .parents(US_ENGLISH_DIALECT))
                 .attach(new StatedAxiom()
                         .isA(US_ENGLISH_DIALECT));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_DATA_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2712,7 +2705,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(DYNAMIC_COLUMN_DATA_TYPES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("UUID field (SOLOR)")
@@ -2737,7 +2729,6 @@ public class TinkarStarterData {
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
                         .isA(DISPLAY_FIELDS));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_LIST_FOR_COMPONENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2764,7 +2755,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(CHRONICLE_PROPERTIES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNCATEGORIZED_PHENOMENON))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Uncategorized phenomenon (SOLOR)")
@@ -2789,7 +2779,6 @@ public class TinkarStarterData {
                         .parents(PHENOMENON))
                 .attach(new StatedAxiom()
                         .isA(PHENOMENON));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNINITIALIZED_COMPONENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2816,7 +2805,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(OBJECT));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSAL_RESTRICTION))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Universal Restriction")
@@ -2842,7 +2830,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(ROLE_OPERATOR));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("UNIVERSALLY_UNIQUE_IDENTIFIER")
@@ -2867,7 +2854,6 @@ public class TinkarStarterData {
                         .parents(IDENTIFIER_SOURCE))
                 .attach(new StatedAxiom()
                         .isA(IDENTIFIER_SOURCE));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.USER))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2895,7 +2881,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(ROOT_VERTEX));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERSION_LIST_FOR_CHRONICLE))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Version list for chronicle (SOLOR)")
@@ -2920,7 +2905,6 @@ public class TinkarStarterData {
                         .parents(CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
                         .isA(CHRONICLE_PROPERTIES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VERSION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2948,7 +2932,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(OBJECT_PROPERTIES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Vertex field (SOLOR)")
@@ -2974,6 +2957,30 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(DISPLAY_FIELDS));
 
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_STATE_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Vertex state set (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Vertex states")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Vertex states")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.VERTEX_STATE_SET.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_SORT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3000,7 +3007,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VIEW_COORDINATE_KEY))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("View coordinate key (SOLOR)")
@@ -3025,7 +3031,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.QUERY_CLAUSES))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.QUERY_CLAUSES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.WITHDRAWN_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3052,7 +3057,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.STATUS_VALUE));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Boolean (SOLOR)")
@@ -3077,7 +3081,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BYTE_ARRAY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3104,7 +3107,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Description list for concept (SOLOR)")
@@ -3129,7 +3131,6 @@ public class TinkarStarterData {
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(TINKAR_MODEL_CONCEPT));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DOUBLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3156,7 +3157,6 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
 
-
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Float (SOLOR)")
@@ -3181,7 +3181,6 @@ public class TinkarStarterData {
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
                         .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
