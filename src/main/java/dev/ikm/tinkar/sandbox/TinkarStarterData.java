@@ -9,6 +9,7 @@ import dev.ikm.tinkar.common.util.io.FileUtil;
 import dev.ikm.tinkar.composer.Composer;
 import dev.ikm.tinkar.composer.Session;
 import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
+import dev.ikm.tinkar.composer.assembler.SemanticAssembler;
 import dev.ikm.tinkar.composer.template.Definition;
 import dev.ikm.tinkar.composer.template.FullyQualifiedName;
 import dev.ikm.tinkar.composer.template.Identifier;
@@ -80,7 +81,9 @@ import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MAXIMUM;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MINIMUM;
 import static dev.ikm.tinkar.terms.TinkarTerm.REFLEXIVE_PROPERTY;
+import static dev.ikm.tinkar.terms.TinkarTerm.ROLE;
 import static dev.ikm.tinkar.terms.TinkarTerm.ROLE_OPERATOR;
+import static dev.ikm.tinkar.terms.TinkarTerm.ROLE_RESTRICTION;
 import static dev.ikm.tinkar.terms.TinkarTerm.ROOT_VERTEX;
 import static dev.ikm.tinkar.terms.TinkarTerm.SNOROCKET_CLASSIFIER;
 import static dev.ikm.tinkar.terms.TinkarTerm.SOLOR_MODULE;
@@ -1078,7 +1081,7 @@ public class TinkarStarterData {
                 .synonym("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1098,7 +1101,7 @@ public class TinkarStarterData {
                 .synonym("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
@@ -2134,146 +2137,395 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.PRIMORDIAL_STATE)
-                .fullyQualifiedName("Primordial state", TinkarTerm.PREFERRED)
-                .synonym("Primordial", TinkarTerm.PREFERRED)
-                .definition("Concept used to represent a status for components that have not yet been released and exist in their most basic form.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PRIMORDIAL_STATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.STATUS_VALUE))
-                .statedDefinition(List.of(TinkarTerm.STATUS_VALUE))
-                .tinkarBaseModelMembership()
-                .build();
+//        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_PATH))
+//                .attach((FullyQualifiedName fqn) -> fqn
+//                        .text("Primordial path")
+//                        .language(ENGLISH_LANGUAGE)
+//                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+//                        .attach(new USDialect()
+//                                .acceptability(PREFERRED))
+//                        .attach((Synonym synonym) -> synonym
+//                                .text("Primordial path")
+//                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+//                                .language(ENGLISH_LANGUAGE)))
+//                .attach(new USDialect()
+//                        .acceptability(PREFERRED))
+//                .attach((Definition definition) -> definition
+//                        .text("")
+//                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+//                        .language(ENGLISH_LANGUAGE))
+//                .attach((Identifier identifier) -> identifier
+//                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+//                        .identifier(TinkarTerm.PRIMORDIAL_PATH.asUuidArray()[0].toString()))
+//                .attach(new StatedNavigation()
+//                        .parents(TinkarTerm.PATH))
+//                .attach(new StatedAxiom()
+//                        .isA(TinkarTerm.PATH));
 
-        starterData.concept(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC)
-                .fullyQualifiedName("Referenced component nid for semantic (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Referenced component id", TinkarTerm.PREFERRED)
-                .definition("Component id Referenced", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.SEMANTIC_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.SEMANTIC_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION)
-                .fullyQualifiedName("Referenced component subtype restriction (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Referenced component subtype restriction", TinkarTerm.PREFERRED)
-                .definition("Stores the (optional) referenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(ROLE_OPERATOR))
-                .statedDefinition(List.of(ROLE_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_STATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Primordial state")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Primordial")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Concept used to represent a status for components that have not yet been released and exist in their most basic form.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.PRIMORDIAL_STATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.STATUS_VALUE))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.STATUS_VALUE));
 
-        starterData.concept(TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION)
-                .fullyQualifiedName("Referenced component type restriction (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Referenced component type restriction", TinkarTerm.PREFERRED)
-                .definition("Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(ROLE_OPERATOR))
-                .statedDefinition(List.of(ROLE_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE)
-                .fullyQualifiedName("Regular name description type", TinkarTerm.PREFERRED)
-                .synonym("Regular name description type", TinkarTerm.PREFERRED)
-                .definition("There may be descriptions/synonyms marked as “regular.”", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
-                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Referenced component nid for semantic (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Referenced component id")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Component id Referenced")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.SEMANTIC_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.SEMANTIC_PROPERTIES));
 
-        starterData.concept(TinkarTerm.RELATIONSHIP_DESTINATION)
-                .fullyQualifiedName("Relationship destination", TinkarTerm.PREFERRED)
-                .synonym("Relationship destination", TinkarTerm.PREFERRED)
-                .definition("Signifies path to child concepts which are more specific than the Tinkar term", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.RELATIONSHIP_DESTINATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.RELATIONSHIP_ORIGIN)
-                .fullyQualifiedName("Relationship origin", TinkarTerm.PREFERRED)
-                .synonym("Relationship origin", TinkarTerm.PREFERRED)
-                .definition("Signifies path to parent concepts which are more general than the Tinkar term", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.RELATIONSHIP_ORIGIN.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Referenced component subtype restriction (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Referenced component subtype restriction")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Stores the (optional) referenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.ROLE_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.ROLE_OPERATOR));
 
-        starterData.concept(TinkarTerm.ROLE)
-                .fullyQualifiedName("Role", TinkarTerm.PREFERRED)
-                .synonym("Role", TinkarTerm.PREFERRED)
-                .definition("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.ROLE_GROUP)
-                .fullyQualifiedName("Role group", TinkarTerm.PREFERRED)
-                .synonym("Role group", TinkarTerm.PREFERRED)
-                .definition("An association between a set of attribute or axiom value pairs that causes them to be considered together within a concept definition or post coordinated expression.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_GROUP.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE), List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Referenced component type restriction (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Referenced component type restriction")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.ROLE_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.ROLE_OPERATOR));
 
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(ROLE_OPERATOR)
-                .fullyQualifiedName("Role operator", TinkarTerm.PREFERRED)
-                .synonym("Role operator", TinkarTerm.PREFERRED)
-                .definition("Concept that is used to describe universal vs existential restrictions.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, ROLE_OPERATOR.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.UNIVERSAL_RESTRICTION, EXISTENTIAL_RESTRICTION), List.of(TinkarTerm.ROLE))
-                .statedDefinition(List.of(TinkarTerm.ROLE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Regular name description type")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Regular name description type")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("There may be descriptions/synonyms marked as “regular.”")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.DESCRIPTION_TYPE))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.DESCRIPTION_TYPE));
 
-        starterData.concept(TinkarTerm.ROLE_RESTRICTION)
-                .fullyQualifiedName(TinkarTerm.ROLE_RESTRICTION.description(), TinkarTerm.PREFERRED)
-                .synonym("Role value", TinkarTerm.PREFERRED)
-                .definition("Role restriction", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_RESTRICTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ROLE))
-                .statedDefinition(List.of(TinkarTerm.ROLE))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.ROLE_TYPE)
-                .fullyQualifiedName("Role type", TinkarTerm.PREFERRED)
-                .synonym("Role type", TinkarTerm.PREFERRED)
-                .definition("Refers to a concept that represents a particular kind of relationship that can exist between two entities. It defines the specific function or responsibility that one entity plays in relation to another.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.ROLE))
-                .statedDefinition(List.of(TinkarTerm.ROLE))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RELATIONSHIP_DESTINATION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Relationship destination")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Relationship destination")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Signifies path to child concepts which are more specific than the Tinkar term")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.RELATIONSHIP_DESTINATION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
 
-        starterData.concept(TinkarTerm.ROLE_TYPE_TO_ADD)
-                .fullyQualifiedName("Role type to add (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Role type to add", TinkarTerm.PREFERRED)
-                .definition("Action - add role type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_TYPE_TO_ADD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(ACTION_PROPERTIES))
-                .statedDefinition(List.of(ACTION_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.ROOT_FOR_LOGIC_COORDINATE)
-                .fullyQualifiedName("Root for logic coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Root", TinkarTerm.PREFERRED)
-                .definition("Logic coordinate root", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RELATIONSHIP_ORIGIN))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Relationship origin")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Relationship origin")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Signifies path to parent concepts which are more general than the Tinkar term")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.RELATIONSHIP_ORIGIN.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Role")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.ROLE_TYPE, ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION)
+                        .parents(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_GROUP))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Role group")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role group")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("An association between a set of attribute or axiom value pairs that causes them to be considered together within a concept definition or post coordinated expression.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE_GROUP.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(ROLE)
+                        .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS) );
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_OPERATOR))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Role operator")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role operator")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Concept that is used to describe universal vs existential restrictions.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE_OPERATOR.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.UNIVERSAL_RESTRICTION, EXISTENTIAL_RESTRICTION)
+                        .parents(ROLE))
+                .attach(new StatedAxiom()
+                        .isA(ROLE) );
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_RESTRICTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(ROLE_RESTRICTION.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role value")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Role restriction")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE_RESTRICTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(ROLE))
+                .attach(new StatedAxiom()
+                        .isA(ROLE) );
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Role type")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role type")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Refers to a concept that represents a particular kind of relationship that can exist between two entities. It defines the specific function or responsibility that one entity plays in relation to another.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(ROLE))
+                .attach(new StatedAxiom()
+                        .isA(ROLE) );
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_TYPE_TO_ADD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Role type to add (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Role type to add")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Action - add role type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROLE_TYPE_TO_ADD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(ACTION_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(ACTION_PROPERTIES));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_FOR_LOGIC_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Root for logic coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Root")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Logic coordinate root")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ROOT_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RUSSIAN_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2299,7 +2551,6 @@ public class TinkarStarterData {
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
                         .isA(DIALECT_ASSEMBLAGE));
-
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RUSSIAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3677,7 +3928,7 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                         .identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
+                        .children(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(ROOT_VERTEX));
 
