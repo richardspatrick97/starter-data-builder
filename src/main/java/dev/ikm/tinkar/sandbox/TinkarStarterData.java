@@ -69,6 +69,8 @@ import static dev.ikm.tinkar.terms.TinkarTerm.LATERALITY;
 import static dev.ikm.tinkar.terms.TinkarTerm.LITERAL_VALUE;
 import static dev.ikm.tinkar.terms.TinkarTerm.MAXIMUM_VALUE_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.MINIMUM_VALUE_OPERATOR;
+import static dev.ikm.tinkar.terms.TinkarTerm.MODEL_CONCEPT;
+import static dev.ikm.tinkar.terms.TinkarTerm.NAVIGATION;
 import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT;
 import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.PHENOMENON;
@@ -98,6 +100,7 @@ import static dev.ikm.tinkar.terms.TinkarTerm.TINKAR_MODEL_CONCEPT;
 import static dev.ikm.tinkar.terms.TinkarTerm.TRANSITIVE_PROPERTY;
 import static dev.ikm.tinkar.terms.TinkarTerm.TREE_AMALGAM_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.UNMODELED_ROLE_CONCEPT;
+import static dev.ikm.tinkar.terms.TinkarTerm.USER;
 import static dev.ikm.tinkar.terms.TinkarTerm.USERS_MODULE;
 import static dev.ikm.tinkar.terms.TinkarTerm.US_ENGLISH_DIALECT;
 import static dev.ikm.tinkar.terms.TinkarTerm.US_NURSING_DIALECT;
@@ -129,7 +132,7 @@ public class TinkarStarterData {
                 .authoringSTAMP(
                         TinkarTerm.ACTIVE_STATE,
                         PrimitiveData.PREMUNDANE_TIME,
-                        TinkarTerm.USER,
+                        USER,
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
@@ -150,7 +153,7 @@ public class TinkarStarterData {
         Session session = composer.open(
                 State.ACTIVE,
                 PrimitiveData.PREMUNDANE_TIME,
-                TinkarTerm.USER,
+                USER,
                 TinkarTerm.PRIMORDIAL_MODULE,
                 TinkarTerm.PRIMORDIAL_PATH);
 
@@ -179,8 +182,8 @@ public class TinkarStarterData {
                 .synonym("Metadata Authoring", TinkarTerm.ACCEPTABLE)
                 .definition("Define necessary minimum viable concepts to use Tinkar Data", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STARTER_DATA_AUTHORING.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.USER))
-                .statedDefinition(List.of(TinkarTerm.USER))
+                .statedNavigation(null, List.of(USER))
+                .statedDefinition(List.of(USER))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1422,8 +1425,8 @@ public class TinkarStarterData {
                 .synonym("Is-a inferred navigation", TinkarTerm.PREFERRED)
                 .definition("Designates the parent child relationship following the application of the reasoner", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A_INFERRED_NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
+                .statedNavigation(null, List.of(NAVIGATION))
+                .statedDefinition(List.of(NAVIGATION))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1432,8 +1435,8 @@ public class TinkarStarterData {
                 .synonym("Is-a stated navigation", TinkarTerm.PREFERRED)
                 .definition("Designates the parent child relationship as authored", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A_STATED_NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
+                .statedNavigation(null, List.of(NAVIGATION))
+                .statedDefinition(List.of(NAVIGATION))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1462,8 +1465,8 @@ public class TinkarStarterData {
                 .synonym("KOMET user", TinkarTerm.PREFERRED)
                 .definition("Authorized to author, edit and/or view in Komet", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.KOMET_USER.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.USER))
-                .statedDefinition(List.of(TinkarTerm.USER))
+                .statedNavigation(null, List.of(USER))
+                .statedDefinition(List.of(USER))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1472,8 +1475,8 @@ public class TinkarStarterData {
                 .synonym("KOMET user list", TinkarTerm.PREFERRED)
                 .definition("Inventory of authorized komet users", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.KOMET_USER_LIST.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.USER))
-                .statedDefinition(List.of(TinkarTerm.USER))
+                .statedNavigation(null, List.of(USER))
+                .statedDefinition(List.of(USER))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1689,173 +1692,434 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.MODEL_CONCEPT)
-                .fullyQualifiedName("Model concept", TinkarTerm.PREFERRED)
-                .synonym("Model concept", TinkarTerm.PREFERRED)
-                .definition("", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TINKAR_MODEL_CONCEPT), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TINKAR_MODEL_CONCEPT)
-                .fullyQualifiedName("Tinkar Model concept", TinkarTerm.PREFERRED)
-                .synonym("Tinkar Model concept", TinkarTerm.PREFERRED)
-                .definition("", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.AXIOM_ORIGIN, TinkarTerm.CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY,
-                        DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE,
-                        DIALECT_ASSEMBLAGE, DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
-                        IDENTIFIER_SOURCE, IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
-                        LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
-                        PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
-                        REFERENCE_RANGE, STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, VALUE_CONSTRAINT,
-                        VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX),
-                        List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.MODULE)
-                .fullyQualifiedName("Module", TinkarTerm.PREFERRED)
-                .synonym("Module", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.PRIMORDIAL_MODULE), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODEL_CONCEPT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Model concept")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Model concept")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text(" ")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.TINKAR_MODEL_CONCEPT)
+                        .parents(ROOT_VERTEX))
+                .attach(new StatedAxiom()
+                        .isA(ROOT_VERTEX));
 
-        starterData.concept(TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE)
-                .fullyQualifiedName("Module exclusion set for stamp coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module exclusions", TinkarTerm.PREFERRED)
-                .definition("Module exclusion set for stamp coordinate", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.MODULE_FOR_USER)
-                .fullyQualifiedName("Module for user (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module for user", TinkarTerm.PREFERRED)
-                .definition("User preference for Module?", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_FOR_USER.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.USER))
-                .statedDefinition(List.of(TinkarTerm.USER))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TINKAR_MODEL_CONCEPT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Tinkar Model concept")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Tinkar Model concept")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text(" ")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.AXIOM_ORIGIN, TinkarTerm.CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY,
+                                DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE,
+                                DIALECT_ASSEMBLAGE, DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                                IDENTIFIER_SOURCE, IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
+                                LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
+                                PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
+                                REFERENCE_RANGE, STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, VALUE_CONSTRAINT,
+                                VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX)
+                        .parents(MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(MODEL_CONCEPT));
 
-        starterData.concept(TinkarTerm.MODULE_FOR_VERSION)
-                .fullyQualifiedName("Module for version (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module", TinkarTerm.PREFERRED)
-                .definition("Module Version", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_FOR_VERSION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(VERSION_PROPERTIES))
-                .statedDefinition(List.of(VERSION_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE)
-                .fullyQualifiedName("Module options for edit coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module options", TinkarTerm.PREFERRED)
-                .definition("Coordinate edit options for Module", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.PRIMORDIAL_MODULE)
+                        .parents(ROOT_VERTEX))
+                .attach(new StatedAxiom()
+                        .isA(ROOT_VERTEX));
 
-        starterData.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE)
-                .fullyQualifiedName("Module preference list for language coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module nids", TinkarTerm.PREFERRED)
-                .definition("Module preference list for language coordinate", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE)
-                .fullyQualifiedName("Module preference list for stamp coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module Preference list", TinkarTerm.PREFERRED)
-                .definition("Module preference list for stamp coordinate", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module exclusion set for stamp coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module exclusions")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Module exclusion set for stamp coordinate")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
 
-        starterData.concept(TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE)
-                .fullyQualifiedName("Module preference order for stamp coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Module order", TinkarTerm.PREFERRED)
-                .definition("Module preference order for stamp coordinate", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.MODULES_FOR_STAMP_COORDINATE)
-                .fullyQualifiedName("Modules for stamp coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Modules", TinkarTerm.PREFERRED)
-                .definition("Stamp coordinate modules", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODULES_FOR_STAMP_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_FOR_USER))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module for user (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module for user")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("User preference for Module?")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_FOR_USER.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(USER))
+                .attach(new StatedAxiom()
+                        .isA(USER));
 
-        starterData.concept(TinkarTerm.NAVIGATION)
-                .fullyQualifiedName("Navigation (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Navigation", TinkarTerm.PREFERRED)
-                .definition("Navigation", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_VERTEX), List.of(TinkarTerm.PURPOSE))
-                .statedDefinition(List.of(TinkarTerm.PURPOSE))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.NAVIGATION_CONCEPT_SET)
-                .fullyQualifiedName("Navigation concept set (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Navigation set", TinkarTerm.PREFERRED)
-                .definition("Navigating sets of concepts?", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION_CONCEPT_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_FOR_VERSION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module for version (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Module Version")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_FOR_VERSION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(VERSION_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(VERSION_PROPERTIES));
 
-        starterData.concept(TinkarTerm.NAVIGATION_VERTEX)
-                .fullyQualifiedName("Navigation vertex (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Navigation vertex", TinkarTerm.PREFERRED)
-                .definition("Navigation vertex", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION_VERTEX.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module options for edit coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module options")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Coordinate edit options for Module")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
 
-        starterData.concept(TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION)
-                .fullyQualifiedName("Necessary but not sufficient concept definition (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Necessary but not sufficient concept definition", TinkarTerm.PREFERRED)
-                .definition("Not sufficiently defined by necessary conditions definition status", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
 
-        starterData.concept(TinkarTerm.NECESSARY_SET)
-                .fullyQualifiedName("Necessary set", TinkarTerm.PREFERRED)
-                .synonym("Necessary set", TinkarTerm.PREFERRED)
-                .definition("A set of relationships that is always true of a concept.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NECESSARY_SET.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module preference list for stamp coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module Preference list")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Module preference list for stamp coordinate")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module preference list for language coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module nids")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Module preference list for language coordinate")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Module preference order for stamp coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Module order")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Module preference order for stamp coordinate")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULES_FOR_STAMP_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Modules for stamp coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Modules")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Stamp coordinate modules")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.MODULES_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Navigation (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Navigation")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Navigation")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.NAVIGATION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_VERTEX)
+                        .parents(PURPOSE))
+                .attach(new StatedAxiom()
+                        .isA(PURPOSE));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION_CONCEPT_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Navigation concept set (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Navigation set")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Navigating sets of concepts?")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.NAVIGATION_CONCEPT_SET.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(NAVIGATION))
+                .attach(new StatedAxiom()
+                        .isA(NAVIGATION));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION_VERTEX))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Navigation vertex (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Navigation vertex")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Navigation vertex")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.NAVIGATION_VERTEX.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(NAVIGATION))
+                .attach(new StatedAxiom()
+                        .isA(NAVIGATION));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Necessary but not sufficient concept definition (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Necessary but not sufficient concept definition")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Not sufficiently defined by necessary conditions definition status")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NECESSARY_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Necessary set")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Necessary set")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE)))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A set of relationships that is always true of a concept.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.NECESSARY_SET.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
+
+
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NOT_APPLICABLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1984,9 +2248,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.USER))
+                        .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.USER));
+                        .isA(USER));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2009,9 +2273,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.USER))
+                        .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.USER));
+                        .isA(USER));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS))
@@ -2035,9 +2299,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.USER))
+                        .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.USER));
+                        .isA(USER));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PART_OF))
@@ -2245,9 +2509,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_FOR_USER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.USER))
+                        .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.USER));
+                        .isA(USER));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_FOR_VERSION))
@@ -3893,7 +4157,7 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(IDENTIFIER_SOURCE));
 
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.USER))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(USER))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Author")
                         .language(ENGLISH_LANGUAGE)
@@ -3912,7 +4176,7 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.USER.asUuidArray()[0].toString()))
+                        .identifier(USER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, TinkarTerm.STARTER_DATA_AUTHORING)
                         .parents(ROOT_VERTEX))
@@ -4366,7 +4630,7 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                         .identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
+                        .children(MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, ROLE, USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(ROOT_VERTEX));
 
