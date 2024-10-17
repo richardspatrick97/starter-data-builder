@@ -7,7 +7,7 @@ open module tinkar.sandbox {
     requires dev.ikm.tinkar.provider.executor;
     requires dev.ikm.tinkar.provider.search;
     requires dev.ikm.tinkar.coordinate;
-    requires org.eclipse.collections.api;
+    requires dev.ikm.jpms.eclipse.collections.api;
     requires java.logging;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.uuid;
