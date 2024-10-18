@@ -3151,6 +3151,26 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
+        starterData.concept(TinkarTerm.FEATURE_TYPE)
+                .fullyQualifiedName("Feature Type (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Feature Type", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.FEATURE_TYPE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FEATURE_TYPE.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .tinkarBaseModelMembership()
+                .build();
+
+        starterData.concept(TinkarTerm.PROPERTY_SEQUENCE)
+                .fullyQualifiedName("Property Sequence (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Property Sequence", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.PROPERTY_SEQUENCE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PROPERTY_SEQUENCE.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
+                .tinkarBaseModelMembership()
+                .build();
+
         //Create Description Pattern
         starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
                 .fullyQualifiedName("Description Pattern", TinkarTerm.PREFERRED)
