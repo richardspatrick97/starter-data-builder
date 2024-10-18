@@ -45,21 +45,27 @@ import static dev.ikm.tinkar.terms.TinkarTerm.CHRONICLE_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE;
 import static dev.ikm.tinkar.terms.TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
 import static dev.ikm.tinkar.terms.TinkarTerm.CONCRETE_DOMAIN_OPERATOR;
+import static dev.ikm.tinkar.terms.TinkarTerm.CONNECTIVE_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE;
+import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_DIALECT_PAIR;
+import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_LOGIC_PROFILE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_TYPE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_VERSION_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE;
+import static dev.ikm.tinkar.terms.TinkarTerm.DIRECTED_GRAPH;
 import static dev.ikm.tinkar.terms.TinkarTerm.DISPLAY_FIELDS;
 import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES;
 import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_REFERENCED_COMPONENT_RESTRICTION;
+import static dev.ikm.tinkar.terms.TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS;
 import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_LANGUAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.EXAMPLE_UCUM_UNITS;
 import static dev.ikm.tinkar.terms.TinkarTerm.EXISTENTIAL_RESTRICTION;
 import static dev.ikm.tinkar.terms.TinkarTerm.FEATURE;
 import static dev.ikm.tinkar.terms.TinkarTerm.FIELD_SUBSTITUTION;
+import static dev.ikm.tinkar.terms.TinkarTerm.GROUPING;
 import static dev.ikm.tinkar.terms.TinkarTerm.HAS_ACTIVE_INGREDIENT;
 import static dev.ikm.tinkar.terms.TinkarTerm.HAS_DOSE_FORM;
 import static dev.ikm.tinkar.terms.TinkarTerm.IDENTIFIER_SOURCE;
@@ -73,8 +79,10 @@ import static dev.ikm.tinkar.terms.TinkarTerm.LANGUAGE;
 import static dev.ikm.tinkar.terms.TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.LATERALITY;
 import static dev.ikm.tinkar.terms.TinkarTerm.LITERAL_VALUE;
+import static dev.ikm.tinkar.terms.TinkarTerm.LOGICAL_DEFINITION;
 import static dev.ikm.tinkar.terms.TinkarTerm.LOGIC_COORDINATE_PROPERTIES;
 import static dev.ikm.tinkar.terms.TinkarTerm.MAXIMUM_VALUE_OPERATOR;
+import static dev.ikm.tinkar.terms.TinkarTerm.MEANING;
 import static dev.ikm.tinkar.terms.TinkarTerm.MINIMUM_VALUE_OPERATOR;
 import static dev.ikm.tinkar.terms.TinkarTerm.MODEL_CONCEPT;
 import static dev.ikm.tinkar.terms.TinkarTerm.MODULE;
@@ -183,8 +191,8 @@ public class TinkarStarterData {
                 .synonym("Text comparison", TinkarTerm.PREFERRED)
                 .definition("Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TEXT_COMPARISON_MEASURE_SEMANTIC.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION), List.of(TinkarTerm.MEANING))
-                .statedDefinition(List.of(TinkarTerm.MEANING))
+                .statedNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION), List.of(MEANING))
+                .statedDefinition(List.of(MEANING))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -253,8 +261,8 @@ public class TinkarStarterData {
                 .synonym("And", TinkarTerm.PREFERRED)
                 .definition("An operator that typically is employed to combine two conditions", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.AND.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CONNECTIVE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.CONNECTIVE_OPERATOR))
+                .statedNavigation(null, List.of(CONNECTIVE_OPERATOR))
+                .statedDefinition(List.of(CONNECTIVE_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -583,8 +591,8 @@ public class TinkarStarterData {
                 .synonym("Concept reference", TinkarTerm.PREFERRED)
                 .definition("A field to capture a reference to validate concept", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_REFERENCE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CONNECTIVE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.CONNECTIVE_OPERATOR))
+                .statedNavigation(null, List.of(CONNECTIVE_OPERATOR))
+                .statedDefinition(List.of(CONNECTIVE_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -658,13 +666,13 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.CONNECTIVE_OPERATOR)
+        starterData.concept(CONNECTIVE_OPERATOR)
                 .fullyQualifiedName("Connective operator (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Connective operator", TinkarTerm.PREFERRED)
                 .definition("A field that captures what the operator is (logical connective)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONNECTIVE_OPERATOR.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.AND, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DISJOINT_WITH, TinkarTerm.OR, TinkarTerm.IS_A, TinkarTerm.PART_OF, TinkarTerm.CONCEPT_REFERENCE), List.of(TinkarTerm.MEANING))
-                .statedDefinition(List.of(TinkarTerm.MEANING))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, CONNECTIVE_OPERATOR.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.AND, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DISJOINT_WITH, TinkarTerm.OR, TinkarTerm.IS_A, TinkarTerm.PART_OF, TinkarTerm.CONCEPT_REFERENCE), List.of(MEANING))
+                .statedDefinition(List.of(MEANING))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -763,8 +771,8 @@ public class TinkarStarterData {
                 .synonym("Definition root", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DEFINITION_ROOT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CONNECTIVE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.CONNECTIVE_OPERATOR))
+                .statedNavigation(null, List.of(CONNECTIVE_OPERATOR))
+                .statedDefinition(List.of(CONNECTIVE_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -818,11 +826,11 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.DESCRIPTION_DIALECT_PAIR)
+        starterData.concept(DESCRIPTION_DIALECT_PAIR)
                 .fullyQualifiedName("Description dialect pair (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Description dialect pair", TinkarTerm.PREFERRED)
                 .definition("Description dialect pair - linking together dialects with language descriptions", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_DIALECT_PAIR.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, DESCRIPTION_DIALECT_PAIR.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR), List.of(DESCRIPTION_VERSION_PROPERTIES))
                 .statedDefinition(List.of(DESCRIPTION_VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
@@ -843,8 +851,8 @@ public class TinkarStarterData {
                 .synonym("Description for dialect/description pair", TinkarTerm.PREFERRED)
                 .definition("Linking together dialects with language descriptions", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_DIALECT_PAIR))
-                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_DIALECT_PAIR))
+                .statedNavigation(null, List.of(DESCRIPTION_DIALECT_PAIR))
+                .statedDefinition(List.of(DESCRIPTION_DIALECT_PAIR))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -923,16 +931,16 @@ public class TinkarStarterData {
                 .synonym("Description version properties", TinkarTerm.PREFERRED)
                 .definition("Combination of terms that might be used in a specific context or domain", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, DESCRIPTION_VERSION_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_DIALECT_PAIR), List.of(VERSION_PROPERTIES))
+                .statedNavigation(List.of(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, DESCRIPTION_DIALECT_PAIR), List.of(VERSION_PROPERTIES))
                 .statedDefinition(List.of(VERSION_PROPERTIES))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(TinkarTerm.DESCRIPTION_LOGIC_PROFILE)
+        starterData.concept(DESCRIPTION_LOGIC_PROFILE)
                 .fullyQualifiedName("Description-logic profile (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Description-logic profile", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DESCRIPTION_LOGIC_PROFILE.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, DESCRIPTION_LOGIC_PROFILE.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_PROFILE), List.of(TINKAR_MODEL_CONCEPT))
                 .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
@@ -958,6 +966,7 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
+/*
         starterData.concept(TinkarTerm.DEVELOPMENT_PATH)
                 .fullyQualifiedName("Development path", TinkarTerm.PREFERRED)
                 .synonym("Development path", TinkarTerm.PREFERRED)
@@ -969,341 +978,144 @@ public class TinkarStarterData {
                 .pathOrigin(TinkarTerm.SANDBOX_PATH)
                 .tinkarBaseModelMembership()
                 .build();
-
-        starterData.concept(TinkarTerm.DIGRAPH_FIELD)
-                .fullyQualifiedName("DiGraph field", TinkarTerm.PREFERRED)
-                .synonym("Instant/ DiGraph", TinkarTerm.PREFERRED)
-                .definition("A display field that references a di-graph whose edges are ordered pairs of vertices. Each edge can be followed from one vertex to another vertex.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIGRAPH_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DISPLAY_FIELDS))
-                .statedDefinition(List.of(DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DITREE_FIELD)
-                .fullyQualifiedName("DiTree field", TinkarTerm.PREFERRED)
-                .synonym("DiTree", TinkarTerm.PREFERRED)
-                .definition("A display field that references a graph obtained from an undirected tree by replacing each undirected edge by two directed edges with opposite directions.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DITREE_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DISPLAY_FIELDS))
-                .statedDefinition(List.of(DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR)
-                .fullyQualifiedName("Dialect for dialect/description pair (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Dialect for dialect/description pair", TinkarTerm.PREFERRED)
-                .definition("Specific dialect", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_DIALECT_PAIR))
-                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_DIALECT_PAIR))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE)
-                .fullyQualifiedName("Digraph for logic coordinate (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Digraph", TinkarTerm.PREFERRED)
-                .definition("A value which describes a immutable coordinate property", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .statedDefinition(List.of(IMMUTABLECOORDINATE_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DIRECTED_GRAPH)
-                .fullyQualifiedName("Directed graph (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("NavigationCoordinate/Directed graph", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIRECTED_GRAPH.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_DIGRAPH), List.of(TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DISJOINT_WITH)
-                .fullyQualifiedName("Disjoint with (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Disjoint with", TinkarTerm.PREFERRED)
-                .definition("An operator", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DISJOINT_WITH.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CONNECTIVE_OPERATOR))
-                .statedDefinition(List.of(TinkarTerm.CONNECTIVE_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(DISPLAY_FIELDS)
-                .fullyQualifiedName("Display Fields", TinkarTerm.PREFERRED)
-                .synonym("Display fields", TinkarTerm.PREFERRED)
-                .definition("Captures the human readable terms", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, DISPLAY_FIELDS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.COMPONENT_FIELD, TinkarTerm.COMPONENT_ID_LIST_FIELD, TinkarTerm.COMPONENT_ID_SET_FIELD, TinkarTerm.CONCEPT_FIELD, TinkarTerm.DIGRAPH_FIELD, TinkarTerm.DITREE_FIELD, TinkarTerm.FLOAT_FIELD, TinkarTerm.INTEGER_FIELD, TinkarTerm.SEMANTIC_FIELD_TYPE, TinkarTerm.STRING), List.of(TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DOUBLE_FIELD)
-                .fullyQualifiedName("Double field (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Double field", TinkarTerm.PREFERRED)
-                .definition("A data value (type of structure for data)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DOUBLE_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DISPLAY_FIELDS))
-                .statedDefinition(List.of(DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.DUTCH_LANGUAGE)
-                .fullyQualifiedName("Dutch language (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Dutch language", TinkarTerm.PREFERRED)
-                .definition("Dutch language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DUTCH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(LANGUAGE))
-                .statedDefinition(List.of(LANGUAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PROFILE_SET_OPERATOR)
-                .fullyQualifiedName("El profile set operator (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("EL profile set operator", TinkarTerm.PREFERRED)
-                .definition("EL profile set operator", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PROFILE_SET_OPERATOR.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET), List.of(TinkarTerm.MEANING))
-                .statedDefinition(List.of(TinkarTerm.MEANING))
-                .tinkarBaseModelMembership()
-                .build();
-
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)
-                .fullyQualifiedName("EL++ terminological axioms", TinkarTerm.PREFERRED)
-                .synonym("EL++ terminological axioms", TinkarTerm.PREFERRED)
-                .definition("The set of relationships or axioms has defined by the EL++ Logic", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS), List.of(TINKAR_MODEL_CONCEPT))
-                .statedDefinition(List.of(TINKAR_MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION)
-                .fullyQualifiedName("El++ Inferred Concept Definition (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("EL++ Inferred Concept Definition", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LOGICAL_DEFINITION))
-                .statedDefinition(List.of(TinkarTerm.LOGICAL_DEFINITION))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS)
-                .fullyQualifiedName("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
-                .synonym("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION)
-                .fullyQualifiedName("EL++ Stated Concept Definition (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("EL++ Stated Concept Definition", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.LOGICAL_DEFINITION))
-                .statedDefinition(List.of(TinkarTerm.LOGICAL_DEFINITION))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)
-                .fullyQualifiedName("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
-                .synonym("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_DIGRAPH)
-                .fullyQualifiedName("EL++ digraph (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("EL++ digraph", TinkarTerm.PREFERRED)
-                .definition("The directed graph that results from classifying a set of EL++ axioms", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_DIGRAPH.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DIRECTED_GRAPH))
-                .statedDefinition(List.of(TinkarTerm.DIRECTED_GRAPH))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EL_PLUS_PLUS_PROFILE)
-                .fullyQualifiedName("EL++ logic profile (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("EL ++ logic profile", TinkarTerm.PREFERRED)
-                .definition("EL ++ profile", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_PROFILE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_LOGIC_PROFILE))
-                .statedDefinition(List.of(TinkarTerm.DESCRIPTION_LOGIC_PROFILE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.ENGLISH_LANGUAGE)
-                .fullyQualifiedName("English Language", TinkarTerm.PREFERRED)
-                .synonym("English language", TinkarTerm.PREFERRED)
-                .definition("Value for description language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ENGLISH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(LANGUAGE))
-                .statedDefinition(List.of(LANGUAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EQUAL_TO)
-                .fullyQualifiedName("Equal to (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Equal to", TinkarTerm.PREFERRED)
-                .definition("A concept indicating the operator \"=\"", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EQUAL_TO.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(CONCRETE_DOMAIN_OPERATOR))
-                .statedDefinition(List.of(CONCRETE_DOMAIN_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EXACT)
-                .fullyQualifiedName("Exact (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Exact", TinkarTerm.PREFERRED)
-                .definition("Source and target are semantic or exact lexical match", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EXACT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.GROUPING))
-                .statedDefinition(List.of(TinkarTerm.GROUPING))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EXTENDED_DESCRIPTION_TYPE)
-                .fullyQualifiedName("Extended description type (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Extended description type", TinkarTerm.PREFERRED)
-                .definition("Used to store non-snomed description types when other terminologies are imported", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EXTENDED_DESCRIPTION_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DESCRIPTION_TYPE))
-                .statedDefinition(List.of(DESCRIPTION_TYPE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.EXTENDED_RELATIONSHIP_TYPE)
-                .fullyQualifiedName("Extended relationship type (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Extended relationship type", TinkarTerm.PREFERRED)
-                .definition("Used to store non-snomed relationship types when other terminologies are imported- especially when a relationship is mapped onto a snomed relationship type (such as isa)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EXTENDED_RELATIONSHIP_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DESCRIPTION_TYPE))
-                .statedDefinition(List.of(DESCRIPTION_TYPE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FLOAT_FIELD)
-                .fullyQualifiedName("Float field", TinkarTerm.PREFERRED)
-                .synonym("Float field", TinkarTerm.PREFERRED)
-                .definition("Represents values as high-precision fractional values.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FLOAT_FIELD.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DISPLAY_FIELDS))
-                .statedDefinition(List.of(DISPLAY_FIELDS))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FLOAT_LITERAL)
-                .fullyQualifiedName("Float literal (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Float literal", TinkarTerm.PREFERRED)
-                .definition("Numbers with decimal point or an exponential part", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FLOAT_LITERAL.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(LITERAL_VALUE))
-                .statedDefinition(List.of(LITERAL_VALUE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FLOAT_SUBSTITUTION)
-                .fullyQualifiedName("Float substitution (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Float substitution", TinkarTerm.PREFERRED)
-                .definition("Null", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FLOAT_SUBSTITUTION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(FIELD_SUBSTITUTION))
-                .statedDefinition(List.of(FIELD_SUBSTITUTION))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FRENCH_DIALECT)
-                .fullyQualifiedName("French dialect (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("French dialect", TinkarTerm.PREFERRED)
-                .definition("French dialect", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FRENCH_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(DIALECT_ASSEMBLAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FRENCH_LANGUAGE)
-                .fullyQualifiedName("French Language (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("French language", TinkarTerm.PREFERRED)
-                .definition("French Language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FRENCH_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(LANGUAGE))
-                .statedDefinition(List.of(LANGUAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE)
-                .fullyQualifiedName("Fully qualified name description type", TinkarTerm.PREFERRED)
-                .synonym("Fully qualified name", TinkarTerm.PREFERRED)
-                .definition("Fully qualified name is a description that uniquely identifies and differentiates it from other concepts with similar descriptions", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(DESCRIPTION_TYPE))
-                .statedDefinition(List.of(DESCRIPTION_TYPE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.GB_ENGLISH_DIALECT)
-                .fullyQualifiedName("Great Britain English dialect", TinkarTerm.PREFERRED)
-                .synonym("GB English dialect / GB English", TinkarTerm.PREFERRED)
-                .definition("Great Britain: English Language reference set", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GB_ENGLISH_DIALECT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(ENGLISH_DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(ENGLISH_DIALECT_ASSEMBLAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.GERMAN_LANGUAGE)
-                .fullyQualifiedName("German Language (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("German language", TinkarTerm.PREFERRED)
-                .definition("German Language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GERMAN_LANGUAGE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(LANGUAGE))
-                .statedDefinition(List.of(LANGUAGE))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.GREATER_THAN)
-                .fullyQualifiedName("Greater than (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Greater than", TinkarTerm.PREFERRED)
-                .definition("A concept indicating the operator \">\"", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GREATER_THAN.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(CONCRETE_DOMAIN_OPERATOR))
-                .statedDefinition(List.of(CONCRETE_DOMAIN_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(TinkarTerm.GREATER_THAN_OR_EQUAL_TO)
-                .fullyQualifiedName("Greater than or equal to (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Greater than or equal to", TinkarTerm.PREFERRED)
-                .definition("A concept indicating the operator \">=\"", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.GREATER_THAN_OR_EQUAL_TO.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(CONCRETE_DOMAIN_OPERATOR))
-                .statedDefinition(List.of(CONCRETE_DOMAIN_OPERATOR))
-                .tinkarBaseModelMembership()
-                .build();
-
-
-
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GROUPING))
+*/
+        // todo
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEVELOPMENT_PATH))
                 .attach((FullyQualifiedName fqn) -> fqn
-                        .text("Health concept (SOLOR)")
+                        .text("Development path")
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
-                                .text("Health concept")
+                                .text("Development path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A path that specifies that the components are currently under development")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DEVELOPMENT_PATH.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(PATH))
+                .attach(new StatedAxiom()
+                        .isA(PATH));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIGRAPH_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("DiGraph field")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Instant/ DiGraph")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A display field that references a di-graph whose edges are ordered pairs of vertices. Each edge can be followed from one vertex to another vertex.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DIGRAPH_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DITREE_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("DiTree field")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("DiTree")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A display field that references a graph obtained from an undirected tree by replacing each undirected edge by two directed edges with opposite directions.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DITREE_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Dialect for dialect/description pair (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Dialect for dialect/description pair")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Specific dialect")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DESCRIPTION_DIALECT_PAIR))
+                .attach(new StatedAxiom()
+                        .isA(DESCRIPTION_DIALECT_PAIR));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Digraph for logic coordinate (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Digraph")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A value which describes a immutable coordinate property")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(IMMUTABLECOORDINATE_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIRECTED_GRAPH))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Directed graph (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("NavigationCoordinate/Directed graph")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1312,7 +1124,718 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.GROUPING.asUuidArray()[0].toString()))
+                        .identifier(TinkarTerm.DIRECTED_GRAPH.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.EL_PLUS_PLUS_DIGRAPH)
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DISJOINT_WITH))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Disjoint with (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Disjoint with")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("An operator")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DISJOINT_WITH.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CONNECTIVE_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(CONNECTIVE_OPERATOR));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DISPLAY_FIELDS))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Display Fields")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Display fields")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Captures the human readable terms")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DISPLAY_FIELDS.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.COMPONENT_FIELD, TinkarTerm.COMPONENT_ID_LIST_FIELD, TinkarTerm.COMPONENT_ID_SET_FIELD, TinkarTerm.CONCEPT_FIELD, TinkarTerm.DIGRAPH_FIELD, TinkarTerm.DITREE_FIELD, TinkarTerm.FLOAT_FIELD, TinkarTerm.INTEGER_FIELD, TinkarTerm.SEMANTIC_FIELD_TYPE, TinkarTerm.STRING)
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DOUBLE_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Double field (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Double field")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A data value (type of structure for data)")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DOUBLE_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DUTCH_LANGUAGE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Dutch language (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Dutch language")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Dutch language")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.DUTCH_LANGUAGE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LANGUAGE))
+                .attach(new StatedAxiom()
+                        .isA(LANGUAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PROFILE_SET_OPERATOR))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("El profile set operator (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL profile set operator")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("EL profile set operator")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PROFILE_SET_OPERATOR.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET)
+                        .parents(MEANING))
+                .attach(new StatedAxiom()
+                        .isA(MEANING));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ terminological axioms")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ terminological axioms")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("The set of relationships or axioms has defined by the EL++ Logic")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)
+                        .parents(TINKAR_MODEL_CONCEPT))
+                .attach(new StatedAxiom()
+                        .isA(TINKAR_MODEL_CONCEPT));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("El++ Inferred Concept Definition (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ Inferred Concept Definition")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LOGICAL_DEFINITION))
+                .attach(new StatedAxiom()
+                        .isA(LOGICAL_DEFINITION));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ Inferred terminological axioms")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ Inferred terminological axioms")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP)
+                        .parents(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ Stated Concept Definition (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ Stated Concept Definition")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LOGICAL_DEFINITION))
+                .attach(new StatedAxiom()
+                        .isA(LOGICAL_DEFINITION));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ Stated terminological axioms")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ Stated terminological axioms")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP)
+                        .parents(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
+                .attach(new StatedAxiom()
+                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_DIGRAPH))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ digraph (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL++ digraph")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("The directed graph that results from classifying a set of EL++ axioms")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_DIGRAPH.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DIRECTED_GRAPH))
+                .attach(new StatedAxiom()
+                        .isA(DIRECTED_GRAPH));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_PROFILE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ logic profile (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("EL ++ logic profile")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("EL ++ profile")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EL_PLUS_PLUS_PROFILE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DESCRIPTION_LOGIC_PROFILE))
+                .attach(new StatedAxiom()
+                        .isA(DESCRIPTION_LOGIC_PROFILE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ENGLISH_LANGUAGE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("English Language")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("English language")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Value for description language")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.ENGLISH_LANGUAGE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LANGUAGE))
+                .attach(new StatedAxiom()
+                        .isA(LANGUAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EQUAL_TO))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Equal to (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Equal to")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A concept indicating the operator \"=\"")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EQUAL_TO.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CONCRETE_DOMAIN_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(CONCRETE_DOMAIN_OPERATOR));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXACT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Exact (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Exact")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Source and target are semantic or exact lexical match")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EXACT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(GROUPING))
+                .attach(new StatedAxiom()
+                        .isA(GROUPING));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXTENDED_DESCRIPTION_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Extended description type (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Extended description type")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Used to store non-snomed description types when other terminologies are imported")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EXTENDED_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DESCRIPTION_TYPE))
+                .attach(new StatedAxiom()
+                        .isA(DESCRIPTION_TYPE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXTENDED_RELATIONSHIP_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Extended relationship type (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Extended relationship type")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Used to store non-snomed relationship types when other terminologies are imported- especially when a relationship is mapped onto a snomed relationship type (such as isa)")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.EXTENDED_RELATIONSHIP_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DESCRIPTION_TYPE))
+                .attach(new StatedAxiom()
+                        .isA(DESCRIPTION_TYPE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Float field")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Float field")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Represents values as high-precision fractional values.")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FLOAT_FIELD.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DISPLAY_FIELDS))
+                .attach(new StatedAxiom()
+                        .isA(DISPLAY_FIELDS));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_LITERAL))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Float literal (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Float literal")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Numbers with decimal point or an exponential part")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FLOAT_LITERAL.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LITERAL_VALUE))
+                .attach(new StatedAxiom()
+                        .isA(LITERAL_VALUE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_SUBSTITUTION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Float substitution (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Float substitution")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FLOAT_SUBSTITUTION.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(FIELD_SUBSTITUTION))
+                .attach(new StatedAxiom()
+                        .isA(FIELD_SUBSTITUTION));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FRENCH_DIALECT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("French dialect (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("French dialect")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("French dialect")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FRENCH_DIALECT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DIALECT_ASSEMBLAGE))
+                .attach(new StatedAxiom()
+                        .isA(DIALECT_ASSEMBLAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FRENCH_LANGUAGE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("French Language (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("French language")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("French Language")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FRENCH_LANGUAGE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LANGUAGE))
+                .attach(new StatedAxiom()
+                        .isA(LANGUAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Fully qualified name description type")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Fully qualified name")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Fully qualified name is a description that uniquely identifies and differentiates it from other concepts with similar descriptions")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(DESCRIPTION_TYPE))
+                .attach(new StatedAxiom()
+                        .isA(DESCRIPTION_TYPE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GB_ENGLISH_DIALECT))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Great Britain English dialect")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("GB English dialect / GB English")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Great Britain: English Language reference set")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.GB_ENGLISH_DIALECT.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(ENGLISH_DIALECT_ASSEMBLAGE))
+                .attach(new StatedAxiom()
+                        .isA(ENGLISH_DIALECT_ASSEMBLAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GERMAN_LANGUAGE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("German Language (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("German language")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("German Language")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.GERMAN_LANGUAGE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(LANGUAGE))
+                .attach(new StatedAxiom()
+                        .isA(LANGUAGE));
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GREATER_THAN))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Greater than (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Greater than")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A concept indicating the operator \">\"")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.GREATER_THAN.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CONCRETE_DOMAIN_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(CONCRETE_DOMAIN_OPERATOR));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GREATER_THAN_OR_EQUAL_TO))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Greater than or equal to (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Greater than or equal to")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("A concept indicating the operator \">=\"")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TinkarTerm.GREATER_THAN_OR_EQUAL_TO.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(CONCRETE_DOMAIN_OPERATOR))
+                .attach(new StatedAxiom()
+                        .isA(CONCRETE_DOMAIN_OPERATOR));
+
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(GROUPING))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Health concept (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                        .attach((Synonym synonym) -> synonym
+                                .text("Health concept")
+                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                                .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text("Null")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(GROUPING.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.EXACT, TinkarTerm.PARTIAL)
                         .parents(TINKAR_MODEL_CONCEPT))
@@ -1326,11 +1849,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Health concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1352,11 +1875,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Identifier source")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1378,11 +1901,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inclusion set")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1403,11 +1926,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inactive")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1428,11 +1951,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inferred relationship / Inferred")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1453,11 +1976,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Instant literal")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1478,11 +2001,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Instant substitution")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1504,11 +2027,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Integer field")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1529,11 +2052,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inverse name")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1554,11 +2077,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inverse tree list")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1579,11 +2102,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Irish dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1604,11 +2127,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Irish language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1629,11 +2152,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Is a")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1654,11 +2177,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Is-a inferred navigation")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1679,11 +2202,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Is-a stated navigation")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1704,11 +2227,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Italian language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1729,11 +2252,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("KOMET module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1754,11 +2277,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("KOMET user")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1779,11 +2302,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("KOMET user list")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1804,11 +2327,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Komet issue")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1829,11 +2352,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Korean dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1855,11 +2378,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Korean language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1881,11 +2404,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1907,11 +2430,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language for description")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1932,11 +2455,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language coordinate name")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1957,11 +2480,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language coordinate properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -1983,11 +2506,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language nid")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2008,11 +2531,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2033,11 +2556,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Less than")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2058,11 +2581,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Less than or equal to")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2083,11 +2606,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Lithuanian Language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2108,11 +2631,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logic coordinate name")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2134,11 +2657,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logic coordinate properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2154,17 +2677,17 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(OBJECT_PROPERTIES));
 
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGICAL_DEFINITION))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LOGICAL_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Logical Definition")
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logical Definition")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2173,7 +2696,7 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.LOGICAL_DEFINITION.asUuidArray()[0].toString()))
+                        .identifier(LOGICAL_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
@@ -2185,11 +2708,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logical expression field")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2210,11 +2733,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logical expression semantic")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2235,11 +2758,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logically equivalent to")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2274,11 +2797,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Master path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2293,17 +2816,17 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(PATH));
 
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MEANING))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MEANING))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Meaning")
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Meaning")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2312,7 +2835,7 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.MEANING.asUuidArray()[0].toString()))
+                        .identifier(MEANING.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
@@ -2324,11 +2847,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Membership semantic")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2350,11 +2873,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Model concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2377,11 +2900,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Tinkar Model concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2394,9 +2917,9 @@ public class TinkarStarterData {
                 .attach(new StatedNavigation()
                         .children(AXIOM_ORIGIN, CONCRETE_DOMAIN_OPERATOR, TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY,
                                 DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, DESCRIPTION_TYPE,
-                                DIALECT_ASSEMBLAGE, DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
+                                DIALECT_ASSEMBLAGE, DISPLAY_FIELDS, EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS,
                                 IDENTIFIER_SOURCE, IDENTIFIER_VALUE, TinkarTerm.INFERRED_DEFINITION, TinkarTerm.IS_A,
-                                LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE,
+                                LANGUAGE, LOGICAL_DEFINITION, MEANING, TinkarTerm.PURPOSE,
                                 PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN,
                                 REFERENCE_RANGE, STATED_DEFINITION, TinkarTerm.TEXT_FOR_DESCRIPTION, VALUE_CONSTRAINT,
                                 VALUE_CONSTRAINT_SOURCE, TinkarTerm.AXIOM_SYNTAX)
@@ -2411,11 +2934,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2438,11 +2961,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module exclusions")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2464,11 +2987,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module for user")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2490,11 +3013,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2515,11 +3038,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module options")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2541,11 +3064,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module Preference list")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2567,11 +3090,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module nids")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2593,11 +3116,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Module order")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2619,11 +3142,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Modules")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2645,11 +3168,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Navigation")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2672,11 +3195,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Navigation set")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2698,11 +3221,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Navigation vertex")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2724,11 +3247,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Necessary but not sufficient concept definition")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2750,11 +3273,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Necessary set")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2777,11 +3300,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Not applicable")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2803,11 +3326,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Object")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2830,11 +3353,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Object properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2857,11 +3380,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Or")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2872,9 +3395,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.OR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.CONNECTIVE_OPERATOR))
+                        .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS))
@@ -2883,11 +3406,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Axiom attachment order")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2908,11 +3431,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Concept attachment order")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2934,11 +3457,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Description attachment order")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2960,11 +3483,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Part of")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -2975,9 +3498,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PART_OF.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.CONNECTIVE_OPERATOR))
+                        .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PARTIAL))
@@ -2986,11 +3509,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Partial")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3001,9 +3524,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PARTIAL.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.GROUPING))
+                        .parents(GROUPING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.GROUPING));
+                        .isA(GROUPING));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PATH))
@@ -3012,11 +3535,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3039,11 +3562,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3065,11 +3588,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path coordinate name")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3091,11 +3614,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path coordinate properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3118,11 +3641,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3144,11 +3667,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path for user")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3170,11 +3693,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3196,11 +3719,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path options")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3222,11 +3745,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path origins")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3248,11 +3771,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Path origins")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3274,11 +3797,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Promotion Path for Edit Coordinate")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3300,11 +3823,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Phenomenon")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3327,11 +3850,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Polish dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3353,11 +3876,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Polish language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3379,11 +3902,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Preferred")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3405,11 +3928,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Presentation unit different")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3420,9 +3943,9 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRESENTATION_UNIT_DIFFERENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE))
@@ -3431,11 +3954,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Primordial UUID")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3457,11 +3980,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Primordial module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 . attach((Definition definition) -> definition
@@ -3495,11 +4018,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Primordial path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3521,11 +4044,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Primordial")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3547,11 +4070,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Referenced component id")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3573,11 +4096,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Referenced component subtype restriction")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3599,11 +4122,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Referenced component type restriction")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3625,11 +4148,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Regular name description type")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3651,11 +4174,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Relationship destination")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3677,11 +4200,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Relationship origin")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3702,11 +4225,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3729,11 +4252,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role group")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3756,11 +4279,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3783,11 +4306,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3809,11 +4332,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role type")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3835,11 +4358,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Role type to add")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3860,11 +4383,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Root")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3885,11 +4408,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Russian dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3910,11 +4433,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Russian language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3936,11 +4459,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sandbox component")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -3975,11 +4498,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sandbox module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4015,11 +4538,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sandbox path")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4041,11 +4564,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sandbox Path module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4067,11 +4590,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Semantic field concepts")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4093,11 +4616,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Field name")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4119,11 +4642,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Semantic field type")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4145,11 +4668,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Semantic properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4172,11 +4695,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Semantic type")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4188,9 +4711,9 @@ public class TinkarStarterData {
                         .identifier(SEMANTIC_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.COMPONENT_SEMANTIC, TinkarTerm.CONCEPT_SEMANTIC, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC, TinkarTerm.MEMBERSHIP_SEMANTIC)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SIGNED_INTEGER))
@@ -4199,11 +4722,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Signed integer")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4225,11 +4748,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Spanish language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4251,11 +4774,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Standard Korean Dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4277,11 +4800,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Stated")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4303,11 +4826,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Status for version")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4329,11 +4852,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Status")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4356,11 +4879,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("String")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4382,11 +4905,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sufficient concept definition")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4408,11 +4931,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sufficient concept definition operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4424,9 +4947,9 @@ public class TinkarStarterData {
                         .identifier(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SUFFICIENT_SET))
@@ -4435,11 +4958,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sufficient set")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4461,11 +4984,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Swedish language")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4486,11 +5009,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Text")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4511,11 +5034,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Time for version")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4536,11 +5059,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Tree amalgam properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4562,11 +5085,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Tree list")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4587,11 +5110,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("US English dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4613,11 +5136,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("United States English Nursing Dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4638,11 +5161,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("UUID data type")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4663,11 +5186,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("UUID field")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4688,11 +5211,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("UUIDs")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4713,11 +5236,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Uncategorized phenomenon")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4738,11 +5261,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Uninitialized")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4763,11 +5286,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Universal Restriction")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4788,11 +5311,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("UUID")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4813,11 +5336,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Author")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4839,11 +5362,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Versions")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4864,11 +5387,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Version properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4890,11 +5413,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Vertex")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4915,11 +5438,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Vertex states")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4940,11 +5463,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Sort")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4965,11 +5488,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("View Key")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -4990,11 +5513,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Withdrawn")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5015,11 +5538,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Boolean")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5040,11 +5563,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Byte array")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5065,11 +5588,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Description list for concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5090,11 +5613,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Double")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5115,11 +5638,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Float")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5140,11 +5663,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Logic graph")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5165,11 +5688,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Long")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5190,11 +5713,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Native Identifier")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5215,11 +5738,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Semantic list for chronicle")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5240,11 +5763,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("User module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5280,7 +5803,7 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                         .identifier(TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(MODEL_CONCEPT, TinkarTerm.MEANING, OBJECT, ROLE, USER, ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
+                        .children(MODEL_CONCEPT, MEANING, OBJECT, ROLE, USER, ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
                 .attach(new StatedAxiom()
                         .isA(ROOT_VERTEX));
 
@@ -5291,11 +5814,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Query clauses")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5307,9 +5830,9 @@ public class TinkarStarterData {
                         .identifier(QUERY_CLAUSES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.VIEW_COORDINATE_KEY)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(FIELD_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5317,11 +5840,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Field substitution")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5333,9 +5856,9 @@ public class TinkarStarterData {
                         .identifier(FIELD_SUBSTITUTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.INSTANT_SUBSTITUTION)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TAXONOMY_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5343,11 +5866,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Taxonomy operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5359,9 +5882,9 @@ public class TinkarStarterData {
                         .identifier(TAXONOMY_OPERATOR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.LOGICALLY_EQUIVALENT_TO)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5369,11 +5892,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("ImmutableCoordinate properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5395,11 +5918,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Purpose")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5420,11 +5943,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Action properties")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5447,11 +5970,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Literal value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5463,9 +5986,9 @@ public class TinkarStarterData {
                         .identifier(LITERAL_VALUE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.FLOAT_LITERAL, TinkarTerm.INSTANT_LITERAL)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DIALECT_ASSEMBLAGE))
@@ -5474,11 +5997,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Dialect")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5501,11 +6024,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Dynamic column data types")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5517,9 +6040,9 @@ public class TinkarStarterData {
                         .identifier(DYNAMIC_COLUMN_DATA_TYPES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .children(TinkarTerm.ARRAY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LONG, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.UUID_DATA_TYPE)
-                        .parents(TinkarTerm.MEANING))
+                        .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.MEANING));
+                        .isA(MEANING));
 
         //Necessary Terms Filtered out in generation routine - END
 
@@ -5530,11 +6053,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text(POSITION_ON_PATH.description())
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5555,11 +6078,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Stated assemblage")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5580,11 +6103,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inferred assemblage")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5605,11 +6128,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Concepts to classify")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5630,11 +6153,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Classifier")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5655,11 +6178,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Dialect order")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5680,11 +6203,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("SOLOR overlay module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5705,11 +6228,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("SOLOR module")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5730,11 +6253,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Transitive Feature")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5755,11 +6278,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Reflexive Feature")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5780,11 +6303,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Laterality")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5805,11 +6328,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Has Active Ingredient")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5830,11 +6353,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Has Dose Form")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5855,11 +6378,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Unmodeled role concept")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5880,11 +6403,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Dynamic referenced component restriction")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5905,11 +6428,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Existential restriction")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5930,11 +6453,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Intrinsic role")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5955,11 +6478,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Property pattern implication")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -5980,11 +6503,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("SnoRocket classifier")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6005,11 +6528,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Property set")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6030,11 +6553,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Feature")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6055,11 +6578,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Example UCUM Units")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6083,11 +6606,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inferred Definition")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6108,11 +6631,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Identifier Value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6133,11 +6656,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Maximum Value Operator; Maximum Domain Operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6158,11 +6681,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Minimum Value Operator; Minimum Domain Operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6183,11 +6706,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Value Range")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6210,11 +6733,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Maximum Value; Max Value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6235,11 +6758,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Minimum Value; Min Value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6260,11 +6783,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Stated Definition")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6285,11 +6808,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Value Constraint")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6310,11 +6833,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Value Constraint Source")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6380,11 +6903,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Stated navigation")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6424,11 +6947,11 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE)
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
-                                .acceptability(PREFERRED))
+                                .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
                                 .text("Inferred navigation")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE)))
+                                .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -6505,10 +7028,10 @@ public class TinkarStarterData {
                 .fullyQualifiedName("EL++ Stated Axioms Pattern", TinkarTerm.PREFERRED)
                 .synonym("Stated definition pattern", TinkarTerm.PREFERRED)
                 .meaning(STATED_DEFINITION)
-                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .purpose(LOGICAL_DEFINITION)
                 .fieldDefinition(
                         TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
+                        LOGICAL_DEFINITION,
                         TinkarTerm.DITREE_FIELD)
                 .tinkarBaseModelMembership()
                 .build();
@@ -6518,10 +7041,10 @@ public class TinkarStarterData {
                 .fullyQualifiedName("EL++ Inferred Axioms Pattern", TinkarTerm.PREFERRED)
                 .synonym("Inferred definition pattern", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.INFERRED_DEFINITION)
-                .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                .purpose(LOGICAL_DEFINITION)
                 .fieldDefinition(
                         TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
-                        TinkarTerm.LOGICAL_DEFINITION,
+                        LOGICAL_DEFINITION,
                         TinkarTerm.DITREE_FIELD)
                 .tinkarBaseModelMembership()
                 .build();
