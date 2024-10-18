@@ -1796,7 +1796,11 @@ public class TinkarStarterData {
                 .synonym("Object properties", TinkarTerm.PREFERRED)
                 .definition("Objects are instances of classes, the properties describe the data or attributes that an object can have", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.OBJECT_PROPERTIES.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ACTION_PROPERTIES, TinkarTerm.CHRONICLE_PROPERTIES, TinkarTerm.VERSION_PROPERTIES, TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES, TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES, TinkarTerm.LOGIC_COORDINATE_PROPERTIES, TinkarTerm.PATH_COORDINATE_PROPERTIES, TinkarTerm.SEMANTIC_PROPERTIES, TinkarTerm.TREE_AMALGAM_PROPERTIES, TinkarTerm.CORRELATION_PROPERTIES, TinkarTerm.TRANSITIVE_PROPERTY, TinkarTerm.REFLEXIVE_PROPERTY), List.of(TinkarTerm.OBJECT))
+                .statedNavigation(List.of(TinkarTerm.ACTION_PROPERTIES, TinkarTerm.CHRONICLE_PROPERTIES, TinkarTerm.VERSION_PROPERTIES,
+                        TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES, TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES,
+                        TinkarTerm.LOGIC_COORDINATE_PROPERTIES, TinkarTerm.PATH_COORDINATE_PROPERTIES, TinkarTerm.SEMANTIC_PROPERTIES,
+                        TinkarTerm.TREE_AMALGAM_PROPERTIES, TinkarTerm.CORRELATION_PROPERTIES, TinkarTerm.TRANSITIVE_PROPERTY,
+                        TinkarTerm.REFLEXIVE_PROPERTY, TinkarTerm.FEATURE_TYPE, TinkarTerm.PROPERTY_SEQUENCE), List.of(TinkarTerm.OBJECT))
                 .statedDefinition(List.of(TinkarTerm.OBJECT))
                 .tinkarBaseModelMembership()
                 .build();
