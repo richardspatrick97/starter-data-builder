@@ -9,6 +9,8 @@ import dev.ikm.tinkar.common.util.io.FileUtil;
 import dev.ikm.tinkar.composer.Composer;
 import dev.ikm.tinkar.composer.Session;
 import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
+import dev.ikm.tinkar.composer.assembler.PatternAssembler;
+import dev.ikm.tinkar.composer.assembler.PatternAssemblerConsumer;
 import dev.ikm.tinkar.composer.assembler.SemanticAssembler;
 import dev.ikm.tinkar.composer.template.Definition;
 import dev.ikm.tinkar.composer.template.FullyQualifiedName;
@@ -37,102 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static dev.ikm.tinkar.terms.TinkarTerm.ACTION_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.ANNOTATION_TYPE;
-import static dev.ikm.tinkar.terms.TinkarTerm.AXIOM_ORIGIN;
-import static dev.ikm.tinkar.terms.TinkarTerm.AXIOM_SYNTAX;
-import static dev.ikm.tinkar.terms.TinkarTerm.CASE_INSENSITIVE_EVALUATION;
-import static dev.ikm.tinkar.terms.TinkarTerm.CHRONICLE_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.CLASSIFIER_FOR_LOGIC_COORDINATE;
-import static dev.ikm.tinkar.terms.TinkarTerm.COMPONENT_TYPE_FOCUS;
-import static dev.ikm.tinkar.terms.TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
-import static dev.ikm.tinkar.terms.TinkarTerm.CONCEPT_TYPE;
-import static dev.ikm.tinkar.terms.TinkarTerm.CONCRETE_DOMAIN_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.CONNECTIVE_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.CORRELATION_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_ACCEPTABILITY;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_DIALECT_PAIR;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_LOGIC_PROFILE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_TYPE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DESCRIPTION_VERSION_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE;
-import static dev.ikm.tinkar.terms.TinkarTerm.DIRECTED_GRAPH;
-import static dev.ikm.tinkar.terms.TinkarTerm.DISPLAY_FIELDS;
-import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES;
-import static dev.ikm.tinkar.terms.TinkarTerm.DYNAMIC_REFERENCED_COMPONENT_RESTRICTION;
-import static dev.ikm.tinkar.terms.TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS;
-import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE;
-import static dev.ikm.tinkar.terms.TinkarTerm.ENGLISH_LANGUAGE;
-import static dev.ikm.tinkar.terms.TinkarTerm.EXAMPLE_UCUM_UNITS;
-import static dev.ikm.tinkar.terms.TinkarTerm.EXISTENTIAL_RESTRICTION;
-import static dev.ikm.tinkar.terms.TinkarTerm.FEATURE;
-import static dev.ikm.tinkar.terms.TinkarTerm.FIELD_SUBSTITUTION;
-import static dev.ikm.tinkar.terms.TinkarTerm.GROUPING;
-import static dev.ikm.tinkar.terms.TinkarTerm.HAS_ACTIVE_INGREDIENT;
-import static dev.ikm.tinkar.terms.TinkarTerm.HAS_DOSE_FORM;
-import static dev.ikm.tinkar.terms.TinkarTerm.IDENTIFIER_SOURCE;
-import static dev.ikm.tinkar.terms.TinkarTerm.IDENTIFIER_VALUE;
-import static dev.ikm.tinkar.terms.TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
-import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_DEFINITION;
-import static dev.ikm.tinkar.terms.TinkarTerm.INFERRED_NAVIGATION;
-import static dev.ikm.tinkar.terms.TinkarTerm.INTRINSIC_ROLE;
-import static dev.ikm.tinkar.terms.TinkarTerm.LANGUAGE;
-import static dev.ikm.tinkar.terms.TinkarTerm.LANGUAGE_COORDINATE_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.LATERALITY;
-import static dev.ikm.tinkar.terms.TinkarTerm.LITERAL_VALUE;
-import static dev.ikm.tinkar.terms.TinkarTerm.LOGICAL_DEFINITION;
-import static dev.ikm.tinkar.terms.TinkarTerm.LOGIC_COORDINATE_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.MAXIMUM_VALUE_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.MEANING;
-import static dev.ikm.tinkar.terms.TinkarTerm.MINIMUM_VALUE_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.MODEL_CONCEPT;
-import static dev.ikm.tinkar.terms.TinkarTerm.MODULE;
-import static dev.ikm.tinkar.terms.TinkarTerm.NAVIGATION;
-import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT;
-import static dev.ikm.tinkar.terms.TinkarTerm.OBJECT_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.PATH;
-import static dev.ikm.tinkar.terms.TinkarTerm.PHENOMENON;
-import static dev.ikm.tinkar.terms.TinkarTerm.POSITION_ON_PATH;
-import static dev.ikm.tinkar.terms.TinkarTerm.PREFERRED;
-import static dev.ikm.tinkar.terms.TinkarTerm.PROPERTY_PATTERN_IMPLICATION;
-import static dev.ikm.tinkar.terms.TinkarTerm.PROPERTY_SET;
-import static dev.ikm.tinkar.terms.TinkarTerm.PURPOSE;
-import static dev.ikm.tinkar.terms.TinkarTerm.QUERY_CLAUSES;
-import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE;
-import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MAXIMUM;
-import static dev.ikm.tinkar.terms.TinkarTerm.REFERENCE_RANGE_MINIMUM;
-import static dev.ikm.tinkar.terms.TinkarTerm.REFLEXIVE_PROPERTY;
-import static dev.ikm.tinkar.terms.TinkarTerm.ROLE;
-import static dev.ikm.tinkar.terms.TinkarTerm.ROLE_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.ROLE_RESTRICTION;
-import static dev.ikm.tinkar.terms.TinkarTerm.ROOT_VERTEX;
-import static dev.ikm.tinkar.terms.TinkarTerm.SEMANTIC_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.SEMANTIC_TYPE;
-import static dev.ikm.tinkar.terms.TinkarTerm.SNOROCKET_CLASSIFIER;
-import static dev.ikm.tinkar.terms.TinkarTerm.SOLOR_MODULE;
-import static dev.ikm.tinkar.terms.TinkarTerm.SOLOR_OVERLAY_MODULE;
-import static dev.ikm.tinkar.terms.TinkarTerm.STARTER_DATA_AUTHORING;
-import static dev.ikm.tinkar.terms.TinkarTerm.STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE;
-import static dev.ikm.tinkar.terms.TinkarTerm.STATED_DEFINITION;
-import static dev.ikm.tinkar.terms.TinkarTerm.STATED_NAVIGATION;
-import static dev.ikm.tinkar.terms.TinkarTerm.STATUS_VALUE;
-import static dev.ikm.tinkar.terms.TinkarTerm.TAXONOMY_OPERATOR;
-import static dev.ikm.tinkar.terms.TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC;
-import static dev.ikm.tinkar.terms.TinkarTerm.TINKAR_MODEL_CONCEPT;
-import static dev.ikm.tinkar.terms.TinkarTerm.TRANSITIVE_PROPERTY;
-import static dev.ikm.tinkar.terms.TinkarTerm.TREE_AMALGAM_PROPERTIES;
-import static dev.ikm.tinkar.terms.TinkarTerm.UNMODELED_ROLE_CONCEPT;
-import static dev.ikm.tinkar.terms.TinkarTerm.USER;
-import static dev.ikm.tinkar.terms.TinkarTerm.USERS_MODULE;
-import static dev.ikm.tinkar.terms.TinkarTerm.US_ENGLISH_DIALECT;
-import static dev.ikm.tinkar.terms.TinkarTerm.US_NURSING_DIALECT;
-import static dev.ikm.tinkar.terms.TinkarTerm.VALUE_CONSTRAINT;
-import static dev.ikm.tinkar.terms.TinkarTerm.VALUE_CONSTRAINT_SOURCE;
-import static dev.ikm.tinkar.terms.TinkarTerm.VERSION_PROPERTIES;
+import static dev.ikm.tinkar.terms.TinkarTerm.*;
 
 
 public class TinkarStarterData {
@@ -182,6 +89,8 @@ public class TinkarStarterData {
                 USER,
                 TinkarTerm.PRIMORDIAL_MODULE,
                 TinkarTerm.PRIMORDIAL_PATH);
+
+        EntityProxy.Pattern pattern = EntityProxy.Pattern.make(PublicIds.newRandom());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(ENGLISH_DIALECT_ASSEMBLAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -4056,7 +3965,7 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(TINKAR_MODEL_CONCEPT));
 
-        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MEMBERSHIP_SEMANTIC))
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MEMBERSHIP_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Membership semantic (SOLOR)")
                         .language(ENGLISH_LANGUAGE)
@@ -4075,7 +3984,7 @@ public class TinkarStarterData {
                         .language(ENGLISH_LANGUAGE))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
-                        .identifier(TinkarTerm.MEMBERSHIP_SEMANTIC.asUuidArray()[0].toString()))
+                        .identifier(MEMBERSHIP_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_TYPE))
                 .attach(new StatedAxiom()
@@ -5925,7 +5834,7 @@ public class TinkarStarterData {
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(SEMANTIC_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(TinkarTerm.COMPONENT_SEMANTIC, TinkarTerm.CONCEPT_SEMANTIC, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC, TinkarTerm.MEMBERSHIP_SEMANTIC)
+                        .children(TinkarTerm.COMPONENT_SEMANTIC, TinkarTerm.CONCEPT_SEMANTIC, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC, MEMBERSHIP_SEMANTIC)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
                         .isA(MEANING));
@@ -7999,10 +7908,10 @@ public class TinkarStarterData {
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                         .attach(new USDialect()
                                 .acceptability(PREFERRED)))
-                        .attach((Synonym synonym) -> synonym
-                                .text("Stated Definition")
-                                .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                                .language(ENGLISH_LANGUAGE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Stated Definition")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
@@ -8267,13 +8176,13 @@ public class TinkarStarterData {
         //Create Path Membership Pattern
         starterData.pattern(TinkarTerm.PATHS_PATTERN)
                 .meaning(PATH)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
                 .build();
 
         starterData.pattern(TinkarTerm.SOLOR_CONCEPT_ASSEMBLAGE)
                 .meaning(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -8321,8 +8230,21 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
+                .meaning(TinkarTerm.PATH_ORIGINS)
+                .purpose(TinkarTerm.PATH_ORIGINS)
+                .fieldDefinition(
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.INSTANT_LITERAL));
+
+
         //Create Comment Pattern
-        starterData.pattern(TinkarTerm.COMMENT_PATTERN)
+        /*starterData.pattern(TinkarTerm.COMMENT_PATTERN)
                 .meaning(TinkarTerm.COMMENT)
                 .purpose(TinkarTerm.COMMENT)
                 .fieldDefinition(
@@ -8330,23 +8252,42 @@ public class TinkarStarterData {
                         TinkarTerm.COMMENT,
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
-                .build();
+                .build();*/
+
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(COMMENT_PATTERN)
+                .meaning(COMMENT)
+                .purpose(COMMENT)
+                .fieldDefinition(
+                        TinkarTerm.COMMENT,
+                        TinkarTerm.COMMENT,
+                        TinkarTerm.STRING));
 
         //Create Tinkar Core base model pattern
-        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
+        /*starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(STARTER_DATA_AUTHORING)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
-                .build();
+                .build();*/
+
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TINKAR_BASE_MODEL_COMPONENT_PATTERN)
+                .meaning(STARTER_DATA_AUTHORING)
+                .purpose(MEMBERSHIP_SEMANTIC));
+
 
         //Create Komet base model component pattern
-        starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
+        /*starterData.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(STARTER_DATA_AUTHORING)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
+                .purpose(MEMBERSHIP_SEMANTIC)
                 .kometBaseModelMembership()
-                .build();
+                .build();*/
 
-        starterData.pattern(TinkarTerm.VALUE_CONSTRAINT_PATTERN)
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
+                .meaning(STARTER_DATA_AUTHORING)
+                .purpose(MEMBERSHIP_SEMANTIC));
+
+
+/*
+        starterData.pattern(VALUE_CONSTRAINT_PATTERN)
                 .fullyQualifiedName("Value Constraint Pattern", TinkarTerm.PREFERRED)
                 .synonym("Value Constraint Pattern", TinkarTerm.PREFERRED)
                 .definition("A pattern specifying value constraint pattern", TinkarTerm.PREFERRED)
@@ -8378,8 +8319,44 @@ public class TinkarStarterData {
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
                 .build();
+*/
 
-        composer.commitSession(session);
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(VALUE_CONSTRAINT_PATTERN)
+                .meaning(VALUE_CONSTRAINT)
+                .purpose(VALUE_CONSTRAINT)
+                .fieldDefinition(VALUE_CONSTRAINT_SOURCE,
+                        VALUE_CONSTRAINT_SOURCE,
+                        TinkarTerm.CONCEPT_FIELD)
+                .fieldDefinition(MINIMUM_VALUE_OPERATOR,
+                        CONCRETE_DOMAIN_OPERATOR,
+                        TinkarTerm.CONCEPT_FIELD)
+                .fieldDefinition( REFERENCE_RANGE_MINIMUM,
+                        REFERENCE_RANGE,
+                        TinkarTerm.FLOAT_FIELD)
+                .fieldDefinition( MAXIMUM_VALUE_OPERATOR,
+                        CONCRETE_DOMAIN_OPERATOR,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(REFERENCE_RANGE_MAXIMUM,
+                        REFERENCE_RANGE,
+                        TinkarTerm.FLOAT_FIELD)
+                .fieldDefinition(EXAMPLE_UCUM_UNITS,
+                        EXAMPLE_UCUM_UNITS,
+                        TinkarTerm.STRING)
+                .attach((FullyQualifiedName fqn) -> fqn.language(ENGLISH_LANGUAGE)
+                        .text("Value Constraint Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Value Constraint Pattern")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach((Definition definition) -> definition
+                        .text("A pattern specifying value constraint pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)));
+
+        composer.commitAllSessions();
+        //composer.commitSession(session);
     }
 
     private static void exportStarterData(){
