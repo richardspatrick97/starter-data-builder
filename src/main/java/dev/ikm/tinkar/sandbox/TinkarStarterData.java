@@ -8230,21 +8230,8 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
-                .meaning(TinkarTerm.PATH_ORIGINS)
-                .purpose(TinkarTerm.PATH_ORIGINS)
-                .fieldDefinition(
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.INSTANT_LITERAL));
-
-
         //Create Comment Pattern
-        /*starterData.pattern(TinkarTerm.COMMENT_PATTERN)
+        starterData.pattern(TinkarTerm.COMMENT_PATTERN)
                 .meaning(TinkarTerm.COMMENT)
                 .purpose(TinkarTerm.COMMENT)
                 .fieldDefinition(
@@ -8252,41 +8239,22 @@ public class TinkarStarterData {
                         TinkarTerm.COMMENT,
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
-                .build();*/
-
-        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(COMMENT_PATTERN)
-                .meaning(COMMENT)
-                .purpose(COMMENT)
-                .fieldDefinition(
-                        TinkarTerm.COMMENT,
-                        TinkarTerm.COMMENT,
-                        TinkarTerm.STRING));
+                .build();
 
         //Create Tinkar Core base model pattern
-        /*starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
+        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(STARTER_DATA_AUTHORING)
                 .purpose(MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
-                .build();*/
-
-        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TINKAR_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(STARTER_DATA_AUTHORING)
-                .purpose(MEMBERSHIP_SEMANTIC));
-
+                .build();
 
         //Create Komet base model component pattern
-        /*starterData.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
+        starterData.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(STARTER_DATA_AUTHORING)
                 .purpose(MEMBERSHIP_SEMANTIC)
                 .kometBaseModelMembership()
-                .build();*/
+                .build();
 
-        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(STARTER_DATA_AUTHORING)
-                .purpose(MEMBERSHIP_SEMANTIC));
-
-
-/*
         starterData.pattern(VALUE_CONSTRAINT_PATTERN)
                 .fullyQualifiedName("Value Constraint Pattern", TinkarTerm.PREFERRED)
                 .synonym("Value Constraint Pattern", TinkarTerm.PREFERRED)
@@ -8319,44 +8287,8 @@ public class TinkarStarterData {
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
                 .build();
-*/
 
-        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(VALUE_CONSTRAINT_PATTERN)
-                .meaning(VALUE_CONSTRAINT)
-                .purpose(VALUE_CONSTRAINT)
-                .fieldDefinition(VALUE_CONSTRAINT_SOURCE,
-                        VALUE_CONSTRAINT_SOURCE,
-                        TinkarTerm.CONCEPT_FIELD)
-                .fieldDefinition(MINIMUM_VALUE_OPERATOR,
-                        CONCRETE_DOMAIN_OPERATOR,
-                        TinkarTerm.CONCEPT_FIELD)
-                .fieldDefinition( REFERENCE_RANGE_MINIMUM,
-                        REFERENCE_RANGE,
-                        TinkarTerm.FLOAT_FIELD)
-                .fieldDefinition( MAXIMUM_VALUE_OPERATOR,
-                        CONCRETE_DOMAIN_OPERATOR,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(REFERENCE_RANGE_MAXIMUM,
-                        REFERENCE_RANGE,
-                        TinkarTerm.FLOAT_FIELD)
-                .fieldDefinition(EXAMPLE_UCUM_UNITS,
-                        EXAMPLE_UCUM_UNITS,
-                        TinkarTerm.STRING)
-                .attach((FullyQualifiedName fqn) -> fqn.language(ENGLISH_LANGUAGE)
-                        .text("Value Constraint Pattern")
-                        .language(ENGLISH_LANGUAGE)
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
-                .attach((Synonym synonym) -> synonym
-                        .text("Value Constraint Pattern")
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach((Definition definition) -> definition
-                        .text("A pattern specifying value constraint pattern")
-                        .language(ENGLISH_LANGUAGE)
-                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)));
-
-        composer.commitAllSessions();
-        //composer.commitSession(session);
+        composer.commitSession(session);
     }
 
     private static void exportStarterData(){
