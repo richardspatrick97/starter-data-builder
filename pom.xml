@@ -6,7 +6,7 @@
 
     <groupId>dev.ikm.tinkar</groupId>
     <artifactId>starter-data-builder</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -97,13 +97,14 @@
             <version>${activej-common.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+<!--
+         https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -117,5 +118,12 @@
             <artifactId>composer</artifactId>
             <version>${tinkar-composer.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>dev.ikm.tinkar</groupId>
+            <artifactId>composer</artifactId>
+            <version>${tinkar-composer.version}</version>
+        </dependency>
+
     </dependencies>
 </project>
