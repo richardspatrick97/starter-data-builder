@@ -12,15 +12,15 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tinkar-core.version>1.71.0</tinkar-core.version>
-        <tinkar-schema.version>1.27.0</tinkar-schema.version>
+        <tinkar-core.version>1.75.0</tinkar-core.version>
+        <tinkar-schema.version>1.33.0</tinkar-schema.version>
         <tinkar-transformer-api.version>1.7.0</tinkar-transformer-api.version>
         <java-uuid-generator.version>4.3.0</java-uuid-generator.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <tinkar-composer.version>1.3.0</tinkar-composer.version>
-        <log4j.version>2.21.1</log4j.version>
-
+        <tinkar-composer.version>1.5.0</tinkar-composer.version>
+        <protobuf-java.version>3.22.0-r7</protobuf-java.version>
+        <activej-common.version>4.3-r8</activej-common.version>
     </properties>
 
     <dependencies>
@@ -88,13 +88,13 @@
         <dependency>
             <groupId>dev.ikm.jpms</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.22.0-r5</version>
+            <version>${protobuf-java.version}</version>
         </dependency>
 
         <dependency>
             <groupId>dev.ikm.jpms</groupId>
             <artifactId>activej-common</artifactId>
-            <version>4.3-r5</version>
+            <version>${activej-common.version}</version>
         </dependency>
 
 <!--
