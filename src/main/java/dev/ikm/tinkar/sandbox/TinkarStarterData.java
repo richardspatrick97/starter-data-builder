@@ -15,9 +15,11 @@ import dev.ikm.tinkar.composer.assembler.SemanticAssembler;
 import dev.ikm.tinkar.composer.template.Definition;
 import dev.ikm.tinkar.composer.template.FullyQualifiedName;
 import dev.ikm.tinkar.composer.template.Identifier;
+import dev.ikm.tinkar.composer.template.KometBaseModel;
 import dev.ikm.tinkar.composer.template.StatedAxiom;
 import dev.ikm.tinkar.composer.template.StatedNavigation;
 import dev.ikm.tinkar.composer.template.Synonym;
+import dev.ikm.tinkar.composer.template.TinkarBaseModel;
 import dev.ikm.tinkar.composer.template.USDialect;
 import dev.ikm.tinkar.entity.Entity;
 import dev.ikm.tinkar.entity.EntityVersion;
@@ -83,14 +85,13 @@ public class TinkarStarterData {
 
     private static void configureConceptsAndPatterns(StarterData starterData){
         Composer composer = new Composer("ConceptComposer");
+
         Session session = composer.open(
                 State.ACTIVE,
                 PrimitiveData.PREMUNDANE_TIME,
                 USER,
                 TinkarTerm.PRIMORDIAL_MODULE,
                 TinkarTerm.PRIMORDIAL_PATH);
-
-        EntityProxy.Pattern pattern = EntityProxy.Pattern.make(PublicIds.newRandom());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(ENGLISH_DIALECT_ASSEMBLAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -102,13 +103,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("English dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Specifies the dialect of the English language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE.asUuidArray()[0].toString()))
@@ -116,7 +117,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT)
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -128,13 +129,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Text comparison")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC.asUuidArray()[0].toString()))
@@ -142,7 +143,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(STARTER_DATA_AUTHORING))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -154,20 +155,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Metadata Authoring")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Define necessary minimum viable concepts to use Tinkar Data")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.STARTER_DATA_AUTHORING.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AXIOM_SYNTAX))
@@ -180,20 +181,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Axiom Syntax")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Syntax defining description logic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AXIOM_SYNTAX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXPRESS_AXIOM_SYNTAX))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -205,20 +206,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Express Axiom")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Expressing description logic through syntax")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EXPRESS_AXIOM_SYNTAX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(AXIOM_SYNTAX))
                 .attach(new StatedAxiom()
-                        .isA(AXIOM_SYNTAX));
+                        .isA(AXIOM_SYNTAX)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ACCEPTABLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -230,20 +231,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Acceptable")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Specifies that a description is acceptable, but not preferred within a language or dialect.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ACCEPTABLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_ACCEPTABILITY))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_ACCEPTABILITY));
+                        .isA(DESCRIPTION_ACCEPTABILITY)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ACTIVE_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -255,20 +256,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Active")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Concept used to represent a status for components that are active.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ACTIVE_STATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(STATUS_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(STATUS_VALUE));
+                        .isA(STATUS_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -280,20 +281,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Allowed states")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Predefined list of values for STAMP coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AND))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -305,20 +306,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("And")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("An operator that typically is employed to combine two conditions")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AND.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ANNOTATION_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -330,13 +331,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Annotation type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Metadata about program elements, and annotation types define the structure of these annotations")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ANNOTATION_TYPE.asUuidArray()[0].toString()))
@@ -344,7 +345,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.COMMENT, TinkarTerm.KOMET_ISSUE)
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ANONYMOUS_CONCEPT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -356,20 +357,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Anonymous concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Concepts or entities that do not have a specific, named identity, (defined on-the-fly without a dedicated name)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ANONYMOUS_CONCEPT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCEPT_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(CONCEPT_TYPE));
+                        .isA(CONCEPT_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ANY_COMPONENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -381,20 +382,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Any component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A general-purpose container to represent any component with generic data structure. Modifiable based on the specific requirements and characteristics of the components.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ANY_COMPONENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ARRAY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -406,20 +407,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Array")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Linear data structure")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ARRAY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ARRAY_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -431,20 +432,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Array field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A lexical set of semantically related elements/items")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ARRAY_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -456,20 +457,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Author")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Individual or entity who made a particular edit or revision in a document (authoring a specific location or point in the codebase where an edit was made)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AUTHOR_FOR_VERSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -481,20 +482,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Author")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Individual or entity who made a specific set of changes or modifications to a codebase/terminology resulting in the creation of a new version or revision")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AUTHOR_FOR_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(VERSION_PROPERTIES));
+                        .isA(VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -506,20 +507,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Authors")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("In individual or an entity responsible for defining or updating the values associated with the STAMP coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AXIOM_FOCUS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -531,20 +532,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Axiom focus")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A statement or proposition that is assumed to be true without requiring proof, it serves as a foundation principles on which a system or theory is built. Focus refers to the central point of attention or concentration on a specific concept/axioms")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AXIOM_FOCUS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(COMPONENT_TYPE_FOCUS))
                 .attach(new StatedAxiom()
-                        .isA(COMPONENT_TYPE_FOCUS));
+                        .isA(COMPONENT_TYPE_FOCUS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.AXIOM_ORIGIN))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -556,13 +557,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Axiom origin")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("The parent concept for the axiom?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.AXIOM_ORIGIN.asUuidArray()[0].toString()))
@@ -570,7 +571,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.STATED_PREMISE_TYPE, TinkarTerm.INFERRED_PREMISE_TYPE)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -582,20 +583,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Boolean field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("True (1) or false (0)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BOOLEAN_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN_LITERAL))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -607,20 +608,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Boolean literal")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("TRUE, FALSE, UNKNOWN")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BOOLEAN_LITERAL.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LITERAL_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(LITERAL_VALUE));
+                        .isA(LITERAL_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN_REFERENCE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -632,20 +633,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Boolean reference")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Reference(a pointer) to a Boolean object")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BOOLEAN_REFERENCE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(QUERY_CLAUSES))
                 .attach(new StatedAxiom()
-                        .isA(QUERY_CLAUSES));
+                        .isA(QUERY_CLAUSES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -657,20 +658,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Boolean substitution")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("The process of replacing or substituting boolean values or expression in a logical context")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BOOLEAN_SUBSTITUTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(FIELD_SUBSTITUTION))
                 .attach(new StatedAxiom()
-                        .isA(FIELD_SUBSTITUTION));
+                        .isA(FIELD_SUBSTITUTION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BYTE_ARRAY_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -682,20 +683,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Byte array field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("An array of bytes")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BYTE_ARRAY_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CANCELED_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -707,20 +708,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Canceled")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Concept used to represent a status for components that are canceled")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CANCELED_STATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(STATUS_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(STATUS_VALUE));
+                        .isA(STATUS_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CASE_INSENSITIVE_EVALUATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -732,20 +733,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Ignore case")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Evaluates values regardless of the case")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CASE_INSENSITIVE_EVALUATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .attach(new StatedAxiom()
-                        .isA(TEXT_COMPARISON_MEASURE_SEMANTIC));
+                        .isA(TEXT_COMPARISON_MEASURE_SEMANTIC)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CASE_SENSITIVE_EVALUATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -757,20 +758,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Compare case")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Evaluated based on the case")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CASE_SENSITIVE_EVALUATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .attach(new StatedAxiom()
-                        .isA(TEXT_COMPARISON_MEASURE_SEMANTIC));
+                        .isA(TEXT_COMPARISON_MEASURE_SEMANTIC)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -782,20 +783,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Case significance")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A field label which captures the case significance for a given concept description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_VERSION_PROPERTIES));
+                        .isA(DESCRIPTION_VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CHINESE_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -807,20 +808,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Chinese language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Chinese language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CHINESE_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CHRONICLE_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -832,13 +833,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Chronicle properties")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Attributes or characteristic associated with a historical record or an account of events (metadata, timestamps)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CHRONICLE_PROPERTIES.asUuidArray()[0].toString()))
@@ -846,7 +847,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE, TinkarTerm.VERSION_LIST_FOR_CHRONICLE, TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE, TinkarTerm.UUID_LIST_FOR_COMPONENT)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMMENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -858,20 +859,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Comment")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A filed label to capture free text information which may be necessary to add or change (concepts, relationships, semantics, etc)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMMENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ANNOTATION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(ANNOTATION_TYPE));
+                        .isA(ANNOTATION_TYPE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_ID_LIST_FIELD))
@@ -884,20 +885,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component Id list")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A display field that references an ordered list of Concept IDs.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_ID_LIST_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_ID_SET_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -909,20 +910,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component Id set")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A display field that references an unordered list of Concept IDs.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_ID_SET_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -934,20 +935,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A display field type that references a concept ID.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_FOR_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -959,20 +960,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Component for semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_FOR_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(SEMANTIC_PROPERTIES));
+                        .isA(SEMANTIC_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -984,20 +985,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component Semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Component semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(SEMANTIC_TYPE));
+                        .isA(SEMANTIC_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.COMPONENT_TYPE_FOCUS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1009,13 +1010,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Component type focus")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Focus type of component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.COMPONENT_TYPE_FOCUS.asUuidArray()[0].toString()))
@@ -1023,7 +1024,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.AXIOM_FOCUS, TinkarTerm.CONCEPT_FOCUS, TinkarTerm.DESCRIPTION_FOCUS)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_CONSTRAINTS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1035,20 +1036,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept constraints")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Defined filters for a given concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_CONSTRAINTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ACTION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(ACTION_PROPERTIES));
+                        .isA(ACTION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_DETAILS_TREE_TABLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1060,20 +1061,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept details tree table")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Tree table with concept details")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_DETAILS_TREE_TABLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1085,20 +1086,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Field for the human readable description for the given concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_FOCUS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1110,20 +1111,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept focus")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_FOCUS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(COMPONENT_TYPE_FOCUS))
                 .attach(new StatedAxiom()
-                        .isA(COMPONENT_TYPE_FOCUS));
+                        .isA(COMPONENT_TYPE_FOCUS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_REFERENCE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1135,20 +1136,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept reference")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A field to capture a reference to validate concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_REFERENCE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1160,20 +1161,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Value to define a given semantic as a concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(SEMANTIC_TYPE));
+                        .isA(SEMANTIC_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1185,20 +1186,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept substitution")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Substitution for concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_SUBSTITUTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(FIELD_SUBSTITUTION))
                 .attach(new StatedAxiom()
-                        .isA(FIELD_SUBSTITUTION));
+                        .isA(FIELD_SUBSTITUTION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_TO_FIND))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1210,20 +1211,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept to find")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Find concept (if searching on Komet shows us the results 'details and further information?)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_TO_FIND.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ACTION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(ACTION_PROPERTIES));
+                        .isA(ACTION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(CONCEPT_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1235,13 +1236,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concept type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A field that captures a defined concept label")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CONCEPT_TYPE.asUuidArray()[0].toString()))
@@ -1249,7 +1250,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.PATH_CONCEPT, TinkarTerm.SEMANTIC_FIELD_CONCEPTS)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONCEPT_VERSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1261,20 +1262,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Version")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A filed that captures the version of the terminology that it came from")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCEPT_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
 
@@ -1288,13 +1289,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Concrete value operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A concept that specifies value operators")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONCRETE_DOMAIN_OPERATOR.asUuidArray()[0].toString()))
@@ -1302,7 +1303,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.EQUAL_TO, TinkarTerm.GREATER_THAN, TinkarTerm.GREATER_THAN_OR_EQUAL_TO, TinkarTerm.LESS_THAN, TinkarTerm.LESS_THAN_OR_EQUAL_TO, MAXIMUM_VALUE_OPERATOR, MINIMUM_VALUE_OPERATOR)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONDITIONAL_TRIGGERS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1314,20 +1315,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Conditional triggers")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Conditional triggers based on actions, reasoner")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONDITIONAL_TRIGGERS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ACTION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(ACTION_PROPERTIES));
+                        .isA(ACTION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CONNECTIVE_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1339,13 +1340,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Connective operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A field that captures what the operator is (logical connective)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CONNECTIVE_OPERATOR.asUuidArray()[0].toString()))
@@ -1353,7 +1354,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.AND, TinkarTerm.DEFINITION_ROOT, TinkarTerm.DISJOINT_WITH, TinkarTerm.OR, TinkarTerm.IS_A, TinkarTerm.PART_OF, TinkarTerm.CONCEPT_REFERENCE)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CORELATION_EXPRESSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1365,20 +1366,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Correlation expression")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A value for Correlation properties")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CORELATION_EXPRESSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CORRELATION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(CORRELATION_PROPERTIES));
+                        .isA(CORRELATION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CORELATION_REFERENCE_EXPRESSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1390,20 +1391,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Correlation reference expression")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A value for correlation")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CORELATION_REFERENCE_EXPRESSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CORRELATION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(CORRELATION_PROPERTIES));
+                        .isA(CORRELATION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(CORRELATION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1415,13 +1416,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Correlation properties")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Characteristics or measures that describe the relationship between two or more variables")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CORRELATION_PROPERTIES.asUuidArray()[0].toString()))
@@ -1429,7 +1430,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.CORELATION_EXPRESSION, TinkarTerm.CORELATION_REFERENCE_EXPRESSION)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CREATIVE_COMMONS_BY_LICENSE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1441,20 +1442,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Creative Commons BY license")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Creative Commons (CC) licenses are a set of public copyright licenses that enable the free distribution of an otherwise copyrighted work")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CREATIVE_COMMONS_BY_LICENSE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CZECH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1466,20 +1467,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Czech dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Czech dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CZECH_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.CZECH_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1491,20 +1492,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Czech language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Czech Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.CZECH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DANISH_LANGUAGE))
@@ -1517,20 +1518,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Danish language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Danish Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DANISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1542,20 +1543,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Default module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("A value for coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEFINITION_DESCRIPTION_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1567,20 +1568,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Definition")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Semantic value describing the description type for the description pattern is a definition")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DEFINITION_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEFINITION_ROOT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1592,20 +1593,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Definition root")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DEFINITION_ROOT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1617,20 +1618,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Human readable text for a concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DESCRIPTION_ACCEPTABILITY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1642,13 +1643,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description acceptability")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Whether a given human readable text for a concept is permissible")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(DESCRIPTION_ACCEPTABILITY.asUuidArray()[0].toString()))
@@ -1656,7 +1657,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ACCEPTABLE, TinkarTerm.PREFERRED)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_CASE_SENSITIVE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1668,20 +1669,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Case sensitive")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Assumes the description is dependent on capitalization")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_CASE_SENSITIVE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_CASE_SIGNIFICANCE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_CASE_SIGNIFICANCE));
+                        .isA(DESCRIPTION_CASE_SIGNIFICANCE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1693,13 +1694,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description case significance")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Specifies how to handle the description text in terms of case sensitivity")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE.asUuidArray()[0].toString()))
@@ -1707,7 +1708,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.DESCRIPTION_CASE_SENSITIVE, TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_CORE_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1719,20 +1720,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description core type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Used to mark non-snomed descriptions as one of the core snomed types")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_CORE_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_DIALECT_PAIR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1744,13 +1745,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description dialect pair")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Description dialect pair - linking together dialects with language descriptions")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_DIALECT_PAIR.asUuidArray()[0].toString()))
@@ -1758,7 +1759,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR, TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR)
                         .parents(DESCRIPTION_VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_VERSION_PROPERTIES));
+                        .isA(DESCRIPTION_VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_FOCUS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1770,20 +1771,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description focus")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Description focus")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_FOCUS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(COMPONENT_TYPE_FOCUS))
                 .attach(new StatedAxiom()
-                        .isA(COMPONENT_TYPE_FOCUS));
+                        .isA(COMPONENT_TYPE_FOCUS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1795,20 +1796,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description for dialect/description pair")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Linking together dialects with language descriptions")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_DIALECT_PAIR))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_DIALECT_PAIR));
+                        .isA(DESCRIPTION_DIALECT_PAIR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_INITIAL_CHARACTER_CASE_SENSITIVE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1820,20 +1821,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Initial character case insensitive")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Value which designates initial character as sensitive for a given description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_INITIAL_CHARACTER_CASE_SENSITIVE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_CASE_SIGNIFICANCE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_CASE_SIGNIFICANCE));
+                        .isA(DESCRIPTION_CASE_SIGNIFICANCE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1845,20 +1846,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Logic profile")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1870,20 +1871,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Case insensitive")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Value which designate character as not sensitive for a given description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_NOT_CASE_SENSITIVE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_CASE_SIGNIFICANCE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_CASE_SIGNIFICANCE));
+                        .isA(DESCRIPTION_CASE_SIGNIFICANCE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1895,20 +1896,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Purpose and meaning for the description pattern and dialect patterns")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1920,13 +1921,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Specifying what type of description it is i.e. is it fully qualified or regular and etc.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_TYPE.asUuidArray()[0].toString()))
@@ -1934,7 +1935,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.DEFINITION_DESCRIPTION_TYPE, TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION))
@@ -1947,20 +1948,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Linking for each description -> what type it is")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_VERSION_PROPERTIES));
+                        .isA(DESCRIPTION_VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1972,20 +1973,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Type order")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_VERSION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -1997,13 +1998,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description version properties")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Combination of terms that might be used in a specific context or domain")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_VERSION_PROPERTIES.asUuidArray()[0].toString()))
@@ -2011,7 +2012,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.CASE_SIGNIFICANCE_CONCEPT_NID_FOR_DESCRIPTION, TinkarTerm.DESCRIPTION_TYPE_FOR_DESCRIPTION, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION, DESCRIPTION_DIALECT_PAIR)
                         .parents(VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(VERSION_PROPERTIES));
+                        .isA(VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_LOGIC_PROFILE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2023,13 +2024,13 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Description-logic profile")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_LOGIC_PROFILE.asUuidArray()[0].toString()))
@@ -2037,7 +2038,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.EL_PLUS_PLUS_PROFILE)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2049,20 +2050,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Destination module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEVELOPMENT_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2074,20 +2075,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Development module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Predefines or standard module within a system or application that is specifically designed to support the development phase of a project")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DEVELOPMENT_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(MODULE))
                 .attach(new StatedAxiom()
-                        .isA(MODULE));
+                        .isA(MODULE)).attach(new TinkarBaseModel());
 
 
 /*
@@ -2101,7 +2102,7 @@ public class TinkarStarterData {
                 .pathMembership()
                 .pathOrigin(TinkarTerm.SANDBOX_PATH)
                 .tinkarBaseModelMembership()
-                .build();
+                .build().attach(new TinkarBaseModel());
 */
         // todo
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEVELOPMENT_PATH))
@@ -2120,14 +2121,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A path that specifies that the components are currently under development")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DEVELOPMENT_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PATH))
                 .attach(new StatedAxiom()
-                        .isA(PATH));
+                        .isA(PATH)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIGRAPH_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2145,14 +2147,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A display field that references a di-graph whose edges are ordered pairs of vertices. Each edge can be followed from one vertex to another vertex.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DIGRAPH_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DITREE_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2170,14 +2173,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A display field that references a graph obtained from an undirected tree by replacing each undirected edge by two directed edges with opposite directions.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DITREE_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2195,14 +2199,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Specific dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DIALECT_FOR_DIALECT_AND_OR_DESCRIPTION_PAIR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_DIALECT_PAIR))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_DIALECT_PAIR));
+                        .isA(DESCRIPTION_DIALECT_PAIR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2220,14 +2225,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A value which describes a immutable coordinate property")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIRECTED_GRAPH))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2245,7 +2251,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DIRECTED_GRAPH.asUuidArray()[0].toString()))
@@ -2253,7 +2260,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.EL_PLUS_PLUS_DIGRAPH)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DISJOINT_WITH))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2271,14 +2278,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DISJOINT_WITH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DISPLAY_FIELDS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2296,7 +2304,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Captures the human readable terms")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DISPLAY_FIELDS.asUuidArray()[0].toString()))
@@ -2304,7 +2313,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.COMPONENT_FIELD, TinkarTerm.COMPONENT_ID_LIST_FIELD, TinkarTerm.COMPONENT_ID_SET_FIELD, TinkarTerm.CONCEPT_FIELD, TinkarTerm.DIGRAPH_FIELD, TinkarTerm.DITREE_FIELD, TinkarTerm.FLOAT_FIELD, TinkarTerm.INTEGER_FIELD, TinkarTerm.SEMANTIC_FIELD_TYPE, TinkarTerm.STRING)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DOUBLE_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2322,14 +2331,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A data value (type of structure for data)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DOUBLE_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DUTCH_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2347,14 +2357,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Dutch language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DUTCH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PROFILE_SET_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2372,7 +2383,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("EL profile set operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PROFILE_SET_OPERATOR.asUuidArray()[0].toString()))
@@ -2380,7 +2392,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
@@ -2399,7 +2411,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The set of relationships or axioms has defined by the EL++ Logic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
@@ -2407,7 +2420,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION))
@@ -2426,14 +2439,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_INFERRED_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LOGICAL_DEFINITION))
                 .attach(new StatedAxiom()
-                        .isA(LOGICAL_DEFINITION));
+                        .isA(LOGICAL_DEFINITION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2451,7 +2465,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
@@ -2459,7 +2474,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP)
                         .parents(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS));
+                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2477,14 +2492,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_STATED_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LOGICAL_DEFINITION))
                 .attach(new StatedAxiom()
-                        .isA(LOGICAL_DEFINITION));
+                        .isA(LOGICAL_DEFINITION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2502,7 +2518,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString()))
@@ -2510,7 +2527,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.INCLUSION_SET, ROLE, TinkarTerm.ROLE_GROUP)
                         .parents(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS));
+                        .isA(EL_PLUS_PLUS_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_DIGRAPH))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2528,14 +2545,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The directed graph that results from classifying a set of EL++ axioms")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_DIGRAPH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DIRECTED_GRAPH))
                 .attach(new StatedAxiom()
-                        .isA(DIRECTED_GRAPH));
+                        .isA(DIRECTED_GRAPH)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EL_PLUS_PLUS_PROFILE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2553,14 +2571,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("EL ++ profile")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EL_PLUS_PLUS_PROFILE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_LOGIC_PROFILE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_LOGIC_PROFILE));
+                        .isA(DESCRIPTION_LOGIC_PROFILE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ENGLISH_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2578,14 +2597,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Value for description language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ENGLISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EQUAL_TO))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2603,14 +2623,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A concept indicating the operator \"=\"")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EQUAL_TO.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXACT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2628,14 +2649,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Source and target are semantic or exact lexical match")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EXACT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(GROUPING))
                 .attach(new StatedAxiom()
-                        .isA(GROUPING));
+                        .isA(GROUPING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXTENDED_DESCRIPTION_TYPE))
@@ -2654,14 +2676,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Used to store non-snomed description types when other terminologies are imported")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EXTENDED_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.EXTENDED_RELATIONSHIP_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2679,14 +2702,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Used to store non-snomed relationship types when other terminologies are imported- especially when a relationship is mapped onto a snomed relationship type (such as isa)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.EXTENDED_RELATIONSHIP_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2704,14 +2728,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Represents values as high-precision fractional values.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FLOAT_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_LITERAL))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2729,14 +2754,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Numbers with decimal point or an exponential part")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FLOAT_LITERAL.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LITERAL_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(LITERAL_VALUE));
+                        .isA(LITERAL_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2754,14 +2780,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FLOAT_SUBSTITUTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(FIELD_SUBSTITUTION))
                 .attach(new StatedAxiom()
-                        .isA(FIELD_SUBSTITUTION));
+                        .isA(FIELD_SUBSTITUTION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FRENCH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2779,14 +2806,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("French dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FRENCH_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FRENCH_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2804,14 +2832,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("French Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FRENCH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2829,14 +2858,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Fully qualified name is a description that uniquely identifies and differentiates it from other concepts with similar descriptions")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GB_ENGLISH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2854,14 +2884,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Great Britain: English Language reference set")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.GB_ENGLISH_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ENGLISH_DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(ENGLISH_DIALECT_ASSEMBLAGE));
+                        .isA(ENGLISH_DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GERMAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2879,14 +2910,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("German Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.GERMAN_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GREATER_THAN))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2904,14 +2936,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A concept indicating the operator \">\"")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.GREATER_THAN.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.GREATER_THAN_OR_EQUAL_TO))
@@ -2930,14 +2963,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A concept indicating the operator \">=\"")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.GREATER_THAN_OR_EQUAL_TO.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(GROUPING))
@@ -2956,7 +2990,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(GROUPING.asUuidArray()[0].toString()))
@@ -2964,7 +2999,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.EXACT, TinkarTerm.PARTIAL)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.HEALTH_CONCEPT))
@@ -2983,14 +3018,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.HEALTH_CONCEPT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IDENTIFIER_SOURCE))
@@ -3009,7 +3045,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An identifier used to label the identity of a unique component.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IDENTIFIER_SOURCE.asUuidArray()[0].toString()))
@@ -3017,7 +3054,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INCLUSION_SET))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3035,14 +3072,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A set of relationships that indicate something is has an inclusion. Not necessarily or sufficient but inclusive.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INCLUSION_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS));
+                        .isA(TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INACTIVE_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3060,14 +3098,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept used to represent a status for components that are no longer active")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INACTIVE_STATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(STATUS_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(STATUS_VALUE));
+                        .isA(STATUS_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INFERRED_PREMISE_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3085,14 +3124,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The axiom view following the application of the reasoner")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INFERRED_PREMISE_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(AXIOM_ORIGIN))
                 .attach(new StatedAxiom()
-                        .isA(AXIOM_ORIGIN));
+                        .isA(AXIOM_ORIGIN)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INSTANT_LITERAL))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3110,14 +3150,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("May refer to a specific point in time which is often represented by a date or time value")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INSTANT_LITERAL.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LITERAL_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(LITERAL_VALUE));
+                        .isA(LITERAL_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INSTANT_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3135,14 +3176,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Substitution of instant literal?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INSTANT_SUBSTITUTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(FIELD_SUBSTITUTION))
                 .attach(new StatedAxiom()
-                        .isA(FIELD_SUBSTITUTION));
+                        .isA(FIELD_SUBSTITUTION)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INTEGER_FIELD))
@@ -3161,14 +3203,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type that represents some range of mathematical integers")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INTEGER_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INVERSE_NAME))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3186,14 +3229,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("This is the extended description type that maye be attached to a description within a concept that defines as Association refex to signify that the referenced description  is the inverse of the association name")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INVERSE_NAME.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.INVERSE_TREE_LIST))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3211,14 +3255,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Inverse tree list")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.INVERSE_TREE_LIST.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TREE_AMALGAM_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TREE_AMALGAM_PROPERTIES));
+                        .isA(TREE_AMALGAM_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IRISH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3236,14 +3281,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Irish dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IRISH_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IRISH_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3261,14 +3307,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Irish language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IRISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IS_A))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3286,14 +3333,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Designates the parent child relationship")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IS_A.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IS_A_INFERRED_NAVIGATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3311,14 +3359,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Designates the parent child relationship following the application of the reasoner")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IS_A_INFERRED_NAVIGATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(NAVIGATION))
                 .attach(new StatedAxiom()
-                        .isA(NAVIGATION));
+                        .isA(NAVIGATION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.IS_A_STATED_NAVIGATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3336,14 +3385,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Designates the parent child relationship as authored")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.IS_A_STATED_NAVIGATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(NAVIGATION))
                 .attach(new StatedAxiom()
-                        .isA(NAVIGATION));
+                        .isA(NAVIGATION)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ITALIAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3361,14 +3411,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Italian language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ITALIAN_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOMET_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3386,14 +3437,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Komet specific values?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOMET_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(MODULE))
                 .attach(new StatedAxiom()
-                        .isA(MODULE));
+                        .isA(MODULE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOMET_USER))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3411,14 +3463,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Authorized to author, edit and/or view in Komet")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOMET_USER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOMET_USER_LIST))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3436,14 +3489,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Inventory of authorized komet users")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOMET_USER_LIST.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOMET_ISSUE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3461,14 +3515,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Komet being the 'annotation type' - specified type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOMET_ISSUE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ANNOTATION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(ANNOTATION_TYPE));
+                        .isA(ANNOTATION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOREAN_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3486,7 +3541,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Korean dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOREAN_DIALECT.asUuidArray()[0].toString()))
@@ -3494,7 +3550,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.STANDARD_KOREAN_DIALECT)
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.KOREAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3512,14 +3568,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Korean language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.KOREAN_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LANGUAGE))
@@ -3538,7 +3595,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Specifies the language of the description text.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LANGUAGE.asUuidArray()[0].toString()))
@@ -3546,7 +3604,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ENGLISH_LANGUAGE, TinkarTerm.SPANISH_LANGUAGE)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3564,14 +3622,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Captures the language code for a description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_VERSION_PROPERTIES));
+                        .isA(DESCRIPTION_VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LANGUAGE_COORDINATE_NAME))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3589,14 +3648,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LANGUAGE_COORDINATE_NAME.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE_COORDINATE_PROPERTIES));
+                        .isA(LANGUAGE_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LANGUAGE_COORDINATE_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3614,7 +3674,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Spatial representation of language, attributes or language coordinates, programming language metadata?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LANGUAGE_COORDINATE_PROPERTIES.asUuidArray()[0].toString()))
@@ -3622,7 +3683,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.LANGUAGE_COORDINATE_NAME, DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3640,14 +3701,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3665,14 +3727,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LESS_THAN))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3690,14 +3753,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A concept indicating the operator \"<\"")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LESS_THAN.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LESS_THAN_OR_EQUAL_TO))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3715,14 +3779,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A concept indicating the operator \"<=\"")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LESS_THAN_OR_EQUAL_TO.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LITHUANIAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3740,14 +3805,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Lithuanian Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LITHUANIAN_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGIC_COORDINATE_NAME))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3765,14 +3831,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LOGIC_COORDINATE_NAME.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LOGIC_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(LOGIC_COORDINATE_PROPERTIES));
+                        .isA(LOGIC_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LOGIC_COORDINATE_PROPERTIES))
@@ -3791,7 +3858,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Structural characteristics of logical elements, Attributes of Logical coordinates, Mathematical Representation of logical relationships ?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LOGIC_COORDINATE_PROPERTIES.asUuidArray()[0].toString()))
@@ -3799,7 +3867,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.LOGIC_COORDINATE_NAME)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LOGICAL_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3817,14 +3885,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The semantic value describing the purpose of the stated and inferred terminological axioms.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LOGICAL_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGICAL_EXPRESSION_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3842,14 +3911,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LOGICAL_EXPRESSION_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3867,14 +3937,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(SEMANTIC_TYPE));
+                        .isA(SEMANTIC_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGICALLY_EQUIVALENT_TO))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3892,14 +3963,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An operator for the reasoner to determine the equivalence")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LOGICALLY_EQUIVALENT_TO.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TAXONOMY_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TAXONOMY_OPERATOR));
+                        .isA(TAXONOMY_OPERATOR)).attach(new TinkarBaseModel());
 
 
         /*starterData.concept(TinkarTerm.MASTER_PATH)
@@ -3912,7 +3984,7 @@ public class TinkarStarterData {
                 .pathMembership()
                 .pathOrigin(TinkarTerm.DEVELOPMENT_PATH)
                 .tinkarBaseModelMembership()
-                .build();*/
+                .build().attach(new TinkarBaseModel());*/
 
         //todo implement pathmembership & origin
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MASTER_PATH))
@@ -3931,14 +4003,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A default path for components")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MASTER_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PATH))
                 .attach(new StatedAxiom()
-                        .isA(PATH));
+                        .isA(PATH)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MEANING))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3956,14 +4029,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The interpretation or explanation field for a pattern/semantics")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(MEANING.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MEMBERSHIP_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -3981,14 +4055,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Membership semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(MEMBERSHIP_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(SEMANTIC_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(SEMANTIC_TYPE));
+                        .isA(SEMANTIC_TYPE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODEL_CONCEPT))
@@ -4007,7 +4082,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(" ")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString()))
@@ -4015,7 +4091,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.TINKAR_MODEL_CONCEPT)
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TINKAR_MODEL_CONCEPT))
@@ -4034,7 +4110,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(" ")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.TINKAR_MODEL_CONCEPT.asUuidArray()[0].toString()))
@@ -4049,7 +4126,7 @@ public class TinkarStarterData {
                                 VALUE_CONSTRAINT_SOURCE, AXIOM_SYNTAX)
                         .parents(MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(MODEL_CONCEPT));
+                        .isA(MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MODULE))
@@ -4068,7 +4145,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(MODULE.asUuidArray()[0].toString()))
@@ -4076,7 +4154,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.PRIMORDIAL_MODULE)
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE))
@@ -4095,14 +4173,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module exclusion set for stamp coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_FOR_USER))
@@ -4121,14 +4200,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("User preference for Module?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_FOR_USER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_FOR_VERSION))
@@ -4147,14 +4227,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module Version")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_FOR_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(VERSION_PROPERTIES));
+                        .isA(VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -4172,14 +4253,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Coordinate edit options for Module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE))
@@ -4198,14 +4280,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module preference list for stamp coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE))
@@ -4224,14 +4307,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module preference list for language coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE))
@@ -4250,14 +4334,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module preference order for stamp coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.MODULES_FOR_STAMP_COORDINATE))
@@ -4276,14 +4361,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Stamp coordinate modules")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.MODULES_FOR_STAMP_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION))
@@ -4302,7 +4388,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Navigation")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NAVIGATION.asUuidArray()[0].toString()))
@@ -4310,7 +4397,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_VERTEX)
                         .parents(PURPOSE))
                 .attach(new StatedAxiom()
-                        .isA(PURPOSE));
+                        .isA(PURPOSE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION_CONCEPT_SET))
@@ -4329,14 +4416,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Navigating sets of concepts?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NAVIGATION_CONCEPT_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(NAVIGATION))
                 .attach(new StatedAxiom()
-                        .isA(NAVIGATION));
+                        .isA(NAVIGATION)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NAVIGATION_VERTEX))
@@ -4355,14 +4443,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Navigation vertex")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NAVIGATION_VERTEX.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(NAVIGATION))
                 .attach(new StatedAxiom()
-                        .isA(NAVIGATION));
+                        .isA(NAVIGATION)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION))
@@ -4381,14 +4470,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Not sufficiently defined by necessary conditions definition status")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NECESSARY_SET))
@@ -4407,14 +4497,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A set of relationships that is always true of a concept.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NECESSARY_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
 
 
@@ -4434,14 +4525,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Not available")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NOT_APPLICABLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_CASE_SIGNIFICANCE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_CASE_SIGNIFICANCE));
+                        .isA(DESCRIPTION_CASE_SIGNIFICANCE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.OBJECT))
@@ -4460,7 +4552,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An encapsulation of data together with procedures")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.OBJECT.asUuidArray()[0].toString()))
@@ -4468,7 +4561,7 @@ public class TinkarStarterData {
                         .children(STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, MODULE, PATH, OBJECT_PROPERTIES, HAS_ACTIVE_INGREDIENT, HAS_DOSE_FORM, LATERALITY)
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.OBJECT_PROPERTIES))
@@ -4487,7 +4580,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Objects are instances of classes, the properties describe the data or attributes that an object can have")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.OBJECT_PROPERTIES.asUuidArray()[0].toString()))
@@ -4495,7 +4589,7 @@ public class TinkarStarterData {
                         .children(ACTION_PROPERTIES, CHRONICLE_PROPERTIES, VERSION_PROPERTIES, IMMUTABLECOORDINATE_PROPERTIES, LANGUAGE_COORDINATE_PROPERTIES, LOGIC_COORDINATE_PROPERTIES, TinkarTerm.PATH_COORDINATE_PROPERTIES, TinkarTerm.SEMANTIC_PROPERTIES, TREE_AMALGAM_PROPERTIES, CORRELATION_PROPERTIES, TRANSITIVE_PROPERTY, REFLEXIVE_PROPERTY)
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.OR))
@@ -4514,14 +4608,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.OR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS))
@@ -4540,14 +4635,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Order in which axioms are attached")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -4565,14 +4661,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Order in which concepts are attached")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS))
@@ -4591,14 +4688,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Order in which descriptions are attached")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PART_OF))
@@ -4617,14 +4715,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Part of an attribute")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PART_OF.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONNECTIVE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONNECTIVE_OPERATOR));
+                        .isA(CONNECTIVE_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PARTIAL))
@@ -4643,14 +4742,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Exists in/ Inclusion of ?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PARTIAL.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(GROUPING))
                 .attach(new StatedAxiom()
-                        .isA(GROUPING));
+                        .isA(GROUPING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PATH))
@@ -4669,7 +4769,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A set of assets under version control that can be managed distinctly from other assets. Paths “branch” from other paths when established, and can be “merged” with other paths as well.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(PATH.asUuidArray()[0].toString()))
@@ -4677,7 +4778,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.DEVELOPMENT_PATH, TinkarTerm.MASTER_PATH, TinkarTerm.PRIMORDIAL_PATH, TinkarTerm.SANDBOX_PATH)
                         .parents(TinkarTerm.ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROOT_VERTEX));
+                        .isA(TinkarTerm.ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_CONCEPT))
@@ -4696,14 +4797,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path concept")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_CONCEPT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCEPT_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(CONCEPT_TYPE));
+                        .isA(CONCEPT_TYPE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_COORDINATE_NAME))
@@ -4722,14 +4824,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path coordinate name")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_COORDINATE_NAME.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.PATH_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_COORDINATE_PROPERTIES))
@@ -4748,7 +4851,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Character or attribute of coordinates referring to a series of connected points, that form a shape or trajectory")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_COORDINATE_PROPERTIES.asUuidArray()[0].toString()))
@@ -4756,7 +4860,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.PATH_COORDINATE_NAME, TinkarTerm.PATH_ORIGINS)
                         .parents(TinkarTerm.OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(TinkarTerm.OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_FOR_PATH_COORDINATE))
@@ -4775,14 +4879,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path for path coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_FOR_PATH_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_FOR_USER))
@@ -4801,14 +4906,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path for user")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_FOR_USER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(USER))
                 .attach(new StatedAxiom()
-                        .isA(USER));
+                        .isA(USER)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_FOR_VERSION))
@@ -4827,14 +4933,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Version path")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_FOR_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.VERSION_PROPERTIES));
+                        .isA(TinkarTerm.VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE))
@@ -4853,14 +4960,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path options for edit coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_ORIGINS))
@@ -4879,14 +4987,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path origins")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_ORIGINS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.PATH_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH))
@@ -4905,14 +5014,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Path origins for stamp path")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PROMOTION_PATH_FOR_EDIT_CORDINATE))
@@ -4931,14 +5041,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Promotion Path for Edit Coordinate")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PROMOTION_PATH_FOR_EDIT_CORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.PATH_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.PATH_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PHENOMENON))
@@ -4957,7 +5068,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A unique thought, fact, or circumstance")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PHENOMENON.asUuidArray()[0].toString()))
@@ -4965,7 +5077,7 @@ public class TinkarStarterData {
                         .children(EXAMPLE_UCUM_UNITS)
                         .parents(TinkarTerm.TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT));
+                        .isA(TinkarTerm.TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.POLISH_DIALECT))
@@ -4984,14 +5096,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Polish Dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.POLISH_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DIALECT_ASSEMBLAGE));
+                        .isA(TinkarTerm.DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.POLISH_LANGUAGE))
@@ -5010,14 +5123,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Polish Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.POLISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.LANGUAGE));
+                        .isA(TinkarTerm.LANGUAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PREFERRED))
@@ -5036,14 +5150,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Preferred( Foundation metadata concept)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PREFERRED.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_ACCEPTABILITY))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_ACCEPTABILITY));
+                        .isA(DESCRIPTION_ACCEPTABILITY)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRESENTATION_UNIT_DIFFERENT))
@@ -5062,14 +5177,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Unit difference")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRESENTATION_UNIT_DIFFERENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE))
@@ -5088,14 +5204,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Primordial UUID")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRIMORDIAL_UUID_FOR_CHRONICLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.CHRONICLE_PROPERTIES));
+                        .isA(TinkarTerm.CHRONICLE_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_MODULE))
@@ -5114,14 +5231,15 @@ public class TinkarStarterData {
                 . attach((Definition definition) -> definition
                         .text(" ")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRIMORDIAL_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(MODULE))
                 .attach(new StatedAxiom()
-                        .isA(MODULE));
+                        .isA(MODULE)).attach(new TinkarBaseModel());
 
 
       /*  starterData.concept(TinkarTerm.PRIMORDIAL_PATH)
@@ -5133,7 +5251,7 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.PATH))
                 .pathMembership()
                 .tinkarBaseModelMembership()
-                .build();*/
+                .build().attach(new TinkarBaseModel());*/
 
         //todo implement pathmembership
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_PATH))
@@ -5152,14 +5270,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(" ")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRIMORDIAL_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PATH))
                 .attach(new StatedAxiom()
-                        .isA(PATH));
+                        .isA(PATH)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_STATE))
@@ -5178,14 +5297,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept used to represent a status for components that have not yet been released and exist in their most basic form.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PRIMORDIAL_STATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(STATUS_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(STATUS_VALUE));
+                        .isA(STATUS_VALUE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC))
@@ -5204,14 +5324,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Component id Referenced")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.SEMANTIC_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.SEMANTIC_PROPERTIES));
+                        .isA(TinkarTerm.SEMANTIC_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION))
@@ -5230,14 +5351,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Stores the (optional) referenced component type sub restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.ROLE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROLE_OPERATOR));
+                        .isA(TinkarTerm.ROLE_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION))
@@ -5256,14 +5378,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Stores the (Optional) referenced component type restriction selection which will be used by the validator to check the user input for the referenced component when creating an instance of a dynamic field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.ROLE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROLE_OPERATOR));
+                        .isA(TinkarTerm.ROLE_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE))
@@ -5282,14 +5405,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("There may be descriptions/synonyms marked as “regular.”")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RELATIONSHIP_DESTINATION))
@@ -5308,14 +5432,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Signifies path to child concepts which are more specific than the Tinkar term")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.RELATIONSHIP_DESTINATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RELATIONSHIP_ORIGIN))
@@ -5334,14 +5459,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Signifies path to parent concepts which are more general than the Tinkar term")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.RELATIONSHIP_ORIGIN.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5357,9 +5483,10 @@ public class TinkarStarterData {
                 .attach(new USDialect()
                         .acceptability(PREFERRED))
                 .attach((Definition definition) -> definition
-                        .text("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.")
+                        .text("Is an abstract representation of a high-level role for a therapeutic medicinal product.attach(new TinkarBaseModel()); the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE.asUuidArray()[0].toString()))
@@ -5367,7 +5494,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ROLE_TYPE, ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION)
                         .parents(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS));
+                        .isA(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_GROUP))
@@ -5386,7 +5513,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An association between a set of attribute or axiom value pairs that causes them to be considered together within a concept definition or post coordinated expression.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE_GROUP.asUuidArray()[0].toString()))
@@ -5394,7 +5522,7 @@ public class TinkarStarterData {
                         .children(ROLE)
                         .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS) );
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS) ).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_OPERATOR))
@@ -5413,7 +5541,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept that is used to describe universal vs existential restrictions.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE_OPERATOR.asUuidArray()[0].toString()))
@@ -5421,7 +5550,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.UNIVERSAL_RESTRICTION, EXISTENTIAL_RESTRICTION)
                         .parents(ROLE))
                 .attach(new StatedAxiom()
-                        .isA(ROLE) );
+                        .isA(ROLE) ).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_RESTRICTION))
@@ -5440,14 +5569,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Role restriction")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROLE))
                 .attach(new StatedAxiom()
-                        .isA(ROLE) );
+                        .isA(ROLE) ).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_TYPE))
@@ -5466,14 +5596,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Refers to a concept that represents a particular kind of relationship that can exist between two entities. It defines the specific function or responsibility that one entity plays in relation to another.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROLE))
                 .attach(new StatedAxiom()
-                        .isA(ROLE) );
+                        .isA(ROLE) ).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROLE_TYPE_TO_ADD))
@@ -5492,14 +5623,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Action - add role type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROLE_TYPE_TO_ADD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ACTION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(ACTION_PROPERTIES));
+                        .isA(ACTION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5517,14 +5649,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Logic coordinate root")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.ROOT_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RUSSIAN_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5542,14 +5675,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Russian Dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.RUSSIAN_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(DIALECT_ASSEMBLAGE));
+                        .isA(DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.RUSSIAN_LANGUAGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5567,14 +5701,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Russian language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.RUSSIAN_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SANDBOX_COMPONENT))
@@ -5593,7 +5728,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Sandbox component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SANDBOX_COMPONENT.asUuidArray()[0].toString()))
@@ -5601,7 +5737,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.SANDBOX_MODULE, TinkarTerm.SANDBOX_PATH)
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
 
 /*
@@ -5613,7 +5749,7 @@ public class TinkarStarterData {
                 .statedNavigation(List.of(TinkarTerm.SANDBOX_PATH_MODULE), List.of(TinkarTerm.MODULE, TinkarTerm.SANDBOX_COMPONENT))
                 .statedDefinition(List.of(TinkarTerm.MODULE, TinkarTerm.SANDBOX_COMPONENT))
                 .tinkarBaseModelMembership()
-                .build();
+                .build().attach(new TinkarBaseModel());
 */
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SANDBOX_MODULE))
@@ -5632,7 +5768,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Sandbox module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SANDBOX_MODULE.asUuidArray()[0].toString()))
@@ -5640,7 +5777,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.SANDBOX_PATH_MODULE)
                         .parents(MODULE, TinkarTerm.SANDBOX_COMPONENT))
                 .attach(new StatedAxiom()
-                        .isA(MODULE, TinkarTerm.SANDBOX_COMPONENT));
+                        .isA(MODULE, TinkarTerm.SANDBOX_COMPONENT)).attach(new TinkarBaseModel());
 
 
         //TODO how to implement pathOrigin? is this important?
@@ -5654,7 +5791,7 @@ public class TinkarStarterData {
                 .pathMembership()
                 .pathOrigin(TinkarTerm.PRIMORDIAL_PATH)
                 .tinkarBaseModelMembership()
-                .build();*/
+                .build().attach(new TinkarBaseModel());*/
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SANDBOX_PATH))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5672,14 +5809,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A path for components under testing.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SANDBOX_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PATH))
                 .attach(new StatedAxiom()
-                        .isA(PATH));
+                        .isA(PATH)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SANDBOX_PATH_MODULE))
@@ -5698,14 +5836,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Sandbox path module")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SANDBOX_PATH_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.SANDBOX_MODULE))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.SANDBOX_MODULE));
+                        .isA(TinkarTerm.SANDBOX_MODULE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_FIELD_CONCEPTS))
@@ -5724,14 +5863,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Semantic field concepts")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_FIELD_CONCEPTS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCEPT_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(CONCEPT_TYPE));
+                        .isA(CONCEPT_TYPE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_FIELD_NAME))
@@ -5750,14 +5890,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Field name - semantics")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_FIELD_NAME.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.SEMANTIC_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.SEMANTIC_PROPERTIES));
+                        .isA(TinkarTerm.SEMANTIC_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_FIELD_TYPE))
@@ -5776,14 +5917,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("List of fields-  semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_FIELD_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DISPLAY_FIELDS));
+                        .isA(TinkarTerm.DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_PROPERTIES))
@@ -5802,7 +5944,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The attributes or characteristics of a concept, term, or element that convey meaning or semantics in a given context")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_PROPERTIES.asUuidArray()[0].toString()))
@@ -5810,7 +5953,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.REFERENCED_COMPONENT_NID_FOR_SEMANTIC, TinkarTerm.COMPONENT_FOR_SEMANTIC, TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC, TinkarTerm.SEMANTIC_FIELD_NAME)
                         .parents(TinkarTerm.OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.OBJECT_PROPERTIES));
+                        .isA(TinkarTerm.OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(SEMANTIC_TYPE))
@@ -5829,7 +5972,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Type- semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(SEMANTIC_TYPE.asUuidArray()[0].toString()))
@@ -5837,7 +5981,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.COMPONENT_SEMANTIC, TinkarTerm.CONCEPT_SEMANTIC, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.LOGICAL_EXPRESSION_SEMANTIC, MEMBERSHIP_SEMANTIC)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SIGNED_INTEGER))
@@ -5856,14 +6000,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Signed integer (Foundation metadata concept)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SIGNED_INTEGER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SPANISH_LANGUAGE))
@@ -5882,14 +6027,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Value for the description language dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SPANISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.LANGUAGE));
+                        .isA(TinkarTerm.LANGUAGE)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.STANDARD_KOREAN_DIALECT))
@@ -5908,14 +6054,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Standard")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.STANDARD_KOREAN_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.KOREAN_DIALECT))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.KOREAN_DIALECT));
+                        .isA(TinkarTerm.KOREAN_DIALECT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.STATED_PREMISE_TYPE))
@@ -5934,14 +6081,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Stated relationship")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.STATED_PREMISE_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(AXIOM_ORIGIN))
                 .attach(new StatedAxiom()
-                        .isA(AXIOM_ORIGIN));
+                        .isA(AXIOM_ORIGIN)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.STATUS_FOR_VERSION))
@@ -5960,14 +6108,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Version status?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.STATUS_FOR_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.VERSION_PROPERTIES));
+                        .isA(TinkarTerm.VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(STATUS_VALUE))
@@ -5986,7 +6135,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The status of the STAMP Coordinate(Active, Cancelled, Inactive, Primordial)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(STATUS_VALUE.asUuidArray()[0].toString()))
@@ -5994,7 +6144,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ACTIVE_STATE, TinkarTerm.CANCELED_STATE, TinkarTerm.INACTIVE_STATE, TinkarTerm.PRIMORDIAL_STATE, TinkarTerm.WITHDRAWN_STATE)
                         .parents(TinkarTerm.ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.ROOT_VERTEX));
+                        .isA(TinkarTerm.ROOT_VERTEX)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.STRING))
@@ -6013,14 +6163,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A sequence of characters, either as a literal constant or as a variable. Strings could be used to represent terms from code systems or URLs, textual definitions, etc.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.STRING.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DISPLAY_FIELDS));
+                        .isA(TinkarTerm.DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION))
@@ -6039,14 +6190,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept definition - Sufficient")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR));
+                        .isA(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR))
@@ -6065,7 +6217,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept definition operator")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR.asUuidArray()[0].toString()))
@@ -6073,7 +6226,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION, TinkarTerm.NECESSARY_BUT_NOT_SUFFICIENT_CONCEPT_DEFINITION)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SUFFICIENT_SET))
@@ -6092,14 +6245,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A set of relationships that differentiate a concept and its subtypes from all other concepts. A concept that contains at least one set of necessary and sufficient conditions is considered defined.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SUFFICIENT_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS));
+                        .isA(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SWEDISH_LANGUAGE))
@@ -6118,14 +6272,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Swedish Language")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SWEDISH_LANGUAGE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE));
+                        .isA(LANGUAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TEXT_FOR_DESCRIPTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6143,14 +6298,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Captures the human readable text for a description in Komet")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.TEXT_FOR_DESCRIPTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TIME_FOR_VERSION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6168,14 +6324,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Version time")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.TIME_FOR_VERSION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(VERSION_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(VERSION_PROPERTIES));
+                        .isA(VERSION_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TREE_AMALGAM_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6193,7 +6350,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data structure that consists of nodes connected by edges (a mixture or blend of different elements)")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TREE_AMALGAM_PROPERTIES.asUuidArray()[0].toString()))
@@ -6201,7 +6359,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.INVERSE_TREE_LIST, TinkarTerm.TREE_LIST)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.TREE_LIST))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6219,14 +6377,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("List - Tree")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.TREE_LIST.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TREE_AMALGAM_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TREE_AMALGAM_PROPERTIES));
+                        .isA(TREE_AMALGAM_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.US_ENGLISH_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6244,7 +6403,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("USA -english dialect")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.US_ENGLISH_DIALECT.asUuidArray()[0].toString()))
@@ -6252,7 +6412,7 @@ public class TinkarStarterData {
                         .children(US_NURSING_DIALECT)
                         .parents(ENGLISH_DIALECT_ASSEMBLAGE))
                 .attach(new StatedAxiom()
-                        .isA(ENGLISH_DIALECT_ASSEMBLAGE));
+                        .isA(ENGLISH_DIALECT_ASSEMBLAGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(US_NURSING_DIALECT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6270,14 +6430,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Nursing Dialect -US English")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(US_NURSING_DIALECT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(US_ENGLISH_DIALECT))
                 .attach(new StatedAxiom()
-                        .isA(US_ENGLISH_DIALECT));
+                        .isA(US_ENGLISH_DIALECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_DATA_TYPE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6295,14 +6456,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Distinction of data type of UUID")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UUID_DATA_TYPE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6320,14 +6482,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Universally unique identifier field")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UUID_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UUID_LIST_FOR_COMPONENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6345,14 +6508,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("UUIDs")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UUID_LIST_FOR_COMPONENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(CHRONICLE_PROPERTIES));
+                        .isA(CHRONICLE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNCATEGORIZED_PHENOMENON))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6370,14 +6534,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Unknown")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UNCATEGORIZED_PHENOMENON.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PHENOMENON))
                 .attach(new StatedAxiom()
-                        .isA(PHENOMENON));
+                        .isA(PHENOMENON)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNINITIALIZED_COMPONENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6395,14 +6560,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Not initialized component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UNINITIALIZED_COMPONENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSAL_RESTRICTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6420,14 +6586,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Universal restrictions constrain the relationships along a given property to concepts that are members of a specific class.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UNIVERSAL_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROLE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(ROLE_OPERATOR));
+                        .isA(ROLE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6445,14 +6612,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A universally unique identifier that uniquely represents a concept in Tinkar")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IDENTIFIER_SOURCE))
                 .attach(new StatedAxiom()
-                        .isA(IDENTIFIER_SOURCE));
+                        .isA(IDENTIFIER_SOURCE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(USER))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6470,7 +6638,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(USER.asUuidArray()[0].toString()))
@@ -6478,7 +6647,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, STARTER_DATA_AUTHORING)
                         .parents(ROOT_VERTEX))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERSION_LIST_FOR_CHRONICLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6496,14 +6665,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Chronicle version list")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.VERSION_LIST_FOR_CHRONICLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(CHRONICLE_PROPERTIES));
+                        .isA(CHRONICLE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VERSION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6521,7 +6691,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Null")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(VERSION_PROPERTIES.asUuidArray()[0].toString()))
@@ -6529,7 +6700,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.AUTHOR_FOR_VERSION, TinkarTerm.MODULE_FOR_VERSION, TinkarTerm.PATH_FOR_VERSION, TinkarTerm.STATUS_FOR_VERSION, TinkarTerm.TIME_FOR_VERSION, DESCRIPTION_VERSION_PROPERTIES)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6547,14 +6718,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Field for Vertex")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.VERTEX_FIELD.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DISPLAY_FIELDS))
                 .attach(new StatedAxiom()
-                        .isA(DISPLAY_FIELDS));
+                        .isA(DISPLAY_FIELDS)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_STATE_SET))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6572,14 +6744,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Vertex states")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.VERTEX_STATE_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VERTEX_SORT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6597,14 +6770,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Vertex sort")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.VERTEX_SORT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(TinkarTerm.IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.VIEW_COORDINATE_KEY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6622,14 +6796,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("View Key")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.VIEW_COORDINATE_KEY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.QUERY_CLAUSES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.QUERY_CLAUSES));
+                        .isA(TinkarTerm.QUERY_CLAUSES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.WITHDRAWN_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6647,14 +6822,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Concept used to represent a status for components that are withdrawn.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.WITHDRAWN_STATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(STATUS_VALUE))
                 .attach(new StatedAxiom()
-                        .isA(STATUS_VALUE));
+                        .isA(STATUS_VALUE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BOOLEAN))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6672,14 +6848,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BOOLEAN.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.BYTE_ARRAY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6697,14 +6874,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.BYTE_ARRAY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6722,14 +6900,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("List of description")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DESCRIPTION_LIST_FOR_CONCEPT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DOUBLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6747,14 +6926,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.DOUBLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.FLOAT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6772,14 +6952,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.FLOAT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(TinkarTerm.DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6797,14 +6978,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Semantic")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LOGIC_GRAPH_FOR_SEMANTIC.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TinkarTerm.SEMANTIC_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(TinkarTerm.SEMANTIC_PROPERTIES));
+                        .isA(TinkarTerm.SEMANTIC_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.LONG))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6822,14 +7004,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.LONG.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DYNAMIC_COLUMN_DATA_TYPES))
                 .attach(new StatedAxiom()
-                        .isA(DYNAMIC_COLUMN_DATA_TYPES));
+                        .isA(DYNAMIC_COLUMN_DATA_TYPES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.NID))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6847,14 +7030,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data type")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.NID.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6872,14 +7056,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Semantic list")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.SEMANTIC_LIST_FOR_CHRONICLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CHRONICLE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(CHRONICLE_PROPERTIES));
+                        .isA(CHRONICLE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(USERS_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6897,14 +7082,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Module - user")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(USERS_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(MODULE))
                 .attach(new StatedAxiom()
-                        .isA(MODULE));
+                        .isA(MODULE)).attach(new TinkarBaseModel());
 
         //converting above concept "ROOT_VERTEX" to composer api format.
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.ROOT_VERTEX))
@@ -6929,7 +7115,7 @@ public class TinkarStarterData {
                 .attach(new StatedNavigation()
                         .children(MODEL_CONCEPT, MEANING, OBJECT, ROLE, USER, ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(ROOT_VERTEX));
+                        .isA(ROOT_VERTEX)).attach(new TinkarBaseModel());
 
         //Necessary Terms Filtered out in generation routine - START
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(QUERY_CLAUSES))
@@ -6948,7 +7134,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A distinct component/query that serves a specific purpose")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(QUERY_CLAUSES.asUuidArray()[0].toString()))
@@ -6956,7 +7143,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.BOOLEAN_REFERENCE, TinkarTerm.VIEW_COORDINATE_KEY)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(FIELD_SUBSTITUTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -6974,7 +7161,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Replacing a placeholder variable in a field with a specific value")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(FIELD_SUBSTITUTION.asUuidArray()[0].toString()))
@@ -6982,7 +7170,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.BOOLEAN_SUBSTITUTION, TinkarTerm.CONCEPT_SUBSTITUTION, TinkarTerm.FLOAT_SUBSTITUTION, TinkarTerm.INSTANT_SUBSTITUTION)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TAXONOMY_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7000,7 +7188,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("An operator or set of operations applied within the context of a taxonomy")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TAXONOMY_OPERATOR.asUuidArray()[0].toString()))
@@ -7008,7 +7197,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.LOGICALLY_EQUIVALENT_TO)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7026,7 +7215,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A set of values or data representing a point in space that one established cannot be changed?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(IMMUTABLECOORDINATE_PROPERTIES.asUuidArray()[0].toString()))
@@ -7034,7 +7224,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ALLOWED_STATES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHORS_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_EXCLUSION_SET_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_STAMP_COORDINATE, TinkarTerm.MODULE_PREFERENCE_ORDER_FOR_STAMP_COORDINATE, TinkarTerm.MODULES_FOR_STAMP_COORDINATE, TinkarTerm.AUTHOR_FOR_EDIT_COORDINATE, TinkarTerm.DEFAULT_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.DESTINATION_MODULE_FOR_EDIT_COORDINATE, TinkarTerm.MODULE_OPTIONS_FOR_EDIT_COORDINATE, TinkarTerm.PATH_OPTIONS_FOR_EDIT_CORDINATE, TinkarTerm.DESCRIPTION_LOGIC_PROFILE_FOR_LOGIC_COORDINATE, TinkarTerm.DIGRAPH_FOR_LOGIC_COORDINATE, TinkarTerm.ROOT_FOR_LOGIC_COORDINATE, TinkarTerm.DESCRIPTION_TYPE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_NID_FOR_LANGUAGE_COORDINATE, TinkarTerm.LANGUAGE_SPECIFICATION_FOR_LANGUAGE_COORDINATE, TinkarTerm.MODULE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE, TinkarTerm.PATH_FOR_PATH_COORDINATE, TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH, TinkarTerm.VERTEX_SORT, TinkarTerm.VERTEX_STATE_SET, STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE, CLASSIFIER_FOR_LOGIC_COORDINATE, TinkarTerm.POSITION_ON_PATH)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PURPOSE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7052,14 +7242,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The reason for which a Tinkar value in a pattern was created or for which it exist.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TinkarTerm.PURPOSE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(ACTION_PROPERTIES))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7077,7 +7268,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Attributes of an action object")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(ACTION_PROPERTIES.asUuidArray()[0].toString()))
@@ -7085,7 +7277,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.CONCEPT_CONSTRAINTS, TinkarTerm.CONCEPT_TO_FIND, TinkarTerm.ROLE_TYPE_TO_ADD, TinkarTerm.CONDITIONAL_TRIGGERS)
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LITERAL_VALUE))
@@ -7104,7 +7296,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Fixed Value/Constant?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LITERAL_VALUE.asUuidArray()[0].toString()))
@@ -7112,7 +7305,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.BOOLEAN_LITERAL, TinkarTerm.FLOAT_LITERAL, TinkarTerm.INSTANT_LITERAL)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DIALECT_ASSEMBLAGE))
@@ -7131,7 +7324,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Specifies the dialect of the language.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(DIALECT_ASSEMBLAGE.asUuidArray()[0].toString()))
@@ -7139,7 +7333,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.CZECH_DIALECT, ENGLISH_DIALECT_ASSEMBLAGE, TinkarTerm.FRENCH_DIALECT, TinkarTerm.IRISH_DIALECT, TinkarTerm.KOREAN_DIALECT, TinkarTerm.POLISH_DIALECT, TinkarTerm.RUSSIAN_DIALECT)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DYNAMIC_COLUMN_DATA_TYPES))
@@ -7158,7 +7352,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Data storage system where the structure of the data can be altered or extended dynamically?")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(DYNAMIC_COLUMN_DATA_TYPES.asUuidArray()[0].toString()))
@@ -7166,7 +7361,7 @@ public class TinkarStarterData {
                         .children(TinkarTerm.ARRAY, TinkarTerm.BOOLEAN, TinkarTerm.BYTE_ARRAY, TinkarTerm.DOUBLE, TinkarTerm.FLOAT, TinkarTerm.LONG, TinkarTerm.SIGNED_INTEGER, TinkarTerm.STRING, TinkarTerm.UUID_DATA_TYPE)
                         .parents(MEANING))
                 .attach(new StatedAxiom()
-                        .isA(MEANING));
+                        .isA(MEANING)).attach(new TinkarBaseModel());
 
         //Necessary Terms Filtered out in generation routine - END
 
@@ -7187,14 +7382,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(POSITION_ON_PATH.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(POSITION_ON_PATH.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7212,14 +7408,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(STATED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7237,14 +7434,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(INFERRED_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7262,14 +7460,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(CLASSIFIER_FOR_LOGIC_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7287,14 +7486,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(CLASSIFIER_FOR_LOGIC_COORDINATE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CLASSIFIER_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(IMMUTABLECOORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(IMMUTABLECOORDINATE_PROPERTIES));
+                        .isA(IMMUTABLECOORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7312,14 +7512,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(DIALECT_ASSEMBLAGE_PREFERENCE_LIST_FOR_LANGUAGE_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(LANGUAGE_COORDINATE_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(LANGUAGE_COORDINATE_PROPERTIES));
+                        .isA(LANGUAGE_COORDINATE_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(SOLOR_OVERLAY_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7337,14 +7538,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(SOLOR_OVERLAY_MODULE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(SOLOR_OVERLAY_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(SOLOR_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7362,14 +7564,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(SOLOR_MODULE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(SOLOR_MODULE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TRANSITIVE_PROPERTY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7387,14 +7590,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(TRANSITIVE_PROPERTY.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(TRANSITIVE_PROPERTY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFLEXIVE_PROPERTY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7412,14 +7616,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(REFLEXIVE_PROPERTY.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(REFLEXIVE_PROPERTY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT_PROPERTIES))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT_PROPERTIES));
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(LATERALITY))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7437,14 +7642,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(LATERALITY.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(LATERALITY.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(HAS_ACTIVE_INGREDIENT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7462,14 +7668,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(HAS_ACTIVE_INGREDIENT.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(HAS_ACTIVE_INGREDIENT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(HAS_DOSE_FORM))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7487,14 +7694,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(HAS_DOSE_FORM.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(HAS_DOSE_FORM.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
-                        .isA(OBJECT));
+                        .isA(OBJECT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(UNMODELED_ROLE_CONCEPT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7512,14 +7720,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(UNMODELED_ROLE_CONCEPT.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(UNMODELED_ROLE_CONCEPT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DYNAMIC_REFERENCED_COMPONENT_RESTRICTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7537,14 +7746,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(DYNAMIC_REFERENCED_COMPONENT_RESTRICTION.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(DYNAMIC_REFERENCED_COMPONENT_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(EXISTENTIAL_RESTRICTION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7562,14 +7772,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("Existential restrictions describe objects that participate in at least one relationship along a specified property to objects of a specified class.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(EXISTENTIAL_RESTRICTION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(ROLE_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(ROLE_OPERATOR));
+                        .isA(ROLE_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INTRINSIC_ROLE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7587,14 +7798,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(INTRINSIC_ROLE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(INTRINSIC_ROLE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PROPERTY_PATTERN_IMPLICATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7612,14 +7824,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(PROPERTY_PATTERN_IMPLICATION.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(PROPERTY_PATTERN_IMPLICATION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(SNOROCKET_CLASSIFIER))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7637,14 +7850,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(SNOROCKET_CLASSIFIER.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(SNOROCKET_CLASSIFIER.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PROPERTY_SET))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7662,14 +7876,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(PROPERTY_SET.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(PROPERTY_SET.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(FEATURE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7687,14 +7902,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(FEATURE.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(FEATURE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(EXAMPLE_UCUM_UNITS))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7715,14 +7931,15 @@ public class TinkarStarterData {
                                 "engineering, and business. (www.unitsofmeasure.org) This field contains example units " +
                                 "of measures for this term expressed as UCUM units.")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(EXAMPLE_UCUM_UNITS.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(PHENOMENON))
                 .attach(new StatedAxiom()
-                        .isA(PHENOMENON));
+                        .isA(PHENOMENON)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INFERRED_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7740,14 +7957,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The relationships/axioms of a concept that have been inferred")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(INFERRED_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(IDENTIFIER_VALUE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7765,14 +7983,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The literal string value identifier")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(IDENTIFIER_VALUE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MAXIMUM_VALUE_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7782,7 +8001,7 @@ public class TinkarStarterData {
                         .attach(new USDialect()
                                 .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
-                                .text("Maximum Value Operator; Maximum Domain Operator")
+                                .text("Maximum Value Operator.attach(new TinkarBaseModel()); Maximum Domain Operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                                 .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
@@ -7790,14 +8009,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The Value Operator assigned to the Maximum Value in a Range")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(MAXIMUM_VALUE_OPERATOR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MINIMUM_VALUE_OPERATOR))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7807,7 +8027,7 @@ public class TinkarStarterData {
                         .attach(new USDialect()
                                 .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
-                                .text("Minimum Value Operator; Minimum Domain Operator")
+                                .text("Minimum Value Operator.attach(new TinkarBaseModel()); Minimum Domain Operator")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                                 .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
@@ -7815,14 +8035,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The Value Operator assigned to the Minimum Value in a Range")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(MINIMUM_VALUE_OPERATOR.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(CONCRETE_DOMAIN_OPERATOR))
                 .attach(new StatedAxiom()
-                        .isA(CONCRETE_DOMAIN_OPERATOR));
+                        .isA(CONCRETE_DOMAIN_OPERATOR)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFERENCE_RANGE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7840,7 +8061,8 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The range of values specific to a component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(REFERENCE_RANGE.asUuidArray()[0].toString()))
@@ -7848,7 +8070,7 @@ public class TinkarStarterData {
                         .children(REFERENCE_RANGE_MAXIMUM, REFERENCE_RANGE_MINIMUM)
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFERENCE_RANGE_MAXIMUM))
@@ -7859,7 +8081,7 @@ public class TinkarStarterData {
                         .attach(new USDialect()
                                 .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
-                                .text("Maximum Value; Max Value")
+                                .text("Maximum Value.attach(new TinkarBaseModel()); Max Value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                                 .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
@@ -7867,14 +8089,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The highest possible value for a component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(REFERENCE_RANGE_MAXIMUM.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(REFERENCE_RANGE))
                 .attach(new StatedAxiom()
-                        .isA(REFERENCE_RANGE));
+                        .isA(REFERENCE_RANGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(REFERENCE_RANGE_MINIMUM))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7884,7 +8107,7 @@ public class TinkarStarterData {
                         .attach(new USDialect()
                                 .acceptability(PREFERRED)))
                         .attach((Synonym synonym) -> synonym
-                                .text("Minimum Value; Min Value")
+                                .text("Minimum Value.attach(new TinkarBaseModel()); Min Value")
                                 .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
                                 .language(ENGLISH_LANGUAGE))
                 .attach(new USDialect()
@@ -7892,14 +8115,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The lowest possible value for a component")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(REFERENCE_RANGE_MINIMUM.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(REFERENCE_RANGE))
                 .attach(new StatedAxiom()
-                        .isA(REFERENCE_RANGE));
+                        .isA(REFERENCE_RANGE)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(STATED_DEFINITION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7911,20 +8135,20 @@ public class TinkarStarterData {
                 .attach((Synonym synonym) -> synonym
                         .text("Stated Definition")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
-                .attach(new USDialect()
-                        .acceptability(PREFERRED))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Definition definition) -> definition
                         .text("Relationships/Axioms of a concept that have been explicitly stated and defined")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(STATED_DEFINITION.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VALUE_CONSTRAINT))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7942,14 +8166,15 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("A component has specific value requirements that needs to be met")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(VALUE_CONSTRAINT.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(VALUE_CONSTRAINT_SOURCE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -7967,79 +8192,130 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text("The source organization of that specifies the constraint")
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(VALUE_CONSTRAINT_SOURCE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(TINKAR_MODEL_CONCEPT))
                 .attach(new StatedAxiom()
-                        .isA(TINKAR_MODEL_CONCEPT));
+                        .isA(TINKAR_MODEL_CONCEPT)).attach(new TinkarBaseModel());
 
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(FEATURE_TYPE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Feature Type (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                .attach((Synonym synonym) -> synonym
+                        .text("Feature Type")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text(FEATURE_TYPE.description())
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(FEATURE_TYPE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
-        starterData.concept(TinkarTerm.FEATURE_TYPE)
-                .fullyQualifiedName("Feature Type (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Feature Type", TinkarTerm.PREFERRED)
-                .definition(TinkarTerm.FEATURE_TYPE.description(), TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.FEATURE_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PROPERTY_SEQUENCE))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Property Sequence (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(new USDialect()
+                                .acceptability(PREFERRED)))
+                .attach((Synonym synonym) -> synonym
+                        .text("Property Sequence")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE))
+                .attach(new USDialect()
+                        .acceptability(PREFERRED))
+                .attach((Definition definition) -> definition
+                        .text(PROPERTY_SEQUENCE.description())
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
+                .attach((Identifier identifier) -> identifier
+                        .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(PROPERTY_SEQUENCE.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
 
-        starterData.concept(TinkarTerm.PROPERTY_SEQUENCE)
-                .fullyQualifiedName("Property Sequence (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Property Sequence", TinkarTerm.PREFERRED)
-                .definition(TinkarTerm.PROPERTY_SEQUENCE.description(), TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PROPERTY_SEQUENCE.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .statedDefinition(List.of(TinkarTerm.OBJECT_PROPERTIES))
-                .tinkarBaseModelMembership()
-                .build();
 
         //Create Description Pattern
-        starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
-                .fullyQualifiedName("Description Pattern", TinkarTerm.PREFERRED)
-                .synonym("Description Pattern", TinkarTerm.PREFERRED)
-                .definition("Contains all metadata and human readable text that describes the concept", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .fieldDefinition(
-                        TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION,
-                        LANGUAGE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.TEXT_FOR_DESCRIPTION,
-                        TinkarTerm.DESCRIPTION,
-                        TinkarTerm.STRING)
-                .fieldDefinition(
-                        DESCRIPTION_CASE_SIGNIFICANCE,
-                        DESCRIPTION_CASE_SIGNIFICANCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        DESCRIPTION_TYPE,
-                        DESCRIPTION_TYPE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.DESCRIPTION_PATTERN)
+                        .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
+                        .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                        .fieldDefinition(
+                                TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION,
+                                LANGUAGE,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.TEXT_FOR_DESCRIPTION,
+                                TinkarTerm.DESCRIPTION,
+                                TinkarTerm.STRING)
+                        .fieldDefinition(
+                                DESCRIPTION_CASE_SIGNIFICANCE,
+                                DESCRIPTION_CASE_SIGNIFICANCE,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                DESCRIPTION_TYPE,
+                                DESCRIPTION_TYPE,
+                                TinkarTerm.COMPONENT_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Description Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Description Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("Contains all metadata and human readable text that describes the concept")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create Stated Navigation Pattern
-        starterData.pattern(TinkarTerm.STATED_NAVIGATION_PATTERN)
-                .fullyQualifiedName("Stated Navigation Pattern", TinkarTerm.PREFERRED)
-                .synonym("Stated Navigation Pattern", TinkarTerm.PREFERRED)
-                .definition("A pattern specifying the origins and destinations for concepts based on the stated terminological axioms.", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.IS_A)
-                .purpose(TinkarTerm.IS_A)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_DESTINATION,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_ORIGIN,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.STATED_NAVIGATION_PATTERN)
+                        .meaning(TinkarTerm.IS_A)
+                        .purpose(TinkarTerm.IS_A)
+                        .fieldDefinition(
+                                TinkarTerm.RELATIONSHIP_DESTINATION,
+                                TinkarTerm.IS_A,
+                                TinkarTerm.COMPONENT_ID_SET_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.RELATIONSHIP_ORIGIN,
+                                TinkarTerm.IS_A,
+                                TinkarTerm.COMPONENT_ID_SET_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Stated Navigation Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Stated Navigation Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("A pattern specifying the origins and destinations for concepts based on the stated terminological axioms.")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(STATED_NAVIGATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -8057,33 +8333,43 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(STATED_NAVIGATION.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
 
         //Create Inferred Navigation Pattern
-        starterData.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
-                .fullyQualifiedName("Inferred Navigation Pattern", TinkarTerm.PREFERRED)
-                .synonym("Inferred Navigation Pattern", TinkarTerm.PREFERRED)
-                .definition("A pattern specifying the origins and destinations for concepts based on the inferred terminological axioms.", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.IS_A)
-                .purpose(TinkarTerm.IS_A)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_DESTINATION,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.RELATIONSHIP_ORIGIN,
-                        TinkarTerm.IS_A,
-                        TinkarTerm.COMPONENT_ID_SET_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
+                        .meaning(TinkarTerm.IS_A)
+                        .purpose(TinkarTerm.IS_A)
+                        .fieldDefinition(
+                                TinkarTerm.RELATIONSHIP_DESTINATION,
+                                TinkarTerm.IS_A,
+                                TinkarTerm.COMPONENT_ID_SET_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.RELATIONSHIP_ORIGIN,
+                                TinkarTerm.IS_A,
+                                TinkarTerm.COMPONENT_ID_SET_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Inferred Navigation Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Inferred Navigation Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("A pattern specifying the origins and destinations for concepts based on the inferred terminological axioms.")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(INFERRED_NAVIGATION))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -8101,212 +8387,295 @@ public class TinkarStarterData {
                 .attach((Definition definition) -> definition
                         .text(INFERRED_NAVIGATION.description())
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
-                        .language(ENGLISH_LANGUAGE))
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(new USDialect().acceptability(PREFERRED)))
                 .attach((Identifier identifier) -> identifier
                         .source(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
-                        .isA(DESCRIPTION_TYPE));
+                        .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
 
 
         //Create Identifier Pattern
-        starterData.pattern(TinkarTerm.IDENTIFIER_PATTERN)
-                .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
-                .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
-                .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value.", TinkarTerm.PREFERRED)
-                .meaning(IDENTIFIER_SOURCE)
-                .purpose(IDENTIFIER_SOURCE)
-                .fieldDefinition(
-                        IDENTIFIER_SOURCE,
-                        IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        IDENTIFIER_VALUE,
-                        IDENTIFIER_VALUE,
-                        TinkarTerm.STRING)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.IDENTIFIER_PATTERN)
+                        .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                        .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                        .fieldDefinition(
+                                IDENTIFIER_SOURCE,
+                                IDENTIFIER_SOURCE,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                IDENTIFIER_VALUE,
+                                IDENTIFIER_VALUE,
+                                TinkarTerm.STRING))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Identifier Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Identifier Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("An identifier pattern is used to identity a concept which contains the identifier source and the actual value.")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create US Dialect Pattern
-        starterData.pattern(TinkarTerm.US_DIALECT_PATTERN)
-                .fullyQualifiedName("US Dialect Pattern", TinkarTerm.PREFERRED)
-                .synonym("US Dialect Pattern", TinkarTerm.PREFERRED)
-                .meaning(DESCRIPTION_ACCEPTABILITY)
-                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .fieldDefinition(
-                        TinkarTerm.US_ENGLISH_DIALECT,
-                        DESCRIPTION_ACCEPTABILITY,
-                        TinkarTerm.COMPONENT_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.US_DIALECT_PATTERN)
+                        .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
+                        .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                        .fieldDefinition(
+                                TinkarTerm.US_ENGLISH_DIALECT,
+                                DESCRIPTION_ACCEPTABILITY,
+                                TinkarTerm.COMPONENT_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("US Dialect Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("US Dialect Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create GB Dialect Pattern
-        starterData.pattern(TinkarTerm.GB_DIALECT_PATTERN)
-                .fullyQualifiedName("GB Dialect Pattern", TinkarTerm.PREFERRED)
-                .synonym("GB Dialect Pattern", TinkarTerm.PREFERRED)
-                .definition("Particular form of language specific form of English language, particular to Great Britain.", TinkarTerm.PREFERRED)
-                .meaning(DESCRIPTION_ACCEPTABILITY)
-                .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
-                .fieldDefinition(
-                        TinkarTerm.GB_ENGLISH_DIALECT,
-                        DESCRIPTION_ACCEPTABILITY,
-                        TinkarTerm.COMPONENT_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.GB_DIALECT_PATTERN)
+                        .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
+                        .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
+                        .fieldDefinition(
+                                TinkarTerm.GB_ENGLISH_DIALECT,
+                                DESCRIPTION_ACCEPTABILITY,
+                                TinkarTerm.COMPONENT_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("GB Dialect Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("GB Dialect Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("Particular form of language specific form of English language, particular to Great Britain.")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create Axiom Syntax Pattern
-        starterData.pattern(TinkarTerm.OWL_AXIOM_SYNTAX_PATTERN)
-                .meaning(AXIOM_SYNTAX)
-                .purpose(TinkarTerm.EXPRESS_AXIOM_SYNTAX)
-                .fieldDefinition(
-                        AXIOM_SYNTAX,
-                        TinkarTerm.EXPRESS_AXIOM_SYNTAX,
-                        TinkarTerm.STRING)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.OWL_AXIOM_SYNTAX_PATTERN)
+                        .meaning(TinkarTerm.AXIOM_SYNTAX)
+                        .purpose(TinkarTerm.EXPRESS_AXIOM_SYNTAX)
+                        .fieldDefinition(
+                                AXIOM_SYNTAX,
+                                TinkarTerm.EXPRESS_AXIOM_SYNTAX,
+                                TinkarTerm.STRING))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(OWL_AXIOM_SYNTAX_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create Stated Definition Pattern
-        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
-                .fullyQualifiedName("EL++ Stated Axioms Pattern", TinkarTerm.PREFERRED)
-                .synonym("Stated definition pattern", TinkarTerm.PREFERRED)
-                .meaning(STATED_DEFINITION)
-                .purpose(LOGICAL_DEFINITION)
-                .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
-                        LOGICAL_DEFINITION,
-                        TinkarTerm.DITREE_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
+                        .meaning(TinkarTerm.STATED_DEFINITION)
+                        .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                        .fieldDefinition(
+                                TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS,
+                                LOGICAL_DEFINITION,
+                                TinkarTerm.DITREE_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ Stated Axioms Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Stated definition pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create Inferred Definition Pattern
-        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
-                .fullyQualifiedName("EL++ Inferred Axioms Pattern", TinkarTerm.PREFERRED)
-                .synonym("Inferred definition pattern", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.INFERRED_DEFINITION)
-                .purpose(LOGICAL_DEFINITION)
-                .fieldDefinition(
-                        TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
-                        LOGICAL_DEFINITION,
-                        TinkarTerm.DITREE_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
+                        .meaning(TinkarTerm.INFERRED_DEFINITION)
+                        .purpose(TinkarTerm.LOGICAL_DEFINITION)
+                        .fieldDefinition(
+                                TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS,
+                                LOGICAL_DEFINITION,
+                                TinkarTerm.DITREE_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("EL++ Inferred Axioms Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Inferred definition pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create Path Membership Pattern
-        starterData.pattern(TinkarTerm.PATHS_PATTERN)
-                .meaning(PATH)
-                .purpose(MEMBERSHIP_SEMANTIC)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.PATHS_PATTERN)
+                        .meaning(TinkarTerm.PATH)
+                        .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(PATHS_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
 
-        starterData.pattern(TinkarTerm.SOLOR_CONCEPT_ASSEMBLAGE)
-                .meaning(CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
-                .purpose(MEMBERSHIP_SEMANTIC)
-                .tinkarBaseModelMembership()
-                .build();
+
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.SOLOR_CONCEPT_ASSEMBLAGE)
+                        .meaning(TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE)
+                        .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(SOLOR_CONCEPT_ASSEMBLAGE.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         //Create STAMP Pattern
-        starterData.pattern(TinkarTerm.STAMP_PATTERN)
-                .meaning(VERSION_PROPERTIES)
-                .purpose(VERSION_PROPERTIES)
-                .fieldDefinition(
-                        STATUS_VALUE,
-                        TinkarTerm.STATUS_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.TIME_FOR_VERSION,
-                        TinkarTerm.TIME_FOR_VERSION,
-                        TinkarTerm.LONG)
-                .fieldDefinition(
-                        TinkarTerm.AUTHOR_FOR_VERSION,
-                        TinkarTerm.AUTHOR_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.MODULE_FOR_VERSION,
-                        TinkarTerm.MODULE_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_FOR_VERSION,
-                        TinkarTerm.PATH_FOR_VERSION,
-                        TinkarTerm.COMPONENT_FIELD)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.STAMP_PATTERN)
+                        .meaning(TinkarTerm.VERSION_PROPERTIES)
+                        .purpose(TinkarTerm.VERSION_PROPERTIES)
+                        .fieldDefinition(
+                                STATUS_VALUE,
+                                TinkarTerm.STATUS_FOR_VERSION,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.TIME_FOR_VERSION,
+                                TinkarTerm.TIME_FOR_VERSION,
+                                TinkarTerm.LONG)
+                        .fieldDefinition(
+                                TinkarTerm.AUTHOR_FOR_VERSION,
+                                TinkarTerm.AUTHOR_FOR_VERSION,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.MODULE_FOR_VERSION,
+                                TinkarTerm.MODULE_FOR_VERSION,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.PATH_FOR_VERSION,
+                                TinkarTerm.PATH_FOR_VERSION,
+                                TinkarTerm.COMPONENT_FIELD))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(STAMP_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
 
-        starterData.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
-                .fullyQualifiedName("Path origins pattern (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Path origins pattern", TinkarTerm.PREFERRED)
-                .definition("Pattern of path origins", TinkarTerm.PREFERRED)
-                .meaning(TinkarTerm.PATH_ORIGINS)
-                .purpose(TinkarTerm.PATH_ORIGINS)
-                .fieldDefinition(
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.INSTANT_LITERAL)
-                .tinkarBaseModelMembership()
-                .build();
+
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
+                        .meaning(TinkarTerm.PATH_ORIGINS)
+                        .purpose(TinkarTerm.PATH_ORIGINS)
+                        .fieldDefinition(
+                                TinkarTerm.PATH_CONCEPT,
+                                TinkarTerm.PATH_CONCEPT,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                TinkarTerm.PATH_ORIGINS,
+                                TinkarTerm.PATH_ORIGINS,
+                                TinkarTerm.INSTANT_LITERAL))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Path origins pattern (SOLOR)")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Path origins pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("Pattern of path origins")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
 
         //Create Comment Pattern
-        starterData.pattern(TinkarTerm.COMMENT_PATTERN)
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.COMMENT_PATTERN)
                 .meaning(TinkarTerm.COMMENT)
                 .purpose(TinkarTerm.COMMENT)
                 .fieldDefinition(
                         TinkarTerm.COMMENT,
                         TinkarTerm.COMMENT,
-                        TinkarTerm.STRING)
-                .tinkarBaseModelMembership()
-                .build();
+                        TinkarTerm.STRING))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(COMMENT_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Comment Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
 
         //Create Tinkar Core base model pattern
-        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(STARTER_DATA_AUTHORING)
-                .purpose(MEMBERSHIP_SEMANTIC)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
+                        .meaning(TinkarTerm.STARTER_DATA_AUTHORING)
+                        .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(TINKAR_BASE_MODEL_COMPONENT_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
 
         //Create Komet base model component pattern
-        starterData.pattern(KOMET_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(STARTER_DATA_AUTHORING)
-                .purpose(MEMBERSHIP_SEMANTIC)
-                .kometBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
+                        .meaning(TinkarTerm.STARTER_DATA_AUTHORING)
+                        .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text(KOMET_BASE_MODEL_COMPONENT_PATTERN.description())
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new KometBaseModel());
 
-        starterData.pattern(VALUE_CONSTRAINT_PATTERN)
-                .fullyQualifiedName("Value Constraint Pattern", TinkarTerm.PREFERRED)
-                .synonym("Value Constraint Pattern", TinkarTerm.PREFERRED)
-                .definition("A pattern specifying value constraint pattern", TinkarTerm.PREFERRED)
-                .meaning(VALUE_CONSTRAINT)
-                .purpose(VALUE_CONSTRAINT)
-                .fieldDefinition(
-                        VALUE_CONSTRAINT_SOURCE,
-                        VALUE_CONSTRAINT_SOURCE,
-                        TinkarTerm.CONCEPT_FIELD)
-                .fieldDefinition(
-                        MINIMUM_VALUE_OPERATOR,
-                        CONCRETE_DOMAIN_OPERATOR,
-                        TinkarTerm.CONCEPT_FIELD)
-                .fieldDefinition(
-                        REFERENCE_RANGE_MINIMUM,
-                        REFERENCE_RANGE,
-                        TinkarTerm.FLOAT_FIELD)
-                .fieldDefinition(
-                        MAXIMUM_VALUE_OPERATOR,
-                        CONCRETE_DOMAIN_OPERATOR,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        REFERENCE_RANGE_MAXIMUM,
-                        REFERENCE_RANGE,
-                        TinkarTerm.FLOAT_FIELD)
-                .fieldDefinition(
-                        EXAMPLE_UCUM_UNITS,
-                        EXAMPLE_UCUM_UNITS,
-                        TinkarTerm.STRING)
-                .tinkarBaseModelMembership()
-                .build();
+        session.compose((PatternAssembler patternAssembler) -> patternAssembler.pattern(TinkarTerm.VALUE_CONSTRAINT_PATTERN)
+                        .meaning(TinkarTerm.VALUE_CONSTRAINT)
+                        .purpose(TinkarTerm.VALUE_CONSTRAINT)
+                        .fieldDefinition(
+                                VALUE_CONSTRAINT_SOURCE,
+                                VALUE_CONSTRAINT_SOURCE,
+                                TinkarTerm.CONCEPT_FIELD)
+                        .fieldDefinition(
+                                MINIMUM_VALUE_OPERATOR,
+                                CONCRETE_DOMAIN_OPERATOR,
+                                TinkarTerm.CONCEPT_FIELD)
+                        .fieldDefinition(
+                                REFERENCE_RANGE_MINIMUM,
+                                REFERENCE_RANGE,
+                                TinkarTerm.FLOAT_FIELD)
+                        .fieldDefinition(
+                                MAXIMUM_VALUE_OPERATOR,
+                                CONCRETE_DOMAIN_OPERATOR,
+                                TinkarTerm.COMPONENT_FIELD)
+                        .fieldDefinition(
+                                REFERENCE_RANGE_MAXIMUM,
+                                REFERENCE_RANGE,
+                                TinkarTerm.FLOAT_FIELD)
+                        .fieldDefinition(
+                                EXAMPLE_UCUM_UNITS,
+                                EXAMPLE_UCUM_UNITS,
+                                TinkarTerm.STRING))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Value Constraint Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Synonym synonym) -> synonym
+                        .text("Value Constraint Pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach((Definition definition) -> definition
+                        .text("A pattern specifying value constraint pattern")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
+                .attach(new TinkarBaseModel());
+
 
         composer.commitSession(session);
     }
