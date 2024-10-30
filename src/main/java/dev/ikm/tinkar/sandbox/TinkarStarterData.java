@@ -2169,8 +2169,8 @@ public class TinkarStarterData {
                         .isA(MODULE)).attach(new TinkarBaseModel());
 
 
-/*
-        starterData.concept(TinkarTerm.DEVELOPMENT_PATH)
+
+     /*   starterData.concept(TinkarTerm.DEVELOPMENT_PATH)
                 .fullyQualifiedName("Development path", TinkarTerm.PREFERRED)
                 .synonym("Development path", TinkarTerm.PREFERRED)
                 .definition("A path that specifies that the components are currently under development", TinkarTerm.PREFERRED)
@@ -2180,8 +2180,8 @@ public class TinkarStarterData {
                 .pathMembership()
                 .pathOrigin(TinkarTerm.SANDBOX_PATH)
                 .tinkarBaseModelMembership()
-                .build();
-*/
+                .build();*/
+
         // todo
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DEVELOPMENT_PATH))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -2208,6 +2208,10 @@ public class TinkarStarterData {
                         .parents(PATH))
                 .attach(new StatedAxiom()
                         .isA(PATH)).attach(new TinkarBaseModel());
+
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .reference(DEVELOPMENT_PATH)
+                .pattern(PATHS_PATTERN));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.DIGRAPH_FIELD))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -4091,6 +4095,10 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(PATH)).attach(new TinkarBaseModel());
 
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .reference(MASTER_PATH)
+                .pattern(PATHS_PATTERN));
+
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(MEANING))
                 .attach((FullyQualifiedName fqn) -> fqn
                         .text("Meaning")
@@ -5358,6 +5366,9 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(PATH)).attach(new TinkarBaseModel());
 
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .reference(PRIMORDIAL_PATH)
+                .pattern(PATHS_PATTERN));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.PRIMORDIAL_STATE))
                 .attach((FullyQualifiedName fqn) -> fqn
@@ -5897,6 +5908,9 @@ public class TinkarStarterData {
                 .attach(new StatedAxiom()
                         .isA(PATH)).attach(new TinkarBaseModel());
 
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .reference(SANDBOX_PATH)
+                .pattern(PATHS_PATTERN));
 
         session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(TinkarTerm.SANDBOX_PATH_MODULE))
                 .attach((FullyQualifiedName fqn) -> fqn
