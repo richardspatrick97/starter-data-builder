@@ -6,6 +6,7 @@ import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
 import dev.ikm.tinkar.common.util.io.FileUtil;
+import dev.ikm.tinkar.common.util.time.DateTimeUtil;
 import dev.ikm.tinkar.composer.Composer;
 import dev.ikm.tinkar.composer.Session;
 import dev.ikm.tinkar.composer.assembler.ConceptAssembler;
@@ -33,6 +34,8 @@ import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.State;
 import dev.ikm.tinkar.terms.TinkarTerm;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Consumer;
 
 import static dev.ikm.tinkar.terms.TinkarTerm.*;
 
@@ -8743,7 +8747,38 @@ public class TinkarStarterData {
                         .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE))
                 .attach(new TinkarBaseModel());
 
+        addPathMembershipSemantics(session);
+        addPathOriginSemantics(session);
+
         composer.commitSession(session);
+    }
+
+    private static void addPathMembershipSemantics(Session session) {
+        addPathMembershipSemantic(session, DEVELOPMENT_PATH);
+        addPathMembershipSemantic(session, SANDBOX_PATH);
+        addPathMembershipSemantic(session, PRIMORDIAL_PATH);
+        addPathMembershipSemantic(session, MASTER_PATH);
+    }
+
+    private static void addPathMembershipSemantic(Session session, EntityProxy.Concept concept) {
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .pattern(TinkarTerm.PATHS_PATTERN)
+                .reference(concept)
+                .fieldValues(MutableList::newEmpty));
+    }
+
+    private static void addPathOriginSemantics(Session session) {
+        addPathOriginSemantic(session, DEVELOPMENT_PATH, SANDBOX_PATH);
+        addPathOriginSemantic(session, MASTER_PATH, DEVELOPMENT_PATH);
+        addPathOriginSemantic(session, SANDBOX_PATH, PRIMORDIAL_PATH);
+    }
+
+    private static void addPathOriginSemantic(Session session, EntityProxy.Concept concept, EntityProxy.Concept originPath) {
+        session.compose((SemanticAssembler semanticAssembler) -> semanticAssembler
+                .pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
+                .reference(concept)
+                .fieldValues(objects -> objects.addAll(Lists.mutable.of(originPath, DateTimeUtil.epochMsToInstant(Long.MAX_VALUE)))));
+
     }
 
     private static void exportStarterData(){
