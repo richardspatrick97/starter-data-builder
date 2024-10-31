@@ -20,6 +20,7 @@ import dev.ikm.tinkar.composer.template.StatedNavigation;
 import dev.ikm.tinkar.composer.template.Synonym;
 import dev.ikm.tinkar.composer.template.TinkarBaseModel;
 import dev.ikm.tinkar.composer.template.USDialect;
+import dev.ikm.tinkar.entity.EntityService;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.State;
@@ -61,20 +62,25 @@ public class TinkarStarterData {
     }
 
     private void transform() {
-        Composer composer = new Composer("Tinkar Starter Data Composer");
-        Session session = composer.open(
-                State.ACTIVE,
-                PrimitiveData.PREMUNDANE_TIME,
-                USER,
-                PRIMORDIAL_MODULE,
-                PRIMORDIAL_PATH);
-        createConcepts(session);
-        createPatterns(session);
+        EntityService.get().beginLoadPhase();
+        try {
+            Composer composer = new Composer("Tinkar Starter Data Composer");
+            Session session = composer.open(
+                    State.ACTIVE,
+                    PrimitiveData.PREMUNDANE_TIME,
+                    USER,
+                    PRIMORDIAL_MODULE,
+                    PRIMORDIAL_PATH);
+            createConcepts(session);
+            createPatterns(session);
 
-        createPathMembershipSemantics(session);
-        addPathOriginSemantics(session);
+            createPathMembershipSemantics(session);
+            addPathOriginSemantics(session);
 
-        composer.commitSession(session);
+            composer.commitSession(session);
+        } finally {
+            EntityService.get().endLoadPhase();
+        }
     }
 
     private void createConcepts(Session session) {

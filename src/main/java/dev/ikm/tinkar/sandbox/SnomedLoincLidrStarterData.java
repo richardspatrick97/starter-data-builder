@@ -3,6 +3,7 @@ package dev.ikm.tinkar.sandbox;
 import dev.ikm.tinkar.common.id.PublicId;
 import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.common.util.uuid.UuidUtil;
+import dev.ikm.tinkar.entity.EntityService;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
@@ -28,18 +29,22 @@ public class SnomedLoincLidrStarterData {
         exportFile = new File(args[1]);
 
         UUIDUtility uuidUtility = new UUIDUtility();
-
         StarterData starterData = new StarterData(exportDataStore, uuidUtility)
-                .init()
-                .authoringSTAMP(
-                        TinkarTerm.ACTIVE_STATE,
-                        System.currentTimeMillis(),
-                        TinkarTerm.USER,
-                        TinkarTerm.PRIMORDIAL_MODULE,
-                        TinkarTerm.PRIMORDIAL_PATH);
+                .init();
+        EntityService.get().beginLoadPhase();
+        try {
+            starterData = starterData.authoringSTAMP(
+                            TinkarTerm.ACTIVE_STATE,
+                            System.currentTimeMillis(),
+                            TinkarTerm.USER,
+                            TinkarTerm.PRIMORDIAL_MODULE,
+                            TinkarTerm.PRIMORDIAL_PATH);
 
-        configureConceptsAndPatterns(starterData, uuidUtility);
-        starterData.build(); //Natively writing data to spined array
+            configureConceptsAndPatterns(starterData, uuidUtility);
+            starterData.build(); //Natively writing data to spined array
+        } finally {
+            EntityService.get().endLoadPhase();
+        }
         exportStarterData(); //exports starter data to pb.zip
         starterData.shutdown();
     }

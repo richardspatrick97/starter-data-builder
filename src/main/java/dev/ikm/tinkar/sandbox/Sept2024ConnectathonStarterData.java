@@ -16,6 +16,7 @@ import dev.ikm.tinkar.composer.template.Identifier;
 import dev.ikm.tinkar.composer.template.StatedAxiom;
 import dev.ikm.tinkar.composer.template.Synonym;
 import dev.ikm.tinkar.composer.template.USDialect;
+import dev.ikm.tinkar.entity.EntityService;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
@@ -49,13 +50,17 @@ public class Sept2024ConnectathonStarterData {
         PrimitiveData.selectControllerByName("Open SpinedArrayStore");
         PrimitiveData.start();
 
-        Composer composer = new Composer("Sept 2024 Connectathon Starter Data");
-        session = composer.open(State.ACTIVE, TinkarTerm.USER, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.PRIMORDIAL_PATH);
+        EntityService.get().beginLoadPhase();
+        try {
+            Composer composer = new Composer("Sept 2024 Connectathon Starter Data");
+            session = composer.open(State.ACTIVE, TinkarTerm.USER, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.PRIMORDIAL_PATH);
 
-        configureConceptsAndPatterns();
+            configureConceptsAndPatterns();
 
-        composer.commitSession(session);
-
+            composer.commitSession(session);
+        } finally {
+            EntityService.get().endLoadPhase();
+        }
         exportStarterData();
         PrimitiveData.stop();
     }
