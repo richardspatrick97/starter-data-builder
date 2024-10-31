@@ -22,12 +22,11 @@ public class SnomedStarterData {
         UUIDUtility uuidUtility = new UUIDUtility();
 
         //Build, export, and shutdown database
-        StarterData starterData = null;
+        StarterData starterData = new StarterData(exportDataStore, uuidUtility)
+                .init();
         EntityService.get().beginLoadPhase();
         try {
-            starterData = new StarterData(exportDataStore, uuidUtility)
-                    .init()
-                    .authoringSTAMP(
+            starterData = starterData.authoringSTAMP(
                             TinkarTerm.ACTIVE_STATE,
                             System.currentTimeMillis(),
                             TinkarTerm.USER,
