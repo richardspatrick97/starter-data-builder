@@ -4281,7 +4281,10 @@ public class TinkarStarterData {
                         .source(UNIVERSALLY_UNIQUE_IDENTIFIER)
                         .identifier(OBJECT_PROPERTIES.asUuidArray()[0].toString()))
                 .attach(new StatedNavigation()
-                        .children(ACTION_PROPERTIES, CHRONICLE_PROPERTIES, VERSION_PROPERTIES, IMMUTABLECOORDINATE_PROPERTIES, LANGUAGE_COORDINATE_PROPERTIES, LOGIC_COORDINATE_PROPERTIES, PATH_COORDINATE_PROPERTIES, SEMANTIC_PROPERTIES, TREE_AMALGAM_PROPERTIES, CORRELATION_PROPERTIES, TRANSITIVE_PROPERTY, REFLEXIVE_PROPERTY)
+                        .children(ACTION_PROPERTIES, CHRONICLE_PROPERTIES, VERSION_PROPERTIES, IMMUTABLECOORDINATE_PROPERTIES,
+                                LANGUAGE_COORDINATE_PROPERTIES, LOGIC_COORDINATE_PROPERTIES, PATH_COORDINATE_PROPERTIES,
+                                SEMANTIC_PROPERTIES, TREE_AMALGAM_PROPERTIES, CORRELATION_PROPERTIES, TRANSITIVE_PROPERTY,
+                                REFLEXIVE_PROPERTY, ANNOTATION_PROPERTY_SET, DATA_PROPERTY_SET, PROPERTY_SEQUENCE_IMPLICATION)
                         .parents(OBJECT))
                 .attach(new StatedAxiom()
                         .isA(OBJECT)).attach(new TinkarBaseModel());
@@ -7686,6 +7689,78 @@ public class TinkarStarterData {
                         .parents(DESCRIPTION_TYPE))
                 .attach(new StatedAxiom()
                         .isA(DESCRIPTION_TYPE)).attach(new TinkarBaseModel());
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(ANNOTATION_PROPERTY_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Annotation property set")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(usDialect()))
+                .attach((Synonym synonym) -> synonym
+                        .text("Annotation property set")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Definition definition) -> definition
+                        .text(ANNOTATION_PROPERTY_SET.description())
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Identifier identifier) -> identifier
+                        .source(UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TRANSITIVE_PROPERTY.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(DATA_PROPERTY_SET))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Data property set")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(usDialect()))
+                .attach((Synonym synonym) -> synonym
+                        .text("Data property set")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Definition definition) -> definition
+                        .text(DATA_PROPERTY_SET.description())
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Identifier identifier) -> identifier
+                        .source(UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TRANSITIVE_PROPERTY.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
+
+        session.compose((ConceptAssembler conceptAssembler) -> conceptAssembler.concept(PROPERTY_SEQUENCE_IMPLICATION))
+                .attach((FullyQualifiedName fqn) -> fqn
+                        .text("Property sequence implication")
+                        .language(ENGLISH_LANGUAGE)
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .attach(usDialect()))
+                .attach((Synonym synonym) -> synonym
+                        .text("Property sequence implication")
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Definition definition) -> definition
+                        .text(PROPERTY_SEQUENCE_IMPLICATION.description())
+                        .caseSignificance(DESCRIPTION_NOT_CASE_SENSITIVE)
+                        .language(ENGLISH_LANGUAGE)
+                        .attach(usDialect()))
+                .attach((Identifier identifier) -> identifier
+                        .source(UNIVERSALLY_UNIQUE_IDENTIFIER)
+                        .identifier(TRANSITIVE_PROPERTY.asUuidArray()[0].toString()))
+                .attach(new StatedNavigation()
+                        .parents(OBJECT_PROPERTIES))
+                .attach(new StatedAxiom()
+                        .isA(OBJECT_PROPERTIES)).attach(new TinkarBaseModel());
     }
 
     private void createPatterns(Session session) {
