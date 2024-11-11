@@ -50,7 +50,7 @@ public class SnomedLoincLidrStarterData {
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-        SnomedLoincStarterData.configureConceptsAndPatterns(starterData, uuidUtility);
+        //SnomedLoincStarterData.configureConceptsAndPatterns(starterData, uuidUtility);
 
         //LOINC Long Common Name
         PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("LOINC Long Name".getBytes()));
