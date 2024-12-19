@@ -14,5 +14,5 @@ open module tinkar.sandbox {
     requires org.slf4j;
     requires dev.ikm.tinkar.composer;
     exports dev.ikm.tinkar.starterdata;
-
+    exports dev.ikm.tinkar.sandbox;
 }
